@@ -1,4 +1,4 @@
-Package: r4dsclub
+Package: bookclub-r4ds
 Title: R for Data Science Book Club
 Version: 0.0.0.9000
 Authors@R: c(
@@ -14,4 +14,3 @@ Imports:
     tidyverse
 Remotes: 
     hadley/emo
-    
