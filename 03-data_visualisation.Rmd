@@ -1,8 +1,19 @@
 # Data visualisation
 
+Let's visualize some data!
+
 **Learning objectives:**
 
-- Jon will try to prefill these ahead of each week.
+- **Load** the `tidyverse` family of packages.
+- Produce a simple plot with **ggplot2.**
+- Use **`aes`thetic mappings** to produce more complex plots.
+- Deal with **common R programming problems.**
+- Produce **small multiples** with `facet()`.
+- Combine multiple `geom_*()` objects to produce more complex plots.
+- Recognize the interaction between `stat`s and `geom`s.
+- Use the `position` argument to control **data layout.**
+- Use alternative **coordinate systems** for plots in ggplot2.
+- Describe the components of the **layered grammar of graphics.**
 
 ## Slide 1
 
