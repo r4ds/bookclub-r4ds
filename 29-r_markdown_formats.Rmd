@@ -1,0 +1,14 @@
+# R Markdown formats
+
+**Learning objectives:**
+
+- Jon will try to prefill these ahead of each week.
+
+## Slide 1
+
+Slide contents. 
+Keep it short and slide-like!
+
+## Slide 2
+
+Slide contents.
