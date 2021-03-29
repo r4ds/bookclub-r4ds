@@ -1,14 +1,164 @@
 # Data visualisation
 
+Let's visualize some data!
+
 **Learning objectives:**
 
-- Jon will try to prefill these ahead of each week.
+- **Load** the `tidyverse` family of packages.
+- Produce a simple plot with **{ggplot2}.**
+- Use **`aes`thetic mappings** to produce more complex plots.
+- Deal with **common R programming problems.**
+- Produce **small multiples** with `facet()`.
+- Combine multiple `geom_*()` objects to produce more complex plots.
+- Recognize the interaction between `stat`s and `geom`s.
+- Use the `position` argument to control **data layout.**
+- Use alternative **coordinate systems** for plots in ggplot2.
+- Describe the components of the **layered grammar of graphics.**
 
-## Slide 1
+## Loading Packages in R
 
-Slide contents. 
-Keep it short and slide-like!
+- Use `install.packages("PACKAGE_NAME")` to **install** a package in R.
+  - You need to do this before you can use a package, but you only need to do it once.
+  - Depending where you're learning R, the packages you need may already be installed.
+- Use `library(PACKAGE_NAME)` to **load** a package in R.
+  - In general, you want to do this at the start of any session where you use a package.
+  - Alternatively, you can refer to a package every time you use it, such as `ggplot2::ggplot()`. "ggplot2" is the package, "ggplot()" is the function call, "::" tells R "look up this function in this package."
 
-## Slide 2
+```{r library}
+library(tidyverse)
+```
 
-Slide contents.
+## First Steps
+
+The `{ggplot2}` package lets us build up plots layer by layer.
+
+```{r graphing-template-1, eval = FALSE}
+ggplot(data = <DATA>) + 
+  <GEOM_FUNCTION>(mapping = aes(<MAPPINGS>))
+```
+
+- `ggplot(data = <DATA>)`: Set up a base plot with data.
+- `<GEOM_FUNCTION>(mapping = aes(<MAPPINGS>))`: Add a geometry, such as a point (`geom_point()`).
+  - `mapping`: Map visual properties (`x`, `y`) to variables from `data` (`displ`, `hwy`).
+  - `aes()`: A function to do the mapping. The name is short for "aesthetics." **Spoiler alert:** "aesthetics" is the word Hadley uses for "visual properties."
+- Other little things brought out here:
+  - Type `?FUNCTION_NAME` (`?) to load help for that function (or data object).
+  - All `{tidyverse}` help is also available at [tidyverse.org](https://www.tidyverse.org/).
+  - Super minor convention: "`hwy` vs `cyl`" means "`hwy` as `y` and `cyl` as `x`." 
+  - Solutions are available at [jrnold.github.io/r4ds-exercise-solutions](https://jrnold.github.io/r4ds-exercise-solutions/)
+
+
+## Aesthetic mappings
+
+- **Aesthetics** are visual properties of objects in the plot.
+- Includes:
+  - size
+  - shape
+  - color
+  - alpha (transparency)
+  - x
+  - y
+  - others, sometimes specific to a geom.
+- Use the `mapping` argument and the `aes` function to map an aesthetic to a variable in `data`.
+- Or assign the value outside of `mapping` to set it for everything:
+  - `geom_point(mapping = aes(x = displ, y = hwy), color = "blue")`
+  - A super common error: Trying to do that *inside* the `aes` call. Results in random effects because `aes()` automatically figures out the necessary **scale** for your data.
+  
+```{r bad-mapping}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy, color = "blue or whatever"))
+```
+
+## Common problems
+
+- The `{tidyverse}` (the packages described in this book) tend to have *really good error messages.* Pay attention to what they say!
+- Read the help at `?function_name` to see if maybe it doesn't work how you thought it worked.
+- Googling error messages can often help.
+- Take a deep breath. You've got this!
+
+## Facets
+
+They never use this terminology, but...
+
+- **Small multiples:** Multiple plots on the same axes comparing something across splits in a dataset.
+- 2 versions of these in ggplot2:
+  - `facet_wrap()`: Facet by a variable or variables, arrange in order, wrap at the end of the line.
+  - `facet_grid()`: Facet by exactly 2 variables, showing all combinations of those 2 variables (only use this for discrete variables)
+  - Old way ("formula interface," in the book): `facet_wrap(~ class)` or `facet_grid(drv ~ cyl)`
+  - New way (simpler?): `facet_wrap(vars(class))` or `facet_grid(vars(drv), vars(cyl))`
+  - Either way works, do what makes sense to you.
+
+## Geometries
+
+- `geom_*()` functions define different geometric objects or geometries.
+- `geom_point()` = scatterplot
+- `geom_smooth()` = fit a curve
+- `{ggplot2}` defines about 40 more geoms, and lots of helper packages add more!
+
+## Statistical transformations
+
+- Lots of geoms use transformed data. For example, `geom_bar(aes(x = cut))` calculates a count for each `cut`.
+
+```{r counts}
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut))
+```
+
+- `stat_*()` functions do this calculation.
+- `?stat_count` (etc) has a **Computer variables** section that tells you what that stat computes.
+- You can use these computed variables to make fancier plots.
+
+## Position adjustments
+
+- Geoms have a `position` argument to tell it how to deal with things that go on top of one another.
+  - Sample values include "stack", "identity", "fill", "dodge", and "jitter".
+- `geom_jitter()` is a shortcut for `geom_point(position = "jitter")` because it's super useful.
+
+```{r jitter}
+dat <- tibble(
+  x = rep(1:3, 3),
+  y = rep(1:3, 3)
+)
+ggplot(dat, aes(x, y)) +
+  geom_point()
+ggplot(dat, aes(x, y)) +
+  geom_jitter()
+```
+
+- Use `width` and `height` arguments of `geom_jitter` to more specifically specify range.
+
+```{r jitter2}
+ggplot(dat, aes(x, y)) +
+  geom_jitter(width = 0.1, height = 0.5)
+```
+
+## Coordinate systems
+
+- By default, `{ggplot}` uses `coord_cartesian()`.
+- `coord_flip()` can be useful to quickly flip orientations (although this is less necessary in modern `{ggplot}` than when this book was written; now there's an "orientation" argument that is usually guessed properly if you leave it blank)
+- `coord_quickmap()` does proper transformations to work with lat/long data.
+- `coord_polar()` for circular plots, which are almost always a bad idea but they tend to look cool.
+
+## The gg in {ggplot}
+
+`{ggplot}` implements the "layered grammar of graphics."
+
+```{r gg, eval = FALSE}
+ggplot(data = <DATA>) + 
+  <GEOM_FUNCTION>(
+     mapping = aes(<MAPPINGS>),
+     stat = <STAT>, 
+     position = <POSITION>
+  ) +
+  <COORDINATE_FUNCTION> +
+  <FACET_FUNCTION>
+```
+
+- `ggplot(data = <DATA>)`: Set up a base plot with data.
+- `<GEOM_FUNCTION>(mapping = aes(<MAPPINGS>))`: Add a geometry, such as a point (`geom_point()`).
+  - `mapping`: Map aesthetics (`x`, `y`) to variables from `data` (`displ`, `hwy`).
+  - `stat`: How to transform the data.
+  - `aes()`: A function to do the mapping. The name is short for "aesthetics."
+  - `position`: How to deal with things that overlap.
+- `<COORDINATE_FUNCTION>`: Adjust the coordinate layout.
+- `<FACET_FUNCTION>`: Break the plot up into small multiples.

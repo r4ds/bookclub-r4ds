@@ -1,6 +1,6 @@
-book_filename: "bookclub-tmwr"
-repo: https://github.com/r4ds/bookclub-tmwr
-edit: "https://github.com/r4ds/bookclub-tmwr/edit/main/%s"
+book_filename: "bookclub-r4ds"
+repo: https://github.com/r4ds/bookclub-r4ds
+edit: "https://github.com/r4ds/bookclub-r4ds/edit/main/%s"
 output_dir: "_book"
 delete_merged_file: true
 language:

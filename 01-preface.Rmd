@@ -1,4 +1,68 @@
 # Introduction (Preface)
 
-I'm including this section to keep our table of contents in sync with the book's table of contents, but we did not specifically study this preface chapter. 
-But maybe we did and I'll come back and edit this.
+The preface gives an overview of what the book covers.
+
+**Learning objectives:**
+
+- Describe a **typical data science project.**
+- Explain the reasoning behind the **order of content in this book.**
+- Recognize topics that are explicitly **not covered by this book.**
+- **Set up an environment** in which you can learn the topics in this book.
+- Describe how **code in the book** differs from **code in your console.**
+- Recall ways to **get help with R code.**
+  - Produce a minimal reproducible example or **reprex.**
+
+## A typical data science project
+
+![The data science process](images/data-science.png)
+
+- **Import:** Get a data from a file, database, or web app into R.
+- **Tidy:** Make sure each **column** in your data is a **variable** and each **row** in your data is an **observeration.**
+- **Transform:** Filter your data to specific observations, mutate existing columns into new columns, and summarize data.
+- **Visualize:** Visualization is an important component of data exploration, but usually isn't very useful for automated processes.
+- **Model:** Once you know what you're asking, you can use a model to answer those questions. Models tend to scale well.
+- **Communicate:** Communication is a critical part of data science! It doesn't matter how good your models are if nobody knows about them.
+- **Program:** Programming can aid the entire process, and unlock things that wouldn't be possible to determine by hand.
+
+## The order of content in this book
+
+- Import & Tidy are boring, so we jump to **visualization & transformation.**
+- After that we learn to **wrangle (import & tidy) data,** because that is a necessary skill.
+- Those baseline skills enables us to start **programming.** Learning to program helps us simplify the other steps.
+- We might then get into **modeling** and **communicating,** or we might pick those up in books that are more specifically devoted to those skills.
+
+## Not covered by this book
+
+- **Big data:** Working with big data is problem-specific. If you need to work with big data, other tools will be useful to learn.
+- **Python, Julia, etc:** This book focuses on R. Master one tool at a time, but maybe go on to other tools later.
+- **Non-rectangular data:** Honestly even a lot of things that aren't naturally table-like can be coerced to be table-like, so it makes sense to start with tables.
+- **Hypothesis confirmation:** This book focuses on exploratory data analysis.
+
+## Setting up an environment
+
+We'll need:
+
+- **R**
+- **Rstudio**
+- The **tidyverse** (`install.packages("tidyverse")`)
+- Three **additional packages** (`install.packages(c("nycflights13", "gapminder", "Lahman"))`)
+
+Depending where you're learning, this might all be set up for you already.
+
+## Running R code
+
+- Code in the book has some slight differences from code on your console.
+- Don't freak out.
+
+## Getting help
+
+- **Pay attention to error messages.** 
+  - tidyverse error messages tend to actually be helpful.
+  - If you can't figure out what an error is telling you, copy/paste it into Google.
+- **Stackoverflow.com** *can* be helpful, but beware.
+- **r4ds.io/join** is a friendly Slack community with volunteer R tutors.
+- When you ask for help, make a **reprex** if possible.
+  - State up front what **packages** you use (we'll learn about loading packages very soon).
+  - Provide (a subset of) any data you use with `dput()`.
+  - Make sure your code is **easy to read.** Use clean spacing, clear variable names, and comments.
+- [#rstats](https://twitter.com/search?q=%23rstats) twitter is super active and surprisingly friendly.
