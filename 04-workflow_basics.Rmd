@@ -9,28 +9,28 @@
 
 
 
-## The Console Pane {-}
+## The Console Pane 
 
 
 ![](images/console_pane.png)
 
 
-## The Script Pane {-}
+## The Script Pane {.unlisted .unnumbered}
 
 
 ![](images/script_pane.png)
 
-## The Environment Pane {-}
+## The Environment Pane {.unlisted .unnumbered}
 
 
 ![](images/environment_pane.png)
 
-## The Other Pane {-}
+## The Other Pane {.unlisted .unnumbered}
 
 
 ![](images/files_pane.png)
 
-## Using the Console 
+## Using the Console {.unlisted .unnumbered}
 
 Conceptually, everything we do in R is a series of commands. The console is where we can enter these commands.
 
@@ -40,7 +40,7 @@ By default, entering `<thing>` means "print out `<thing>`."
 4
 ```
 
-## Using the Console {-}
+## Using the Console {.unlisted .unnumbered}
 
 R has some pre-defined named objects:
 
@@ -54,7 +54,7 @@ This one is surprisingly useful:
 letters
 ```
 
-## Using the Console {-}
+## Using the Console {.unlisted .unnumbered}
 
 What it means to "print out" a thing depends on what kind of thing it is.
 
@@ -62,7 +62,7 @@ What it means to "print out" a thing depends on what kind of thing it is.
 ggplot2::diamonds
 ```
 
-## Using the Console {-}
+## Using the Console {.unlisted .unnumbered}
 
 Actually, entering `<thing>` really means "**evaluate** and print `<thing>`."
 
@@ -77,7 +77,7 @@ I use R as a desktop calculator a lot.
 ```
 
 
-## Assigning Names {-}
+## Assigning Names {.unlisted .unnumbered}
 
 Sometimes you don't just want to print out a thing, especially if it's a complex evaluation. You want to save it to a named object so that you can do more stuff with it. 
 Use the assignment arrow (`<-`) for this.
@@ -90,7 +90,7 @@ Most programming languages use the equals sign (`=`) for assignment, and this al
 
 Objects that you have named will show up in the "Environment" panel.
 
-## Assigning and Printing {-}
+## Assigning and Printing {.unlisted .unnumbered}
 
 By default, when you make an assignment, the result of the evaluation **is not** printed in the console. To assign **and** print in one command, surround the assignment with parentheses:
 
@@ -99,7 +99,7 @@ By default, when you make an assignment, the result of the evaluation **is not**
 ```
 
 
-## Pronouncing Code {-}
+## Pronouncing Code {.unlisted .unnumbered}
 
 It's easier to remember and understand a thing if you can say it (either out loud or in your head). 
 
@@ -144,7 +144,7 @@ Or:
 nrow(ggplot2::diamonds)
 ```
 
-## Functions {-}
+## Functions {.unlisted .unnumbered}
 
 The inputs (the function *parameters*) have names. When you pass in the function arguments, you can do so by name:
 
@@ -164,7 +164,7 @@ If you don't specify names, the function matches the arguments to the parameters
 seq(10, 1)
 ```
 
-## Other RStudio Features {-}
+## Other RStudio Features {.unlisted .unnumbered}
 
 Explore on your own:
 
