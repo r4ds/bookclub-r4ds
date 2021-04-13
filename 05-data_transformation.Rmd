@@ -2,7 +2,14 @@
 
 **Learning objectives:**
 
-- Jon will try to prefill these ahead of each week.
+- **Pick out rows** of a data frame with the **`dplyr::filter()`** function.
+- **Sort rows** of a data frame with **`dplyr::arrange()`**.
+- **Pick out columns** of a data frame with **`dplyr::select()`**.
+- **Modify columns** of a data frame with **`dplyr::mutate()`**.
+- **Group rows** of a data frame with **`dplyr::group()`**.
+- **Apply functions to columns** of a (grouped) data frame with **`dplyr::summarize()`**.
+- **Streamline data transformations** with the **pipe** operator (`%>%`).
+
 
 ## Slide 1
 
