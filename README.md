@@ -14,6 +14,8 @@ If you would like to present, please add your name next to a chapter using the [
 *Cohort X: (started 2021-03-26) - Fridays, 3:30PM EST/EDT*
 
 - 2021-04-02: Chapters 1-3: Introduction & Data Visualization: Jon Harmon
+- 2021-04-09: Chapter 4: Workflow: basics: Jonathan Bratt
+- 2021-04-16: Chapter 5: Data transformation: Alex Britez
 
 ## How to Present
 
