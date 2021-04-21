@@ -2,7 +2,7 @@
 
 **Learning objectives:**
 
-- Use **keyboard shortcuts** to use RStudio script pane efficiently.
+- Use **keyboard shortcuts** to use the RStudio script pane efficiently.
 - Understand the **script diagnostics** that the RStudio script editor provides.
 
 ## Slide 1
