@@ -2,7 +2,8 @@
 
 **Learning objectives:**
 
-- Jon will try to prefill these ahead of each week.
+- Use **keyboard shortcuts** to use RStudio script pane efficiently.
+- Understand the **script diagnostics** that the RStudio script editor provides.
 
 ## Slide 1
 
