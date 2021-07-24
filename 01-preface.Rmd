@@ -47,8 +47,6 @@ We'll need:
 - The **tidyverse** (`install.packages("tidyverse")`)
 - Three **additional packages** (`install.packages(c("nycflights13", "gapminder", "Lahman"))`)
 
-Depending where you're learning, this might all be set up for you already.
-
 ## Running R code
 
 - Code in the book has some slight differences from code on your console.
