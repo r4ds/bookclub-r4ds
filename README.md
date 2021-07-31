@@ -11,11 +11,13 @@ As we read, we are producing [notes about the book](https://r4ds.github.io/bookc
 
 If you would like to present, please add your name next to a chapter using the [GitHub Web Editor](https://youtu.be/d41oc2OMAuI)!
 
-*Cohort X: (started 2021-03-26) - Fridays, 3:30PM EST/EDT*
+*Cohort 5: (started 2021-07-24) - Saturdays, 1:00PM EST/EDT*
 
-- 2021-04-02: Chapters 1-3: Introduction & Data Visualization: Jon Harmon
-- 2021-04-09: Chapter 4: Workflow: basics: Jonathan Bratt
-- 2021-04-16: Chapter 5: Data transformation: Alex Britez
+- 2021-07-24: Chapter 1: Introduction: Jon Harmon
+- 2021-07-31: Chapter 2-3: Data Visualization: Federica Gazzelloni
+- 2021-08-07: Chapter 4: Workflow: basics: PRESENTER TBD
+- 2021-08-14: Chapter 5: Data transformation:  PRESENTER TBD
+- 2021-08-21: Chapter 6: Workflow: scripts:  PRESENTER TBD
 
 ## How to Present
 
