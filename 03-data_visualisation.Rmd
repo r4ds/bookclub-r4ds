@@ -354,7 +354,7 @@ For example if you would like to customize the background of your plot:
 ```{r}
 ggplot() +
   geom_blank() +
-  theme(plot.background = element_rect(color="red",size=2,fill="gold"),
+  theme(plot.background = element_rect(color = "red", size = 2, fill = "gold"),
         panel.background = element_rect(color="grey",size=5,fill="darkblue"))
 ```
 
