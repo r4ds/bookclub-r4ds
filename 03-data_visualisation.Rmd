@@ -197,7 +197,7 @@ Before you create your visualization, you need to have your data ready. We'll le
 - import your data
 - tidy the set in a way to have your variables ready to display
 - transform the data as needed
-- visualize them with a plot
+- visualize the data with a plot
 - model 
 - communicate
 
