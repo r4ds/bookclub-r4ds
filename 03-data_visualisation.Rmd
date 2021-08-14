@@ -195,7 +195,7 @@ What is very important when deciding on a visualization of your data?
 Before you create your visualization, you need to have your data ready. We'll learn more about these steps in upcoming chapters:```
 
 - import your data
-- tidy the set in a way to have your variables ready to display
+- tidy the data to have your variables ready to display
 - transform the data as needed
 - visualize the data with a plot
 - model 
