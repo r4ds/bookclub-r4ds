@@ -365,7 +365,7 @@ Or you can customize a `theme_`, there are many different themes provided by def
     theme_minimal()
     theme_void()
 
-just to name a few, those function then can be further customize by adding the simple `theme` customization function.
+just to name a few, those function then can be further customize by adding the `theme` customization function.
 
 
 
