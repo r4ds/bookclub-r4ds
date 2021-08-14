@@ -187,7 +187,7 @@ ggplot(data = mpg) +
 ## Common problems
 
 
-What is very important when deciding for a visualization of your data?
+What is very important when deciding on a visualization of your data?
 
 ![](images/data-science-explore.png){width=90%} 
 
