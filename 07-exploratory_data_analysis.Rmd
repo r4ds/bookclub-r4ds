@@ -1,18 +1,139 @@
 # Exploratory Data Analysis
 
-**Learning objectives:**
+## Learning objectives
 
-- List the **two types of questions** that will always be useful for making discoveries within your data.
+```{r 07-setup, include = FALSE}
+library(tidyverse)
+```
+
+- Recognize the **two types of questions** that will always be useful for making discoveries within your data: "What type of variation occurs within my variables?" and "What type of covariation occurs between my variables?"
 - Explore the **variation** within the variables of your observations.
 - Deal with outliers and **missing values** in your data.
 - Explore the **covariation** between the variables of your observations.
 - Recognize how **models** can be used to explore **patterns** in your data.
 
-## Slide 1
+## Overall Vocabulary
 
-Slide contents. 
-Keep it short and slide-like!
+- **variable:** a quantity, quality, or property that you can measure.
+- **value:** the state of a variable when you measure it. Can change.
+- **observation:** a set of measurements made under similar conditions. One value per variable.
+- **tabular data:** observations of variables.
+- **tidy data:** 1 observation per row, 1 variable per column, 1 value per cell. Definition of "tidy" for a dataset can depend on what you're trying to answer.
 
-## Slide 2
+## Variation
 
-Slide contents.
+- **variation:** the tendency of values of a variable to change between measurements.
+- **categorical variable:** can only take certain values. Visualize variation with bar chart.
+
+```{r 07-variation-categorical}
+ggplot(data = diamonds) +
+  aes(x = cut) +
+  geom_bar()
+```
+
+- **continuous variables:** can take on infinite set of ordered values. Visualize variation with histogram.
+
+```{r 07-variation-continuous}
+ggplot(data = diamonds) +
+  aes(x = carat) +
+  geom_histogram(binwidth = 0.5)
+```
+
+- `geom_freqpoly` is `geom_histogram` alternative that doesn't show bars.
+- Reminder: the `%>%` pipe = "and then".
+- `{ggplot2}` uses `+` to add layers, read it as "with" or "and".
+
+```{r 07-variation-freqpoly}
+smaller <- diamonds %>% 
+  filter(carat < 3) 
+ggplot(smaller) +
+  aes(x = carat, colour = cut) +
+  geom_freqpoly(binwidth = 0.1)
+```
+
+- Use the visualizations to develop questions!
+  - Which values are the most common? Why?
+  - Which values are rare? Why? Does that match your expectations?
+  - Can you see any unusual patterns? What might explain them?
+
+```{r 07-var-questions1}
+ggplot(smaller, mapping = aes(x = carat)) +
+  geom_histogram(binwidth = 0.01)
+```
+
+- Subgroups create more questions:
+  - How are the observations within each cluster similar to each other?
+  - How are the observations in separate clusters different from each other?
+  - How can you explain or describe the clusters?
+  - Why might the appearance of clusters be misleading?
+
+- Use `coord_cartesian` to zoom in to see unusual values.
+- Can be ok to drop weird values, especially if you can explain where they came from.
+- Always disclose that you did that, though.
+
+## Missing values
+
+2 options to deal with weird values:
+
+- Drop the entire row. <-- probably don't do this
+- Replace bad data with NA.
+
+```{r 07-replace-weird}
+diamonds2 <- diamonds %>% 
+  mutate(y = ifelse(y < 3 | y > 20, NA, y))
+```
+
+- `{ggplot2}` will give a warning when values are missing, can suppress with `na.rm = TRUE`.
+
+## Covariation
+
+- **covariation:** tendency of values of different variables to vary *together* in a related way.
+- Visualizing covariance depends on types of variables in the pair:
+
+### categorical + continuous
+
+- `x = categorical`
+- `y = continuous`.
+- `geom_boxplot`
+- Lots of options exist to do this better. See [Cedric Scherer's tutorial](https://www.cedricscherer.com/2021/06/06/visualizing-distributions-with-raincloud-plots-with-ggplot2/)!
+
+### categorical + categorical
+
+- `geom_count`
+- `dplyr::count` then `geom_tile`
+
+### continuous + continuous
+
+- `geom_point`
+- `geom_bin2d`
+- `geom_hex`
+
+
+## Finding Patterns
+
+**Ask yourself:**
+
+- Could this pattern be due to coincidence (i.e. random chance)?
+- How can you describe the relationship implied by the pattern?
+- How strong is the relationship implied by the pattern?
+- What other variables might affect the relationship?
+- Does the relationship change if you look at individual subgroups of the data?
+
+## Simplified ggplot2
+
+```{r 07-ggplot-simplified}
+ggplot(data = faithful, mapping = aes(x = eruptions)) + 
+  geom_freqpoly(binwidth = 0.25)
+
+ggplot(faithful, aes(eruptions)) + 
+  geom_freqpoly(binwidth = 0.25)
+
+# Or Jon's crazy way
+ggplot(faithful) +
+  aes(eruptions) +
+  geom_freqpoly(binwidth = 0.25)
+```
+
+## Learning More
+
+- [r4ds.io/join](r4ds.io/join) for more book clubs!
