@@ -8,7 +8,7 @@ bibliography: book.bib
 biblio-style: apalike
 link-citations: yes
 github-repo: r4ds/bookclub-r4ds
-description: "This is the product of the R4DS Online Learning Community's Book Club."
+description: This is the product of the R4DS Online Learning Community's Book Club.
 ---
 
 # Welcome {-}
