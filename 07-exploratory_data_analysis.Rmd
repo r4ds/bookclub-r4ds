@@ -137,3 +137,5 @@ ggplot(faithful) +
 ## Learning More
 
 - [r4ds.io/join](r4ds.io/join) for more book clubs!
+- [R Graph Gallery](https://www.r-graph-gallery.com/ggplot2-package.html)
+- The [Graphs section](http://www.cookbook-r.com/Graphs/) of the R Cookbook
