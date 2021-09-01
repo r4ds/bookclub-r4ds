@@ -20,6 +20,7 @@ If you would like to present, please add your name next to a chapter using the [
 - 2021-08-21: Chapter 6: Workflow: scripts:  Ryan Metcalf
 - 2021-08-28: Chapter 7: Exploratory Data Analysis:  Jon Harmon
 - 2021-09-04: Chapter 8: Workflow: projects:  Susie Neilson
+- 2021-09-11: Chapter 9: Wrangling Introduction & Chapter 10: Tibbles: Njoki Njuki Lucy
 
 ## How to Present
 
