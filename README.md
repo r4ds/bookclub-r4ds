@@ -17,7 +17,9 @@ If you would like to present, please add your name next to a chapter using the [
 - 2021-07-31: Chapter 2-3: Data Visualization: Federica Gazzelloni
 - 2021-08-07: Chapter 4: Workflow: basics: Ryan Metcalf
 - 2021-08-14: Chapter 5: Data transformation:  Wai-Yin
-- 2021-08-21: Chapter 6: Workflow: scripts:  PRESENTER TBD
+- 2021-08-21: Chapter 6: Workflow: scripts:  Ryan Metcalf
+- 2021-08-28: Chapter 7: Exploratory Data Analysis:  Jon Harmon
+- 2021-09-04: Chapter 8: Workflow: projects:  Susie Neilson
 
 ## How to Present
 
