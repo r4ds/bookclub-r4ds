@@ -10,12 +10,816 @@
 - **Apply functions to columns** of a (grouped) data frame with **`dplyr::summarize()`**.
 - **Streamline data transformations** with the **pipe** operator (`%>%`).
 
+## Introduction
 
-## Slide 1
+### Prerequisites
 
-Slide contents. 
-Keep it short and slide-like!
+dplyr is a package that provides functions to manipulate data frames. Data frame consists of columns (variables) and rows (observations).
 
-## Slide 2
+dplyr is part of the tidyverse. You can install and load the all the packages from tidyverse (ggplot2, dplyr, tidyr, readr, purrr, tibble, stringr, forcats)
 
-Slide contents.
+```{r, eval=FALSE}
+install.packages("tidyverse")
+```
+
+```{r}
+library(tidyverse)
+```
+
+Or just install and load dplyr.
+
+```{r, eval=FALSE}
+install.packages("dplyr")
+```
+
+```{r}
+library(dplyr)
+```
+
+### nycflights13
+
+The data set `nycflights13` contains data about flights that departed New York City in 2013.
+
+```{r, eval=FALSE}
+install.packages("nycflights13")
+```
+
+```{r}
+library(nycflights13)
+```
+
+When you use data set for the first time, it's good practice to quickly browse the data to check if you want to use the data.
+
+To view the flights data in the R console.  .
+
+```{r}
+flights
+```
+To view the flights data in a spreadsheet-like viewer.
+
+```{r, eval=FALSE}
+View(flights)
+```
+
+Use `?flights` to open the help viewer to get info about all the variables.
+
+```{r, eval=FALSE}
+?flights
+```
+
+Check the size of the flights data frame using `nrow()`, `ncol()`, `length()`, and `dim()`.
+
+```{r, eval=FALSE}
+# number of rows
+nrow(flights)
+# [1] 336776
+
+# number of columns
+ncol(flights)
+# [1] 19
+
+# number of columns
+length(flights)
+# [1] 19
+
+# number of rows and columns
+dim(flights)
+# [1] 336776     19
+```
+
+get the column names with `colnames()`
+
+```{r}
+colnames(flights)
+```
+
+## Comparisons and logical operators
+
+### Comparisons
+
+-   `>` greater than
+-   `>=` greater than or equal
+-   `<` less than
+-   `<=` less than or equal
+-   `==` equal
+-   `!=` not equal
+
+
+In math we use `=` for equality. In programming we use `==` for equality, and `=` for assignment.
+
+compare numbers
+
+```{r, eval=FALSE}
+1 > 2
+# [1] FALSE
+1 >= 2
+# [1] FALSE
+1 < 2
+# [1] TRUE
+1 <= 2
+# [1] TRUE
+1 == 2
+# [1] FALSE
+1 != 2
+# [1] TRUE
+```
+
+compare characters
+
+```{r, eval=FALSE}
+'a' > 'b'
+# [1] FALSE
+'a' >= 'b'
+# [1] FALSE
+'a' < 'b'
+# [1] TRUE
+'a' <= 'b'
+# [1] TRUE
+'a' == 'b'
+# [1] FALSE
+'a' != 'b'
+# [1] TRUE
+```
+
+Case matters when comparing characters. For English, lowercase letters are less than uppercase letters.
+
+```{r, eval=FALSE}
+'a' > 'A'
+# [1] FALSE
+'a' >= 'A'
+# [1] FALSE
+'a' < 'A'
+# [1] TRUE
+'a' <= 'A'
+# [1] TRUE
+'a' == 'A'
+# [1] FALSE
+'a' != 'A'
+# [1] TRUE
+```
+
+We can change case when comparing characters.
+
+`tolower()` will change characters to lower case. `toupper()` will change characters to upper case.
+
+```{r, eval=FALSE}
+tolower('A')
+# [1] "a"
+
+toupper('a')
+# [1] "A"
+```
+
+
+```{r, eval=FALSE}
+'a' == tolower('A')
+# [1] TRUE
+
+toupper('a') == 'A'
+# [1] TRUE
+```
+
+### Logical operators
+
+`&` and; all expressions must be true in order to return true
+
+```{r, eval=FALSE}
+TRUE & TRUE
+# [1] TRUE
+TRUE & FALSE
+# [1] FALSE
+```
+
+`|` or; one or more expressions must be true in order to return true; `|` is the key above the return key, not lowercase letter l.
+
+```{r, eval=FALSE}
+TRUE | TRUE
+# [1] TRUE
+TRUE | FALSE
+# [1] TRUE
+```
+
+`!` not; negate the expression
+
+```{r, eval=FALSE}
+!TRUE
+# [1] FALSE
+!FALSE
+# [1] TRUE
+!!TRUE
+# [1] TRUE
+```
+
+assign objects
+
+```{r}
+a <- 1
+b <- 5
+```
+
+compare object and numbers
+
+```{r, eval=FALSE}
+a < 3
+# [1] TRUE
+a > 3
+# [1] FALSE
+a == 3
+# [1] FALSE
+a != 3
+# [1] TRUE
+```
+
+compare objects
+
+```{r, eval=FALSE}
+a < b
+# [1] TRUE
+a > b
+# [1] FALSE
+a == b
+# [1] FALSE
+a != b
+# [1] TRUE
+```
+
+comparison and logical operators
+
+```{r, eval=FALSE}
+
+a > 3
+# [1] FALSE
+
+b > 3
+# [1] TRUE
+
+a > 3 & b > 3
+# [1] FALSE
+
+a > 3 | b > 3
+# [1] TRUE
+
+!(a == b)
+# [1] TRUE
+```
+
+## Filter rows with filter()
+
+`filter()` allows you to pick out certain rows (observations) . `filter()` picks the rows which evaluates to TRUE for all criteria.
+
+The first argument to `filter()` is a data frame, the subsequent arguments are the expressions.
+
+Combine comparisons and logical operators on the columns to select rows.
+
+```{r}
+# number of rows and columns
+dim(flights)
+```
+
+```{r}
+# get the column names
+colnames(flights)
+```
+
+```{r}
+# select flights from November
+filter(flights, month == 11)
+```
+`A tibble: 27,268 × 19` tells you 27,268 rows match the criteria
+
+
+```{r}
+# select flights from December
+filter(flights, month == 12)
+```
+
+```{r}
+# select flights not from December (e.g. January to November)
+filter(flights, month != 12)
+```
+
+```{r}
+# select flights from November or December
+filter(flights, month == 11 | month == 12)
+```
+`&` (and)  vs `|` (or)
+
+```{r}
+# select flights from November or from 1st day of any month
+filter(flights, month == 11 | day == 1)
+```
+
+```{r}
+# select flights from November 1st
+filter(flights, month == 11 & day == 1)
+```
+
+If you provide multiple comma-separated expressions, dplyr will automatically use `&` to combine the expressions.
+
+```{r, eval=FALSE}
+# both will select flights from November 1st
+
+filter(flights, month == 11 & day == 1)
+
+filter(flights, month == 11, day == 1)
+```
+
+dplyr functions do not change the original data. To save the results from a function, you need to assign the results to a object.
+
+```{r, eval=FALSE}
+nov1 <- filter(flights, month == 11, day == 1)
+
+nrow(nov1)
+## [1] 986
+
+nrow(flights)
+## [1] 336776
+
+```
+
+### Missing values
+
+Often times, rows will not have data for certain columns. In spreadsheets, csv, tsv, the cells will be blank. In R data frames, the missing values are represented as `NA` (not available).
+
+Operations with `NA` will return `NA`.
+
+```{r, eval=FALSE}
+NA > 5
+# [1] NA
+
+10 == NA
+# [1] NA
+
+NA + 10
+# [1] NA
+
+NA / 2
+# [1] NA
+
+NA == NA
+# [1] NA
+```
+
+To check if value is missing use `is.na()`
+
+```{r, eval=FALSE}
+is.na(NA)
+# [1] TRUE
+```
+
+By default, `filter()` excludes `NA` values. To include `NA` values, you must add an expression.
+
+tibble is the tidyverse version of a data frame. tibble haves some extra functions that normal data frames do not have.
+
+```{r}
+# create a tibble with a column named "x", with 3 values
+df <- tibble(x = c(1, NA, 3))
+df
+```
+
+
+```{r}
+# select rows with values greater than 1
+filter(df, x > 1)
+```
+
+```{r}
+# select rows with NA or values greater than 1
+filter(df, is.na(x) | x > 1)
+```
+
+## Arrange rows with arrange()
+
+`arrange()` changes the order of the rows. The first argument to `arrange()` is a data frame, the subsequent arguments are columns names are expression used to sort the rows.
+
+Ascending (small to big) is the default order.
+
+Use `desc()` for descending order (big to small).
+
+```{r}
+# sort flights by depature delay using ascending order
+arrange(flights, dep_delay)
+```
+
+```{r}
+# sort flights by depature delay using descending order.
+arrange(flights, desc(dep_delay))
+```
+
+sort by multiple columns
+
+```{r}
+# sort flights by year, month, and day using ascending order
+arrange(flights, year, month, day)
+```
+
+`arrange()` puts `NA` values at the end.
+
+```{r}
+# create tibble with 3 values
+df <- tibble(x = c(1, NA, 3))
+
+# sort puts NA at the end
+arrange(df, x)
+```
+
+## Select columns with select()
+
+`select()` lets you pick which columns (variables) to use. The first argument to `select()` is a data frame, the subsequent arguments are columns to use.
+
+```{r}
+# colnames() retrieves the column names
+colnames(flights)
+```
+
+the order you list the columns will determine the order of the columns returned by `select()`.
+
+```{r}
+# select year, month, and day columns.
+select(flights, year, month, day)
+```
+
+```{r}
+# use ':' to select columns from year to day (inclusive).
+select(flights, year:day)
+```
+
+```{r}
+# use '-' to select columns except from year to day (inclusive).
+select(flights, -(year:day))
+```
+
+helper functions for `select()`
+
+`starts_with()`
+
+```{r}
+# select columns that start with "dep"
+select(flights, starts_with("dep"))
+```
+
+`ends_with()`
+
+```{r}
+# select columns that end with "delay"
+select(flights, ends_with("delay"))
+```
+
+`contains()`
+
+```{r}
+# select columns that contain  "dep"
+select(flights, contains("dep"))
+```
+
+`matches()`
+
+```{r}
+# select columns that matches regular expression.
+# "^a(.)r" means it starts with a, has any character, and then r.
+select(flights, matches("^a(.)r"))
+```
+
+`num_range()`
+
+```{r}
+# create tibble with columns x1, x2, x3, x4
+df <- tibble(x1 = c(1, 2), x2 = c(2, 3), x3 = c(4, 5), x4 = c(6, 7))
+
+# select column that matches x1, x2 and x3
+select(df, num_range("x", 1:3))
+```
+
+`rename()` changes the column names. `rename(data_frame, new_name = old_name)`
+
+```{r}
+# rename the column dep_time to departure_time
+
+rename(flights, departure_time = dep_time)
+```
+
+use `select()` and `everything()` to move some columns to start of the dataframe
+
+```{r}
+# rearrange columns to time_hour, air_time, rest of the columns
+select(flights, time_hour, air_time, everything())
+```
+
+## Add new variables with mutate()
+
+`mutate()` adds new columns based on values from existing columns. Data frame includes existing and new columns.
+
+```{r}
+# create data frame with  7 columns: year, month, day, dep_delay, arr_delay, distance, air_time
+
+flights_7_columns <- select(flights,
+  year:day,
+  ends_with("delay"),
+  distance,
+  air_time
+)
+```
+
+```{r}
+# calculate and add columns for gain, hours, and gain_per_hour
+
+mutate(flights_7_columns,
+  gain = dep_delay - arr_delay,
+  hours = air_time / 60,
+  gain_per_hour = gain / hours
+)
+```
+
+`transmute()` adds new columns based on values from existing columns. Data frame only includes new columns.
+
+```{r}
+# calculate and add columns for gain, hours, and gain_per_hour
+transmute(flights_7_columns,
+  gain = dep_delay - arr_delay,
+  hours = air_time / 60,
+  gain_per_hour = gain / hours
+)
+```
+
+### Useful creation functions
+
+There are many functions to use with `mutate()`. The function must be vectorised: it must take a vector of values as input, return a vector with the same number of values as output.
+
+Arithmetic operators: `+`, `-`, `*`, `/`, `^`
+
+aggregate functions: `sum`, `mean`
+
+Modular arithmetic: `%/%` (integer division) and `%%` (remainder)
+
+Logs: `log()`, `log2()`, `log10()`
+
+Offsets: `lead()` leading values; `lag()` lagging values.
+
+Cumulative and rolling aggregates: `cumsum()` cumulative sums, `cumprod()` cumulative products, `cummin()` cumulative min, `cummax()` cumulative max, `cummean()` cumulative means.
+
+Logical comparisons: `<`, `<=`, `>`, `>=`, `!=`, and `==`
+
+Ranking: `min_rank(x)` gives ranks from smallest to largest. `min_rank(desc(x))` gives ranks from largest to smallest. `row_number()`, `dense_rank()`, `percent_rank()`, `cume_dist()`, `ntile()`.
+
+Testing out various functions to see what they do.
+
+```{r}
+transmute(flights,
+  dep_time,
+  arr_time,
+  # Modular arithmetic
+  dep_hour = dep_time %/% 100,
+  dep_minute = dep_time %% 100,
+  # Arithmetic
+  duration = arr_time - dep_time,
+  # logs
+  log_duration = log2(duration),
+  # Offsets
+  lead_duration = lead(duration)
+)
+```
+
+```{r}
+transmute(flights,
+  dep_time,
+  arr_time,
+  # Arithmetic
+  duration = arr_time - dep_time,
+  # Cumulative aggregates
+  cumsum_duration = cumsum(duration),
+  # Logical comparisons
+  long_duration = duration > 300,
+  # Ranking
+  rank_duration = min_rank(duration)
+)
+```
+
+## Grouped summaries with summarize()
+
+`summarize()` or `summarise()` collapses a data frame to a single row
+
+
+By default, summarize includes NA values. `summarize()` will return `NA` if any values are `NA`.
+
+```{r}
+# calculate the mean departure delay for all the flights. Include NA.
+summarize(flights, delay = mean(dep_delay))
+```
+
+Need to use `na.rm = TRUE` to remove NA values.
+
+```{r}
+# calculate the mean departure delay for all the flights. Remove NA.
+summarize(flights, delay = mean(dep_delay, na.rm = TRUE))
+```
+
+You  use `nrow()`, `filter()`, and `is.na()` check the number of `NA` values for a column.
+
+```{r}
+# total rows in flights
+nrow(flights)
+# [1] 336776
+
+# rows where dep_delay is NA
+nrow(filter(flights, is.na(dep_delay)))
+# [1] 8255
+
+# rows where dep_delay has a value
+nrow(filter(flights, !is.na(dep_delay)))
+# [1] 328521
+```
+
+
+Use `summarize()` and `group_by()` to calculate values for each group.
+
+```{r}
+# group flights by year, month and day to get daily flights
+by_day <- group_by(flights, year, month, day)
+
+# calculate mean departure delay for each day
+summarize(by_day, delay = mean(dep_delay, na.rm = TRUE))
+```
+
+### Combining multiple operations with the pipe
+
+Use pipe `%>%` to perform multiple operations on a data set. Do step 1, and then do step 2...
+
+pipe makes code more readable.
+
+```{r}
+# groyup flights by day, and then calculate mean departure delay for each day
+flights %>%
+  group_by(year, month, day) %>%
+  summarize(delay = mean(dep_delay, na.rm = TRUE))
+```
+
+### Counts
+
+Whenever you do any aggregation, you should include a count of values `n()`, or a count of non-missing values `sum(!is.na(x))` to check number of items per group.
+
+```{r}
+
+#  get  flights that were not cancelled
+not_cancelled <- flights %>%
+  filter(!is.na(dep_delay), !is.na(arr_delay))
+
+# group flights by tail number, and then calculate mean arrival delay and number of not canceled flights for each tail number
+delays <- not_cancelled %>%
+  group_by(tailnum) %>%
+  summarize(
+    delay = mean(arr_delay, na.rm = TRUE),
+    n = n()
+  )
+
+delays
+```
+
+combine dplyr with ggplot to rearrange and plot data.
+
+dplyr and rest of tidyverse uses `%\>% `; ggplot uses `+`
+
+```{r}
+
+# pick the delayed flights with more than 25 flights, and then plot the flights.
+delays %>%
+  filter(n > 25) %>%
+  ggplot(mapping = aes(x = n, y = delay)) +
+    geom_point(alpha = 1/10)
+
+```
+
+### Useful summary functions
+
+Many functions can be used with `summarize()`
+
+Measures of location: `median(x)` value where 50% of x is above it, and 50% is below it.
+
+Measures of spread: `sd(x)` standard deviation is the standard measure of spread. interquartile range `IQR(x)` and median absolute deviation `mad(x)` are good if there are outliers.
+
+Measures of rank: `min(x)`, `quantile(x, 0.25)`, `max(x)`
+
+Measures of position: `first(x)`, `nth(x, 2)`, `last(x)`.
+
+Counts: `n()` returns the size of the current group. `sum(!is.na(x))` returns the number of non-missing values. `n_distinct(x)` returns the number of unique values.
+
+`count()` is a shortcut for `group_by()` and `summarize()` to return count by group.
+
+```{r}
+# count the number of flights per destination
+not_cancelled %>%
+  group_by(dest) %>%
+  summarize(n = n())
+```
+
+```{r}
+# count the number of flights per destination
+not_cancelled %>%
+  count(dest)
+```
+
+use `sort=TRUE` with `count()` to sort the counts
+
+```{r}
+# count the number of flights per destination, and sort the results
+not_cancelled %>%
+  count(dest, sort=TRUE)
+```
+
+optionally provide a weight variable to get a sum of that variable.
+
+```{r}
+# get the total number of miles planes flew for each destination
+not_cancelled %>%
+  count(dest, wt = distance)
+```
+
+When used with numeric functions, `TRUE` is converted to 1 and `FALSE` is converted to 0.
+
+```{r, eval=FALSE}
+sum(TRUE)
+# [1] 1
+sum(5 > 0)
+# [1] 1
+
+
+sum(FALSE)
+# [1] 0
+sum(5 < 0)
+# [1] 0
+```
+
+Counts and proportions of logical values: `sum(x)` gives the number of TRUEs, and `mean(x)` gives the proportion of TRUEs.
+
+```{r}
+#  number of flight per day delayed by more than an 60 minutes
+not_cancelled %>%
+  group_by(year, month, day) %>%
+  summarize(hour_count = sum(arr_delay > 60))
+```
+
+```{r}
+#  proportion of flights per day delayed by more than an 60 minutes
+not_cancelled %>%
+  group_by(year, month, day) %>%
+  summarize(hour_prop = mean(arr_delay > 60))
+```
+
+### Grouping by multiple variables
+
+progressively rolling up summaries for sums and counts
+
+```{r}
+# group flights by day
+daily <- group_by(flights, year, month, day)
+```
+
+```{r}
+# number flights per day
+(per_day <- summarize(daily, flights = n()))
+```
+
+```{r}
+ # number flights per month
+(per_month <- summarize(per_day, flights = sum(flights)))
+```
+
+```{r}
+# number of flights per year
+(per_year  <- summarize(per_month, flights = sum(flights)))
+```
+
+### Ungrouping
+
+`ungroup()` removes grouping.
+
+```{r}
+# ungroup the daily flights to count the total number of flights
+daily %>%
+  ungroup() %>%
+  summarize(flights = n())
+```
+
+If during analysis the data doesn't look right, you can try to use `ungroup()` to check if the data was previously grouped.
+
+## Grouped mutates (and filters)
+
+use `group()` with `mutate()` and `filter()`
+
+
+```{r}
+# get the flights with the top 10  largest arrival delays per day
+top_delay <- flights_7_columns %>%
+  group_by(year, month, day) %>%
+  filter(rank(desc(arr_delay)) <= 10)
+top_delay
+```
+
+```{r}
+# add rank column, and sort the rows by day and rank to check if top_delay
+# is returning what we expect
+top_delay %>%
+  mutate(rank = rank(desc(arr_delay)) ) %>%
+  arrange(year, month, day, rank)
+```
+
+
