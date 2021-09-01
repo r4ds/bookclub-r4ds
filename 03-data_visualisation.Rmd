@@ -67,9 +67,8 @@ The `{ggplot2}` package is one of the `{tidyverse}` packages, it lets us build u
 
 
 ```{r echo=FALSE, fig.align='center', fig.cap='ggplot2 package', out.width='25%'} 
-knitr::include_graphics('https://ggplot2.tidyverse.org/logo.png')
+knitr::include_graphics("images/ggplot2_logo.png")
 ```
-
 
 
 **The layered grammar of graphics**: to see the structure of a ggplot()
