@@ -10,5 +10,3 @@ In this section, we'll learn about:
 - **Data transformation**
 - **Exploratory data analysis**
 - **Workflows to organize our thoughts**
-
-Today we'll focus on **visualization.**

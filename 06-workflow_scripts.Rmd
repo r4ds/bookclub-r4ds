@@ -4,3 +4,25 @@
 
 - Use **keyboard shortcuts** to use the RStudio script pane efficiently.
 - Understand the **script diagnostics** that the RStudio script editor provides.
+
+## Meeting Videos
+
+### Cohort 1
+
+`r knitr::include_url("https://www.youtube.com/embed/2LFWCGNiuoE")`
+
+<details>
+  <summary> Meeting chat log </summary>
+  
+```
+00:40:51	Becki R. (she/her):	It works both ways, I think. It's just convention to use <-.
+00:45:11	Wai-Yin:	You can use <- or = for assignment. <-  is the convention in R.  -> results in ab error.
+00:58:59	lucus w:	https://www.rocker-project.org/
+01:01:43	Bruno A. Machado:	tks Lucus for the link 👍
+01:13:48	Susie N.:	I have to head out! Thank you Ryan for the great breakdown
+01:14:07	Federica Gazzelloni:	Thanks!
+01:14:19	Becki R. (she/her):	Thanks everyone, see you next week!
+01:17:04	Bruno A. Machado:	tks team
+01:17:21	Eileen Murphy:	Thank you Ryan
+```
+</details>
