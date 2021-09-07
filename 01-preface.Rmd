@@ -64,3 +64,23 @@ We'll need:
   - Provide (a subset of) any data you use with `dput()`.
   - Make sure your code is **easy to read.** Use clean spacing, clear variable names, and comments.
 - [#rstats](https://twitter.com/search?q=%23rstats) twitter is super active and surprisingly friendly.
+
+## Meeting Videos
+
+### Cohort 1
+
+`r knitr::include_url("https://www.youtube.com/embed/BtRTkChZo8c")`
+
+<details>
+  <summary> Meeting chat log </summary>
+  
+```
+00:18:00	Morgan Grovenburg:	I have to leave early today. Also, I'd normally have my video on, but my kid is currently using me as a jungle gym
+00:21:19	Susie Neilson:	Link to our team’s work :) https://www.sfchronicle.com/data/
+00:22:40	Morgan Grovenburg:	I know what talk you're talking about
+00:23:10	Wai-Yin:	Data journalism’s wikipedia article  https://en.wikipedia.org/wiki/Data_journalism
+00:49:59	Ryan Metcalf:	Great question Susie! I consider “Big Data” anything I can’t open in a conventional service. Using scripting languages helps with managing overhead (Cost [not monetary], time of process, processing capability, etc…).
+01:00:14	Njoki Njuki Lucy:	data.table has the similar syntax as the base R package.
+01:17:46	Jon Harmon (jonthegeek):	r4ds.io/r4ds
+```
+</details>

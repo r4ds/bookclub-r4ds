@@ -139,3 +139,37 @@ ggplot(faithful) +
 - [r4ds.io/join](r4ds.io/join) for more book clubs!
 - [R Graph Gallery](https://www.r-graph-gallery.com/ggplot2-package.html)
 - The [Graphs section](http://www.cookbook-r.com/Graphs/) of the R Cookbook
+
+## Meeting Videos
+
+### Cohort 1
+
+`r knitr::include_url("https://www.youtube.com/embed/ujOn-4esnDo")`
+
+<details>
+  <summary> Meeting chat log </summary>
+  
+```
+00:13:43	Njoki Njuki Lucy:	Is it best to visualize the variation in a categorical variable with only two levels using a bar chart? If not, what's the chart to use if I may ask?
+00:16:00	Ryan Metcalf:	Great question Njoki, Categorical, by definition is a set that a variable can have. Say, Male / Female / Other. This example indicates a variable can have three states. It depends on your data set.
+00:16:51	Eileen:	bar or pie chart?
+00:16:51	Ryan Metcalf:	There are other forms of presentation other than a bar chart. I.E “quantifying” each category.
+00:18:37	Eileen:	box chart
+00:18:46	Njoki Njuki Lucy:	thank you so much  everyone :)
+00:24:31	lucus w:	This website is excellent in determining geom to use: www.data-to-viz.com
+00:25:22	Njoki Njuki Lucy:	awesome, thanks
+00:25:44	Eileen:	Box charts are great for showing outliers
+00:26:31	Federica Gazzelloni:	other interesting resources:
+00:26:34	Federica Gazzelloni:	https://www.r-graph-gallery.com/ggplot2-package.html
+00:26:51	Federica Gazzelloni:	http://www.cookbook-r.com/Graphs/
+00:34:19	Amitrajit:	what is the difference in putting aes()  inside geom_count() rather than main ggplot() call?
+00:35:38	Ryan Metcalf:	Like maybe Supply vs Demand curves?
+00:41:16	Federica Gazzelloni:	what about the factor() that we add to a variable when we apply a color?
+00:42:33	Susie Neilson:	I do aes your way Jon!
+00:43:07	Federica Gazzelloni:	and grouping inside the aes
+00:49:27	Amitrajit:	thanks!
+00:49:32	Federica Gazzelloni:	thanks
+00:49:35	Njoki Njuki Lucy:	thank you, bye
+00:49:45	Eileen:	Thank you!
+```
+</details>
