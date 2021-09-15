@@ -2,7 +2,15 @@
 
 **Learning objectives:**
 
-- Jon will try to prefill these ahead of each week.
+- **Read data** from disk using the `readr::read_*()` family of functions.
+- **Compare and contrast** the `read_*()` functions with the base R equivalents.
+- **Parse character data** into other data types using the `readr::parse_*()` functions.
+  - List the complications that can arise when parsing **numerical strings**.
+  - Understand how the various **character encodings** can make it tricky to parse characters.
+  - Describe the common conventions used for **date/time data**.
+- **Diagnose problems** that may arise when using the `read_*()` functions.
+- **Write data** to disk using the `readr::write_*()` family of functions.
+
 
 ## Slide 1
 
