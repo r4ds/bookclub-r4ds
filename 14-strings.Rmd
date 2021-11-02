@@ -21,7 +21,7 @@
   - **Locate** matches within a string with `stringr::str_locate()` and `stringr::str_locate_all()`.
 - Use **other {stringr} matching rules** to find specific patterns.
 - Use **regex patterns** with base functions such as `apropos()` and `dir()` to find things.
-- Recognize that `{stringi}` can be useful when `{stringr}` can't do something you're trying to do.
+- Describe the **relationship** between `{stringr}` and `{stringi}`.
 
 ## Slide 1
 
