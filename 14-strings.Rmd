@@ -2,7 +2,26 @@
 
 **Learning objectives:**
 
-- Jon will try to prefill these ahead of each week.
+- Manipulate **character vectors** using simple `{stringr}` functions.
+- Use **regular expressions (regex)** to match **patterns** in strings.
+  - Use **regex** to match **simple characters, `.`, and `\`.**
+  - Use **regex** `^`, `$`, and `\b` to match **anchors and boundaries.**
+  - Use **regex** `\d`, `\s`, `[]`, and `[^]` to match **character classes.**
+  - Use **regex** `|` and `()` to match **alternatives.**
+  - Use **regex** `?`, `+`, `*`, `{n}`, `{n,}`, `{,m}`, and `{n, m}` to match **repetitions in patterns.**
+  - Use **regex grouping and backreferences** to refer to previous matches.
+- Use `{stringr}` **functions** and **regex** to **manipulate strings.**
+  - **Detect** pattern matches with `stringr::str_detect()`.
+  - Select **subsets** of strings that match a pattern with `stringr::str_subset()`.
+  - **Count** pattern matches with `stringr::str_count()`.
+  - **Extract** pattern matches with `stringr::str_extract()` and `stringr::str_extract_all()`.
+  - **Extract group matches** with `stringr::str_match()`, `stringr::str_match_all()`, and `tidyr::extract()`.
+  - **Replace** pattern matches with `stringr::str_replace()` and `stringr::str_replace_all()`.
+  - **Split** strings into pieces with `stringr::str_split()` and `stringr::boundary()`.
+  - **Locate** matches within a string with `stringr::str_locate()` and `stringr::str_locate_all()`.
+- Use **other {stringr} matching rules** to find specific patterns.
+- Use **regex patterns** with base functions such as `apropos()` and `dir()` to find things.
+- Recognize that `{stringi}` can be useful when `{stringr}` can't do something you're trying to do.
 
 ## Slide 1
 
