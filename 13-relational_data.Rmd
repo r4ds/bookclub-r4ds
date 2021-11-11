@@ -2,7 +2,12 @@
 
 **Learning objectives:**
 
-- Jon will try to prefill these ahead of each week.
+- Recognize the **families of verbs** for working with relational data.
+- Use **keys (primary, foreign, and surrogate)** to identify relations between tables.
+- Use **mutating joins** to combine related tables.
+- Use **filtering joins** to remove observations from a table.
+- Recognize **common problems with joins.**
+- Use **set operations** to combine or filter tables.
 
 ## Slide 1
 
