@@ -12,3 +12,8 @@ Keep it short and slide-like!
 ## Slide 2
 
 Slide contents.
+
+library(ggplot2)
+library(magrittr)
+ggplot2::diamonds %>% dplyr::count(carat, cut, color, clarity, depth, table, price, x, y, z, sort = TRUE)
+
