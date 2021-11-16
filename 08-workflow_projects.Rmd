@@ -6,11 +6,59 @@
 - Recognize the similarities and differences between **Windows paths and Mac/Linux paths.**
 - Create an **Rstudio project.**
 
-## Slide 1
+## Meeting Videos
 
-Slide contents. 
-Keep it short and slide-like!
+### Cohort 1
 
-## Slide 2
+`r knitr::include_url("https://www.youtube.com/embed/VYYxhIBuDys")`
 
-Slide contents.
+<details>
+  <summary> Meeting chat log </summary>
+  
+```
+00:05:55	docksbox@pm.me:	Hello!
+00:07:40	Becki R. (she/her):	Hello!
+00:07:52	Sandra Muroy:	Hi!
+00:07:57	Federica Gazzelloni:	Hi!
+00:09:49	Eileen:	Hello!
+00:15:44	Becki R. (she/her):	Very cool!
+00:29:31	Jon Harmon (jonthegeek):	https://CRAN.R-project.org/package=renv
+00:31:35	lucus w:	Or just here::here() package, it’s my favorite
+00:32:48	Ryan Metcalf:	Ah, Thank you Lucas! I think you may have solved an error I was trying to overcome!
+00:32:57	Jon Harmon (jonthegeek):	here::here("my_dir", "myfile.R")
+00:33:06	lucus w:	There you go, yup
+00:34:37	Jon Harmon (jonthegeek):	usethis
+00:34:38	lucus w:	You can use usethis
+00:37:56	Jon Harmon (jonthegeek):	.Last.value
+00:38:58	lucus w:	It’s a life saver especially working in databases
+00:44:32	Federica Gazzelloni:	reticulate
+00:45:11	Federica Gazzelloni:	https://rstudio.github.io/reticulate/articles/r_markdown.html
+00:48:18	Ryan Metcalf:	@Shamsuddeen, what was that command again? Cmd + Shift + P?
+00:48:40	Susan Neilson:	That’s right
+00:49:43	Ryan Metcalf:	Awesome! Ive never used that before. These bookclub meetups are so helpful! Thank you everyone!
+00:50:04	Federica Gazzelloni:	yep! very useful
+00:50:09	Shamsuddeen Muhammad:	https://speakerdeck.com/jennybc/how-to-name-files
+00:50:28	Shamsuddeen Muhammad:	Naming things
+00:51:10	Jon Harmon (jonthegeek):	20210904
+00:51:55	Shamsuddeen Muhammad:	Chapter 2 Project-oriented workflow : https://rstats.wtf/project-oriented-workflow.html
+00:52:13	Jon Harmon (jonthegeek):	Had to google that tab: https://bookdown.org/ndphillips/YaRrr/
+00:52:15	Shamsuddeen Muhammad:	What They Forgot to Teach You About R
+00:55:05	Jon Harmon (jonthegeek):	https://github.com/MonkmanMH/EIKIFJB
+00:55:38	Ryan Metcalf:	Transmute I think…..
+00:56:27	Jon Harmon (jonthegeek):	tidyr::replace_na()
+00:56:54	lucus w:	Check out janitor
+01:02:32	Shamsuddeen Muhammad:	https://tidyr.tidyverse.org/reference/replace_na.html
+01:02:42	Shamsuddeen Muhammad:	df %>% dplyr::mutate(x = replace_na(x, 0))
+01:03:30	Jon Harmon (jonthegeek):	""
+01:04:16	Ryan Metcalf:	You’ve discovered the beauty of a programmer!!!
+01:04:28	Shamsuddeen Muhammad:	Yes Yes !!!
+01:05:22	Susan Neilson:	“95% of being a programmer is knowing how to Google” - my programmer friend
+01:06:27	Ryan Metcalf:	I find googling the package and then reading the PDF Manual. CRAN is your friend.
+01:10:38	Sandra Muroy:	thanks everyone for your input!
+01:10:57	Ryan Metcalf:	Thank you Susie! Great presentation and conversation!
+01:11:04	Susan Neilson:	Thanks everyone !
+01:11:08	Federica Gazzelloni:	thanks
+01:11:12	Becki R. (she/her):	Thank you!
+01:11:22	Susan Neilson:	https://bookdown.org/ndphillips/YaRrr/rdata-files.html
+```
+</details>

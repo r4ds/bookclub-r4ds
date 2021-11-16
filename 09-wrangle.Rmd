@@ -4,7 +4,7 @@
 
 **Learning objectives:**
 
-- Jon will try to prefill these ahead of each week.
+- Understand how **data wrangling** fits into the typical data science project.
 
 ## Slide 1
 

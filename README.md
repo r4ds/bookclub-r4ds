@@ -17,7 +17,31 @@ If you would like to present, please add your name next to a chapter using the [
 - 2021-07-31: Chapter 2-3: Data Visualization: Federica Gazzelloni
 - 2021-08-07: Chapter 4: Workflow: basics: Ryan Metcalf
 - 2021-08-14: Chapter 5: Data transformation:  Wai-Yin
-- 2021-08-21: Chapter 6: Workflow: scripts:  PRESENTER TBD
+- 2021-08-21: Chapter 6: Workflow: scripts:  Ryan Metcalf
+- 2021-08-28: Chapter 7: Exploratory Data Analysis:  Jon Harmon
+- 2021-09-04: Chapter 8: Workflow: projects:  Susie Neilson
+- 2021-09-11: Chapter 9-10: Tibbles: Njoki Njuki Lucy
+- 2021-09-18: Chapter 11: Data import (part 1): Njoki Njuki Lucy
+- 2021-09-25: Chapter 11: Data import (part 2): Njoki Njuki Lucy
+- 2021-10-09: Chapter 12: Tidy data (part 1): Sandra Muroy
+- 2021-10-16: Chapter 12: Tidy data (part 2): Sandra Muroy
+- 2021-10-23: Chapter 13: Relational data (part 1): Federica Gazzelloni
+- 2021-10-30: Chapter 13: Relational data (part 2): Federica Gazzelloni
+- 2021-11-13: Chapter 14: Strings: Ryan Metcalf
+- 2021-11-20: Chapter 15: Factors: Presenter TBD
+- 2021-11-27: Chapter 16: Dates and times: Presenter TBD
+- 2021-12-04: Chapter 17-18: Pipes: Presenter TBD
+- 2021-12-11: Chapter 19: Functions: Presenter TBD
+- 2021-12-18: Chapter 20: Vectors: Presenter TBD
+- 2022-01-08: Chapter 21: Iteration: Presenter TBD
+- 2022-01-15: Chapter 22: Modeling introduction: Presenter TBD
+- 2022-01-22: Chapter 23: Model basics: Presenter TBD
+- 2022-01-29: Chapter 24: Model building: Presenter TBD
+- 2022-02-05: Chapter 25: Many models: Presenter TBD
+- 2022-02-12: Chapter 26-27: R Markdown: Presenter TBD
+- 2022-02-19: Chapter 28: Graphics for communication: Presenter TBD
+- 2022-02-26: Chapter 29: Markdown formats: Presenter TBD
+- 2022-03-05: Chapter 30: Markdown workflow: Presenter TBD
 
 ## How to Present
 
