@@ -12,6 +12,7 @@ Imports:
     details,
     emo,
     tufte,
-    tidyverse
+    tidyverse,
+    nycflights13
 Remotes: 
     hadley/emo
