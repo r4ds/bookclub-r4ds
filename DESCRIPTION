@@ -13,7 +13,6 @@ Imports:
     emo,
     nycflights13,
     tufte,
-    tidyverse,
-    nycflights13
+    tidyverse
 Remotes: 
     hadley/emo
