@@ -11,6 +11,7 @@ Imports:
     bookdown,
     details,
     emo,
+    htmltools,
     nycflights13,
     tufte,
     tidyverse
