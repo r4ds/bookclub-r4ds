@@ -2,6 +2,7 @@
 
 **Learning objectives:**
 
+
 - Recognize the **families of verbs** for working with relational data.
 - Use **keys (primary, foreign, and surrogate)** to identify relations between tables.
 - Use **mutating joins** to combine related tables.
@@ -9,11 +10,296 @@
 - Recognize **common problems with joins.**
 - Use **set operations** to combine or filter tables.
 
-## Slide 1
 
-Slide contents. 
-Keep it short and slide-like!
+-----------
 
-## Slide 2
+## Introduction
 
-Slide contents.
+Multiple tables of data are called **relational data**.
+The basic idea is that relations are defined between a pair of tables. Multiple tables are put in relation starting from this basic idea.
+
+There are three families of verbs designed to work with relational data:
+
+- **Mutating joins**, which add new variables to one data frame from matching observations in another.
+
+- **Filtering joins**, which filter observations from one data frame based on whether or not they match an observation in the other table.
+
+- **Set operations**, which treat observations as if they were set elements.
+
+
+## nycflights13
+
+How to make a custom table with different data sets
+
+```{r message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
+library(nycflights13)
+library(tidyverse)
+```
+
+
+```{r eval=FALSE, include=T}
+nycflights13::airlines
+nycflights13::airports
+nycflights13::flights
+nycflights13::planes
+nycflights13::weather
+```
+
+Relations:
+
+- **flights** connects to **planes** via a single variable, **tailnum**.
+
+- **flights** connects to **airlines** through the **carrier** variable.
+
+- **flights** connects to **airports** in two ways: via the **origin** and **dest** variables.
+
+- **flights** connects to **weather** via **origin** (the location), and **year**, **month**, **day** and **hour** (the time).
+
+
+```{r echo=FALSE, fig.align='center', fig.cap='nycfilghts13 package', out.width='100%'} 
+knitr::include_graphics('images/nycfilghts13.png')
+```
+
+[Exercises and solutions](https://jrnold.github.io/r4ds-exercise-solutions/relational-data.html)
+
+## Keys
+
+> What is a **key**?   
+>A key is a variable (or set of variables) that uniquely identifies an observation.
+
+
+> What is a **relation**? 
+> It is when a **primary key** and the corresponding **foreign key** in another table form a relation.
+  
+
+**What are the types of keys:**  
+  
+- A **primary key** uniquely identifies an observation in its own table.
+
+> primary key: each row is an observation
+
+For example, `planes$tailnum` is a primary key because it uniquely identifies each plane in the planes table.
+
+- A **foreign key** uniquely identifies an observation in another table.
+
+For example, `flights$tailnum` is a foreign key for the `planes table` because it appears in the `flights table` where it matches each flight to a unique plane.
+
+- A **surrogate key** is a custom made key where it is possible to identify unique information, such as the number of rows in a table, and it is made if a table lacks a primary key.
+
+For example, `flights$filghts_id` is a surrogate key because it is custom made and uniquely identifies each observation in the flights table.
+
+
+**Type of data relations**
+  
+-   **1-to-many**: flight has one plane, but each plane has many flights
+-   **Many-to-many**: between airlines and airports, each airline flies to many airports; each airport hosts many airlines
+
+Special cases are: **1-to-1** and **Many-to-1** 
+
+-----------
+
+## Mutating joins
+
+To combine variables from two tables
+
+We have seen the **inner_join()** function operating now we see the other three **outer joins**:
+
+- **left_join()** keeps all observations in x
+- **right_join()** keeps all observations in y
+- **full_join()** keeps all observations in x and y
+
+
+### Understanding joins
+
+
+```{r venndiagram, echo=FALSE, fig.align='center', fig.cap='Venn diagram', out.width='100%'} 
+knitr::include_graphics("images/venn_diagram.png")
+```
+
+Suppose we have two tables with two variables: id and the observations
+```{r twotables, echo=FALSE, fig.align='center', fig.cap='Two tables', out.width='30%'} 
+knitr::include_graphics("images/twotables.png")
+```
+
+### Inner join
+
+
+```{r}
+flights %>% 
+  slice(1:100) %>%
+  select(origin,year,month) %>%
+  inner_join(select(weather,origin,temp,wind_dir),by = "origin")
+```
+
+```{r innerjoin, echo=FALSE, fig.align='center', fig.cap='inner join', out.width='100%'} 
+knitr::include_graphics("images/innerjoin.png")
+```
+
+### Outer joins
+
+- A left join keeps all observations in x
+- A right join keeps all observations in y
+- A full join keeps all observations in x and y
+
+```{r outerjoins.png, echo=FALSE, fig.align='center', fig.cap='Outer joins', out.width='60%'} 
+knitr::include_graphics("images/outerjoins.png")
+```
+
+
+- left_join 
+
+```{r}
+flights %>% 
+  select(year:day, hour, origin, dest, tailnum, carrier) %>%
+  select(-origin, -dest) %>% 
+  left_join(airlines, by = "carrier")
+```
+
+- same thing with `mutate()`
+
+```{r}
+flights %>% 
+  select(year:day, hour, origin, dest, tailnum, carrier) %>%
+  select(-origin, -dest) %>% 
+  mutate(name = airlines$name[match(carrier, airlines$carrier)])
+```
+
+- right_join 
+
+```{r}
+weather %>% 
+  select(origin,temp, humid, wind_dir, precip) %>%
+  right_join(airports, by = c("origin" = "faa"))
+```
+
+- full_join
+
+```{r}
+airports %>%
+  select(name,lat,lon) %>%
+  full_join(airlines,by = "name")
+```
+
+
+### Duplicate keys
+
+What happens when the keys are not unique?
+
+1. Table with duplicates
+
+```{r duplicates, echo=FALSE, fig.align='center', fig.cap='Duplicates', out.width='60%'} 
+knitr::include_graphics("images/duplicates.png")
+```
+
+2. Both tables have duplicate keys
+
+```{r duplicates2, echo=FALSE, fig.align='center', fig.cap='Duplicates', out.width='60%'} 
+knitr::include_graphics("images/duplicates2.png")
+```
+
+#### Defining the key columns
+
+`by = "key"` can be customized:
+
+- `by = NULL`, uses all variables that appear in both tables (**natural join**)
+- `by = "x"`, uses only one specific variable
+- `by = c("a" = "b")`, uses a named character vector
+
+[Exercises and solutions](https://jrnold.github.io/r4ds-exercise-solutions/relational-data.html)
+
+#### Other implementations
+
+The `base::merge()` function can perform all four types of mutating join. 
+
+The difference between the **joins** and **merge()** is really important. dplyr’s joins are considerably faster and don’t mess with the order of the rows.
+
+```{r merge, echo=FALSE, fig.align='center', fig.cap='Implementations', out.width='60%'} 
+knitr::include_graphics("images/merge.png")
+```
+
+SQL is the inspiration for dplyr’s conventions
+```{r sql,echo=FALSE, fig.align='center', fig.cap='Implementation', out.width='60%'} 
+knitr::include_graphics("images/sql.png")
+```
+
+Example of dplyr’s joins and SQL syntax:
+
+    inner_join(x, y, by = c("a" = "b")) 
+
+It uses a slightly different syntax in SQL: 
+
+    SELECT * FROM x INNER JOIN y ON x.a = y.b
+
+
+## Filtering joins
+
+- `semi_join(x, y)` **keeps** all observations in x that have a match in y.
+- `anti_join(x, y)` **drops** all observations in x that have a match in y.
+
+**Semi-join**:
+
+    semi_join()
+
+
+```{r semijoin, echo=FALSE, fig.align='center', fig.cap='Semi-join', out.width='60%'} 
+knitr::include_graphics("images/semijoin.png")
+```
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+top_dest <- flights %>%
+  count(dest, sort = TRUE) %>%
+  head(10)
+
+flights %>% 
+  semi_join(top_dest) #  keeps all observations in x that have a match in y
+```
+
+
+
+Filtering joins never duplicate rows like mutating joins do:
+
+```{r semijoin2, echo=FALSE, fig.align='center', fig.cap='Semi-join', out.width='60%'} 
+knitr::include_graphics("images/semijoin2.png")
+```
+
+The inverse of a semi-join is an **anti-join**:
+
+    anti_join()
+
+```{r}
+flights %>%
+  anti_join(planes, by = "tailnum") %>%
+  count(tailnum, sort = TRUE) # keeps the rows that don’t have a match
+```
+
+```{r antijoin, echo=FALSE, fig.align='center', fig.cap='Anti-join', out.width='60%'} 
+knitr::include_graphics("images/antijoin.png")
+```
+
+[Exercises](https://jrnold.github.io/r4ds-exercise-solutions/relational-data.html)
+
+
+## Some more things to consider
+
+### Join problems
+
+>Be aware that simply checking the number of rows before and after the join is not sufficient to ensure that your join has gone smoothly. 
+
+1. Identifying the variables that form the primary key in each table
+2. Check for missing values
+3. Check that your foreign keys match primary keys in another table (using anti_join()`)
+
+### Set operations
+
+These are type of **two-table verb** set operations:
+
+- intersect(x, y): return only observations in both x and y
+- union(x, y): return unique observations in x and y
+- setdiff(x, y): return observations in x, but not in y
+
+
+
+
+
+
+
