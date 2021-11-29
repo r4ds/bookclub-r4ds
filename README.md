@@ -28,7 +28,7 @@ If you would like to present, please add your name next to a chapter using the [
 - 2021-10-23: Chapter 13: Relational data (part 1): Federica Gazzelloni
 - 2021-10-30: Chapter 13: Relational data (part 2): Federica Gazzelloni
 - 2021-11-13: Chapter 14: Strings: Ryan Metcalf
-- 2021-11-20: Chapter 15: Factors: Presenter TBD
+- 2021-11-20: Chapter 15: Factors: Sandra Muroy
 - 2021-11-27: Chapter 16: Dates and times: Presenter TBD
 - 2021-12-04: Chapter 17-18: Pipes: Presenter TBD
 - 2021-12-11: Chapter 19: Functions: Presenter TBD
