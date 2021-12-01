@@ -2,7 +2,19 @@
 
 **Learning objectives:**
 
-- Jon will try to prefill these ahead of each week.
+- **Create date** and **datetime** objects.
+  - Create dates and datetimes from **strings.**
+  - Create dates and datetimes from **individual components.**
+  - Create dates and datetimes from **each other.**
+- Work with **datetime components.**
+  - **Extract** components from datetimes.
+  - **Round** datetime components.
+  - **Set** individual datetime components.
+- Perform **arithmetic** on **timespans.**
+  - Use **durations** to measure exact seconds.
+  - Use **periods** to measure human units like weeks and months.
+  - Use **intervals** to represent timespans with exact start and end datetimes.
+- Recognize ways to deal with **timezones** in R.
 
 ## Slide 1
 
