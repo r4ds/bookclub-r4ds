@@ -12,6 +12,7 @@ Imports:
     details,
     emo,
     htmlwidgets,
+    lubridate,
     microbenchmark,
     nycflights13,
     tufte,
