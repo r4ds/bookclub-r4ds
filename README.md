@@ -27,21 +27,22 @@ If you would like to present, please add your name next to a chapter using the [
 - 2021-10-16: Chapter 12: Tidy data (part 2): Sandra Muroy
 - 2021-10-23: Chapter 13: Relational data (part 1): Federica Gazzelloni
 - 2021-10-30: Chapter 13: Relational data (part 2): Federica Gazzelloni
-- 2021-11-13: Chapter 14: Strings: Ryan Metcalf
-- 2021-11-20: Chapter 15: Factors: Sandra Muroy
-- 2021-11-27: Chapter 16: Dates and times: Presenter TBD
-- 2021-12-04: Chapter 17-18: Pipes: Presenter TBD
-- 2021-12-11: Chapter 19: Functions: Presenter TBD
-- 2021-12-18: Chapter 20: Vectors: Presenter TBD
-- 2022-01-08: Chapter 21: Iteration: Presenter TBD
-- 2022-01-15: Chapter 22: Modeling introduction: Presenter TBD
-- 2022-01-22: Chapter 23: Model basics: Presenter TBD
-- 2022-01-29: Chapter 24: Model building: Presenter TBD
-- 2022-02-05: Chapter 25: Many models: Presenter TBD
-- 2022-02-12: Chapter 26-27: R Markdown: Presenter TBD
-- 2022-02-19: Chapter 28: Graphics for communication: Presenter TBD
-- 2022-02-26: Chapter 29: Markdown formats: Presenter TBD
-- 2022-03-05: Chapter 30: Markdown workflow: Presenter TBD
+- 2021-11-13: Chapter 14: Strings (part 1): Ryan Metcalf
+- 2021-11-20: Chapter 14: Strings (part 2): Ryan Metcalf
+- 2021-12-04: Chapter 15: Factors: Sandra Muroy
+- 2021-12-11: Chapter 16: Dates and times: Becky Gibson
+- 2022-01-08: Chapter 17-18: Pipes: Presenter TBD
+- 2022-01-15: Chapter 19: Functions: Presenter TBD
+- 2022-01-22: Chapter 20: Vectors: Presenter TBD
+- 2022-01-29: Chapter 21: Iteration: Presenter TBD
+- 2022-02-05: Chapter 22: Modeling introduction: Presenter TBD
+- 2022-02-12: Chapter 23: Model basics: Presenter TBD
+- 2022-02-19: Chapter 24: Model building: Presenter TBD
+- 2022-02-26: Chapter 25: Many models: Presenter TBD
+- 2022-03-05: Chapter 26-27: R Markdown: Presenter TBD
+- 2022-03-12: Chapter 28: Graphics for communication: Presenter TBD
+- 2022-03-19: Chapter 29: Markdown formats: Presenter TBD
+- 2022-03-26: Chapter 30: Markdown workflow: Presenter TBD
 
 ## How to Present
 
