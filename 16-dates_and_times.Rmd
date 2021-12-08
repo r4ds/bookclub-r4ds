@@ -16,7 +16,7 @@
   - Use **intervals** to represent timespans with exact start and end datetimes.
 - Recognize ways to deal with **timezones** in R.
 
-# Create date and date-time objects
+## Create date and date-time objects
 **From strings:**
 Date: use 'y' 'm' 'd' in whatever order eg. ymd()
 Date-time: add 'h' 'm' 's' after an underscore eg. ymd_hms()
@@ -29,7 +29,7 @@ Date-time: add 'h' 'm' 's' after an underscore eg. ymd_hms()
 - as_datetime()
 - as_date()
  
-# Work with date-time components
+## Work with date-time components
 **Extract components from datetimes**
 - year()
 - month()
@@ -48,7 +48,7 @@ Date-time: add 'h' 'm' 's' after an underscore eg. ymd_hms()
 **Set individual datetime components**
 Use create functions (ymd_hms) or update()
 
-# Perform arithmetic on timespans
+## Perform arithmetic on timespans
 **Use durations to measure timespans**
 Durations measure seconds, be aware conversions happen at a standard rate
 - dseconds()
@@ -76,7 +76,7 @@ These can be added, subtracted and divided in some cases, also multiplied by num
 Intervals are way to do arithmetic with durations and periods?
 syntax???
 
-# Time zones
+## Time zones
 **Names**
 - R uses IANA (Internet Assigned Numbers Authority) for time zone names.
 - Get a complete list with OlsonNames()
