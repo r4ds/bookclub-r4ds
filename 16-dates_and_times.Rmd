@@ -17,20 +17,26 @@
 - Recognize ways to deal with **timezones** in R.
 
 ## Create date and date-time objects
+
 **From strings:**
-Date: use 'y' 'm' 'd' in whatever order eg. ymd()
-Date-time: add 'h' 'm' 's' after an underscore eg. ymd_hms()
+
+- Date: use 'y' 'm' 'd' in whatever order eg. ymd()
+- Date-time: add 'h' 'm' 's' after an underscore eg. ymd_hms()
 
 **From individual components:**
+
 - make_date()
 - make_datetime()
 
 **From an existing object:**
+
 - as_datetime()
 - as_date()
  
 ## Work with date-time components
+
 **Extract components from datetimes**
+
 - year()
 - month()
 - yday()
@@ -40,27 +46,35 @@ Date-time: add 'h' 'm' 's' after an underscore eg. ymd_hms()
 - minute()
 - second()
 
-**Round datetime components
+**Round datetime components**
+
 - floor_date() rounds down
 - ceiling_date() rounds up
 - round_date() rounds to
 
 **Set individual datetime components**
+
 Use create functions (ymd_hms) or update()
 
 ## Perform arithmetic on timespans
+
 **Use durations to measure timespans**
+
 Durations measure seconds, be aware conversions happen at a standard rate
+
 - dseconds()
 - dminutes()
 - dhours()
 - ddays()
 - dwekks()
 - dyears()
+
 These can be added, subtracted and divided in some cases, also multiplied by numbers.
 
 **Use periods to measure human units like weeks or months**
+
 These work like durations, but take into account things like DST
+
 - seconds()
 - minutes()
 - hours()
@@ -68,23 +82,29 @@ These work like durations, but take into account things like DST
 - weeks()
 - months()
 - years()
+
 These can be added, subtracted and divided in some cases, also multiplied by numbers.
 
 ![](https://d33wubrfki0l68.cloudfront.net/0020136325ea844476bc61eb7e95d2ac5aeebf00/893e9/diagrams/datetimes-arithmetic.png)
 
 **Use intervals to represent timespans with exact start and end datetimes**
+
 Intervals are way to do arithmetic with durations and periods?
 syntax???
 
 ## Time zones
+
 **Names**
+
 - R uses IANA (Internet Assigned Numbers Authority) for time zone names.
 - Get a complete list with OlsonNames()
 
 **Change the displayed time zone**
+
 - The time zone attribute of a datetime is only displayed.
 - UTC is the default (and doesn't have DST, which makes computing easier)
 - with_tz()
 
 **Change the underlying time zone**
+
 - force_tz()
