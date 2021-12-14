@@ -33,7 +33,7 @@ If you would like to present, please add your name next to a chapter using the [
 - 2021-11-13: Chapter 14: Strings (part 1): Ryan Metcalf
 - 2021-11-20: Chapter 14: Strings (part 2): Ryan Metcalf
 - 2021-12-04: Chapter 15: Factors: Sandra Muroy
-- 2021-12-11: Chapter 16: Dates and times: Becky Gibson
+- 2021-12-11: Chapter 16: Dates and times: Becki Roth
 
 </details>
 
