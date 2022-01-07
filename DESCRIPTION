@@ -11,6 +11,9 @@ Imports:
     bookdown,
     details,
     emo,
+    htmlwidgets,
+    lubridate,
+    microbenchmark,
     nycflights13,
     tufte,
     tidyverse
