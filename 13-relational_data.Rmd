@@ -297,9 +297,59 @@ These are type of **two-table verb** set operations:
 - union(x, y): return unique observations in x and y
 - setdiff(x, y): return observations in x, but not in y
 
+## Meeting Videos
 
+### Cohort 5
 
+`r knitr::include_url("https://www.youtube.com/embed/4Ju9nj82Ksk")`
 
+<details>
+  <summary> Meeting chat log </summary>
+  
+```
+00:08:43	Ryan Metcalf:	So sorry for my delay. Aerating the lawn! Fun!
+00:10:36	Becki R. (she/her):	Hello!
+00:22:56	Becki R. (she/her):	That's a good idea! It would be a nice reference.
+00:24:30	Jon Harmon (jonthegeek):	https://cran.r-project.org/web/packages/DiagrammeR/index.html
+00:24:33	Sandra Muroy:	diagramR?
+00:25:12	Jon Harmon (jonthegeek):	I guess the sharable link is supposed to be: https://cran.r-project.org/package=DiagrammeR
+00:26:06	Becki R. (she/her):	That's a good reminder, thanks.
+00:56:06	Ryan Metcalf:	Another way to notate Venn diagrams and/or discrete mathematics is to use LaTeX. This is not intended to deter you learning of R but may be useful when working with a larger team (especially DB admins!) https://www.purplemath.com/modules/venndiag2.htm
+01:04:20	Jon Harmon (jonthegeek):	ggplot2::diamonds %>% dplyr::count(carat, cut, color, clarity, depth, table, price, x, y, z, sort = TRUE)
+01:08:49	Ryan Metcalf:	Great Job Federica! Looking forward to next week!
+```
+</details>
 
+`r knitr::include_url("https://www.youtube.com/embed/BDckA3OdsiU")`
 
+<details>
+  <summary> Meeting chat log </summary>
+  
+```
+00:22:57	Jon Harmon (jonthegeek):	Try this to see a quick example. You're right that the order of the columns is left then right either way, but the rows to keep changes.
+library(dplyr)
+band_members %>% left_join(band_instruments)
+band_members %>% right_join(band_instruments)
+00:29:17	Jon Harmon (jonthegeek):	band_instruments %>% left_join(band_members)
+00:39:07	lucus w:	Seems like setdiff() is similar to dplyr::anti_join()… they maybe differ by how they prints?
+00:40:45	Jon Harmon (jonthegeek):	anti_join only needs to match on one key column to exclude; setdiff is looking for the entire observations to be repeated.
+00:41:29	lucus w:	Interesting.. thanks!
+00:52:28	Njoki Njuki Lucy:	I don't understand what's happening exactly, if age is greater than 25, have it as 25L(int) otherwise its age?
+00:53:56	Njoki Njuki Lucy:	okay, thanks
+00:54:28	Federica Gazzelloni:	sorry my connection
+01:05:28	Njoki Njuki Lucy:	thank you :)
+01:05:33	lucus w:	Thanks y'all
+```
+</details>
 
+### Cohort 6
+
+`r knitr::include_url("https://www.youtube.com/embed/URL")`
+
+<details>
+  <summary> Meeting chat log </summary>
+  
+```
+LOG
+```
+</details>
