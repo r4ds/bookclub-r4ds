@@ -67,7 +67,7 @@ One method of wrangling data is to just overwrite and reassign a calculation to 
 1. Overwriting an object prevents clean debugging. You'll have to rerun your code over and over to see what is changing.
 2. The repetition of the object being transformed implies... "what does my data look like now?"
 
-If you want to make yourself crazy... continually read in a new copy of your data just to walk through the process over agian. This is *not* conducive to efficiency.
+If you want to make yourself crazy... continually read in a new copy of your data just to walk through the process over again. This is *not* conducive to efficiency.
 
 ## The pipe makes lexical transformations
 
@@ -85,7 +85,7 @@ If you want to make yourself crazy... continually read in a new copy of your dat
 
 ## Other tools from `magrittr`
 
-Before we begin, lets discuss `lhs` and `rhs`
+Before we begin, let's discuss `lhs` and `rhs`
 
 - `lhs` - Left Hand Side
 - `rhs` - Right Hand Side
@@ -93,7 +93,7 @@ Before we begin, lets discuss `lhs` and `rhs`
 Alternative Pipes
 
 - **Tee** pipe: `%T>%`
-  - When working with more complex pipes, it’s sometimes useful to call a function for its side-effects
+  - When working with more complex pipes, it's sometimes useful to call a function for its side-effects
     - Returns the left-hand side instead of the right-hand side
   
 ```{r, Tee Pipe, include=TRUE}
@@ -103,7 +103,7 @@ rnorm(100) %>%
   plot() %>%
   str()
 
-# Using hte Tee pipe allows for seeing the data prior to plotting
+# Using the Tee pipe allows for seeing the data prior to plotting
 rnorm(100) %>%
   matrix(ncol = 2) %T>%
   plot() %>%
@@ -134,4 +134,56 @@ mtcars %<>% transform(cyl = cyl * 2)
 ```
 
 > *In my opinion, a little bit of duplication (i.e. repeating the name of the object twice) is fine in return for making assignment more explicit.* - Hadley Wickham
- 
+
+## Meeting Videos
+
+### Cohort 5
+
+`r knitr::include_url("https://www.youtube.com/embed/JW1DilkJ3-0")`
+
+<details>
+  <summary> Meeting chat log </summary>
+  
+```
+00:12:57	Jon Harmon (jonthegeek):	https://en.wikipedia.org/wiki/The_Treachery_of_Images
+00:16:47	Jon Harmon (jonthegeek):	https://cran.r-project.org/package=magrittr
+00:20:53	Jon Harmon (jonthegeek):	https://smile.amazon.com/Mathematical-Notation-Guide-Engineers-Scientists/dp/1466230525/ref=sr_1_2?keywords=Mathematical+Notation&qid=1641665745&sr=8-2
+00:22:16	Jon Harmon (jonthegeek):	|>
+00:23:04	Ryan Metcalf:	And, is this the “Walrus” operator? `:=`
+00:23:19	Jon Harmon (jonthegeek):	%>%
+00:23:28	Jon Harmon (jonthegeek):	|>
+00:24:14	Jon Harmon (jonthegeek):	a |> f()
+00:24:23	Jon Harmon (jonthegeek):	f(a)
+00:41:01	Becki R. (she/her):	Ryan, can you put a link to the video in the chat?
+00:42:27	Jon Harmon (jonthegeek):	a %>% myfun(a = 10, b = .)
+00:42:59	Jon Harmon (jonthegeek):	a |> myfun(a = 10, b = .)
+00:43:00	Ryan Metcalf:	Jenny Bryant Youtube Video: https://youtu.be/4MfUCX_KpdE
+00:43:07	Becki R. (she/her):	Thanks
+00:44:57	Jon Harmon (jonthegeek):	a %>% myfun(arg1 = 10, arg2 = .)
+00:45:48	Jon Harmon (jonthegeek):	a %>% myfun(arg2 = .)
+00:47:40	Federica Gazzelloni:	https://www.r-bloggers.com/2021/05/the-new-r-pipe/
+00:50:00	Jon Harmon (jonthegeek):	https://twitter.com/hadleywickham/status/1359852563726819332
+00:51:58	Federica Gazzelloni:	https://community.rstudio.com/t/why-is-r-core-creating-a-new-pipe-operator/89020
+01:03:35	Federica Gazzelloni:	you can use: set.seed(123) with some numbers inside to recall the same random set
+01:03:56	Federica Gazzelloni:	set.seed(123)
+01:04:06	Federica Gazzelloni:	rnorm(100)…
+01:08:46	Jon Harmon (jonthegeek):	a <- a %>%
+a %<>%
+01:10:41	Jon Harmon (jonthegeek):	mtcars <- head(mtcars)
+01:10:50	Jon Harmon (jonthegeek):	mtcars <- mtcars %>% head()
+01:10:57	Jon Harmon (jonthegeek):	mtcars %<>% head()
+01:13:56	Becki R. (she/her):	Where is the signup list for presenting chapters?
+```
+</details>
+
+### Cohort 6
+
+`r knitr::include_url("https://www.youtube.com/embed/URL")`
+
+<details>
+  <summary> Meeting chat log </summary>
+  
+```
+LOG
+```
+</details>

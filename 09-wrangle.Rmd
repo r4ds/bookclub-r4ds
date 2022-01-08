@@ -5,12 +5,3 @@
 **Learning objectives:**
 
 - Understand how **data wrangling** fits into the typical data science project.
-
-## Slide 1
-
-Slide contents. 
-Keep it short and slide-like!
-
-## Slide 2
-
-Slide contents.

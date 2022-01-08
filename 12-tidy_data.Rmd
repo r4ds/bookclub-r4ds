@@ -17,3 +17,82 @@ Keep it short and slide-like!
 ## Slide 2
 
 Slide contents.
+
+## Meeting Videos
+
+### Cohort 5
+
+`r knitr::include_url("https://www.youtube.com/embed/5lsv2ftMouA")`
+
+<details>
+  <summary> Meeting chat log </summary>
+  
+```
+00:07:37	Federica Gazzelloni:	Hello everyone!
+00:07:53	Sandra Muroy:	Hi Federica!
+00:07:58	Adeyemi Olusola:	hello everyon3.
+00:09:56	Ryan Metcalf:	Good day Cohort!
+00:10:15	Sandra Muroy:	Hi Adeyemi and Ryan :)
+00:13:15	Becki R. (she/her):	Hello!
+00:13:38	Becki R. (she/her):	yes
+00:28:57	Keuntae Kim:	punctuation mark also works for the numeric column name.
+00:29:14	Keuntae Kim:	table4a$`1999`
+00:29:16	Keuntae Kim:	I think..
+00:29:47	Keuntae Kim:	you got that... haha
+00:37:53	Njoki Njuki Lucy:	Thank you Jon, you just answered my question :)
+00:44:12	Federica Gazzelloni:	thanks
+00:51:17	lucus w:	The new {knitr} syntax allows inline chuck options. Better yet you can use yaml styling
+00:52:00	lucus w:	```{r}
+00:52:39	lucus w:	```{r} #| echo:FALSE ```
+00:58:05	Ryan Metcalf:	I know realize….I have an older version of the Print book versus the online version! Now I know why I was scratching my head!
+00:58:13	Ryan Metcalf:	“Now”
+01:02:10	Keuntae Kim:	Agree. reshape/reshape seem to begin deprecated even if there are still users (like me). 😀
+01:02:14	Jon Harmon (jonthegeek):	Yeah, I don't think they've done a printing since pivot_* came out.
+01:13:45	lucus w:	Good job on going through the exercise but maybe randomly select some
+01:13:57	Federica Gazzelloni:	agree
+01:14:53	Keuntae Kim:	agree, but exercises are very interesting. they are what we usually encounter when wrangling the data in practice.
+01:17:12	lucus w:	Sorry folks I have to drop.. good job Sandra!!
+01:20:11	Keuntae Kim:	Excellent job Sandra! You really dive in the contents very deeply!
+01:20:27	Ryan Metcalf:	Great Job Sandra!
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/PB3dBof2q6I")`
+
+<details>
+  <summary> Meeting chat log </summary>
+  
+```
+00:11:11	Njoki Njuki Lucy:	Hi everyone!
+00:12:06	Becki R. (she/her):	Hello!
+00:14:06	Susie N:	You could also just do as.numeric correct?
+00:14:09	Susie N:	Just not as nice
+00:19:26	Jon Harmon (jonthegeek):	Yup, the convert just figures out the as.* for you automatically.
+00:22:11	Keuntae Kim:	https://tldp.org/LDP/Bash-Beginners-Guide/html/sect_04_01.html
+00:22:38	Keuntae Kim:	simple intro. I used this for my text mining analysis.
+00:23:56	Jon Harmon (jonthegeek):	I use regexr.com a lot to test out regex quickly.
+00:24:47	Keuntae Kim:	Thank you for the link!
+00:24:52	Federica Gazzelloni:	thanks
+00:50:11	Susie N:	Amazing job breaking it all down!
+00:50:41	Njoki Njuki Lucy:	Thank you Sandra!
+00:55:00	Becki R. (she/her):	Thanks, Sandra!
+00:55:36	Keuntae Kim:	In the wide-format, it is easy to produce additional derivative variables--such as percentages?
+00:56:24	Keuntae Kim:	It is because, in the wide format, each row represents one single unique observation.
+00:56:58	Keuntae Kim:	Census data
+00:57:03	Keuntae Kim:	is organized in the wide format.
+00:57:26	Jon Harmon (jonthegeek):	Read vignettes here for cases where it makes sense to be wide: https://cran.r-project.org/web/packages/widyr/index.html
+00:58:17	Federica Gazzelloni:	thanks Sandra
+```
+</details>
+
+### Cohort 6
+
+`r knitr::include_url("https://www.youtube.com/embed/URL")`
+
+<details>
+  <summary> Meeting chat log </summary>
+  
+```
+LOG
+```
+</details>

@@ -20,3 +20,127 @@ Keep it short and slide-like!
 ## Slide 2
 
 Slide contents.
+
+## Meeting Videos
+
+### Cohort 5
+
+`r knitr::include_url("https://www.youtube.com/embed/s5b_QkLSYeE")`
+
+<details>
+  <summary> Meeting chat log </summary>
+  
+```
+00:07:14	Njoki Njuki Lucy:	Hi Becki!
+00:11:14	Ryan Metcalf:	Sorry team, hot spot is getting an update then will switch to computer
+00:11:38	Federica Gazzelloni:	Hello Ryan!
+00:17:34	Jon Harmon (jonthegeek):	this  that    another
+is     fixed  width
+00:18:56	Jon Harmon (jonthegeek):	this, that, another
+00:21:12	lucus w:	Some of the healthcare data especially in clinical trials are created using fixed width.. the datasets will usually be shipped with some kind of a data dictionary defining the amongst others, the width of each column
+00:21:32	lucus w:	So parsing the files will include providing each width specification
+00:21:49	Sandra Muroy:	oh interesting! thanks Lucus
+00:21:59	Federica Gazzelloni:	👍🏻
+00:22:03	Jon Harmon (jonthegeek):	Now that you say that, I've also seen that in some of the US government data shared on data.gov.
+00:22:09	lucus w:	Pretty popular in SAS language
+00:22:33	Ryan Metcalf:	Excellent statement Lucas. I was initially thinking you’d have to know the data preparation process before choosing the correct read() function.
+00:24:34	lucus w:	Yes.. maybe Njoki will get to it as well, but readr uses heuristic process to guess.. so it lazily just works
+00:25:07	Federica Gazzelloni:	This is very interesting, I supposed to use read_csv() just with files
+00:28:07	Federica Gazzelloni:	how can I use freed() to see the speed?
+00:30:06	Jon Harmon (jonthegeek):	It's fread() not freed(). It's in the data.table package. You'd need a fairly large csv to notice the speed difference (and the latest version of readr is faster in some cases).
+00:30:15	Federica Gazzelloni:	right
+00:31:52	Federica Gazzelloni:	I’d like to know more about problems()
+00:36:07	lucus w:	Its 1,000
+00:36:20	Federica Gazzelloni:	thanks
+00:41:45	Jon Harmon (jonthegeek):	1,000.2
+00:41:52	Jon Harmon (jonthegeek):	1.000.2
+00:43:12	lucus w:	Oh just read everything as a text and fix them accordingly later
+00:43:31	lucus w:	*or
+00:43:48	Jon Harmon (jonthegeek):	Yeah, but sometimes fixing them can be painful.
+00:44:17	lucus w:	True
+00:50:56	Jon Harmon (jonthegeek):	"you tee eff eight"
+00:58:15	Jon Harmon (jonthegeek):	> x2 <- "\x82\xb1\x82\xf1\x82\xc9\x82\xbf\x82\xcd"
+> parse_character(x2, locale = locale(encoding = "Shift-JIS"))
+[1] "こんにちは"
+00:58:37	Becki R. (she/her):	japanese
+01:02:28	lucus w:	That’s probably a best way of putting it Ryan
+01:05:15	Jon Harmon (jonthegeek):	From Wikipedia: "The objective of a heuristic is to produce a solution in a reasonable time frame that is good enough for solving the problem at hand. This solution may not be the best of all the solutions to this problem, or it may simply approximate the exact solution. But it is still valuable because finding it does not require a prohibitively long time."
+01:05:44	Shamsuddeen Muhammad:	Like the def
+01:05:45	Sandra Muroy:	thanks Jon!
+01:12:53	Becki R. (she/her):	I need to get going. See you all next week!
+01:13:14	Jon Harmon (jonthegeek):	We'll stop after this section!
+01:13:40	lucus w:	date_names_langs()
+01:14:12	lucus w:	So for Swahili it will be locale(“sw”)
+01:15:08	Ryan Metcalf:	Outstanding job Lucy! Thank you everyone!
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/ctRKvm8Z-_8")`
+
+<details>
+  <summary> Meeting chat log </summary>
+  
+```
+00:04:46	Federica G. (she/her):	Hello!
+00:05:19	Becki R. (she/her):	Hello!
+00:06:09	Becki R. (she/her):	Yes!
+00:06:39	Becki R. (she/her):	I'm fine with starting
+00:06:40	Federica G. (she/her):	shall we wait until 5 past?
+00:06:43	Susie:	Good idea
+00:06:48	Becki R. (she/her):	5 past also sounds god
+00:06:50	Becki R. (she/her):	good
+00:08:17	Becki R. (she/her):	How far did you all get last week?
+00:09:07	Becki R. (she/her):	thanks
+00:39:13	Becki R. (she/her):	It's a bit muffled
+00:41:06	Ryan Metcalf:	https://blog.revolutionanalytics.com/2016/05/feather-package.html
+00:41:50	Shamsuddeen Muhammad:	https://github.com/wesm/feather
+00:41:52	Ryan Metcalf:	Not direct answer. It appears the feather project “o create a standard data file format that can be used for data exchange by and between R, Python, and any other software that implements its open-source format"
+00:43:58	Shamsuddeen Muhammad:	@Ryan that’s right. Also, speed is one of the concern.
+00:48:20	Shamsuddeen Muhammad:	A good package I used also readtext: https://github.com/quanteda/readtext
+00:50:25	Becki R. (she/her):	do you have a link to the import function information?
+00:51:20	Federica G. (she/her):	you need to right click the file name and it appears
+00:52:04	Sandra Muroy:	it's also located in the Environment tab
+00:52:05	Federica G. (she/her):	the file name in the file pane
+00:52:33	Becki R. (she/her):	Ah, thanks.
+01:13:11	Ryan Metcalf:	From parse_date(): Month: "%m" (2 digits), "%b" (abbreviated name in current locale), "%B" (full name in current locale).
+01:18:25	Ryan Metcalf:	readr() CRAN link: https://cran.r-project.org/web/packages/readr/readr.pdf
+01:21:10	Federica G. (she/her):	here are the date formats: https://www.r-bloggers.com/2013/08/date-formats-in-r/
+01:22:10	Federica G. (she/her):	at the bottom of the blog you find the codification
+01:22:29	Sandra Muroy:	great! thank you Ryan and Federica
+01:26:56	Njoki Njuki Lucy:	exercises: https://jrnold.github.io/r4ds-exercise-solutions/data-import.html
+01:27:06	Njoki Njuki Lucy:	course book: https://r4ds.had.co.nz/data-import.html
+01:27:36	Federica G. (she/her):	thanks
+01:27:39	Becki R. (she/her):	thank you!
+```
+</details>
+
+### Cohort 6
+
+`r knitr::include_url("https://www.youtube.com/embed/QKB9wy-2_Ps")`
+
+<details>
+  <summary> Meeting chat log </summary>
+  
+```
+00:04:29	Adeyemi Olusola:	Hello Daniel. Happy New Year
+00:04:35	Adeyemi Olusola:	!!!
+00:04:41	Daniel Adereti:	Happy new year, chief!
+00:05:07	Daniel Adereti:	Let's give folks some 5 mins to join since it is early in the year
+00:05:15	Adeyemi Olusola:	Okay.
+00:06:14	Daniel Adereti:	Hello Freya!
+00:08:29	Freya Watkins (she/her):	Hi and happy new year :)
+00:08:57	Shannon:	Happy new year!
+00:09:02	Daniel Adereti:	Happy new year Freya. Hello Shannon!
+00:09:22	Adeyemi Olusola:	HI all. HNY!
+00:41:09	Shannon:	I haven't used read_fwf()
+00:41:43	Daniel Adereti:	Found this short article on fixed width files: https://www.techwalla.com/articles/what-is-a-delimited-a-fixed-width-file
+00:42:03	Shannon:	Thanks, Daniel
+00:43:16	Daniel Adereti:	The solutions book: https://jrnold.github.io/r4ds-exercise-solutions/data-import.html
+00:43:41	Freya Watkins (she/her):	No
+01:05:12	Daniel Adereti:	Hello Adeyemi, can you please share the Rmarkdown file you just used?
+01:07:46	Shannon:	Thank you, Adeyemi, great lesson
+01:07:53	Freya Watkins (she/her):	Thanks!
+01:07:58	Daniel Adereti:	Thank you Adeyemi!
+01:07:59	Adeyemi Olusola:	Thank you
+```
+</details>
