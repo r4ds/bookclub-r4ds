@@ -2,16 +2,16 @@
 
 **Learning objectives:**
 
-- What is the ` %>% ` operator and how to use it
+- Use the `%>%` operator to make code more readable.
   - `lhs` versus `rhs`
-- When NOT to use the ` %>% ` operator
-- Review other pipe operators that may be helpful
+- Recognize when *not* to use the `%>%` operator.
+- Review other pipe operators that may be helpful.
 
 ## Introduction
 
 - The pipe operator comes from the `{magrittr}` package by [Stefan Milton Bache](https://stefanbache.dk/)
 - If you use ***ANY*** tidyverse libraries, `{magrittr}` is already included (how to validate this statement)
-- For learning humans....read the `%>%` operator as semantically: *and then*
+- For learning humans... read the `%>%` operator as semantically: *and then*
 
 ```{r, Loading magrittr, eval=FALSE}
 library(magrittr)
@@ -40,9 +40,9 @@ dplyr::arrange(
        dplyr::group_by(
            dplyr::filter(mtcars, carb > 1),
            cyl
-          ),
+       ),
        Avg_mpg = mean(mpg)
-      ),
+   ),
    desc(Avg_mpg)
  )
 ```
@@ -56,31 +56,39 @@ mtcars %>%
         dplyr::summarise(Avg_mpg = mean(mpg)) %>%
         dplyr::arrange(desc(Avg_mpg))
 ```
-The third example not only reduces complexity....you are building a pipeline to process the `mtcars` dataset. There is no difference in computation from the first example....only, now everything is in memory.
+The third example not only reduces complexity... you are building a pipeline to process the `mtcars` dataset. There is no difference in computation from the first example... only, now everything is in memory.
 
 >NOTE: There is a section in here about `pryr` that I wasn't sure the intent other then a discussion on memory use. R is intellegent and will share colums across dataframes. The material was excluded from the discussion.
 
-## Overwritting Data....easy, right?
+## Overwritting Data... easy, right?
+
 One method of wrangling data is to just overwrite and reassign a calculation to its original object. But, there is a problem...
 
 1. Overwriting an object prevents clean debugging. You'll have to rerun your code over and over to see what is changing.
-2. The repetition of the object being transformed implies...."what does my data look like now?"
+2. The repetition of the object being transformed implies... "what does my data look like now?"
 
-If you want to make yourself crazy...continually read in a new copy of your data just to walk through the process over agian. This is *not* conducive to efficiency.
+If you want to make yourself crazy... continually read in a new copy of your data just to walk through the process over agian. This is *not* conducive to efficiency.
 
 ## The pipe makes lexical transformations
+<<<<<<< HEAD
 - `magrittr` reassembles the code in the pipe to a form that works by overwriting an intermediate object, see [link](https://adv-r.hadley.nz/functions.html#lexical-scoping)
+=======
+
+- `magrittr` reassembles the code in the pipe to a form that works by overwriting an intermediate object, see [link]()
+>>>>>>> 165b9608eb6a2bea0d5713ef13659cda022ddb3a
 - This means that the pipe won’t work for two classes of functions:
  
  1. Functions that use the current environment.
  2. Functions that use lazy evaluation.
  
 ## When not to use the pipe
+
 - Your pipes are longer than (say) ten steps.
 - You have multiple inputs or outputs.
 - You are starting to think about a directed graph with a complex dependency structure.
 
 ## Other tools from `magrittr`
+
 Before we begin, lets discuss `lhs` and `rhs`
 
 - `lhs` - Left Hand Side
