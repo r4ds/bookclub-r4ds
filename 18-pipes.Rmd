@@ -72,7 +72,6 @@ If you want to make yourself crazy... continually read in a new copy of your dat
 ## The pipe makes lexical transformations
 
 - `magrittr` reassembles the code in the pipe to a form that works by overwriting an intermediate object, see [link](https://adv-r.hadley.nz/functions.html#lexical-scoping)
-
 - This means that the pipe won’t work for two classes of functions:
  
  1. Functions that use the current environment.
