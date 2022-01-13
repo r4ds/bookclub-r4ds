@@ -2,7 +2,21 @@
 
 **Learning objectives:**
 
-- Jon will try to prefill these ahead of each week.
+- Write **functions** to **automate common tasks** in R.
+  - **Name** R functions using **consistent rules.**
+  - Effectively **use comments** in R functions to **explain the "why"** of your code.
+- **Conditionally execute code** in R functions.
+  - Use **`if`** and **`else`** statements to conditionally execute R code.
+  - Use **`switch`** statements to conditionally execute R code.
+  - Use **`cut`** to **discretize continuous variables.**
+- Use **consistent argument**s for R functions.
+  - Give **default values** to arguments in R functions.
+  - **Check values** of arguments to make safer functions in R.
+  - Use **`...` arguments** in R functions.
+- **Return** values from R functions.
+  - Use **explicit `return`s** to **return early** from an R function.
+  - Use **`invisible`** to **invisibly return values** from R functions.
+- Recognize how R utilizes **environments** and **lexical scoping** to find the value associated with a name.
 
 ## Slide 1
 
