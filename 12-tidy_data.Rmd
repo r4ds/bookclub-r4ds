@@ -87,12 +87,25 @@ Slide contents.
 
 ### Cohort 6
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/e5rO37mHrKQ")`
 
 <details>
   <summary> Meeting chat log </summary>
   
 ```
-LOG
+00:11:55	Marielena Soilemezidi:	hi guys! :)
+00:12:14	Adeyemi Olusola:	Hello
+00:12:16	Daniel Adereti:	Hallo!
+00:14:58	Marielena Soilemezidi:	yep!
+00:18:42	Daniel Adereti:	The link to the paper: https://www.jstatsoft.org/article/view/v059i10
+00:34:12	Daniel Adereti:	why is table 2 not tidy again?
+00:34:26	Marielena Soilemezidi:	it mixes populations and cases
+00:44:13	Marielena Soilemezidi:	nope! All good :)
+00:44:17	Daniel Adereti:	none from me
+01:12:20	Daniel Adereti:	We are overtime though, maybe we conclude with Pivotwider next week?
+01:13:06	Marielena Soilemezidi:	thank you, Adeyemi!
+01:13:06	Daniel Adereti:	Fantastic class! Thanks Adeyemi!
+01:13:14	Marielena Soilemezidi:	great presentation :)
+01:13:16	Folashade Bayode:	Thank you
 ```
 </details>
