@@ -2,7 +2,28 @@
 
 **Learning objectives:**
 
-- Jon will try to prefill these ahead of each week.
+- Compare and contrast **atomic vectors** and **lists**.
+  - Recognize the **six types of atomic vectors**.
+  - Determine the key properties (`typeof` and `length`) of vectors.
+  - Recognize the three important types of **augmented vectors**.
+- Construct **logical** vectors.
+- Construct **numeric** vectors.
+  - Differentiate between the two types of numeric vectors, **double** and **integer**.
+- Construct **character** vectors.
+- Recognize the different types of missing values.
+- **Coerce vectors** between different types.
+- **Test** whether a vector has a given type.
+- Recognize when a vector will be **recycled** to match the length of another vector, and when it will not.
+- **Name** the elements of vectors.
+- **Subset** vectors.
+- Construct **lists**.
+- Differentiate between `[`, `[[`, and `$` for **subsetting lists**.
+- Use **attributes** to provide additional information about vectors.
+- Recognize the **S3 object-oriented system**.
+- Construct **factors**.
+- Construct **dates** and **date-times**.
+- Recognize that **tibbles are augmented lists.**
+
 
 ## Slide 1
 
