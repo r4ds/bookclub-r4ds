@@ -512,15 +512,45 @@ An important difference between `[` and `[[` -> `[[` extracts only a single elem
 
 ### Cohort 5
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/rsRImj294pM")`
 
 <details>
   <summary> Meeting chat log </summary>
   
 ```
-LOG
+
+00:39:35	Jon Harmon (jonthegeek):	.Machine$double.eps
+00:40:36	Jon Harmon (jonthegeek):	> .Machine$integer.max
+[1] 2147483647
+00:41:23	Federica Gazzelloni:	?`.Machine`
+00:42:11	Ryan Metcalf:	Some really fun reading about CPU “inner” workings: https://www.geeksforgeeks.org/computer-organization-von-neumann-architecture/
+00:42:35	Jon Harmon (jonthegeek):	> typeof(.Machine$integer.max + 1)
+[1] "double"
+00:42:55	Jon Harmon (jonthegeek):	> .Machine$integer.max + 1L
+[1] NA
+Warning message:
+In .Machine$integer.max + 1L : NAs produced by integer overflow
+00:43:52	Becki R. (she/her):	thanks for the link, Ryan!
+00:44:44	Jon Harmon (jonthegeek):	> sqrt(2)**2 == 2
+[1] FALSE
+00:45:16	Jon Harmon (jonthegeek):	> dplyr::near(sqrt(2)**2, 2)
+[1] TRUE
+00:57:52	Ryan Metcalf:	Not directly related to Cache or RAM….But similar. It is where you get FAT, FAT32, NTFS, ExFat, EXT, EXT3, etc…etc… there are hundreds of file allocation.
+00:59:29	Sandra Muroy:	thanks Ryan!
+01:02:08	Becki R. (she/her):	I'm finding the info on computer architecture (?) fascinating so I appreciate the detour.
+01:03:05	Sandra Muroy:	I'm glad :)
+01:10:01	Ryan Metcalf:	I think I just had an epiphany!!! Is this were the “Big Endian” and “Little Endian” comes in? The leading bit representing positive and negative?
+01:10:27	Jon Harmon (jonthegeek):	> typeof(0L)
+[1] "integer"
+01:12:42	Jon Harmon (jonthegeek):	> .Machine$double.xmax
+[1] 1.797693e+308
+01:15:53	Jon Harmon (jonthegeek):	> 1:10 + 1
+ [1]  2  3  4  5  6  7  8  9 10 11
+01:16:19	Jon Harmon (jonthegeek):	> 1:10 + 2:11
+ [1]  3  5  7  9 11 13 15 17 19 21
 ```
 </details>
+
 
 ### Cohort 6
 
