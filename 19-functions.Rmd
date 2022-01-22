@@ -31,18 +31,6 @@ Slide contents.
 
 ### Cohort 5
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
-
-<details>
-  <summary> Meeting chat log </summary>
-  
-```
-LOG
-```
-</details>
-
-### Cohort 6
-
 `r knitr::include_url("https://www.youtube.com/embed/B5097Rbsafc")`
 
 <details>
@@ -111,5 +99,29 @@ myfun(a = 1)
   a
 }
 myfun(1:10, Sys.sleep(60))
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/rsRImj294pM")`
+
+<details>
+  <summary> Meeting chat log </summary>
+  
+```
+See Chapter 20 for the part of the log that's relevant to that chapter.
+```
+</details>
+
+
+
+### Cohort 6
+
+`r knitr::include_url("https://www.youtube.com/embed/URL")`
+
+<details>
+  <summary> Meeting chat log </summary>
+  
+```
+LOG
 ```
 </details>
