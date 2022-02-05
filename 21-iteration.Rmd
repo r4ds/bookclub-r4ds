@@ -2,7 +2,20 @@
 
 **Learning objectives:**
 
-- Jon will try to prefill these ahead of each week.
+- **Reduce duplication** in code by **iterating** over a pattern using a **`for` loop.**
+- **Modify an object** using a **`for` loop.**
+- Recognize the **three basic ways** to **loop over a vector** using a **`for` loop.**
+- Handle **unknown output lengths** by using a **more complex result** and then **combining** the result after the **`for` loop.**
+- Handle **unknown sequence lengths** with a **`while` loop.**
+- **Reduce duplication** in code by passing a function as an argument to a function **(functional programming).**
+- Make iteration code **easier to read** with the **`map` family** of functions from **`{purrr}`.**
+- Make `map` code **faster to type** with **shortcuts.**
+- **Compare** the **`map` family** of functions to the base R **`apply` family.**
+- **Deal with errors** and other output using the **`{purrr}` adverbs: `safely`, `possibly`, and `quietly`.**
+- Map over **multiple arguments** with the **`map2` family** and the **`pmap` family** from `{purrr}`.
+- Map over **multiple functions** with the **`invoke_map` family** from `{purrr}` and its replacements (see `?purrr::invoke_map`, "Life cycle").
+- Call a function for its **side effects** using the **`walk`** family of functions from `{purrr}`.
+- Recognize the **other iteration functions** from `{purrr}`.
 
 ## Slide 1
 
