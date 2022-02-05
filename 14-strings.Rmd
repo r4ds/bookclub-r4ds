@@ -53,7 +53,7 @@ string2 <- "This is a string with double quotes"
 
 During scripting, if you do not close a string but try to start a new line you will see the `+` line entry. But how do you quit so you can add the closing quote? Just hit the escape key.
 
-```{code, Rookie Mistake, include = TRUE, evaluate = FALSE}
+```{r Rookie Mistake, include = TRUE, eval = FALSE}
 "This is a string, but I forgot to close the quote
 
 
@@ -62,7 +62,7 @@ Help, I'm stuck! (Hit the escape key)
 
 One of the more tricky things to remember when using regular expressions is the `\` backslash when you literally want to use a special character in a search.
 
-```{r, The magical escape backslash, include = TRUE}
+```{r The magical escape backslash, include = TRUE}
 doublequote <- "\"" # or '"'
 singlequote <- '\'' # or "'"
 print(doublequote)

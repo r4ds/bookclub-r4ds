@@ -48,11 +48,11 @@ library(tidyverse)
     - <span style="color: blue;">complex</span>
     - <span style="color: blue;">raw</span>
   - Integer and double vectors are collectively called **numeric** vectors.
-  - Lists, at times they are called recursive vectors because lists can contain other lists.
+  - Lists, at times, are called recursive vectors because lists can contain other lists.
 - The main difference between vectors and lists:
-  - Atomic vectors are homogeneous i.e. contain only one type (in my understanding).
-  - Lists are heterogeneous i.e.,can have different different types.
-- Another related object: `NULL`. It is often used to represent the absence of a vector (unlike `NA` which is used to represent the absence of a value). `NULL` typically acts like a vector of length 0.
+  - Atomic vectors are homogeneous i.e., contain only one type (in my understanding).
+  - Lists are heterogeneous i.e., can have different types.
+- Another related object: `NULL`. It is often used to represent the absence of a vector (unlike `NA` which is used to represent the absence of a value). `NULL` typically acts as a vector of length 0.
 
 Figure 20.1: The hierarchy of R’s vector types:
 
@@ -78,7 +78,7 @@ x2 <- c("a", "b"); length(x2)
 > Qn: does this imply that the length of a list is the # of elements in a list for example (x1)?
 
 - Vectors can also contain arbitrary additional metadata in the form of attributes.
-  - Which are then used to create **augmented vectors** which build on additional behaviour. There are three important types of augmented vector:
+  - Which are then used to create **augmented vectors** which build on additional behaviour. There are three important types of augmented vectors:
     - Factors are built on top of integer vectors.
     - Dates and date-times are built on top of numeric vectors.
     - Data frames and tibbles are built on top of lists.
@@ -162,7 +162,7 @@ is.nan(c(-1, 0, 1) / 0)
 
 - Most complex atomic vector because each element of a character vector is a string, and a string contains an arbitrary amount of data.
 - R uses a global string pool.
-  - Implying that each unique string is only story in memory once.
+  - Implying that each unique string is only stored in memory once.
   - And every use of the string points to that representation.
     - This reduces the amount of memory needed by duplicated strings. To see this, let's use `pryr::object_size()`:
     
@@ -176,7 +176,7 @@ pryr::object_size(y)
 
 `y` doesn’t take up 1,000x as much memory as `x`, because each element of `y` is just a pointer to that same string. 
 
-A pointer is 8 bytes, so 1000 pointers to a 152 B string is 8 * 1000 + 152 = 8.14 kB. *I am lost :(*
+A pointer is 8 bytes, so 1000 pointers to a 152 B string is 8 * 1000 + 152 = 8.14 kB.
 
 ### Missing values
 
@@ -296,7 +296,7 @@ parse_number(c("1.0", "3.5", "$1,000.00", "NA", "ABCD12234.90", "1234ABC", "A123
 
 ## Using atomic vectors
 
-- Let's review some of the important tools for working with the different types of atomic vector:
+- Let's review some of the important tools for working with the different types of atomic vectors:
   - How to convert from one type to another, and when that happens automatically.
   - How to tell if an object is a specific type of vector.
   - What happens when you work with vectors of different lengths.
@@ -305,7 +305,7 @@ parse_number(c("1.0", "3.5", "$1,000.00", "NA", "ABCD12234.90", "1234ABC", "A123
   
 ### Coercion
 
-- We can coerce or convert one one type of vector to another in two ways:
+- We can coerce or convert one type of vector to another in two ways:
 
 1. Explicit coercion -> call a function like `as.logical()`, `as.integer()`, `as.double()`, or `as.character()`.  Before doing this, check the type of the vector. For example,  you may need to tweak your readr `col_types` specification.
 
@@ -313,7 +313,7 @@ parse_number(c("1.0", "3.5", "$1,000.00", "NA", "ABCD12234.90", "1234ABC", "A123
 
 - Our focus here will be implicit coercion as explicit coercion is relatively rarely used in data analysis plus easy to understand.
 - An important type of implicit coercion: using a logical vector in a numeric context. 
-  - `TRUE` is converted to `1` and `FALSE` is converted to `0`. Hence, summing the logical vector is the # of trues and mean of a logical vector is the proportion of trues.
+  - `TRUE` is converted to `1` and `FALSE` is converted to `0`. Hence, summing the logical vector is the # of trues and the mean of a logical vector is the proportion of trues.
   
 ```{r implicit_coerce_logical_to_numeric, eval=FALSE}
 x <- sample(20, 100, replace = TRUE)
@@ -361,7 +361,7 @@ typeof(c(1.5, "a")) #character wins
 - Not only does R implicitly coerce the types of vectors to be compatible, but it also implicitly coerce the length of vectors. 
   - This is called vector **recycling** because the shorter vector is repeated (or recycled) to the same length as the longer vector.
 - Mostly useful when we are mixing vectors and "scalars". Note, R doesn't have scalars instead, a single number is a vector of length 1.
-  - Since, there are no scalars, most built-in functions are **vectorised** meaning that they will operate on  vector of numbers. Hence, such a code will work:
+  - Since there are no scalars, most built-in functions are **vectorised** meaning that they will operate on a vector of numbers. Hence, such a code will work:
   
 ```{r scalars, eval=FALSE}
 sample(10) + 100
@@ -383,13 +383,12 @@ But what if the length of the longer is not an integer multiple of the length of
 1:10 + 1:3
 ```
 
-Vector recycling can silently conceal problem, hence, the vectorised functions in tidyverse will throw errors when recycling anything other than a scalar. We can use `rep()` to do recycling ourselves.
+Vector recycling can silently conceal the problem, hence, the vectorised functions in tidyverse will throw errors when recycling anything other than a scalar. We can use `rep()` to do recycling ourselves.
 
 ```{r adding_cols_with_lengths_differ, eval=FALSE}
 tibble(x = 1:4, y = 1:2)
 
 tibble(x = 1:4, y = rep(1:2, 2))
-
 
 tibble(x = 1:4, y = rep(1:2, each = 2))
 ```
@@ -484,9 +483,91 @@ An important difference between `[` and `[[` -> `[[` extracts only a single elem
 
 1. What does `mean(is.na(x))` tell you about a vector `x`? What about `sum(!is.finite(x))`?
 
+```{r ex20.4.1_is.na_is_is.finite, eval=FALSE}
+x <- c(-Inf, -1, 0, 1, Inf, NA, NaN)
+mean(is.na(x))
+sum(!is.finite(x))
+```
+
+`mean(is.na(x))` calculates the proprtion of missing (`NA`) and not-a-number (`NaN`) values in a vector. The result of 0.286 is equal to 2 / 7 as expected.
+
+`sum(!is.finite(x))` calculates the number of elements in the vector that are equal to missing (`NA`), not-a-number (`NaN`), or infinity (`Inf`).
+
 2. Carefully read the documentation of `is.vector()`. What does it actually test for? Why does `is.atomic()` not agree with the definition of atomic vectors above?
 
+`is.vector()` checks whether an object has no attributes other than names.
+
+```{r ex20.4.2_is_vector_TRUE, eval=FALSE}
+is.vector(list(a = 1, b = 2))
+```
+
+But any object that has an attribute apart from names is not:
+
+```{r ex20.4.2_is_vector_FALSE, eval=FALSE}
+x <- 1:10
+attr(x, "something") <- TRUE
+is.vector(x)
+```
+
+`is.atomic()` explicitly checks whether an object is one of the atomic types (“logical”, “integer”, “numeric”, “complex”, “character”, and “raw”) or NULL.
+
+```{r ex20.4.2_is_atomic, eval=FALSE}
+is.atomic(1:10)
+is.atomic(list(a = 1))
+```
+
+`is.atomic()` will consider objects to be atomic even if they have extra attributes.
+
+```{r ex20.4.2_is_atomic_attr, eval=FALSE}
+is.atomic(x)
+```
+
 3. Compare and contrast `setNames()` with `purrr::set_names()`.
+
+`setNames()` takes two arguments, a vector to be named and a vector of names to apply to its elements.
+
+```{r ex20.4.3_setNames_fn, eval=FALSE}
+setNames(1:4, c("a", "b", "c", "d"))
+setNames(nm = c("a", "b", "c", "d"))
+```
+
+`set_names()` has more ways to set names than `setNames()`. We can specify the names the same way as `setNames()`:
+
+```{r ex20.4.3_set_names_fn_2, eval=FALSE}
+purrr::set_names(1:4, c("a", "b", "c", "d"))
+```
+
+The names can also be specified as unnamed arguments:
+
+```{r ex20.4.3_set_names_fn_3, eval=FALSE}
+purrr::set_names(1:4, "a", "b", "c", "d")
+```
+
+`set_names()` will name an object with itself if no `nm` argument is provided (the opposite of `setNames()` behavior).
+
+```{r ex20.4.3_set_names_fn_4, eval=FALSE}
+purrr::set_names(c("a", "b", "c", "d"))
+```
+
+The main difference between `set_names()` and `setNames()` is that **`set_names()` allows for using a function or formula to transform the existing names.**
+
+```{r ex20.4.3_set_names_fn_5, eval=FALSE}
+purrr::set_names(c(a = 1, b = 2, c = 3), toupper)
+
+purrr::set_names(c(a = 1, b = 2, c = 3), ~toupper(.))
+```
+
+`set_names()` function also checks that the length of the names argument is the same length as the vector that is being named, and will raise an error if it is not.
+
+```{r ex20.4.3_set_names_fn_6, eval=FALSE}
+purrr::set_names(1:4, c("a", "b"))
+```
+
+`setNames()` function will allow the names to be shorter than the vector being named, and will set the missing names to `NA`.
+
+```{r ex20.4.3_setNames_fn_7, eval=FALSE}
+setNames(1:4, c("a", "b"))
+```
 
 4. Create functions that take a vector as input and returns:
 
@@ -504,9 +585,346 @@ An important difference between `[` and `[[` -> `[[` extracts only a single elem
 
 ## Recursive vectors (lists)
 
+- Lists can contain other lists implying that are more complex than atomic vectors.
+  - Hence, suitable to represent hierarchical or tree-like structures.
+- Use `list()` to create lists.
+
+```{r create_lists, eval=FALSE}
+(xl <- list(1, 2, 3))
+
+```
+
+- We use the function `str()` to assess the structure.
+
+```{r str_lists, eval=FALSE}
+str(xl)
+dplyr::glimpse(xl)
+#seems one and the same thing?
+```
+
+- Lists can be named:
+
+```{r naming_lists, eval=FALSE}
+xl_named <- list(a = 1, b = 2, c = 3)
+str(xl_named)
+```
+
+- `list()` can contain a mix of objects unlike atomic vectors.
+
+```{r lists_with_mix_objects, eval=FALSE}
+yl <- list("a", 1L, 1.5, TRUE)
+str(yl)
+```
+
+- Lists can contain other lists!
+
+```{r lists_within_lists, eval=FALSE}
+zl <- list(list(1, 2), list(3, 4))
+str(zl)
+```
+
+### Visualising lists
+
+- Let's see a visual representation of lists. E.g., 
+
+```{r visual_rep_lists, eval=FALSE}
+x1 <- list(c(1, 2), c(3, 4))
+x2 <- list(list(1, 2), list(3, 4))
+x3 <- list(1, list(2, list(3)))
+```
+
+A visual drawing of the lists:
+
+![](./images/visual_rep_lists.PNG)
+
+There are three principles:
+
+1. Lists have rounded corners. Atomic vectors have square corners.
+
+2. Children are drawn inside their parent, and have a slightly darker background to make it easier to see the hierarchy.
+
+3. The orientation of the children (i.e. rows or columns) isn’t important, a row or column orientation are picked to either save space or illustrate an important property in the example. ??
+
+### Subsetting
+
+- We can subset lists using three ways, let's see the example below.
+
+```{r subsetting_lists, eval=FALSE}
+a <- list(a = 1:3, b = "a string", c = pi, d = list(-1, -5))
+```
+
+1. `[` extracts a sub-list. And the result will always be a list.
+
+```{r str_sublists1, eval=FALSE}
+str(a[1:2])
+
+str(a[4])
+```
+We can also subset lists with a logical, integer or character vector as seen in vectors.
+
+2. `[[` extracts a single component from a list. It removes a level of hierarchy from the list.
+
+```{r str_sublists2, eval=FALSE}
+str(a[[1]])
+
+str(a[[4]])
+```
+
+3. `$` is a shorthand to extract named elements of a list. It works similarly to `[[` except that you don’t need to use quotes.
+
+```{r subsetting_named_lists, eval=FALSE}
+a$a
+
+a[["a"]]
+```
+
+- Difference between `[` and `[[` is important for lists:
+  - `[[` drills down into the list while `[` returns a new, smaller list. Let's compare the code and output above with the visual shown below.
+  
+![](./images/subsetting_lists.PNG)
+
+### Lists of condiments
+
+- Let's discuss an illustration of the difference between `[` and `[[` to solidify our understanding! :)
+- Below we see an usual pepper shaker, and let it be our list `x`.
+
+![](./images/list_pepper_ill.PNG)
+
+- `x[1]` is a pepper shaker containing a single pepper packet:
+
+![](./images/list_pepper_ill_subset1.PNG)
+
+`x[2]` would look the same, but would contain the second packet. `x[1:2]` would be a pepper shaker containing two pepper packets.
+
+- `x[[1]]` is:
+
+![](./images/list_pepper_ill_subset2.PNG)
+
+- `x[[1]][[1]]` to get the content of the pepper package:
+
+![](./images/list_pepper_ill_subset3.PNG)
+
+### Exercises
+
+1. Draw the following lists as nested sets:
+
+```{r ex20.5.1_draw_lists, eval = FALSE}
+list(list(list(list(list(list(a))))))
+list(a, b, list(c, d), list(e, f))
+```
+To draw pretty a visual diagram, refer to [DiagramR](http://rich-iannone.github.io/DiagrammeR/graphviz_and_mermaid.html) R Package to render [Graphviz](https://www.graphviz.org/) diagrams.
+
+But what I have is hand-drawn. Not pretty!! :)
+
+For a:
+![](./images/ex20_5_1_a.jpg)
+
+For b:
+
+![](./images/ex20_5_1_b.jpg)
+2. What happens if you subset a tibble as if you’re subsetting a list? What are the key differences between a list and a tibble?
+
+Subsetting a tibble works the same way as a list; a data frame can be thought of as a list of columns. 
+
+The key difference between a list and a tibble -> **all the elements (columns) of a tibble must have the same length (number of rows). Lists can have vectors with different lengths as elements.**
+
+```{r ex20.5.2_diff_lists_tibbles, eval=FALSE}
+x <- tibble(a = 1:2, b = 3:4)
+x[["a"]]
+x["a"]
+x[1]
+x[1, ]
+```
+
 ## Attributes
 
+- Any vector can contain arbitrary additional metadata through its **attributes**.
+  - Can be thought as named list of vectors that can be attached to any object.
+- We can get and set individual attribute values with `attr()` or see them all at once with `attributes()`.
+
+```{r attributes, eval=FALSE}
+x <- 1:10
+attr(x, "greeting")
+attr(x, "greeting") <- "Hi!"
+attr(x, "farewell") <- "Bye!"
+attributes(x)
+```
+
+- Three very important attributes that used to implement fundamental parts of R:
+  -  **Names** are used to name the elements of a vector.
+  - **Dimensions** (dims, for short) make a vector behave like a matrix or array.
+  - **Class** is used to implement the S3 object oriented system.
+ 
+> Note: We have learnt of the names, and we won't discuss matrices in this discussion as matrices aren;t used in this book!
+
+- Class controls how **generic functions** work.
+  - Generic functions are key to object programming since they make functions behave differently for different classes of input. The discussion of object programming is covered in details in Advanced R: http://adv-r.had.co.nz/OO-essentials.html#s3
+- An example of generic function:
+
+```{r generic_fn, eval=FALSE}
+as.Date
+```
+
+- The call to "UseMethod" means that this is a generic function, and it calls a specific **method**, a function, based on the class of the first argument. 
+
+> Note: All methods are functions; not all functions are methods.
+
+- To list all the methods for a generic, use `methods()`:
+
+```{r method_generic_fn, eval=FALSE}
+methods("as.Date")
+```
+
+- For example, if `x` is a character vector, `as.Date()` will call `as.Date.character()`; if it’s a factor, it’ll call `as.Date.factor().`
+- We can see the specific implementation of a method with `getS3method()`:
+
+```{r implementation_of_method_default, eval=FALSE}
+getS3method("as.Date", "default")
+```
+
+```{r implementation_of_method_numeric, eval=FALSE}
+getS3method("as.Date", "numeric")
+```
+
+- The most important S3 generic is `print()` -> controls how the object is printed when we type its name at the console.
+- Subsetting functions: `[`, `[[` and `$` are other important generics.
+
 ## Augmented vectors
+
+- Atomics vectors and lists are building blocks for other important vector types like factors and dates.
+  - These are called **augmented vectors** because they are vectors with additional **attributes**, including class.
+    - Because augmented vectors have a class, they behave differently to the atomic vector on which they are built.
+- Here, we will discuss four important augmented vectors:
+  - Factors
+  - Dates
+  - Date-times
+  - Tibbles
+  
+### Factors
+
+- They are designed to represent categorical data that can take a fixed set of possible values.
+- They are built on top of integers and have a levels attribute:
+
+```{r augmented_factors, eval=FALSE}
+x_factor <- factor(c("ab", "cd", "ab"), levels = c("ab", "cd", "ef"))
+typeof(x_factor)
+attributes(x_factor)
+```
+
+### Dates and date-times
+
+- In R, dates are numeric vectors that represent the number of days since 1 January 1970.
+
+```{r augmented_dates, eval=FALSE}
+x_date <- as.Date("1971-01-01")
+unclass(x_date)
+
+typeof(x_date)
+
+attributes(x_date)
+```
+- Dates-times are numeric vectors with class `POSIXct` that represent the # of seconds since 1 January 1970.
+
+> Note: "POSIXct” stands for “Portable Operating System Interface”, calendar time.
+
+```{r augmented_date_time, eval=FALSE}
+x_date_time <- lubridate::ymd_hm("1970-01-01 01:00")
+unclass(x_date_time)
+
+typeof(x_date_time)
+
+attributes(x_date_time)
+```
+
+The `tzone` attribute is optional--> controls how the time is printed, not what absolute time it refers to.
+
+```{r augmented_date_time_tzone, eval=FALSE}
+attr(x_date_time, "tzone") <- "US/Pacific"
+x_date_time
+
+attr(x_date_time, "tzone") <- "US/Eastern"
+x_date_time
+
+```
+
+> Qn: how to find the other time zones?
+
+- Another type of date-times called POSIXlt which are built on top of named lists:
+
+```{r augmented_date_time_POSIXlt, eval=FALSE}
+y_date_time <- as.POSIXlt(x_date_time)
+typeof(y_date_time)
+attributes(y_date_time)
+```
+
+POSIXlts are rare inside the tidyverse. But pop up in base R, because they are needed to extract specific components of a date, like the year or month. 
+
+Since lubridate provides helpers for us to do this instead, we don’t need them. 
+
+POSIXct’s are always easier to work with, so if we have a POSIXlt, we should always convert it to a regular data time `lubridate::as_date_time()`.
+
+### Tibbles
+
+- Tibbles are augmented lists.
+  - They have class “tbl_df” + “tbl” + “data.frame”, and names (column) and row.names attributes:
+  
+```{r augmented_tibbles, eval=FALSE}
+tb <- tibble::tibble(x = 1:5, y = 5:1)
+typeof(tb)
+attributes(tb)
+```
+
+- The difference between a tibble and a list:
+  - All the elements of a data frame must be vectors with the same length.
+    - All functions that work with tibbles enforce this constraint.
+- Traditional data.frames have a very similar structure:
+
+```{r augmented_df, eval=FALSE}
+df <- data.frame(x = 1:5, y = 5:1)
+typeof(df)
+attributes(df)
+```
+
+**The main difference is the class**.
+
+The class of tibble includes “data.frame” which means tibbles inherit the regular data frame behaviour by default.
+
+### Exercises
+
+1. What does hms::hms(3600) return? How does it print? What primitive type is the augmented vector built on top of? What attributes does it use?
+
+```{r ex20.7.1_hms, eval=FALSE}
+(x <- hms::hms(3600))
+class(x)
+
+attributes(x)
+```
+
+`hms::hms` returns an object of class, and prints the time in “%H:%M:%S” format.
+
+The attributes it uses are **units** and **class**
+
+2. Try and make a tibble that has columns with different lengths. What happens?
+
+```{r ex20.7.2_1_scalar, eval=FALSE}
+tibble(x = 1, y = 1:5)
+```
+
+The "scalar" 1 is recycled to the length of the longer vector.
+
+```{r ex20.7.2_2_tibbles_cols_diff_lengths, eval=FALSE}
+tibble(x = 1:3, y = 1:4)
+```
+
+Creating a tibble with two vectors of different lengths will give an error.
+
+3. Based on the definition above, is it ok to have a list as a column of a tibble?
+
+```{r ex20.7.3_lists_within_tibbles, eval=FALSE}
+tibble(x = 1:3, y = list("a", 1, list(1:3)))
+```
+
+Tibbles can have atomic vectors (with additional attributes)of different types: doubles, character, integers, logical, factor, date. Hence, they can have a list vector as long as its the same length!
 
 ## Meeting Videos
 
