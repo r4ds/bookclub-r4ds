@@ -2,13 +2,144 @@
 
 **Learning objectives:**
 
-- Jon will try to prefill these ahead of each week.
+-   Write **functions** to **automate common tasks** in R.
 
-## Slide 1
+    -   **Name** R functions using **consistent rules.**
+    -   Effectively **use comments** in R functions to **explain the "why"** of your code.
 
-Slide contents. 
-Keep it short and slide-like!
+-   **Conditionally execute code** in R functions.
 
-## Slide 2
+    -   Use **`if`** and **`else`** statements to conditionally execute R code.
+    -   Use **`switch`** statements to conditionally execute R code.
+    -   Use **`cut`** to **discretize continuous variables.**
 
-Slide contents.
+-   Use **consistent argument**s for R functions.
+
+    -   Give **default values** to arguments in R functions.
+    -   **Check values** of arguments to make safer functions in R.
+    -   Use **`...` arguments** in R functions.
+
+-   **Return** values from R functions.
+
+    -   Use **explicit `return`s** to **return early** from an R function.
+    -   Use **`invisible`** to **invisibly return values** from R functions.
+
+-   Recognize how R utilizes **environments** and **lexical scoping** to find the value associated with a name.
+
+# 19.1 Introduction
+
+Functions are handy because:
+
+-   they automate repetitive tasks.
+
+-   have a name that makes the purpose very clear
+
+-   you only need to update the code in one place as things change
+
+-   it's safer than copy and paste - you won't replicate errors
+
+The common theme for functions is to be consistent.
+
+# 19.2 **When and how to write a function**
+
+Have you copy and pasted code more than 2x? Consider a function!
+
+Key steps in creating a function:
+
+1.  Pick a **name** than makes it clear what the function does
+
+2.  **Arguments**, or inputs, go inside `function`, like so `function(arguments)`.
+
+3.  The **code** goes inside curly braces `{ }`, after `function()`.
+
+4.  Check your function with a few inputs to make sure it's working.
+
+# 19.3 Functions are for computers *and* humans
+
+Be consistent in you naming and coding of functions
+
+**Names:**
+
+Functions should be verbs (action, state, or occurrence), arguments should be nouns (people places or things).
+
+Be consistent in using snake_case or camelCase.
+
+For sets of functions, use a common prefix
+
+Don't overwrite existing function
+
+**Comments:**
+
+Use comments to explain the 'why' of the code
+
+Use lines of - or = to break up code into sections
+
+# 19.4 Conditional execution
+
+`if` statements conditionally execute code. The condition must evaluate to `TRUE` or `FALSE`.
+
+Be careful: **`==`** is vectorised.
+
+Use \|\| (OR) and && (AND) to combine multiple logical expressions.
+
+You can string multiple if statements together: `if`, `else if`, `else`
+
+For a long series of chained if statements, use `switch()`
+
+Use `cut()` to 'discretise continuous variables'
+
+**Format:**
+
+Your function or `if` statement followed by a curly brace
+
+New line, indent 2 spaces.
+
+Ending brace on its own line, unless followed by else.
+
+# 19.5 Function arguments
+
+One set supplies the **data** to compute on
+
+One set supplies arguments that control the **details** of the computation.
+
+Generally, data comes first, and details go on the end and usually have default values.
+
+Choose names that are longer and descriptive or use common ones:
+
+-   x, y, z: vectors
+
+-   w: a vector of weights
+
+-   df: a data frame
+
+-   i, j: numeric indices (rows/columns)
+
+-   n: length, or number of rows
+
+-   p: number of columns
+
+Put checks in your functions to make constraints explicit.
+
+Use `.` as an argument that takes an arbitrary number of values
+
+Lazy evaluation - arguments in R are not computed until they're needed.
+
+# 19.6 Return values
+
+Two things to consider when returning a value:
+
+1.  Does returning early make your function easier to read?
+
+> R, by default, returns the last value of a function. You can return a value with or without an explicit return statement.
+
+2.  Can you make your function pipeable?
+
+> There are two basic types of pipeable functions:
+>
+> -   With **transformations**, an object is passed to the function's first argument and a modified object is returned.
+>
+> -   With **side-effects**, the passed object is not transformed. Instead, the function performs an action on the object, like drawing a plot or saving a file.
+
+# 19.7 Environment
+
+**Lexical scoping** - R will look outside the function, in the environment, for definitions of variables, if it is not defined within.
