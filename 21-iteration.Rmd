@@ -2,13 +2,179 @@
 
 **Learning objectives:**
 
-- Jon will try to prefill these ahead of each week.
+-   **Reduce duplication** in code by **iterating** over a pattern using a **`for` loop.**
+-   **Modify an object** using a **`for` loop.**
+-   Recognize the **three basic ways** to **loop over a vector** using a **`for` loop.**
+-   Handle **unknown output lengths** by using a **more complex result** and then **combining** the result after the **`for` loop.**
+-   Handle **unknown sequence lengths** with a **`while` loop.**
+-   **Reduce duplication** in code by passing a function as an argument to a function **(functional programming).**
+-   Make iteration code **easier to read** with the **`map` family** of functions from **`{purrr}`.**
+-   Make `map` code **faster to type** with **shortcuts.**
+-   **Compare** the **`map` family** of functions to the base R **`apply` family.**
+-   **Deal with errors** and other output using the **`{purrr}` adverbs: `safely`, `possibly`, and `quietly`.**
+-   Map over **multiple arguments** with the **`map2` family** and the **`pmap` family** from `{purrr}`.
+-   Map over **multiple functions** with the **`invoke_map` family** from `{purrr}` and its replacements (see `?purrr::invoke_map`, "Life cycle").
+-   Call a function for its **side effects** using the **`walk`** family of functions from `{purrr}`.
+-   Recognize the **other iteration functions** from `{purrr}`.
 
-## Slide 1
+## 21.1 Intro
 
-Slide contents. 
-Keep it short and slide-like!
+**Good iteration - Pre-allocate the shape/structure and then fill in the data**.
 
-## Slide 2
+**Imperative programming** - `for` loops and `while` loops make iteration very explicit.
 
-Slide contents.
+**Functional programming** - common `for` loop patterns get their own functions, so you can streamline your code even more.
+
+Packages: `library(tidyverse)`, `library(purrr)`
+
+## 21.2 For loops
+
+Each loop has three components:
+
+-   **output** - Allocate enough space for your `for` loop. A loop that grows at each iteration will be very "slow".
+
+-   **sequence** - What to loop over.
+
+    -   `seq_along()` is a safe version of the familiar `1:length(x)`: if you have a zero-length vector, it will tell you.
+
+-   **body** - This is the code that does the work.
+
+## 21.3 For loop variations
+
+There are four variations on the basic theme of the `for` loop:
+
+1.  Modifying an existing object, instead of creating a new object.
+
+2.  Looping over names or values, instead of indices.
+
+    -   There are three basic ways to loop over a vector.
+
+        -   `for (i in seq_along(df))`
+
+        -   `for (x in xs)` - good for **side-effects**
+
+        -   `for (nm in names(xs))` - creates name to access value with `x[[nm]]`
+
+3.  Handling outputs of unknown length.
+
+    -   `unlist()` flattens a list of vectors into a single vector,
+
+    -   `purrr::flatten_dbl()` is stricter --- it will throw an error if the input isn't a list of doubles.
+
+4.  Handling sequences of unknown length.
+
+    -   Use a `while` loop.
+
+## 21.4 For loops vs. functionals
+
+`For` loops are not as important in R as they are in other languages because R is a functional programming language.
+
+This means that it's possible to put `for` loops in a function, and call that function instead of using the `for` loop directly.
+
+Base R and the `purrr` package have functions for many common loops.
+
+## 21.5 The map functions
+
+-   `map(.x, .f, ...)` makes a list.
+
+-   `map_lgl(.x, .f, ...)` makes a logical vector.
+
+-   `map_int(.x, .f, ...)` makes an integer vector.
+
+-   `map_dbl(.x, .f, ...)` makes a double vector.
+
+-   `map_chr(.x, .f, ...)` makes a character vector.
+
+**Shortcuts with `purrr`:**
+
+-   a one-sided formula creates an anonymous function
+
+-   use a string to extract named components
+
+-   Use an integer to select elements by position
+
+**Base R:**
+
+-   `lapply(X, FUN, ...)` makes a list (`map` is more consistent)
+
+-   `sapply(X, FUN, ..., simplify = TRUE, USE.NAMES = TRUE)` wrapper around `lapply`
+
+-   `vapply(X, FUN, FUN.VALUE, ..., USE.NAMES = TRUE)` safe alternative to `sapply`, can make a matix
+
+## 21.6 Dealing with failure
+
+`safely()` - designed to work with `map`
+
+-   `result` is the original result. If there was an error, this will be `NULL`.
+
+-   `error` is an error object. If the operation was successful, this will be `NULL`.
+
+`possibly()` - you give it a default value to return when there is an error.
+
+`quietly()` - instead of capturing errors, it captures printed output, messages, and warnings.
+
+## 21.7 Mapping over multiple arguments
+
+`map2()` and `pmap()` functions are for multiple related inputs that you need iterate along in parallel.
+
+**Invoking different functions**
+
+*Read the help in purrr on these functons. If you need to do this read Advanced R. `invoke_map` is retired.*
+
+## 21.8 Walk
+
+`walk()` is an alternative to `map()` that you use when you want to call a function for its side effects, rather than for its return value.
+
+`walk2` and `pwalk` - more useful than `walk`.
+
+## 21.9 Other patterns of for loops
+
+**Predicate functions -** return `TRUE` or `FALSE`
+
+-   `keep` and `discard` - keep elements are `TRUE` and discard are `FALSE`.
+
+-   `some` and `every` - determine if `TRUE` for any (some) or all (every)
+
+-   `detect` and `detect_index` - detect finds first element where `TRUE`, and detect_index returns the position
+
+-   `head_while()` and `tail_while()` - while `TRUE` take elements from start (head_while) or end (tail_while)
+
+**Reduce and accumulate**
+
+-   `reduce()` takes a "binary" function, applies it repeatedly to a list until there is only a single element left.
+
+-   `accumulate()` keeps all the interim results.
+
+## Meeting Videos
+
+### Cohort 5
+
+`r knitr::include_url("https://www.youtube.com/embed/URL")`
+
+<details>
+
+<summary>
+
+Meeting chat log
+
+</summary>
+
+    LOG
+
+</details>
+
+### Cohort 6
+
+`r knitr::include_url("https://www.youtube.com/embed/URL")`
+
+<details>
+
+<summary>
+
+Meeting chat log
+
+</summary>
+
+    LOG
+
+</details>
