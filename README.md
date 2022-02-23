@@ -13,13 +13,16 @@ If you would like to present, please add your name next to a chapter using the [
 
 *Cohort 5: (started 2021-07-24) - Saturdays, 1:00PM EST/EDT*
 
+<details>
+  <summary> Past Meetings </summary>
+
 - 2021-07-24: Chapter 1: Introduction: Jon Harmon
 - 2021-07-31: Chapter 2-3: Data Visualization: Federica Gazzelloni
 - 2021-08-07: Chapter 4: Workflow: basics: Ryan Metcalf
-- 2021-08-14: Chapter 5: Data transformation:  Wai-Yin
-- 2021-08-21: Chapter 6: Workflow: scripts:  Ryan Metcalf
-- 2021-08-28: Chapter 7: Exploratory Data Analysis:  Jon Harmon
-- 2021-09-04: Chapter 8: Workflow: projects:  Susie Neilson
+- 2021-08-14: Chapter 5: Data transformation: Wai-Yin
+- 2021-08-21: Chapter 6: Workflow: scripts: Ryan Metcalf
+- 2021-08-28: Chapter 7: Exploratory Data Analysis: Jon Harmon
+- 2021-09-04: Chapter 8: Workflow: projects: Susie Neilson
 - 2021-09-11: Chapter 9-10: Tibbles: Njoki Njuki Lucy
 - 2021-09-18: Chapter 11: Data import (part 1): Njoki Njuki Lucy
 - 2021-09-25: Chapter 11: Data import (part 2): Njoki Njuki Lucy
@@ -30,8 +33,11 @@ If you would like to present, please add your name next to a chapter using the [
 - 2021-11-13: Chapter 14: Strings (part 1): Ryan Metcalf
 - 2021-11-20: Chapter 14: Strings (part 2): Ryan Metcalf
 - 2021-12-04: Chapter 15: Factors: Sandra Muroy
-- 2021-12-11: Chapter 16: Dates and times: Becky Gibson
-- 2022-01-08: Chapter 17-18: Pipes: Presenter TBD
+- 2021-12-11: Chapter 16: Dates and times: Becki Roth
+
+</details>
+
+- 2022-01-08: Chapter 17-18: Pipes: Ryan Metcalf
 - 2022-01-15: Chapter 19: Functions: Presenter TBD
 - 2022-01-22: Chapter 20: Vectors: Presenter TBD
 - 2022-01-29: Chapter 21: Iteration: Presenter TBD

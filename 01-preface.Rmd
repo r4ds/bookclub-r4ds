@@ -67,7 +67,7 @@ We'll need:
 
 ## Meeting Videos
 
-### Cohort 1
+### Cohort 5
 
 `r knitr::include_url("https://www.youtube.com/embed/BtRTkChZo8c")`
 
@@ -82,5 +82,47 @@ We'll need:
 00:49:59	Ryan Metcalf:	Great question Susie! I consider “Big Data” anything I can’t open in a conventional service. Using scripting languages helps with managing overhead (Cost [not monetary], time of process, processing capability, etc…).
 01:00:14	Njoki Njuki Lucy:	data.table has the similar syntax as the base R package.
 01:17:46	Jon Harmon (jonthegeek):	r4ds.io/r4ds
+```
+</details>
+
+### Cohort 6
+
+`r knitr::include_url("https://www.youtube.com/embed/R1OUW3Ldu4Q")`
+
+<details>
+  <summary> Meeting chat log </summary>
+  
+```
+00:09:03	Matthew Efoli:	Good day everyone
+00:09:16	Trisha Adamus(she/her):	Hi
+00:09:39	Shannon:	Good morning, everyone :)
+00:09:45	Adeyemi Olusola:	hello.
+00:09:56	Marielena Soilemezidi:	Hi all! :)
+00:10:18	Adeyemi Olusola:	who is facilitating this cohort?
+00:10:38	Nico Schmidt:	I think it is Daniel, at least according to Slack
+00:10:59	Shannon:	I was just going to ask. Assuming we're waiting for the host?
+00:11:41	Trisha Adamus(she/her):	Has anyone participate in a cohort before? I am not sure what to expect.
+00:12:20	Daniel Adereti:	Hello all, reaching out to Jon. First classes are usually introductions
+00:12:35	Adeyemi Olusola:	i joined cohort 5 last week just to have a feel and it was pretty interesting
+00:12:37	Matthew Efoli:	@Trisha For me, No. This is my first.
+00:12:45	Shannon:	I haven't. Was wondering if today is just an intro, or if we're jumping into Ch.1
+00:12:45	Nico Schmidt:	Then maybe let’s start, Daniel?
+00:13:23	Nico Schmidt:	If we are jumping into Chapter 1, I have already missed my homework one time
+00:14:40	Shannon:	haha, me too...
+00:16:41	Nico Schmidt:	Do we do this with Cameras on or off?
+00:18:14	Aalekhya Reddam:	Hello everyone, unfortunately my microphone / camera aren't working right now, hope to have it figured out by next week! I'm a postdoctoral researcher in the US. My research is in environmental epidemiology and data science is a huge part of my work
+00:20:39	Jon Harmon (jonthegeek):	Shared notes/slides: r4ds.io/r4ds
+00:26:47	Aalekhya Reddam:	Do we usually volunteer the week ahead for the next week?
+00:28:53	Aalekhya Reddam:	Thank you!
+00:37:01	Matthew Efoli:	bye Jon
+00:37:19	Adeyemi Olusola:	let me go
+00:39:04	Nico Schmidt:	Cool!
+00:39:08	Nico Schmidt:	Thanks Daniel
+00:39:16	Marielena Soilemezidi:	sounds good!
+00:39:47	Aalekhya Reddam:	That sounds great!
+00:39:50	Shannon:	Sounds good! Thank you Daniel and Adeyemi, for volunteering for next week!
+00:40:12	Trisha Adamus(she/her):	Thank you!
+00:40:14	Matthew Efoli:	Thank you
+00:40:28	Marielena Soilemezidi:	have a great day you all! :)
 ```
 </details>

@@ -53,7 +53,7 @@ string2 <- "This is a string with double quotes"
 
 During scripting, if you do not close a string but try to start a new line you will see the `+` line entry. But how do you quit so you can add the closing quote? Just hit the escape key.
 
-```{code, Rookie Mistake, include = TRUE, evaluate = FALSE}
+```{r Rookie Mistake, include = TRUE, eval = FALSE}
 "This is a string, but I forgot to close the quote
 
 
@@ -62,7 +62,7 @@ Help, I'm stuck! (Hit the escape key)
 
 One of the more tricky things to remember when using regular expressions is the `\` backslash when you literally want to use a special character in a search.
 
-```{r, The magical escape backslash, include = TRUE}
+```{r The magical escape backslash, include = TRUE}
 doublequote <- "\"" # or '"'
 singlequote <- '\'' # or "'"
 print(doublequote)
@@ -998,3 +998,98 @@ If you find yourself struggling to do something in `stringr`, it’s worth takin
   2. Find duplicated strings.
   3.Generate random text.
 2. How do you control the language that `stri_sort()` uses for sorting?
+
+## Meeting Videos
+
+### Cohort 5
+
+`r knitr::include_url("https://www.youtube.com/embed/RpZoQR2xwME")`
+
+<details>
+  <summary> Meeting chat log </summary>
+  
+```
+00:10:10	Njoki Njuki Lucy:	Hi everyone!
+00:10:24	Federica Gazzelloni:	Hello!
+00:10:31	Sandra Muroy:	hi!
+00:11:09	Federica Gazzelloni:	Hi Sandra!
+00:11:27	Sandra Muroy:	Hi Federica :D
+00:11:43	Sandra Muroy:	Hi Lucy!
+00:19:20	Jon Harmon (jonthegeek):	https://xkcd.com/208/
+00:20:10	Jon Harmon (jonthegeek):	https://smltar.com/ is the new book by Julia Silge and Emil Hvitfeldt.
+00:20:42	Jon Harmon (jonthegeek):	https://www.tidytextmining.com/ is the older Tidytext book by Julia Silge and David Robinson.
+00:28:15	Njoki Njuki Lucy:	do you also load the packages or that's sufficient for a readable code?
+00:28:59	Jon Harmon (jonthegeek):	Within an Rmd I tend to put a library() call per package at the top so it's easy to find, but in my exploration work I rarely library anything other than magrittr.
+00:30:11	Njoki Njuki Lucy:	okay, thank you
+00:39:53	Jon Harmon (jonthegeek):	> x <- r"(this treats all characters as ecaped. For example: \ " ')"
+> writeLines(x)
+this treats all characters as ecaped. For example: \ " '
+00:45:30	Jon Harmon (jonthegeek):	\"
+00:45:31	Federica Gazzelloni:	textutils: https://github.com/enricoschumann/textutils
+00:45:42	Jon Harmon (jonthegeek):	"\""
+00:46:00	Jon Harmon (jonthegeek):	"""
+00:46:19	Jon Harmon (jonthegeek):	"\\"
+00:49:07	Jon Harmon (jonthegeek):	> "\"
++
+00:50:06	Jon Harmon (jonthegeek):	> cat("this\ttab")
+this	tab
+00:50:21	Jon Harmon (jonthegeek):	> cat("this\nnewline")
+this
+newline
+00:50:40	Jon Harmon (jonthegeek):	> cat("this\something"
+Error: '\s' is an unrecognized escape in character string starting ""this\s"
+00:51:20	Njoki Njuki Lucy:	did I get it right that the character after \ is escaped not printed?
+00:51:30	Jon Harmon (jonthegeek):	correct
+00:51:41	Jon Harmon (jonthegeek):	https://regexr.com/
+00:59:49	Jon Harmon (jonthegeek):	> str_c(rep("prefix", 3), c("a", "b", "c"), rep("suffix", 3), sep = "-")
+[1] "prefix-a-suffix" "prefix-b-suffix" "prefix-c-suffix"
+01:00:25	Jon Harmon (jonthegeek):	> str_c("prefix", c("a", "b", "c"), "suffix", sep = "-")
+[1] "prefix-a-suffix" "prefix-b-suffix" "prefix-c-suffix"
+01:01:26	Jon Harmon (jonthegeek):	> str_c(c("prefix", "other", "another"), c("a", "b", "c"), "suffix", sep = "-")
+[1] "prefix-a-suffix"  "other-b-suffix"   "another-c-suffix"
+01:02:02	Jon Harmon (jonthegeek):	> str_c(c("prefix", "other"), c("a", "b", "c"), "suffix", sep = "-")
+[1] "prefix-a-suffix" "other-b-suffix"  "prefix-c-suffix"
+Warning message:
+In stri_c(..., sep = sep, collapse = collapse, ignore_null = TRUE) :
+  longer object length is not a multiple of shorter object length
+01:04:54	Jon Harmon (jonthegeek):	> str_c("prefix", c("a", "b", "c"), "suffix", sep = "-", collapse = "|")
+[1] "prefix-a-suffix|prefix-b-suffix|prefix-c-suffix"
+01:09:51	Njoki Njuki Lucy:	thank you so much Ryan and Jon, strings are starting to make sense now!
+01:09:53	Sandra Muroy:	thanks so much Ryna!
+01:09:56	Sandra Muroy:	Ryan!
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/A-_URHkvxNA")`
+
+<details>
+  <summary> Meeting chat log </summary>
+  
+```
+00:07:40	Jon Harmon (jonthegeek):	statlearning.com
+00:23:39	Jon Harmon (jonthegeek):	^ = start of text
+$ = end of text
+00:31:17	Jon Harmon (jonthegeek):	Notes are finally updated on our site if you want to follow along or review: https://r4ds.github.io/bookclub-r4ds/strings.html
+00:31:37	Sandra Muroy:	thanks Jon!
+00:37:56	Jon Harmon (jonthegeek):	https://en.wikipedia.org/wiki/Harvard_sentences
+00:42:35	Jon Harmon (jonthegeek):	sum(stringr::str_detect(sentences, str_c(words, collapse = "|"), negate = TRUE))
+00:45:50	Jon Harmon (jonthegeek):	1 %in% 1:10
+00:46:02	Jon Harmon (jonthegeek):	"a" %in% "ab"
+00:46:08	Jon Harmon (jonthegeek):	"a"
+00:46:10	Jon Harmon (jonthegeek):	"ab"
+00:46:18	Jon Harmon (jonthegeek):	"a" %in% c("a", "b")
+01:02:39	Jon Harmon (jonthegeek):	regexr.com
+```
+</details>
+
+### Cohort 6
+
+`r knitr::include_url("https://www.youtube.com/embed/URL")`
+
+<details>
+  <summary> Meeting chat log </summary>
+  
+```
+LOG
+```
+</details>
