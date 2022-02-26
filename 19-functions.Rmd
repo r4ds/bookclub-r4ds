@@ -135,8 +135,6 @@ Two things to consider when returning a value:
 ## Environment
 
 **Lexical scoping** - R will look outside the function, in the environment, for definitions of variables, if it is not defined within.
-=======
-Slide contents.
 
 ## Meeting Videos
 
