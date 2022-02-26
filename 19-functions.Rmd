@@ -18,7 +18,7 @@
   - Use **`invisible`** to **invisibly return values** from R functions.
 - Recognize how R utilizes **environments** and **lexical scoping** to find the value associated with a name.
 
-# 19.1 Introduction
+## 19.1 Introduction
 
 Functions are handy because:
 
@@ -32,7 +32,7 @@ Functions are handy because:
 
 The common theme for functions is to be consistent.
 
-# 19.2 **When and how to write a function**
+## 19.2 **When and how to write a function**
 
 Have you copy and pasted code more than 2x? Consider a function!
 
@@ -46,7 +46,7 @@ Key steps in creating a function:
 
 4.  Check your function with a few inputs to make sure it's working.
 
-# 19.3 Functions are for computers *and* humans
+## 19.3 Functions are for computers *and* humans
 
 Be consistent in you naming and coding of functions
 
@@ -66,7 +66,7 @@ Use comments to explain the 'why' of the code
 
 Use lines of - or = to break up code into sections
 
-# 19.4 Conditional execution
+## 19.4 Conditional execution
 
 `if` statements conditionally execute code. The condition must evaluate to `TRUE` or `FALSE`.
 
@@ -88,7 +88,7 @@ New line, indent 2 spaces.
 
 Ending brace on its own line, unless followed by else.
 
-# 19.5 Function arguments
+## 19.5 Function arguments
 
 One set supplies the **data** to compute on
 
@@ -116,7 +116,7 @@ Use `.` as an argument that takes an arbitrary number of values
 
 Lazy evaluation - arguments in R are not computed until they're needed.
 
-# 19.6 Return values
+## 19.6 Return values
 
 Two things to consider when returning a value:
 
@@ -132,7 +132,7 @@ Two things to consider when returning a value:
 >
 > -   With **side-effects**, the passed object is not transformed. Instead, the function performs an action on the object, like drawing a plot or saving a file.
 
-# 19.7 Environment
+## 19.7 Environment
 
 **Lexical scoping** - R will look outside the function, in the environment, for definitions of variables, if it is not defined within.
 =======
