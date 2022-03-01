@@ -2,7 +2,9 @@
 
 **Learning objectives:**
 
-- Jon will try to prefill these ahead of each week.
+- Build a **linear model** to explain trends in data.
+- Examine the **residuals** of a model to identify remaining trends in data.
+- Perform **feature engineering** to explain trends in data.
 
 ## Slide 1
 
