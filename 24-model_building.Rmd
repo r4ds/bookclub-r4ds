@@ -2,18 +2,191 @@
 
 **Learning objectives:**
 
-- Build a **linear model** to explain trends in data.
-- Examine the **residuals** of a model to identify remaining trends in data.
-- Perform **feature engineering** to explain trends in data.
+-   Build a **linear model** to explain trends in data.
+-   Examine the **residuals** of a model to identify remaining trends in data.
+-   Perform **feature engineering** to explain trends in data.
+-   Recognize some resources to **learn more about modeling.**
 
-## Slide 1
+## EDA vs Prediction
 
-Slide contents. 
-Keep it short and slide-like!
+**Reminder:** This book focuses on exploratory data analysis, not prediction.
 
-## Slide 2
+![](images/data-science-explore.png)
 
-Slide contents.
+## Build a Linear Model
+
+```{r 24-setup, include = FALSE}
+# By this point these are probably already libraried, but I want to be sure.
+library(tidyverse)
+library(modelr)
+library(nycflights13)
+library(lubridate)
+```
+
+```{r 24-lm}
+diamonds2 <- diamonds %>% 
+  filter(carat <= 2.5) %>% 
+  mutate(log_price = log2(price), log_carat = log2(carat))
+
+mod_diamond <- lm(log_price ~ log_carat, data = diamonds2)
+
+grid <- diamonds2 %>% 
+  data_grid(carat = seq_range(carat, 20)) %>% 
+  mutate(log_carat = log2(carat)) %>% 
+  add_predictions(mod_diamond, "log_price") %>% 
+  mutate(price = 2 ^ log_price)
+
+ggplot(diamonds2) +
+  aes(carat, price) +
+  geom_hex(bins = 50) +
+  geom_line(data = grid, color = "red", size = 1)
+```
+
+## Examine Residuals
+
+```{r 24-residuals}
+diamonds2 <- diamonds2 %>% 
+  add_residuals(mod_diamond, "log_resid")
+
+ggplot(diamonds2) +
+  aes(log_carat, log_resid) +
+  geom_hex(bins = 50)
+```
+
+```{r 24-residuals-plots}
+base_plot <- ggplot(diamonds2) +
+  aes(y = log_resid) + 
+  geom_boxplot()
+
+base_plot +
+  aes(cut)
+
+base_plot +
+  aes(color)
+
+base_plot +
+  aes(clarity)
+```
+
+## Another Diamonds Model
+
+```{r 24-lm2}
+mod_diamond2 <- lm(
+  log_price ~ log_carat + color + cut + clarity, 
+  data = diamonds2
+)
+
+plot_mod2 <- function(parameter) {
+  grid <- diamonds2 %>% 
+    data_grid({{parameter}}, .model = mod_diamond2) %>% 
+    add_predictions(mod_diamond2)
+  
+  ggplot(grid) + 
+    aes(x = {{parameter}}, y = pred) +
+    geom_point()
+}
+
+plot_mod2(cut)
+plot_mod2(color)
+plot_mod2(clarity)
+```
+
+```{r 24-diamond-leftovers}
+diamonds2 <- diamonds2 %>% 
+  add_residuals(mod_diamond2, "log_resid2")
+
+ggplot(diamonds2) +
+  aes(log_carat, log_resid2) + 
+  geom_hex(bins = 50)
+```
+
+## Feature Engineering
+
+```{r 24-flights}
+daily <- flights %>% 
+  mutate(date = make_date(year, month, day)) %>% 
+  group_by(date) %>% 
+  summarise(n = n())
+
+ggplot(daily) +
+  aes(date, n) + 
+  geom_line()
+```
+
+Feature engineering = using data to create new features to use in models
+
+```{r 24-wday}
+daily <- daily %>% 
+  mutate(wday = wday(date, label = TRUE, week_start = 1))
+ggplot(daily) +
+  aes(wday, n) + 
+  geom_boxplot()
+```
+
+```{r 24-wday-mod}
+mod <- lm(n ~ wday, data = daily)
+
+grid <- daily %>% 
+  data_grid(wday) %>% 
+  add_predictions(mod, "n")
+
+ggplot(daily) +
+  aes(wday, n) + 
+  geom_boxplot() +
+  geom_point(data = grid, colour = "red", size = 4)
+```
+
+```{r 24-wday-residuals}
+daily <- daily %>% 
+  add_residuals(mod)
+
+base_plot <- ggplot(daily) + 
+  aes(date, resid) +
+  geom_ref_line(h = 0) + 
+  geom_line()
+
+base_plot
+
+base_plot +
+  aes(color = wday)
+
+base_plot + 
+  geom_smooth(se = FALSE, span = 0.20)
+```
+
+```{r 24-wday-low}
+daily %>% 
+  filter(resid < -100) %>% 
+  pull(date, wday)
+```
+
+```{r 24-seasonal}
+term <- function(date) {
+  cut(date, 
+    breaks = ymd(20130101, 20130605, 20130825, 20140101),
+    labels = c("spring", "summer", "fall") 
+  )
+}
+
+daily <- daily %>% 
+  mutate(term = term(date)) 
+
+mod2 <- MASS::rlm(n ~ wday * term, data = daily)
+
+daily %>% 
+  add_residuals(mod2, "resid") %>% 
+  ggplot() + 
+  aes(date, resid) +
+  geom_hline(yintercept = 0, size = 2, colour = "white") + 
+  geom_line()
+```
+
+## Learning More
+
+- An Introduction to Statistical Learning (with Applications in R) ([statlearning.com](https://www.statlearning.com/) / #book_club-islr): Statistical explanations of various machine learning methods, with explanations of how to apply them in R. A good introduction to all of the types of models and why they work (or don't work) the way they do.
+- Tidy Modeling with R ([tmwr.org](https://www.tmwr.org/) / #book_club-tmwr): An opinionated introduction to using the tidymodels family of packages to build predictive models. Very hands-on and useful, but I think I might want to read it again after ISLR.
+- Feature Engineering and Selection: A Practical Approach for Predictive Models ([feat.engineering](http://www.feat.engineering/) / #book_club-feat_eng): Techniques for manipulating data to get better results out of models.
+- Applied Predictive Modeling ([github.com/topepo/tidy-apm](https://github.com/topepo/tidy-apm) / #project-tidy_apm): There isn't a free online version of this book yet, but it's at least theoretically in the works. This was published about 10 years ago by the leader of the tidymodels team, and he has started to update it to tidymodels code. I'd recommend *not* reading this one until/unless he takes that project back up (very possibly with the help of the R4DS community).
 
 ## Meeting Videos
 
@@ -22,11 +195,15 @@ Slide contents.
 `r knitr::include_url("https://www.youtube.com/embed/URL")`
 
 <details>
-  <summary> Meeting chat log </summary>
-  
-```
-LOG
-```
+
+<summary>
+
+Meeting chat log
+
+</summary>
+
+    LOG
+
 </details>
 
 ### Cohort 6
@@ -34,9 +211,13 @@ LOG
 `r knitr::include_url("https://www.youtube.com/embed/URL")`
 
 <details>
-  <summary> Meeting chat log </summary>
-  
-```
-LOG
-```
+
+<summary>
+
+Meeting chat log
+
+</summary>
+
+    LOG
+
 </details>
