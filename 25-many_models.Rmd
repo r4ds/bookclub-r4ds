@@ -2,7 +2,9 @@
 
 **Learning objectives:**
 
-- Jon will try to prefill these ahead of each week.
+- Create nested data frames to organize data by groups.
+- Create list-columns to generate new data in an organized structure.
+- Simplify list-columns to manipulate the data they contain.
 
 ## Slide 1
 
