@@ -2,13 +2,277 @@
 
 **Learning objectives:**
 
-- Jon will try to prefill these ahead of each week.
+- Define your model family
+- How to make a model with R
 
-## Slide 1
+## A bit of Mathematics:
 
-Slide contents. 
-Keep it short and slide-like!
+Our model is a function of the observed data. This is what we aim to achieve:
 
-## Slide 2
+$$Y=f(x)$$
 
-Slide contents.
+The function is made of some coefficients and predictors:
+
+$$f(x)=\beta_{0}+\beta_{1}x$$
+
+When we make a model, we attempt to replicate $Y=f(x)$ by applying mathematical models to our observed data. 
+The final objective could be the prediction of an outcome. 
+
+$\hat{Y}$ is the result of our model, and this values contain some noise, or residual values which make the model to be slightly different from real values.
+
+$$\hat{Y}=\hat{\beta_{0}}+\hat{\beta_{1}}x+\epsilon$$
+The residuals are identified by the difference between $Y$ and $\hat{Y}$:
+
+$$Y-\hat{Y}=\epsilon$$
+
+What we want is to reduce as much as possible this amount of residuals by selecting different type of models and assessing them on different parameter levels.
+For this purpose we use some metrics to identify the residual level, such as:
+
+- the r squared (rsq) $R^2$ 
+- $\mathrm{adjustedR^2}$
+- the residual sum of squares $RSS$ 
+- and others
+
+To make the formula in Rmarkdown have a look at this resource: [markdown-extensions](https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html)
+
+
+----------
+
+Here is the visualization of simulated data from {modelr} package, we have a look at different slope levels.
+```{r 23-plot1, message=FALSE, warning=FALSE, paged.print=FALSE}
+library(tidyverse)
+library(manipulate)
+library(modelr)
+data(sim1)  
+mod1 <- lm(y~x,sim1)
+
+ggplot(sim1,aes(x,y))+
+             geom_point()+
+             geom_smooth(method="lm")+
+             theme_bw()
+```
+
+We can use the function `manipulate()` from {manipulate} package, to assess the level of the slope to identify the model line:
+
+    manipulate(ggplot(sim1,aes(x,y))+
+             geom_point()+
+             geom_smooth(method="lm")+
+             geom_abline(intercept=mod1$coefficients[1],
+                         slope=r)+
+             theme_bw(),
+             r=slider(min=1,max=3,step=0.1))
+
+-------------
+
+## Linear models and non linear models
+
+
+**Linear models** assume a relationship of the form:
+
+      y = a_1 * x1 + a_2 * x2 + ... + a_n * xn
+
+and assume that the residuals, the distances between the observed and predicted values, are generally normal distributed or have a normal distribution.
+
+
+Types of Linear models:
+
+- Linear models - `stats::lm()`
+- Generalised linear models - `stats::glm()`
+- Generalised additive models - `mgcv::gam()`
+- Penalised linear models - `glmnet::glmnet()`
+- Robust linear models - `MASS::rlm()` 
+- Trees - `rpart::rpart()`
+
+
+**Non linear models** are models with a non-linear trend. 
+
+There are some models that require predictors that have been centered and scaled:
+
+- neural networks
+- K-nearest neighbors
+- support vector machines SVG
+
+while others require a traditional response surface design model expansion (quadratic and two-way interactions).
+
+
+### Transformations
+
+We can switch between linear and non-linear models with some transformations:
+
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+# weighted regression
+data(sim3)
+sim3_2<-sim3%>%mutate(x3=case_when(x2=="a"~1,
+                                   x2=="b"~2,
+                                   x2=="c"~3,
+                                   x2=="d"~4))
+
+mod3w <- lm(y~x1, sim3_2, weights = x3)
+p1<- ggplot(sim3_2, aes(x1, y)) + 
+  geom_point()+
+  geom_smooth()+
+  labs(title="Linear model")
+
+# polynomial transformation
+mod3t <- lm(y~poly(x1,3),sim3_2,weights = x3)
+p2 <- ggplot(sim3_2, aes(x1, y)) + 
+  geom_point()+
+  geom_smooth(method="lm", se=TRUE, fill=NA,
+                formula=y ~ poly(x, 3, raw=TRUE),colour="red" )+
+  labs(title="Polynomial transf.")
+
+# splines
+library(splines)
+mod3s <- lm(y ~ bs(x1,3),sim3_2,weights = x3)
+
+p3 <- ggplot(sim3_2, aes(x1, y)) + 
+  geom_point()+
+  geom_smooth(method="lm", se=TRUE, fill=NA,
+                formula=y~splines::bs(x, 3),colour="red" )+
+  labs(title="Spline transf.")
+
+library(patchwork)
+p1+p2+p3
+```
+
+When you fit a model, you apply the estimates coefficients of your observed data to the model f
+
+$$y = a_1 + a_2x$$
+    
+$$y = 7 + 3x$$
+    
+So, the conversion of the linear model formula $y\sim{x}$ is $y = a_1 + a_2x$    
+
+Behind the scenes, what happens is:
+```{r eval=FALSE, include=T}
+model1 <- function(a, data) {
+  a[1] + data$x * a[2] + a[3]
+}
+```
+
+
+And we can see it with the function `model_matrix()`:
+
+```{r}
+model_matrix(sim3, y ~ x1)
+```
+
+## Prediction
+
+To make the prediction of our model,
+
+```{r}
+sim1_mod <- lm(y ~ x, data = sim1)
+coef(sim1_mod)
+```
+
+we construct a `data_grid()` for simulating new data to be predicted:
+
+```{r}
+grid <- sim1 %>% 
+  data_grid(x) 
+```
+
+and add the prediction with `add_predictions()` function:
+```{r}
+data_pred <- grid %>% 
+  add_predictions(sim1_mod)
+
+head(data_pred)
+```
+    
+```{r}
+ggplot(sim1, aes(x,y)) +
+  geom_point() +
+  geom_line(aes(y = pred), data = data_pred, colour = "red", size = 2)+
+  geom_smooth(method="lm",se=F)
+```
+    
+as well as before we can add residuals to our data to visualize their trend with `add_residuals()` function:
+```{r}
+data_res <- sim1 %>% 
+  add_residuals(sim1_mod)
+
+head(data_res)
+```
+
+```{r}
+ggplot(data_res, aes(x, resid)) + 
+  geom_ref_line(h = 0) +
+  geom_point() 
+```
+
+
+### Interaction
+
+When we need more investigations:
+
+```{r}
+mod1 <- lm(y ~ x1 + x2, data = sim3)
+mod2 <- lm(y ~ x1 * x2, data = sim3)
+```
+
+
+In this case, as we have two models to compare we `gather_predictions`:
+```{r}
+grid2 <- sim3 %>% 
+  data_grid(x1, x2) %>% 
+  gather_predictions(mod1, mod2)
+
+
+grid2%>%count(model)
+
+head(grid2)
+```
+
+
+```{r}
+ggplot(sim3, aes(x1, y, colour = x2)) + 
+  geom_point() + 
+  geom_line(data = grid2, aes(y = pred)) + 
+  facet_wrap(~ model)
+```
+
+as well as `gather_residuals()`:
+```{r}
+sim3 %>% 
+  gather_residuals(mod1, mod2)%>%
+  ggplot(aes(x1, resid, colour = x2)) + 
+  geom_point() + 
+  facet_grid(model ~ x2)
+```
+
+To conclude we look at the output of different transformations:
+```{r}
+sim5 <- tibble(
+  x = seq(0, 3.5 * pi, length = 50),
+  y = 4 * sin(x) + rnorm(length(x))
+)
+
+ggplot(sim5, aes(x, y)) +
+  geom_point()
+```
+
+```{r}
+mod1 <- lm(y ~ ns(x, 1), data = sim5)
+mod2 <- lm(y ~ ns(x, 2), data = sim5)
+mod3 <- lm(y ~ ns(x, 3), data = sim5)
+mod4 <- lm(y ~ ns(x, 4), data = sim5)
+mod5 <- lm(y ~ ns(x, 5), data = sim5)
+
+grid <- sim5 %>% 
+  data_grid(x = seq_range(x, n = 50, expand = 0.1)) %>% 
+  gather_predictions(mod1, mod2, mod3, mod4, mod5, .pred = "y")
+
+ggplot(sim5, aes(x, y)) + 
+  geom_point() +
+  geom_line(data = grid, colour = "red") +
+  facet_wrap(~ model)
+```
+
+
+## Resources:
+
+- [tidymodels](https://www.tidymodels.org/start/models/)
+- [markdown-extensions-by-bookdown](https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html)
+- [geom_smooth](https://ggplot2.tidyverse.org/reference/geom_smooth.html)
