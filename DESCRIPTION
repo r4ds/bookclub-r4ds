@@ -13,6 +13,7 @@ Imports:
     emo,
     htmlwidgets,
     lubridate,
+    manipulate,
     microbenchmark,
     nycflights13,
     tufte,
