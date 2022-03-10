@@ -45,12 +45,19 @@ Slide contents.
 
 ### Cohort 6
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/Xaax7EX-WIQ")`
 
 <details>
   <summary> Meeting chat log </summary>
   
 ```
-LOG
+00:12:43	Daniel Adereti:	https://simplystatistics.org/posts/2015-07-24-stringsasfactors-an-unauthorized-biography/
+00:13:46	Adeyemi Olusola:	Its freezing but I don’t know if it’s from my end
+00:15:05	Shannon:	Yes, Adeyemi, it's freezing a bit...cleared up for now
+00:19:52	Adeyemi Olusola:	I guess as.factor( ) does the same without aorting
+01:01:46	Marielena Soilemezidi:	thank you Daniel!
+01:01:52	Adeyemi Olusola:	Thank you Daniel
+01:02:34	Marielena Soilemezidi:	bye all!
+01:02:40	Daniel Adereti:	Bye!
 ```
 </details>
