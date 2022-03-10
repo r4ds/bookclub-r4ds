@@ -1084,12 +1084,56 @@ $ = end of text
 
 ### Cohort 6
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/l07Vo1wMW5s")`
 
 <details>
   <summary> Meeting chat log </summary>
   
 ```
-LOG
+00:09:53	Daniel Adereti:	We will kick off in 1 min
+00:14:55	Shannon:	https://r4ds.github.io/bookclub-r4ds/string-basics.html
+00:18:48	Shannon:	https://stringr.tidyverse.org/
+00:19:06	Shannon:	https://github.com/rstudio/cheatsheets/blob/main/strings.pdf
+00:21:02	Daniel Adereti:	For new members, we have this sheet where we volunteer to take classes each week, you are welcome to fill in your names. Thanks! https://docs.google.com/spreadsheets/d/1zy2nXNkvcdqWuF8rQ5ApWRkVQG_UJt0azu3h_mEnY2E/edit?usp=drive_web&ouid=115626840160043101981
+00:26:49	Shannon:	https://en.wikipedia.org/wiki/List_of_Unicode_characters
+01:05:02	Daniel Adereti:	That's fine!
+01:05:13	Daniel Adereti:	We can pick up next week
+01:05:37	Adeyemi Olusola:	Thank you!
+01:05:45	Folashade Bayode:	Thank you 😊
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/k7poFr556To")`
+
+<details>
+  <summary> Meeting chat log </summary>
+  
+```
+00:15:15	Daniel Adereti:	We have this nice book that solves the exercises, if you are interested: https://jrnold.github.io/r4ds-exercise-solutions/strings.html
+00:15:35	Marielena Soilemezidi:	awesome, thanks Daniel! :)
+00:22:13	Marielena Soilemezidi:	the book has the same solution for this, so you did great actually! :)
+00:36:42	Shannon:	https://regexcrossword.com/challenges/beginner
+00:37:04	Marielena Soilemezidi:	ooh cool!
+00:37:10	Marielena Soilemezidi:	thanks Shannon!
+00:43:17	Marielena Soilemezidi:	0.0
+00:43:26	Marielena Soilemezidi:	who thought of this example?!
+00:52:47	Daniel Adereti:	Hey Marielena, if you want to volunteer for a class, you can fill in your name here: https://docs.google.com/spreadsheets/d/1zy2nXNkvcdqWuF8rQ5ApWRkVQG_UJt0azu3h_mEnY2E/edit#gid=0
+00:55:10	Marielena Soilemezidi:	Thanks, Daniel! I'll check the next available chapters :)
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/9UuMNJB3KFA")`
+
+<details>
+  <summary> Meeting chat log </summary>
+  
+```
+00:03:15	Adeyemi Olusola:	Good day!
+00:04:23	Adeyemi Olusola:	That sounds perfect
+00:48:27	Adeyemi Olusola:	I have to drop off now.
+Thanks Shannon for the wonderful presentation!
+00:49:28	Marielena Soilemezidi:	oh, cool! :)
+00:50:24	Marielena Soilemezidi:	haha yaay!
+00:51:47	Marielena Soilemezidi:	weird!
 ```
 </details>

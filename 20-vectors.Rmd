@@ -969,6 +969,62 @@ In .Machine$integer.max + 1L : NAs produced by integer overflow
 ```
 </details>
 
+`r knitr::include_url("https://www.youtube.com/embed/EfOPxmQ9R-c")`
+
+<details>
+  <summary> Meeting chat log </summary>
+  
+```
+00:03:09	Becki R. (she/her):	I have a buzz in my audio so I'm staying muted.
+00:30:48	Federica Gazzelloni:	http://adv-r.had.co.nz/Subsetting.html
+00:33:31	Jon Harmon (jonthegeek):	mtcars["mpg"]
+mtcars[["mpg"]]
+00:35:19	Jon Harmon (jonthegeek):	months <- purrr::set_names(month.name, month.abb)
+00:35:40	Jon Harmon (jonthegeek):	months["Jan"]
+00:35:46	Jon Harmon (jonthegeek):	Jan 
+"January"
+00:36:10	Jon Harmon (jonthegeek):	> months[["Jan"]]
+[1] "January"
+00:38:28	Federica Gazzelloni:	it acts like unlist()
+00:38:48	Jon Harmon (jonthegeek):	> unlist(mtcars["mpg"])
+ mpg1  mpg2  mpg3  mpg4  mpg5  mpg6  mpg7  mpg8  mpg9 mpg10 mpg11 mpg12 mpg13 mpg14 
+ 21.0  21.0  22.8  21.4  18.7  18.1  14.3  24.4  22.8  19.2  17.8  16.4  17.3  15.2 
+mpg15 mpg16 mpg17 mpg18 mpg19 mpg20 mpg21 mpg22 mpg23 mpg24 mpg25 mpg26 mpg27 mpg28 
+ 10.4  10.4  14.7  32.4  30.4  33.9  21.5  15.5  15.2  13.3  19.2  27.3  26.0  30.4 
+mpg29 mpg30 mpg31 mpg32 
+ 15.8  19.7  15.0  21.4
+00:39:13	Jon Harmon (jonthegeek):	> unname(unlist(mtcars["mpg"]))
+ [1] 21.0 21.0 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 17.8 16.4 17.3 15.2 10.4 10.4
+[17] 14.7 32.4 30.4 33.9 21.5 15.5 15.2 13.3 19.2 27.3 26.0 30.4 15.8 19.7 15.0 21.4
+00:39:29	Jon Harmon (jonthegeek):	single <- mtcars["mpg"]
+00:39:50	Jon Harmon (jonthegeek):	> attributes(single) <- NULL
+> single
+[[1]]
+ [1] 21.0 21.0 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 17.8 16.4 17.3 15.2 10.4 10.4
+[17] 14.7 32.4 30.4 33.9 21.5 15.5 15.2 13.3 19.2 27.3 26.0 30.4 15.8 19.7 15.0 21.4
+00:42:51	Jon Harmon (jonthegeek):	> str(months[[1]])
+ chr "January"
+> str(months[1])
+ Named chr "January"
+ - attr(*, "names")= chr "Jan"
+00:43:41	Jon Harmon (jonthegeek):	?`[`
+00:44:15	Jon Harmon (jonthegeek):	The most important distinction between [, [[ and $ is that the [ can select more than one element whereas the other two select a single element.
+00:47:28	Ryan Metcalf:	BRB
+00:56:31	Jon Harmon (jonthegeek):	The tangent I obsessed on just now:
+> pillar:::glimpse.default
+function (x, width = NULL, max.level = 3, ...) 
+{
+    str(x, width = get_width_glimpse(width), max.level = max.level, 
+        ...)
+    invisible(x)
+}
+
+(huh, "glimpse" technically comes from the {pillar} package)
+01:12:09	Jon Harmon (jonthegeek):	> round(c(1.5, 2.5, 3.5, 4.5))
+[1] 2 2 4 4
+01:14:08	Jon Harmon (jonthegeek):	Note that for rounding off a 5, the IEC 60559 standard (see also ‘IEEE 754’) is expected to be used, ‘go to the even digit’. Therefore round(0.5) is 0 and round(-1.5) is -2. However, this is dependent on OS services and on representation error (since e.g. 0.15 is not represented exactly, the rounding rule applies to the represented number and not to the printed number, and so round(0.15, 1) could be either 0.1 or 0.2).
+```
+</details>
 
 ### Cohort 6
 

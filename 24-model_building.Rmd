@@ -192,18 +192,17 @@ daily %>%
 
 ### Cohort 5
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/jZmSbkkJIzQ")`
 
 <details>
-
-<summary>
-
-Meeting chat log
-
-</summary>
-
-    LOG
-
+<summary>Meeting chat log</summary>
+```
+00:18:47	Njoki Njuki Lucy:	yes
+00:56:00	Ryan Metcalf:	@Sandra, here is a LARGE section to answer your question. I’m banking that Federica will provide a more specific code snippet….https://ggplot2-book.org/scales-guides.html#scales-guides
+00:56:09	Federica Gazzelloni:	https://ggplot2.tidyverse.org/reference/guide_colourbar.html
+00:57:03	Federica Gazzelloni:	ggplot()+geom_…()+guides()
+00:58:35	Federica Gazzelloni:	guides(color=guide_colourbar())
+```
 </details>
 
 ### Cohort 6
@@ -211,13 +210,8 @@ Meeting chat log
 `r knitr::include_url("https://www.youtube.com/embed/URL")`
 
 <details>
-
-<summary>
-
-Meeting chat log
-
-</summary>
-
-    LOG
-
+<summary>Meeting chat log</summary>
+```
+LOG
+```
 </details>

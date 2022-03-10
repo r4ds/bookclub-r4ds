@@ -149,12 +149,55 @@ Base R and the `purrr` package have functions for many common loops.
 
 ### Cohort 5
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/0rsV1jlxhws")`
 
 <details>
   <summary> Meeting chat log </summary>  
 ```
-LOG
+00:03:23	Becki R. (she/her):	I'm having trouble with a buzz again
+00:03:37	Njoki Njuki Lucy:	I so look forward to the discussion. I have been struggling with understanding this particular chapter! :)
+00:26:58	Jon Harmon (jonthegeek):	> x <- purrr::set_names(month.name, month.abb)
+> x
+00:27:21	Jon Harmon (jonthegeek):	x[["Jan"]]
+00:30:12	Jon Harmon (jonthegeek):	results <- purrr::set_names(vector("list", length(x)), names(x))
+00:35:10	lucus w:	A data frame is simply a list in disguise
+00:45:37	Njoki Njuki Lucy:	It makes sense now, thanks!
+00:48:05	Ryan Metcalf:	Sorry team, I have to drop. Sister-in-law is stranded and needs a jump-start. I’ll finish watching the recording and catch any questions.
+00:51:19	Jon Harmon (jonthegeek):	> paste(month.name, collapse = "")
+[1] "JanuaryFebruaryMarchAprilMayJuneJulyAugustSeptemberOctoberNovemberDecember"
+> paste(month.name, collapse = " ")
+[1] "January February March April May June July August September October November December"
+01:09:10	Njoki Njuki Lucy:	that's so cool! I wondered! Ha!!
+01:10:30	Federica Gazzelloni:	thanks Jon!!
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/CEKPAUWTA3c")`
+
+<details>
+  <summary> Meeting chat log </summary>  
+```
+00:10:17	Becki R. (she/her):	brb!
+00:26:00	Njoki Njuki Lucy:	does this mean, in this case, we will have 3 regression models?
+00:26:21	Federica Gazzelloni:	can you specify: mtcars%>%map(.f=
+00:27:12	Federica Gazzelloni:	mtcars%>%split(.$cyl)%>%map(.f=lm(….))
+00:27:41	Ryan Metcalf:	I’m reading it as `mpg` being dependent (y) and `wt` being independent.
+00:29:08	Jon Harmon (jonthegeek):	# A more realistic example: split a data frame into pieces, fit a
+# model to each piece, summarise and extract R^2
+mtcars %>%
+  split(.$cyl) %>%
+  map(~ lm(mpg ~ wt, data = .x)) %>%
+  map(summary) %>%
+  map_dbl("r.squared")
+00:29:55	Jon Harmon (jonthegeek):	mtcars %>%
+  split(.$cyl) %>%
+  map(.f = ~ lm(mpg ~ wt, data = .x))
+00:30:22	Jon Harmon (jonthegeek):	mtcars %>%
+  split(.$cyl) %>%
+  map(.f = lm(mpg ~ wt, data = .x))
+00:45:11	Federica Gazzelloni:	coalesce()
+01:17:01	Ryan Metcalf:	Great Job Becki!!!
+01:17:25	Becki R. (she/her):	Thanks :)
 ```
 </details>
 
