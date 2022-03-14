@@ -31,11 +31,10 @@ Where do I begin to express the awesomness of Hans Rosling (27 July 1948 -- 7 Fe
 
 [Hans Rosling's 200 Countries, 200 Years, 4 Minutes - The Joy of Stats - BBC Four](https://www.youtube.com/watch?v=jbkSRLYSojo%22)
 
-Furthermore, we can thank Jenny Bryan for authoring hte gapminder package!
+Furthermore, we can thank Jenny Bryan for authoring the gapminder package!
 
-```{r, Load Gapminder, eval=FALSE}
+```{r, Load Gapminder, eval=TRUE}
 library(gapminder)
-gapminder
 ```
 
 To gain some insight to the data, we ask the question: "How does life expectancy (lifeExp) change over time (year) for each country (country)?"
