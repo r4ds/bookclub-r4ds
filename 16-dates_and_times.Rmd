@@ -2,55 +2,61 @@
 
 **Learning objectives:**
 
-- **Create date** and **datetime** objects.
-  - Create dates and datetimes from **strings.**
-  - Create dates and datetimes from **individual components.**
-  - Create dates and datetimes from **each other.**
-- Work with **datetime components.**
-  - **Extract** components from datetimes.
-  - **Round** datetime components.
-  - **Set** individual datetime components.
-- Perform **arithmetic** on **timespans.**
-  - Use **durations** to measure exact seconds.
-  - Use **periods** to measure human units like weeks and months.
-  - Use **intervals** to represent timespans with exact start and end datetimes.
-- Recognize ways to deal with **timezones** in R.
+-   **Create date** and **datetime** objects.
+
+    -   Create dates and datetimes from **strings.**
+    -   Create dates and datetimes from **individual components.**
+    -   Create dates and datetimes from **each other.**
+
+-   Work with **datetime components.**
+
+    -   **Extract** components from datetimes.
+    -   **Round** datetime components.
+    -   **Set** individual datetime components.
+
+-   Perform **arithmetic** on **timespans.**
+
+    -   Use **durations** to measure exact seconds.
+    -   Use **periods** to measure human units like weeks and months.
+    -   Use **intervals** to represent timespans with exact start and end datetimes.
+
+-   Recognize ways to deal with **timezones** in R.
 
 ## Create date and date-time objects
 
 **From strings:**
 
-- Date: use 'y' 'm' 'd' in whatever order eg. ymd()
-- Date-time: add 'h' 'm' 's' after an underscore eg. ymd_hms()
+-   Date: use 'y' 'm' 'd' in whatever order eg. ymd()
+-   Date-time: add 'h' 'm' 's' after an underscore eg. ymd_hms()
 
 **From individual components:**
 
-- make_date()
-- make_datetime()
+-   make_date()
+-   make_datetime()
 
 **From an existing object:**
 
-- as_datetime()
-- as_date()
- 
+-   as_datetime()
+-   as_date()
+
 ## Work with date-time components
 
 **Extract components from datetimes**
 
-- year()
-- month()
-- yday()
-- mday()
-- wday()
-- hour()
-- minute()
-- second()
+-   year()
+-   month()
+-   yday()
+-   mday()
+-   wday()
+-   hour()
+-   minute()
+-   second()
 
 **Round datetime components**
 
-- floor_date() rounds down
-- ceiling_date() rounds up
-- round_date() rounds to
+-   floor_date() rounds down
+-   ceiling_date() rounds up
+-   round_date() rounds to
 
 **Set individual datetime components**
 
@@ -62,12 +68,12 @@ Use create functions (ymd_hms) or update()
 
 Durations measure seconds, be aware conversions happen at a standard rate
 
-- dseconds()
-- dminutes()
-- dhours()
-- ddays()
-- dwekks()
-- dyears()
+-   dseconds()
+-   dminutes()
+-   dhours()
+-   ddays()
+-   dwekks()
+-   dyears()
 
 These can be added, subtracted and divided in some cases, also multiplied by numbers.
 
@@ -75,13 +81,13 @@ These can be added, subtracted and divided in some cases, also multiplied by num
 
 These work like durations, but take into account things like DST
 
-- seconds()
-- minutes()
-- hours()
-- days()
-- weeks()
-- months()
-- years()
+-   seconds()
+-   minutes()
+-   hours()
+-   days()
+-   weeks()
+-   months()
+-   years()
 
 These can be added, subtracted and divided in some cases, also multiplied by numbers.
 
@@ -89,22 +95,62 @@ These can be added, subtracted and divided in some cases, also multiplied by num
 
 **Use intervals to represent timespans with exact start and end datetimes**
 
-Intervals are way to do arithmetic with durations and periods?
-syntax???
+Intervals are way to do arithmetic with durations and periods? syntax???
 
 ## Time zones
 
 **Names**
 
-- R uses IANA (Internet Assigned Numbers Authority) for time zone names.
-- Get a complete list with OlsonNames()
+-   R uses IANA (Internet Assigned Numbers Authority) for time zone names.
+-   Get a complete list with OlsonNames()
 
 **Change the displayed time zone**
 
-- The time zone attribute of a datetime is only displayed.
-- UTC is the default (and doesn't have DST, which makes computing easier)
-- with_tz()
+-   The time zone attribute of a datetime is only displayed.
+-   UTC is the default (and doesn't have DST, which makes computing easier)
+-   with_tz()
 
 **Change the underlying time zone**
 
-- force_tz()
+-   force_tz()
+
+## Meeting Videos
+
+### Cohort 5
+
+`r knitr::include_url("https://www.youtube.com/embed/J8QU4RBdi5c")`
+
+<details>
+  <summary> Meeting chat log </summary>
+  
+```
+00:17:21	Sandra Muroy:	Hi Lucus!
+00:17:52	lucus w:	Hi Sandra
+00:27:34	Ryan Metcalf:	The “Visual Markdown Editor” icon Becki mentioned is intended to provide a similar experience to Jupyter Notebooks.
+00:41:39	Federica Gazzelloni:	round_date:: https://lubridate.tidyverse.org/reference/round_date.html
+00:51:22	lucus w:	Dates and time are HARD
+00:51:40	Sandra Muroy:	agree!
+00:52:21	Ryan Metcalf:	For a list of timezone abbreviations in R, run `OlsonNames(tzdir = NULL)`
+00:53:16	Sandra Muroy:	thanks Ryan!
+00:58:51	Ryan Metcalf:	I learned a trick from Federica….for syntax questions, use “?`<the character in question>`” Note the back ticks to highlight the sequence of character.
+01:06:13	lucus w:	“?” -- aka “what the”
+01:07:42	Federica Gazzelloni:	?`%--%`
+01:08:42	Federica Gazzelloni:	start %--% end
+01:10:08	Becki R. (she/her):	Thanks, Federica! The easiest answer is the best.
+01:10:54	lucus w:	In healthcare there’s a tendency to deidentify date time objects as it’s considered patient identified information. Masking those date time randomly is a huge challenge
+01:11:19	Sandra Muroy:	interesting
+01:13:57	Sandra Muroy:	happy holidays everyone!
+```
+</details>
+
+### Cohort 6
+
+`r knitr::include_url("https://www.youtube.com/embed/URL")`
+
+<details>
+  <summary> Meeting chat log </summary>
+  
+```
+LOG
+```
+</details>

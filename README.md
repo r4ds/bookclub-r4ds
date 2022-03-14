@@ -34,21 +34,22 @@ If you would like to present, please add your name next to a chapter using the [
 - 2021-11-20: Chapter 14: Strings (part 2): Ryan Metcalf
 - 2021-12-04: Chapter 15: Factors: Sandra Muroy
 - 2021-12-11: Chapter 16: Dates and times: Becki Roth
+- 2022-01-08: Chapter 17-18: Pipes: Ryan Metcalf
+- 2022-01-15: Chapter 19: Functions: Becki Roth
+- 2022-01-22: Chapter 20: Vectors: Njoki Njuki Lucy
+- 2022-01-29: Chapter 20: Vectors: Njoki Njuki Lucy
+- 2022-02-05: Chapter 21: Iteration: Becki Roth
+- 2022-02-12: Chapter 21: Iteration: Becki Roth
+- 2022-02-19: Chapter 22: Modeling introduction: Federica Gazzelloni
+- 2022-02-26: Chapter 23: Model basics: Federica Gazzelloni
 
 </details>
 
-- 2022-01-08: Chapter 17-18: Pipes: Ryan Metcalf
-- 2022-01-15: Chapter 19: Functions: Presenter TBD
-- 2022-01-22: Chapter 20: Vectors: Presenter TBD
-- 2022-01-29: Chapter 21: Iteration: Presenter TBD
-- 2022-02-05: Chapter 22: Modeling introduction: Presenter TBD
-- 2022-02-12: Chapter 23: Model basics: Presenter TBD
-- 2022-02-19: Chapter 24: Model building: Presenter TBD
-- 2022-02-26: Chapter 25: Many models: Presenter TBD
-- 2022-03-05: Chapter 26-27: R Markdown: Presenter TBD
-- 2022-03-12: Chapter 28: Graphics for communication: Presenter TBD
-- 2022-03-19: Chapter 29: Markdown formats: Presenter TBD
-- 2022-03-26: Chapter 30: Markdown workflow: Presenter TBD
+- 2022-03-05: Chapter 24: Model building: Jon Harmon
+- 2022-03-12: Chapter 25: Many models: Ryan Metcalf
+- 2022-03-19: Chapter 26-27: R Markdown: Becki Roth
+- 2022-03-26: Chapter 28: Graphics for communication: Federica Gazzelloni
+- 2022-04-02: Chapter 29-30: Markdown formats and workflow: Sandra Muroy
 
 ## How to Present
 

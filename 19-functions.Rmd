@@ -2,13 +2,235 @@
 
 **Learning objectives:**
 
-- Jon will try to prefill these ahead of each week.
+- Write **functions** to **automate common tasks** in R.
+  - **Name** R functions using **consistent rules.**
+  - Effectively **use comments** in R functions to **explain the "why"** of your code.
+- **Conditionally execute code** in R functions.
+  - Use **`if`** and **`else`** statements to conditionally execute R code.
+  - Use **`switch`** statements to conditionally execute R code.
+  - Use **`cut`** to **discretize continuous variables.**
+- Use **consistent arguments** for R functions.
+  - Give **default values** to arguments in R functions.
+  - **Check values** of arguments to make safer functions in R.
+  - Use **`...` arguments** in R functions.
+- **Return** values from R functions.
+  - Use **explicit `return`s** to **return early** from an R function.
+  - Use **`invisible`** to **invisibly return values** from R functions.
+- Recognize how R utilizes **environments** and **lexical scoping** to find the value associated with a name.
 
-## Slide 1
+## Introduction
 
-Slide contents. 
-Keep it short and slide-like!
+Functions are handy because:
 
-## Slide 2
+-   they automate repetitive tasks.
 
-Slide contents.
+-   have a name that makes the purpose very clear
+
+-   you only need to update the code in one place as things change
+
+-   it's safer than copy and paste - you won't replicate errors
+
+The common theme for functions is to be consistent.
+
+## When and how to write a function
+
+Have you copy and pasted code more than 2x? Consider a function!
+
+Key steps in creating a function:
+
+1.  Pick a **name** than makes it clear what the function does
+
+2.  **Arguments**, or inputs, go inside `function`, like so `function(arguments)`.
+
+3.  The **code** goes inside curly braces `{ }`, after `function()`.
+
+4.  Check your function with a few inputs to make sure it's working.
+
+## Functions are for computers *and* humans
+
+Be consistent in you naming and coding of functions
+
+**Names:**
+
+Functions should be verbs (action, state, or occurrence), arguments should be nouns (people places or things).
+
+Be consistent in using snake_case or camelCase.
+
+For sets of functions, use a common prefix
+
+Don't overwrite existing function
+
+**Comments:**
+
+Use comments to explain the 'why' of the code
+
+Use lines of - or = to break up code into sections
+
+## Conditional execution
+
+`if` statements conditionally execute code. The condition must evaluate to `TRUE` or `FALSE`.
+
+Be careful: **`==`** is vectorised.
+
+Use \|\| (OR) and && (AND) to combine multiple logical expressions.
+
+You can string multiple if statements together: `if`, `else if`, `else`
+
+For a long series of chained if statements, use `switch()`
+
+Use `cut()` to 'discretise continuous variables'
+
+**Format:**
+
+Your function or `if` statement followed by a curly brace
+
+New line, indent 2 spaces.
+
+Ending brace on its own line, unless followed by else.
+
+## Function arguments
+
+One set supplies the **data** to compute on
+
+One set supplies arguments that control the **details** of the computation.
+
+Generally, data comes first, and details go on the end and usually have default values.
+
+Choose names that are longer and descriptive or use common ones:
+
+-   x, y, z: vectors
+
+-   w: a vector of weights
+
+-   df: a data frame
+
+-   i, j: numeric indices (rows/columns)
+
+-   n: length, or number of rows
+
+-   p: number of columns
+
+Put checks in your functions to make constraints explicit.
+
+Use `.` as an argument that takes an arbitrary number of values
+
+Lazy evaluation - arguments in R are not computed until they're needed.
+
+## Return values
+
+Two things to consider when returning a value:
+
+1.  Does returning early make your function easier to read?
+
+> R, by default, returns the last value of a function. You can return a value with or without an explicit return statement.
+
+2.  Can you make your function pipeable?
+
+> There are two basic types of pipeable functions:
+>
+> -   With **transformations**, an object is passed to the function's first argument and a modified object is returned.
+>
+> -   With **side-effects**, the passed object is not transformed. Instead, the function performs an action on the object, like drawing a plot or saving a file.
+
+## Environment
+
+**Lexical scoping** - R will look outside the function, in the environment, for definitions of variables, if it is not defined within.
+
+## Meeting Videos
+
+### Cohort 5
+
+`r knitr::include_url("https://www.youtube.com/embed/B5097Rbsafc")`
+
+<details>
+  <summary> Meeting chat log </summary>
+  
+```
+00:24:22	Jon Harmon (jonthegeek):	Famous computer science quote: There are only two hard things in Computer Science: cache invalidation and naming things.
+
+-- Phil Karlton
+00:32:31	Jon Harmon (jonthegeek):	> identical(1.0, 1L)
+[1] FALSE
+00:32:50	Jon Harmon (jonthegeek):	> 1.0 == 1L
+[1] TRUE
+00:33:31	Jon Harmon (jonthegeek):	identical(as.integer(1.0), 1L)
+00:33:49	Jon Harmon (jonthegeek):	identical(1.0, as.double(1L))
+00:38:39	Njoki Njuki Lucy:	is there a difference between ifelse() and if, else function?
+00:39:32	Jon Harmon (jonthegeek):	ifelse()
+if … else if … else
+00:40:15	Jon Harmon (jonthegeek):	ifelse(c(TRUE, FALSE, TRUE), "yes", "no")
+00:40:28	Jon Harmon (jonthegeek):	> ifelse(c(TRUE, FALSE, TRUE), "yes", "no")
+[1] "yes" "no"  "yes"
+00:40:52	Jon Harmon (jonthegeek):	> ifelse(1:10 == 8, "it's 8", "it isn't")
+ [1] "it isn't" "it isn't" "it isn't" "it isn't" "it isn't" "it isn't" "it isn't"
+ [8] "it's 8"   "it isn't" "it isn't"
+00:41:12	Jon Harmon (jonthegeek):	> ifelse(1:10 == 8, 8, NA)
+ [1] NA NA NA NA NA NA NA  8 NA NA
+00:42:13	Ryan Metcalf:	Possible Reference, Section 7.4, Missing Values. It makes a reference to `ifelse()` function: https://r4ds.had.co.nz/exploratory-data-analysis.html?q=ifelse()#missing-values-2
+00:43:01	Jon Harmon (jonthegeek):	if else
+ifelse
+if_else
+00:43:17	Njoki Njuki Lucy:	thank you!
+00:43:22	Njoki Njuki Lucy:	big time:)
+00:50:35	Njoki Njuki Lucy:	what exactly is the trim doing? I didn't understand
+00:52:05	Jon Harmon (jonthegeek):	> mean(c(1, 90:100), trim = 0)
+[1] 87.16667
+> mean(c(1, 90:100), trim = 0.1)
+[1] 94.5
+> mean(c(1, 90:100), trim = 0.5)
+[1] 94.5
+00:52:46	Jon Harmon (jonthegeek):	> mean(1:10, trim = 0.5)
+[1] 5.5
+00:54:10	Njoki Njuki Lucy:	okay, understood. thanks!
+00:58:15	Jon Harmon (jonthegeek):	myfun <- function(x, ...) {
+  mean(x, ...)
+}
+00:58:47	Jon Harmon (jonthegeek):	> myfun(1:10, trim = 0.1)
+[1] 5.5
+00:59:13	Jon Harmon (jonthegeek):	> myfun(1:10, trim = 0.1)
+Error in myfun(1:10, trim = 0.1) : unused argument (trim = 0.1)
+01:01:34	Jon Harmon (jonthegeek):	myfun <- function(x, funname, ...) {
+  if (funname == "mean") {
+    mean(x, ...)
+  } else {
+    log(x, ...)
+  }
+}
+01:04:11	Jon Harmon (jonthegeek):	myfun <- function(...) {
+  dots <- list(...)
+  names(dots)
+}
+
+myfun(a = 1)
+01:05:28	Jon Harmon (jonthegeek):	[1] "a"
+01:05:49	Jon Harmon (jonthegeek):	dots <- list(a = 1)
+01:09:32	Jon Harmon (jonthegeek):	myfun <- function(a, b) {
+  a
+}
+myfun(1:10, Sys.sleep(60))
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/rsRImj294pM")`
+
+<details>
+  <summary> Meeting chat log </summary>
+  
+```
+See Chapter 20 for the part of the log that's relevant to that chapter.
+```
+</details>
+
+
+
+### Cohort 6
+
+`r knitr::include_url("https://www.youtube.com/embed/URL")`
+
+<details>
+  <summary> Meeting chat log </summary>
+  
+```
+LOG
+```
+</details>

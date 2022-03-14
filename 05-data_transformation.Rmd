@@ -824,7 +824,7 @@ top_delay %>%
 
 ## Meeting Videos
 
-### Cohort 1
+### Cohort 5
 
 `r knitr::include_url("https://www.youtube.com/embed/J6mGn1F1kiA")`
 
@@ -859,3 +859,66 @@ top_delay %>%
 ```
 </details>
 
+### Cohort 6
+
+`r knitr::include_url("https://www.youtube.com/embed/DNwioC-SgKQ")`
+
+<details>
+  <summary> Meeting chat log </summary>
+  
+```
+00:01:33	Adeyemi Olusola:	good day Daniel
+00:01:48	Daniel Adereti:	Hello Adeyemi!
+00:03:09	Adeyemi Olusola:	we are experiencing loadshedding as regards electricity in SA. So, If I am unavailable at some point kindly know that its light issues
+00:03:26	Daniel Adereti:	Got you!
+00:06:42	Daniel Adereti:	Let's give people about 5 minutes to join in
+00:07:21	Daniel Adereti:	Also, expecting our volunteer Matthew to join a bit late
+00:07:38	Shannon:	Sounds good
+00:07:56	Daniel Adereti:	He had to reschedule a number of things due to the timezone issues (CDT vs WAT)
+00:09:07	Shannon:	it's a bit crackly
+00:09:30	Adeyemi Olusola:	yes...its getting better
+00:10:29	Adeyemi Olusola:	yeah
+00:10:32	Shannon:	much better!
+00:10:45	Adeyemi Olusola:	you decide
+00:12:04	Shannon:	yes! seeing your RStudio screen clearly
+00:19:39	Vrinda Kalia:	That’s my guess as well
+00:21:10	Freya Watkins (she/her):	maybe it's just the order, a=1, b=2 etc? I guess
+00:21:25	Daniel Adereti:	seems like @freya
+00:21:26	Shannon:	That seems right
+00:21:27	Adeyemi Olusola:	my guess...
+00:21:36	Adeyemi Olusola:	perhaps we can try z and t
+00:22:56	Daniel Adereti:	'z'  > 't' == TRUE, so it appears it is by order
+00:23:10	Adeyemi Olusola:	nice one
+00:24:25	Adeyemi Olusola:	equal to
+00:24:29	Adeyemi Olusola:	a = 1
+00:24:40	Vrinda Kalia:	on Mac: option + -
+00:24:45	Freya Watkins (she/her):	ALT-minus is a shortcut for on Windows
+00:29:26	Adeyemi Olusola:	1 = 5 is false but the negation turns it true
+00:32:00	Adeyemi Olusola:	yes, we can
+00:32:54	Vrinda Kalia:	Sorry, I don’t see the pop-up. We see the help pane
+00:33:23	Adeyemi Olusola:	Yes, I was referring to the help pane, I thought he will be scrolling along the pane
+00:36:01	Vrinda Kalia:	flights$month
+00:38:15	Shannon:	I haven't seen/used the as.levels() function yet, looks like it can be useful!
+00:38:57	Daniel Adereti:	levels(as.factor(flights$month))
+00:39:07	Adeyemi Olusola:	exactly
+00:39:31	Shannon:	Nice!
+00:40:59	Shannon:	oops, as.factor(), not as.levels()
+00:41:19	Adeyemi Olusola:	@Shannon exactly
+00:41:44	Shannon:	So many functions to learn! :)
+00:44:54	Adeyemi Olusola:	its filtering november
+00:45:20	Adeyemi Olusola:	across years
+00:47:09	Adeyemi Olusola:	the time is also there
+00:47:43	Adeyemi Olusola:	so there are many flights in one (1) day
+00:52:32	Daniel Adereti:	Let's aim to finish the filter() fxn lesson today, right? it ends at "missing values"
+00:52:57	Shannon:	that sounds good
+00:58:50	Vrinda Kalia:	That sounds good!
+00:58:52	Adeyemi Olusola:	Nice work!!!!
+00:59:04	Adeyemi Olusola:	Thanks a lot Mattew!
+00:59:04	Aalekhya Reddam:	That’s great! Thank you Matthew :)
+00:59:05	Vrinda Kalia:	thank you so much, Matthew!
+00:59:23	Shannon:	Thank you, Matthew!
+00:59:35	Adeyemi Olusola:	Bye Bye
+00:59:42	Freya Watkins (she/her):	Thanks Matthew!
+00:59:45	Daniel Adereti:	Thank you!
+```
+</details>
