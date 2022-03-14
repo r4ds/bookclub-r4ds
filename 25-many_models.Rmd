@@ -489,6 +489,17 @@ The broom package provides three general tools for turning models into tidy data
 
 ### Cohort 5
 
+`r knitr::include_url("https://www.youtube.com/embed/lO_qtXM8OH8")`
+
+<details>
+  <summary> Meeting chat log </summary>
+  
+```
+00:09:25	Jon Harmon (jonthegeek):	r4ds.io/bookclubber
+01:07:14	Jon Harmon (jonthegeek):	ggrepel
+```
+</details>
+
 `r knitr::include_url("https://www.youtube.com/embed/URL")`
 
 <details>
