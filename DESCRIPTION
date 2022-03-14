@@ -11,6 +11,7 @@ Imports:
     bookdown,
     details,
     emo,
+    gapminder,
     htmlwidgets,
     lubridate,
     manipulate,
