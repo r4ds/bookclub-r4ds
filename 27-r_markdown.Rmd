@@ -9,7 +9,7 @@
 - Use **`knitr::kable`** to display formatted tables in an R Markdown document.
 - **Cache data** in an R Markdown document.
 - Set **global chunk options** in an R Markdown document.
-- Embed inlide code in an R Markdown document.
+- Embed **inline code** in an R Markdown document.
 
 
 ## Slide 1
