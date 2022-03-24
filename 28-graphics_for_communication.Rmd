@@ -2,7 +2,12 @@
 
 **Learning objectives:**
 
-- Jon will try to prefill these ahead of each week.
+- **Describe the contents** of a plot with **labels.**
+- Call out **specific features** of your data with **annotations.**
+- Control **how data maps** to things you can see with **`scale_` functions.**
+- Control **which data displays** in a plot.
+- **Customize** the non-data elements of your plot with **themes.**
+- **Save** your plots.
 
 ## Slide 1
 

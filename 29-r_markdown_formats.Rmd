@@ -2,7 +2,14 @@
 
 **Learning objectives:**
 
-- Jon will try to prefill these ahead of each week.
+- **Control R Markdown output** with **output formats** and **options.**
+- Recognize the available R Markdown **document formats.**
+- **Collaborate** using R Markdown **notebooks.**
+- Recognize the available R Markdown **presentation formats.**
+- Build dashboards with **`{flexdashboard}`.**
+- Add **interactivity** to R Markdown documents.
+- Generate **complete websites** with R Markdown.
+- Recognize **other R Markdown formats.**
 
 ## Slide 1
 
