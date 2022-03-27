@@ -17,6 +17,7 @@ Imports:
     manipulate,
     microbenchmark,
     nycflights13,
+    patchwork,
     tufte,
     tidyverse
 Remotes: 
