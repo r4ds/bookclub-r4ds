@@ -11,6 +11,11 @@ Imports:
     bookdown,
     details,
     emo,
+    gapminder,
+    htmlwidgets,
+    lubridate,
+    manipulate,
+    microbenchmark,
     nycflights13,
     tufte,
     tidyverse

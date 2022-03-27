@@ -2,7 +2,7 @@
 
 **Learning objectives:**
 
-- Jon will try to prefill these ahead of each week.
+- **Communicate data analysis** work with an **analysis notebook.**
 
 ## Slide 1
 
@@ -12,3 +12,29 @@ Keep it short and slide-like!
 ## Slide 2
 
 Slide contents.
+
+## Meeting Videos
+
+### Cohort 5
+
+`r knitr::include_url("https://www.youtube.com/embed/URL")`
+
+<details>
+  <summary> Meeting chat log </summary>
+  
+```
+LOG
+```
+</details>
+
+### Cohort 6
+
+`r knitr::include_url("https://www.youtube.com/embed/URL")`
+
+<details>
+  <summary> Meeting chat log </summary>
+  
+```
+LOG
+```
+</details>

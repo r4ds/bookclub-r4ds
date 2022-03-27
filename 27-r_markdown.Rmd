@@ -2,7 +2,15 @@
 
 **Learning objectives:**
 
-- Jon will try to prefill these ahead of each week.
+- **Create R Markdown documents.**
+- **Format text** using Pandoc’s Markdown.
+- Include **R code chunks** in an R Markdown document.
+- Use **chunk options** to change what displays in an R Markdown document.
+- Use **`knitr::kable`** to display formatted tables in an R Markdown document.
+- **Cache data** in an R Markdown document.
+- Set **global chunk options** in an R Markdown document.
+- Embed **inline code** in an R Markdown document.
+
 
 ## Slide 1
 
@@ -12,3 +20,29 @@ Keep it short and slide-like!
 ## Slide 2
 
 Slide contents.
+
+## Meeting Videos
+
+### Cohort 5
+
+`r knitr::include_url("https://www.youtube.com/embed/URL")`
+
+<details>
+  <summary> Meeting chat log </summary>
+  
+```
+LOG
+```
+</details>
+
+### Cohort 6
+
+`r knitr::include_url("https://www.youtube.com/embed/URL")`
+
+<details>
+  <summary> Meeting chat log </summary>
+  
+```
+LOG
+```
+</details>

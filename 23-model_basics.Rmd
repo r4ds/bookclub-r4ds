@@ -2,8 +2,10 @@
 
 **Learning objectives:**
 
-- Define your model family
-- How to make a model with R
+- Evaluate a set of **simple linear models.**
+- Evaluate **model fits** through **visualization.**
+- Use R's **formula syntax** to **specify models.**
+- Recognize **model families.**
 
 ## A bit of Mathematics:
 
@@ -276,3 +278,63 @@ ggplot(sim5, aes(x, y)) +
 - [tidymodels](https://www.tidymodels.org/start/models/)
 - [markdown-extensions-by-bookdown](https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html)
 - [geom_smooth](https://ggplot2.tidyverse.org/reference/geom_smooth.html)
+
+## Meeting Videos
+
+### Cohort 5
+
+`r knitr::include_url("https://www.youtube.com/embed/hEjE7PYLCL8")`
+
+<details>
+  <summary> Meeting chat log </summary>
+  
+```
+00:10:00	Jon Harmon (jonthegeek):	https://www.youtube.com/c/TidyX_screencast/playlists?app=desktop
+00:10:13	Jon Harmon (jonthegeek):	https://twitter.com/kierisi
+00:10:42	Jon Harmon (jonthegeek):	https://twitter.com/FGazzelloni
+00:10:48	Federica Gazzelloni:	@fgazzelloni
+00:11:10	Jon Harmon (jonthegeek):	https://twitter.com/search?q=%23TidyTuesday
+00:12:17	Jon Harmon (jonthegeek):	https://twitter.com/RLadiesGlobal
+00:12:36	Federica Gazzelloni:	https://rladies.org/
+00:13:03	Jon Harmon (jonthegeek):	https://twitter.com/RLadiesLima
+00:38:04	Njoki Njuki Lucy:	for the linear regression model, what's the difference having the interaction effect as * or :? like y~x1*x2/ y~x1:x2
+I have seen both being used but I haven't understood the difference yet 😄
+Or for one (*) we must include the main effects?
+00:39:50	Njoki Njuki Lucy:	aah okay :)
+00:48:05	Jon Harmon (jonthegeek):	* includes : plus the terms without interaction, so in most cases it makes sense to just use *:
+y ~ x1*x2 = y ~ x1 + x2 + x1:x2
+00:49:50	Njoki Njuki Lucy:	thanks!
+01:05:06	Ryan Metcalf:	Maybe another thought towards differences between `baseR`, `tidyverse`, or `tidy models` is like having a simple toolkit for your home…something small like Hammer, Screwdriver, and wrench set versus having an entire tool box of specific tools. It gives more granular choice for specific jobs.
+01:05:28	Ryan Metcalf:	Or an entire workshop with power tools too!!!
+01:06:59	Becki R. (she/her):	That's a helpful description, Ryan, thanks!
+01:07:33	Ryan Metcalf:	Both kids live on their own. I hate showing up to hang a picture and realize the tool kits we gave for Xmas doesn’t have a tool to make the job easier.
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/9DZV6bvifHA")`
+
+<details>
+  <summary> Meeting chat log </summary>
+  
+```
+00:51:07	Becki R. (she/her):	i'm fading fast - catch up with you all next week.
+00:52:36	Federica Gazzelloni:	https://www.tidymodels.org/start/
+00:55:00	Federica Gazzelloni:	https://rpruim.github.io/s341/S19/from-class/MathinRmd.html
+00:55:46	Federica Gazzelloni:	https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html
+00:56:00	Federica Gazzelloni:	https://ggplot2.tidyverse.org/reference/geom_smooth.html
+00:56:49	Ryan Metcalf:	Another LaTeX code editor: https://latex.codecogs.com/eqneditor/editor.php
+00:57:14	Federica Gazzelloni:	thanks ryan
+```
+</details>
+
+### Cohort 6
+
+`r knitr::include_url("https://www.youtube.com/embed/URL")`
+
+<details>
+  <summary> Meeting chat log </summary>
+  
+```
+LOG
+```
+</details>

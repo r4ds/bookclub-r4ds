@@ -2,7 +2,19 @@
 
 **Learning objectives:**
 
-- Jon will try to prefill these ahead of each week.
+- **Create `factor()`** variables.
+- **Explore** the **General Social Survey** dataset via `forcats::gss_cat`.
+- **Reorder factor levels.**
+  - `forcats::fct_reorder()`
+  - `forcats::fct_relevel()`
+  - `forcats::fct_reorder2()`
+  - `forcats::fct_infreq()`
+  - `forcats::fct_rev()`
+- **Modify factor levels.**
+  - `forcats::fct_recode()`
+  - `forcats::fct_collapse()`
+  - `forcats::fct_lump()`
+
 
 ## Slide 1
 
@@ -12,3 +24,40 @@ Keep it short and slide-like!
 ## Slide 2
 
 Slide contents.
+
+## Meeting Videos
+
+### Cohort 5
+
+`r knitr::include_url("https://www.youtube.com/embed/2ySAk-lgT88")`
+
+<details>
+  <summary> Meeting chat log </summary>
+  
+```
+00:05:04	Federica Gazzelloni:	Hello
+00:23:34	Jon Harmon (jonthegeek):	Useful: R has month.name and month.abb character vectors built in. So you can do things like y3 <- factor(month.abb, levels = month.abb)
+00:35:46	Ryan Metcalf:	Open ended question for the team. If Factors are a built-in enumeration in categorical data….what if the data in review has a dictionary and the variable (column) of each record is entered as a numeral. Would a best practice to use a join or mutate to enter the text instead of a numeral.
+01:00:25	Ryan Metcalf:	I’m not finding a direct definition of “level” in the Forecats text. Would it be appropriate to state a “level” in this Factor chapter is the “quantity of a given category?”
+01:05:05	Jon Harmon (jonthegeek):	state.abb
+```
+</details>
+
+### Cohort 6
+
+`r knitr::include_url("https://www.youtube.com/embed/Xaax7EX-WIQ")`
+
+<details>
+  <summary> Meeting chat log </summary>
+  
+```
+00:12:43	Daniel Adereti:	https://simplystatistics.org/posts/2015-07-24-stringsasfactors-an-unauthorized-biography/
+00:13:46	Adeyemi Olusola:	Its freezing but I don’t know if it’s from my end
+00:15:05	Shannon:	Yes, Adeyemi, it's freezing a bit...cleared up for now
+00:19:52	Adeyemi Olusola:	I guess as.factor( ) does the same without aorting
+01:01:46	Marielena Soilemezidi:	thank you Daniel!
+01:01:52	Adeyemi Olusola:	Thank you Daniel
+01:02:34	Marielena Soilemezidi:	bye all!
+01:02:40	Daniel Adereti:	Bye!
+```
+</details>

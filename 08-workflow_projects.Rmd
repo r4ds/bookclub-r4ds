@@ -8,7 +8,7 @@
 
 ## Meeting Videos
 
-### Cohort 1
+### Cohort 5
 
 `r knitr::include_url("https://www.youtube.com/embed/VYYxhIBuDys")`
 
@@ -60,5 +60,23 @@
 01:11:08	Federica Gazzelloni:	thanks
 01:11:12	Becki R. (she/her):	Thank you!
 01:11:22	Susan Neilson:	https://bookdown.org/ndphillips/YaRrr/rdata-files.html
+```
+</details>
+
+### Cohort 6
+
+`r knitr::include_url("https://www.youtube.com/embed/dNtF8-lZ_pA")`
+
+<details>
+  <summary> Meeting chat log </summary>
+  
+```
+00:01:19	Adeyemi Olusola:	Good day everyone
+00:01:32	Daniel:	Hello!
+00:17:42	Esmeralda Cruz:	nop
+00:33:45	Daniel:	https://jrnold.github.io/r4ds-exercise-solutions/tibbles.html
+00:44:48	Esmeralda Cruz:	interesting
+00:46:11	Esmeralda Cruz:	ok, make sense
+00:49:45	Esmeralda Cruz:	ok
 ```
 </details>
