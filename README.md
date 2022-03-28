@@ -42,14 +42,16 @@ If you would like to present, please add your name next to a chapter using the [
 - 2022-02-12: Chapter 21: Iteration: Becki Roth
 - 2022-02-19: Chapter 22: Modeling introduction: Federica Gazzelloni
 - 2022-02-26: Chapter 23: Model basics: Federica Gazzelloni
+- 2022-03-05: Chapter 24: Model building: Jon Harmon
+- 2022-03-12: Chapter 25: Many models: Ryan Metcalf
+- 2022-03-26: Chapter 25: Many models (part 2): Ryan Metcalf
 
 </details>
 
-- 2022-03-05: Chapter 24: Model building: Jon Harmon
-- 2022-03-12: Chapter 25: Many models: Ryan Metcalf
-- 2022-03-19: Chapter 26-27: R Markdown: Becki Roth
-- 2022-03-26: Chapter 28: Graphics for communication: Federica Gazzelloni
-- 2022-04-02: Chapter 29-30: Markdown formats and workflow: Sandra Muroy
+- 2022-04-02: Chapter 26-27: R Markdown: Becki Roth
+- 2022-04-09: Chapter 28: Graphics for communication: Federica Gazzelloni
+- 2022-04-16: Chapter 29-30: Markdown formats and workflow: Sandra Muroy
+- 2022-04-23: What's Next? Jon Harmon
 
 ## How to Present
 
