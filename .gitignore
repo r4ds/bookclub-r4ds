@@ -6,3 +6,6 @@
 _book
 _bookdown_files
 bookclub-r4ds.Rmd
+bookclub-r4ds_files
+*.html
+libs
