@@ -12,6 +12,8 @@ Imports:
     details,
     emo,
     gapminder,
+    ggthemes,
+    hrbrthemes,
     htmlwidgets,
     lubridate,
     manipulate,
@@ -19,6 +21,8 @@ Imports:
     nycflights13,
     patchwork,
     tufte,
-    tidyverse
+    tidyverse,
+    tvthemes,
+    viridis
 Remotes: 
     hadley/emo
