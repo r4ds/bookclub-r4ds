@@ -32,7 +32,7 @@ library(tidyverse)
 ```
 
 
-### Use labels and annotations
+## Use labels and annotations
 
 1.  First data set is about the Biochemical Oxygen Demand, found in {datasets} package, it is made of two variables:
 -Time
@@ -147,7 +147,7 @@ Other geoms for annotation:
 - `geom_segment()` with the arrow argument to draw attention to a point with an arrow. Use aesthetics x and y to define the starting location, and xend and yend to define the end location.
 
 
-### Scales
+## Scales
 
 The `scale_<functions>` are very useful in many ways, among which is to set a color/fill scale for a particular plot, or to make modification of the x/y text axis.
 
@@ -174,7 +174,7 @@ p1+p2 &
   theme(legend.position = "top")
 ```
 
-### Themes
+## Themes
 
 There are interesting packages available for adjusting the them of your plot in addition to the themes that are provided with {ggplot2} package: **ggplot2 extensions - gallery**
 
@@ -189,12 +189,10 @@ source: [https://exts.ggplot2.tidyverse.org/gallery/](https://exts.ggplot2.tidyv
 ![png](images/28_themes.png)
 
 
-### Save the plot
+## Save the plot
 
 `ggsave("my-plot.pdf")`
 
-
------------
 
 ## Meeting Videos
 
