@@ -25,13 +25,29 @@ Slide contents.
 
 ### Cohort 5
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/wAzYA01hojo")`
 
 <details>
   <summary> Meeting chat log </summary>
   
 ```
-LOG
+00:03:37	Njoki Njuki Lucy:	I agree with Ryan.
+00:15:27	Ryan Metcalf:	https://pandoc.org/
+00:20:48	Ryan Metcalf:	Some extra reading material: https://www.w3.org/TR/WD-html40-970708/intro/sgmltut.html
+00:28:14	Njoki Njuki Lucy:	Qn, does anyone know why putting figure captions move figures to other positions?
+00:33:58	Federica Gazzelloni:	try with {r ….., fig.align =“center”}
+00:35:01	Njoki Njuki Lucy:	Thanks Federica, I'll give it a try :)
+00:57:25	Ryan Metcalf:	https://daringfireball.net/projects/markdown/
+00:58:59	Ryan Metcalf:	The comment I’m making, there are many forms of Markdown, not all created equally. John Gruber originated Markdown syntax to make authoring easier. GitHub versus GitLab, versus RMarkdonw, etc...
+01:02:40	Federica Gazzelloni:	you can set your path: opts_chunk$set(cache.path = " ")
+01:04:42	Federica Gazzelloni:	https://bookdown.org/yihui/rmarkdown-cookbook/cache.html
+01:06:13	Ryan Metcalf:	https://quarto.org/
+01:07:57	Federica Gazzelloni:	The most appropriate use case of caching is to save and reload R objects that take too long to compute in a code chunk
+01:09:20	Njoki Njuki Lucy:	no
+01:09:26	Federica Gazzelloni:	no
+01:12:49	Njoki Njuki Lucy:	I'll have to leave, thanks Becki! I look forward to the other part!!
+01:12:53	Federica Gazzelloni:	there is some more about the changing r session and the cache: https://www.r-bloggers.com/2021/07/caching-the-results-of-functions-of-your-r-package/
+01:13:02	Becki R. (she/her):	Bye Lucy!
 ```
 </details>
 

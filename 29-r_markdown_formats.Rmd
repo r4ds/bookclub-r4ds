@@ -24,13 +24,33 @@ Slide contents.
 
 ### Cohort 5
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/2MGp74nb2ig")`
 
 <details>
   <summary> Meeting chat log </summary>
   
 ```
-LOG
+00:10:00	Jon Harmon (jonthegeek):	bestbook.cool
+00:11:26	Jon Harmon (jonthegeek):	https://podcast.bestbook.cool/
+00:28:01	Jon Harmon (jonthegeek):	happygitwithr.com
+00:30:59	Jon Harmon (jonthegeek):	Remind @Sandra Muroy to share the dlab GitHub stuff when this posts to our channel. There, I think that will tag you in the post!
+00:32:44	Jon Harmon (jonthegeek):	xaringan
+00:36:45	Jon Harmon (jonthegeek):	lol, it's just called {shinydashboard}
+00:48:24	Becki R. (she/her):	I definitely need help with that!
+00:53:08	Jon Harmon (jonthegeek):	It's been a while since we learned that!
+2021-08-21: Chapter 6: Workflow: scripts: Ryan Metcalf
+01:01:01	Jon Harmon (jonthegeek):	{pak} = updated package tracker
+01:01:48	Jon Harmon (jonthegeek):	{targets}
+01:03:00	Federica Gazzelloni:	library(pkgsnap)
+01:04:15	Jon Harmon (jonthegeek):	devtools::install_version()
+01:05:00	Jon Harmon (jonthegeek):	?remotes::install_version()
+01:05:15	Jon Harmon (jonthegeek):	install_version("devtools", ">= 1.12.0, < 1.14")
+01:07:07	Jon Harmon (jonthegeek):	https://github.com/MangoTheCat/pkgsnap
+01:11:32	Jon Harmon (jonthegeek):	https://docs.ropensci.org/targets/
+01:11:46	Jon Harmon (jonthegeek):	pkgdown
+01:12:41	Jon Harmon (jonthegeek):	https://rsample.tidymodels.org/
+01:13:21	Jon Harmon (jonthegeek):	https://pkgdown.r-lib.org/
+01:13:32	Sandra Muroy:	https://github.com/dlab-berkeley/Bash-Git
 ```
 </details>
 

@@ -178,12 +178,16 @@ a %<>%
 
 ### Cohort 6
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/jwnQkHtUiOY")`
 
 <details>
   <summary> Meeting chat log </summary>
   
 ```
-LOG
+00:09:32	Marielena Soilemezidi:	=
+00:26:49	Daniel Adereti:	Yes, I agree. It appears the dot allows to insert any argument
+00:52:38	Daniel Adereti:	Thanks Marielena, also share Shannon's thoughts, pipes had always been taught like a must use operator, glad to see it is meant to be selective
+00:55:20	Daniel Adereti:	works for me too, it is quite a large chapter
+00:55:39	Daniel Adereti:	Sorry, my mic seems problematic, hence my typing
 ```
 </details>

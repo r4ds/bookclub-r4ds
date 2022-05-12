@@ -225,12 +225,16 @@ See Chapter 20 for the part of the log that's relevant to that chapter.
 
 ### Cohort 6
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/jDsmsNUHfPE")`
 
 <details>
   <summary> Meeting chat log </summary>
   
 ```
-LOG
+00:23:48	Daniel Adereti:	Range() function in R returns the maximum and minimum value of the vector and column of the dataframe in R. range() function of the column of dataframe
+00:45:42	Daniel Adereti:	My guess for the inf, -inf is just to assign the respective 1 and 0 to the inf and -inf
+00:46:26	Daniel Adereti:	and to rescale the x vector expressing all variables with inf as 1 and -inf as 0
+00:58:38	Adeyemi Olusola:	Thanks for the wonderful talk. Sorry, I have to drop off now. Thanks
+00:58:41	Daniel Adereti:	it might make sense to stop at 19.2
 ```
 </details>
