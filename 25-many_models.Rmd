@@ -500,15 +500,68 @@ The broom package provides three general tools for turning models into tidy data
 ```
 </details>
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/d5FPrn4vTzc")`
 
 <details>
   <summary> Meeting chat log </summary>
   
 ```
-LOG
+00:10:13	Njoki Njuki Lucy:	It will be nice to see familiar faces :)
+00:36:21	Jon Harmon (jonthegeek):	sim <- tribble(
+  ~params,
+  list(min = -1, max = 1),
+  list(min = -1, max = 2),
+  list(min = -1, max = 3)
+)
+
+set.seed(424242)
+use_purrr <- sim %>% 
+  mutate(
+    sims = map(params, runif)
+  )
+
+set.seed(424242)
+use_rowwise <- sim %>%
+  rowwise() %>% 
+  mutate(
+    sims = list(runif(params))
+  ) %>% 
+  ungroup()
+
+identical(use_purrr, use_rowwise)
+00:37:40	Jon Harmon (jonthegeek):	> use_purrr
+# A tibble: 3 x 2
+  params           sims     
+  <list>           <list>   
+1 <named list [2]> <dbl [2]>
+2 <named list [2]> <dbl [2]>
+3 <named list [2]> <dbl [2]>
+00:52:42	Jon Harmon (jonthegeek):	> tibble(x = 1:2, y = list(1:4, 1))
+# A tibble: 2 x 2
+      x y        
+  <int> <list>   
+1     1 <int [4]>
+2     2 <dbl [1]>
+00:57:04	Jon Harmon (jonthegeek):	> df2 %>% unnest(c(y))
+# A tibble: 3 x 3
+      x y     z        
+  <dbl> <chr> <list>   
+1     1 a     <int [2]>
+2     2 b     <dbl [1]>
+3     2 c     <dbl [1]>
+00:57:23	Jon Harmon (jonthegeek):	> df2 %>% unnest(y) %>% unnest(z)
+# A tibble: 4 x 3
+      x y         z
+  <dbl> <chr> <dbl>
+1     1 a         1
+2     1 a         2
+3     2 b         3
+4     2 c         3
+01:11:05	Njoki Njuki Lucy:	that's what I have been doing - doing the surgery😄
+01:11:33	Njoki Njuki Lucy:	:)
 ```
 </details>
+
 
 ### Cohort 6
 
