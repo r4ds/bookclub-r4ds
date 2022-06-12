@@ -1,11 +1,10 @@
+name: pr_check
 on:
   pull_request:
     branches: main
     paths-ignore:
       - 'README.md'
   workflow_dispatch:
-
-name: pr_check
 
 jobs:
   bookdown:
@@ -16,7 +15,7 @@ jobs:
       - uses: r-lib/actions/setup-r@v2
         with:
           r-version: '4.2.0'
-      - uses: r-lib/actions/setup-pandoc@v1
+      - uses: r-lib/actions/setup-pandoc@v2
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           cache-version: 2
