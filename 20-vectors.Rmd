@@ -1028,12 +1028,16 @@ function (x, width = NULL, max.level = 3, ...)
 
 ### Cohort 6
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/bRwmyUbario")`
 
 <details>
   <summary> Meeting chat log </summary>
   
 ```
-LOG
+00:36:56	Daniel Adereti:	Lucky I am not a python user. lol
+00:37:05	Marielena Soilemezidi:	😂
+00:38:03	Marielena Soilemezidi:	python will come and get you too, Daniel!
+00:38:18	Daniel Adereti:	lol! can't avoid it!
+00:42:11	Daniel Adereti:	Unfortunately, we have a strict 18 mins to end the lessons, let's see where we end up. Thanks
 ```
 </details>

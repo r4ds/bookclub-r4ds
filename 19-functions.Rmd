@@ -238,3 +238,15 @@ See Chapter 20 for the part of the log that's relevant to that chapter.
 00:58:41	Daniel Adereti:	it might make sense to stop at 19.2
 ```
 </details>
+
+`r knitr::include_url("https://www.youtube.com/embed/whu8LeXt0VE")`
+
+<details>
+  <summary> Meeting chat log </summary>  
+```
+00:03:15	Marielena Soilemezidi:	Hello there! :)
+00:03:51	Daniel:	Hello!
+00:32:16	Daniel:	I think it aim to check if any of the vector characters == 8, if yes, it returns 8, if no, it returns "Not available"
+00:44:24	Daniel:	Hello all, please remember we need volunteers for next week's class: Vectors
+```
+</details>
