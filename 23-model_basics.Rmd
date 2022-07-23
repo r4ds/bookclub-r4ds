@@ -329,12 +329,16 @@ y ~ x1*x2 = y ~ x1 + x2 + x1:x2
 
 ### Cohort 6
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/GDIOmvhOgNk")`
 
 <details>
   <summary> Meeting chat log </summary>
   
 ```
-LOG
+00:44:13	Adeyemi Olusola:	Yeah
+00:44:41	Marielena Soilemezidi:	great!
+00:44:43	Adeyemi Olusola:	Thank you Daniel
+00:44:55	Marielena Soilemezidi:	thanks for the presentation Daniel!
+00:45:14	Daniel Adereti:	https://personal.math.ubc.ca/~anstee/math104/newtonmethod.pdf
 ```
 </details>

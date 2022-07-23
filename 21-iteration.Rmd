@@ -203,11 +203,27 @@ mtcars %>%
 
 ### Cohort 6
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/NVUHFpYUmA4")`
 
 <details>
   <summary> Meeting chat log </summary>  
 ```
-LOG
+00:04:39	Marielena Soilemezidi:	I'll be back in 3'! No haste with the setup:)
+00:04:52	Adeyemi Olusola:	Ok
+00:07:22	Adeyemi Olusola:	Let me know when you return
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/YnZSfzMGhTE")`
+
+<details>
+  <summary> Meeting chat log </summary>  
+```
+00:11:10	Marielena Soilemezidi:	hello! :)
+00:20:31	Marielena Soilemezidi:	yep, it looks good!
+00:46:18	Daniel Adereti:	How does it get the list of 3?
+00:47:55	Marielena Soilemezidi:	sorry, got disconnected for some time, but I'm back!
+00:48:05	Daniel Adereti:	No worries!
+00:58:28	Adeyemi Olusola:	olusolaadeyemi.ao@gmail.com
 ```
 </details>
