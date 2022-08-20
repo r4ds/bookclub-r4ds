@@ -1,4 +1,6 @@
-# Vectors
+# Logical vectors
+
+Note: Since these slides were made, this chapter has been split into multiple chapters. After you edit these slides, remove this note.
 
 **Learning objectives:**
 
@@ -33,7 +35,7 @@
 - Here we focus on base R data structures, hence no need to load any packages.
 - But we will a couple of functions from `purrr` package to avoid some inconsistencies in base R.
 
-```{r load_tidyverse, message=FALSE, eval=FALSE} 
+```{r 14-load_tidyverse, message=FALSE, eval=FALSE} 
 library(tidyverse)
 ```
 
@@ -61,7 +63,7 @@ Figure 20.1: The hierarchy of R’s vector types:
 - Two key properties for each vector:
   - Its **type**, which can be determined with `typeof()`.
   
-```{r type_of, eval=FALSE}
+```{r 14-type_of, eval=FALSE}
 typeof(letters)
 
 typeof(1:10)
@@ -69,7 +71,7 @@ typeof(1:10)
 
   - Its **length**, which can be determined with `length()`.
   
-```{r length_vector, eval=FALSE}
+```{r 14-length_vector, eval=FALSE}
 x1 <- list("a", "b", 1:10); length(x1)
 
 x2 <- c("a", "b"); length(x2)
@@ -95,7 +97,7 @@ x2 <- c("a", "b"); length(x2)
 - They are constructed with comparison operators.
 - OR, can create them by hand with `c()`:
 
-```{r logical_vector, eval=FALSE}
+```{r 14-logical_vector, eval=FALSE}
 1:10 %% 3 == 0
 
 c(TRUE, TRUE, FALSE, NA)
@@ -109,7 +111,7 @@ c(TRUE, TRUE, FALSE, NA)
 - In R, numbers are doubles by default.
 - To create an integer, place `L` after the number.
 
-```{r numeric_vector, eval=FALSE}
+```{r 14-numeric_vector, eval=FALSE}
 typeof(1)
 
 typeof(1L)
@@ -122,7 +124,7 @@ typeof(1L)
 - Two important differences between doubles and integers:
   1. Doubles are approximations. They represent floating point numbers that can't be precisely represented with a fixed amount of memory. Therefore, we should consider all doubles as approximations. E.g., the square root of two:
   
-```{r doubles_vector, eval=FALSE}
+```{r 14-doubles_vector, eval=FALSE}
 (x3 <- sqrt(2) ^ 2)
 
 options(scipen = 999)
@@ -134,7 +136,7 @@ x3 - 2
 - When working with floating point numbers, it is common that the calculations include some approximation.
   - Hence, when we compare floating point numbers we should use `dplyr::near()` instead of `==` as it allows for some numerical tolerance. (*what does this mean?*)
   
-```{r dplyr_near, eval=FALSE}
+```{r 14-dplyr_near, eval=FALSE}
 dplyr::near(1.745, 2)
 # compares if 1.745 is the same as 2
 # FALSE
@@ -143,13 +145,13 @@ dplyr::near(1.745, 2)
 2. Integers have one special value: `NA` while doubles have four: `NA`, `NaN`, `Inf` and `-Inf`. 
     - `NaN`, `Inf` and `-Inf` can arise during division:
     
-```{r special_missing_val_numeric, eval=FALSE}
+```{r 14-special_missing_val_numeric, eval=FALSE}
 c(-1, 0, 1) / 0
 ```
 
   - To check for these special values, let's use the helper functions `is.finite()`, `is.infinite()`, and `is.nan()` instead of using `==`.
   
-```{r checking_special_missing_val_numeric, eval=FALSE}
+```{r 14-checking_special_missing_val_numeric, eval=FALSE}
 is.finite(c(-1, 0, 1) / 0)
 is.infinite(c(-1, 0, 1) / 0)
 is.na(c(-1, 0, 1) / 0)
@@ -166,7 +168,7 @@ is.nan(c(-1, 0, 1) / 0)
   - And every use of the string points to that representation.
     - This reduces the amount of memory needed by duplicated strings. To see this, let's use `pryr::object_size()`:
     
-```{r checking_memory_character, eval=FALSE}
+```{r 14-checking_memory_character, eval=FALSE}
 x <- "This is a reasonably long string."
 pryr::object_size(x)
 
@@ -182,7 +184,7 @@ A pointer is 8 bytes, so 1000 pointers to a 152 B string is 8 * 1000 + 152 = 8.1
 
 - Each atomic vector has its own missing value:
 
-```{r atomic_vec_missing_value, eval=FALSE}
+```{r 14-atomic_vec_missing_value, eval=FALSE}
 NA            # logical
 
 NA_integer_   # integer
@@ -200,7 +202,7 @@ NA_character_ # character
 
 1. Describe the difference between is.finite(x) and !is.infinite(x).
 
-```{r diff_finite_inifinite, eval=FALSE}
+```{r 14-diff_finite_inifinite, eval=FALSE}
 (x <- c(-1/0, 0/0, 1/0, 5, 5L, NA))
 is.finite(x)
 is.infinite(x)
@@ -213,7 +215,7 @@ is.infinite(x)
 
 2. Read the source code for dplyr::near() (Hint: to see the source code, drop the ()). How does it work?
 
-```{r info_dplyr_near, eval=FALSE}
+```{r 14-info_dplyr_near, eval=FALSE}
 dplyr::near()
 ```
 
@@ -221,14 +223,14 @@ It doesn't check equality as I first thought, but it checks if two numbers are w
 
 3. A logical vector can take 3 possible values. How many possible values can an integer vector take? How many possible values can a double take? Use google to do some research.
 
-```{r possible_values_numeric, eval=FALSE}
+```{r 14-possible_values_numeric, eval=FALSE}
 help(integer)
 help(double)
 ```
 
 For integers vectors, R uses a 32-bit representation. I.e., it can represent $2^{32}$ different values with the integers. But one of these values is set aside for `NA_integer_`.
 
-```{r max_integer_value, eval=FALSE}
+```{r 14-max_integer_value, eval=FALSE}
 .Machine$integer.max
 .Machine$integer.max + 1L
 ```
@@ -239,7 +241,7 @@ An integer greater than that value, R will return `NA` values.
 
 For double vectors, R uses a 64-bit representation, i.e., they can hold up to $2^{64}$ values. But, some of those values are assigned to special values: `-Inf`, `Inf`, `NA_real_`, and `NaN`.
 
-```{r max_idouble_value, eval=FALSE}
+```{r 14-max_idouble_value, eval=FALSE}
 .Machine$double.xmax
 ```
 
@@ -259,7 +261,7 @@ The difference between conversion of a double to an integer differs in how they 
   - Round half towards the even integer --> `round()`.
   - Round half towards the odd integer.
   
-```{r rounding_double, eval=FALSE}
+```{r 14-rounding_double, eval=FALSE}
 tibble(
   x = c(1.8, 1.5, 1.2, 0.8, 0.5, 0.2, 
         -0.2, -0.5, -0.8, -1.2, -1.5, -1.8),
@@ -274,23 +276,23 @@ tibble(
 
 `parse_logical()` parses logical values, which can appear as variations of TRUE/FALSE or 1/0.
 
-```{r parse_logical, eval=FALSE}
+```{r 14-parse_logical, eval=FALSE}
 parse_logical(c("TRUE", "FALSE", "1", "0", "true", "t", "NA"))
 ```
 
 `parse_integer()` parses integer values.
 
-```{r parse_integer, eval=FALSE}
+```{r 14-parse_integer, eval=FALSE}
 parse_integer(c("1235", "0134", "NA"))
 ```
 
 In case of any non-numeric characters in the string such as commas, decimals, `parse_integer()` will throw an error unlike `parse_numeric()` which ignores all the non-numeric characters before or after the first number.
 
-```{r parse_integer_nonNumeric, eval=FALSE}
+```{r 14-parse_integer_nonNumeric, eval=FALSE}
 parse_integer(c("1000", "$1,000", "10.00"))
 ```
 
-```{r parse_numeric_nonNumeric, eval=FALSE}
+```{r 14-parse_numeric_nonNumeric, eval=FALSE}
 parse_number(c("1.0", "3.5", "$1,000.00", "NA", "ABCD12234.90", "1234ABC", "A123B", "A1B2C"))
 ```
 
@@ -315,7 +317,7 @@ parse_number(c("1.0", "3.5", "$1,000.00", "NA", "ABCD12234.90", "1234ABC", "A123
 - An important type of implicit coercion: using a logical vector in a numeric context. 
   - `TRUE` is converted to `1` and `FALSE` is converted to `0`. Hence, summing the logical vector is the # of trues and the mean of a logical vector is the proportion of trues.
   
-```{r implicit_coerce_logical_to_numeric, eval=FALSE}
+```{r 14-implicit_coerce_logical_to_numeric, eval=FALSE}
 x <- sample(20, 100, replace = TRUE)
 y <- x > 10
 sum(y)  # how many are greater than 10?
@@ -325,7 +327,7 @@ mean(y) # what proportion are greater than 10?
 
 Or, some code that relies  on implicit coercion in the opposite direction, from integer to logical:
 
-```{r implicit_coerce_numeric_to_logical, eval=FALSE}
+```{r 14-implicit_coerce_numeric_to_logical, eval=FALSE}
 if (length(x)) {
   # do something
 }
@@ -335,7 +337,7 @@ Here, 0 is converted to `FALSE` and everything else is converted to `TRUE`. For 
 
 > NOTE1: When we create a vector containing multiple types with `c()`: the most complex type always wins. --> *Aha moment!*
 
-```{r coerce_vector_with_multiple_types, eval=FALSE}
+```{r 14-coerce_vector_with_multiple_types, eval=FALSE}
 typeof(c(TRUE, 1L)) #integer wins
 
 typeof(c(1L, 1.5)) #double wins 
@@ -363,7 +365,7 @@ typeof(c(1.5, "a")) #character wins
 - Mostly useful when we are mixing vectors and "scalars". Note, R doesn't have scalars instead, a single number is a vector of length 1.
   - Since there are no scalars, most built-in functions are **vectorised** meaning that they will operate on a vector of numbers. Hence, such a code will work:
   
-```{r scalars, eval=FALSE}
+```{r 14-scalars, eval=FALSE}
 sample(10) + 100
 
 runif(10) > 0.5
@@ -371,7 +373,7 @@ runif(10) > 0.5
 
 - What happens if we add two vectors of different lengths?
 
-```{r adding_vectors_with_lengths_differ, eval=FALSE}
+```{r 14-adding_vectors_with_lengths_differ, eval=FALSE}
 1:10 + 1:2
 ```
 
@@ -379,13 +381,13 @@ R expands the shortest vector to the same length as the longest --> recycling.
 
 But what if the length of the longer is not an integer multiple of the length of the shorter:
 
-```{r adding_vec_with_lengths_differ_not_multiple, eval=FALSE}
+```{r 14-adding_vec_with_lengths_differ_not_multiple, eval=FALSE}
 1:10 + 1:3
 ```
 
 Vector recycling can silently conceal the problem, hence, the vectorised functions in tidyverse will throw errors when recycling anything other than a scalar. We can use `rep()` to do recycling ourselves.
 
-```{r adding_cols_with_lengths_differ, eval=FALSE}
+```{r 14-adding_cols_with_lengths_differ, eval=FALSE}
 tibble(x = 1:4, y = 1:2)
 
 tibble(x = 1:4, y = rep(1:2, 2))
@@ -397,13 +399,13 @@ tibble(x = 1:4, y = rep(1:2, each = 2))
 
 - We can name all types of vectors during creation with `c()`:
 
-```{r naming_vec_at_creation, eval=FALSE}
+```{r 14-naming_vec_at_creation, eval=FALSE}
 c(x = 1, y = 2, z = 4)
 ```
 
 - Or, with `purrr::set_names()`:
 
-```{r naming_vec_using_purrr, eval=FALSE}
+```{r 14-naming_vec_using_purrr, eval=FALSE}
 set_names(1:3, c("a", "b", "c"))
 ```
 
@@ -417,32 +419,32 @@ set_names(1:3, c("a", "b", "c"))
 
 Subsetting with positive integers keeps the elements at those positions:
 
-```{r subset_vec_positive_integers, eval=FALSE}
+```{r 14-subset_vec_positive_integers, eval=FALSE}
 x <- c("one", "two", "three", "four", "five")
 x[c(3, 2, 5)]
 ```
 
 If we repeat a position, we can actually make a longer output than input:
 
-```{r subset_vec_positive_integers1, eval=FALSE}
+```{r 14-subset_vec_positive_integers1, eval=FALSE}
 x[c(1, 1, 5, 5, 5, 2)]
 ```
 
 Negative values drop the elements at the specified positions:
 
-```{r subset_vec_negative_integers, eval=FALSE}
+```{r 14-subset_vec_negative_integers, eval=FALSE}
 x[c(-1, -3, -5)]
 ```
 
 It’s an error to mix positive and negative values:
 
-```{r subset_vec_positive_and negative_integers, eval=FALSE}
+```{r 14-subset_vec_positive_and negative_integers, eval=FALSE}
 x[c(1, -1)]
 ```
 
 The error message mentions subsetting with zero, which returns no values:
 
-```{r subset_vec_zero, eval=FALSE}
+```{r 14-subset_vec_zero, eval=FALSE}
 x[0]
 ```
 
@@ -450,7 +452,7 @@ This is useful if we want to create unusual data structures to functions with. (
 
 2. Subsetting with a logical vector keeps all values corresponding to a `TRUE` value; often useful in conjunction with the comparison functions.
 
-```{r subset_vec_logical, eval=FALSE}
+```{r 14-subset_vec_logical, eval=FALSE}
 x <- c(10, 3, NA, 5, 8, 1, NA)
 
 # All non-missing values of x
@@ -462,14 +464,14 @@ x[x %% 2 == 0]
 
 3. If you have a named vector, you can subset it with a character vector:
 
-```{r subset_named_vec_with_character_vec, eval=FALSE}
+```{r 14-subset_named_vec_with_character_vec, eval=FALSE}
 x <- c(abc = 1, def = 2, xyz = 5)
 x[c("xyz", "def")]
 ```
 
 We can also use a character vector to duplicate individual entries.
 
-```{r subset_named_vec_with_character_vec1, eval=FALSE}
+```{r 14-subset_named_vec_with_character_vec1, eval=FALSE}
 x[c("xyz", "xyz", "def", "def")]
 ```
 
@@ -483,7 +485,7 @@ An important difference between `[` and `[[` -> `[[` extracts only a single elem
 
 1. What does `mean(is.na(x))` tell you about a vector `x`? What about `sum(!is.finite(x))`?
 
-```{r ex20.4.1_is.na_is_is.finite, eval=FALSE}
+```{r 14-ex20.4.1_is.na_is_is.finite, eval=FALSE}
 x <- c(-Inf, -1, 0, 1, Inf, NA, NaN)
 mean(is.na(x))
 sum(!is.finite(x))
@@ -497,13 +499,13 @@ sum(!is.finite(x))
 
 `is.vector()` checks whether an object has no attributes other than names.
 
-```{r ex20.4.2_is_vector_TRUE, eval=FALSE}
+```{r 14-ex20.4.2_is_vector_TRUE, eval=FALSE}
 is.vector(list(a = 1, b = 2))
 ```
 
 But any object that has an attribute apart from names is not:
 
-```{r ex20.4.2_is_vector_FALSE, eval=FALSE}
+```{r 14-ex20.4.2_is_vector_FALSE, eval=FALSE}
 x <- 1:10
 attr(x, "something") <- TRUE
 is.vector(x)
@@ -511,14 +513,14 @@ is.vector(x)
 
 `is.atomic()` explicitly checks whether an object is one of the atomic types (“logical”, “integer”, “numeric”, “complex”, “character”, and “raw”) or NULL.
 
-```{r ex20.4.2_is_atomic, eval=FALSE}
+```{r 14-ex20.4.2_is_atomic, eval=FALSE}
 is.atomic(1:10)
 is.atomic(list(a = 1))
 ```
 
 `is.atomic()` will consider objects to be atomic even if they have extra attributes.
 
-```{r ex20.4.2_is_atomic_attr, eval=FALSE}
+```{r 14-ex20.4.2_is_atomic_attr, eval=FALSE}
 is.atomic(x)
 ```
 
@@ -526,32 +528,32 @@ is.atomic(x)
 
 `setNames()` takes two arguments, a vector to be named and a vector of names to apply to its elements.
 
-```{r ex20.4.3_setNames_fn, eval=FALSE}
+```{r 14-ex20.4.3_setNames_fn, eval=FALSE}
 setNames(1:4, c("a", "b", "c", "d"))
 setNames(nm = c("a", "b", "c", "d"))
 ```
 
 `set_names()` has more ways to set names than `setNames()`. We can specify the names the same way as `setNames()`:
 
-```{r ex20.4.3_set_names_fn_2, eval=FALSE}
+```{r 14-ex20.4.3_set_names_fn_2, eval=FALSE}
 purrr::set_names(1:4, c("a", "b", "c", "d"))
 ```
 
 The names can also be specified as unnamed arguments:
 
-```{r ex20.4.3_set_names_fn_3, eval=FALSE}
+```{r 14-ex20.4.3_set_names_fn_3, eval=FALSE}
 purrr::set_names(1:4, "a", "b", "c", "d")
 ```
 
 `set_names()` will name an object with itself if no `nm` argument is provided (the opposite of `setNames()` behavior).
 
-```{r ex20.4.3_set_names_fn_4, eval=FALSE}
+```{r 14-ex20.4.3_set_names_fn_4, eval=FALSE}
 purrr::set_names(c("a", "b", "c", "d"))
 ```
 
 The main difference between `set_names()` and `setNames()` is that **`set_names()` allows for using a function or formula to transform the existing names.**
 
-```{r ex20.4.3_set_names_fn_5, eval=FALSE}
+```{r 14-ex20.4.3_set_names_fn_5, eval=FALSE}
 purrr::set_names(c(a = 1, b = 2, c = 3), toupper)
 
 purrr::set_names(c(a = 1, b = 2, c = 3), ~toupper(.))
@@ -559,13 +561,13 @@ purrr::set_names(c(a = 1, b = 2, c = 3), ~toupper(.))
 
 `set_names()` function also checks that the length of the names argument is the same length as the vector that is being named, and will raise an error if it is not.
 
-```{r ex20.4.3_set_names_fn_6, eval=FALSE}
+```{r 14-ex20.4.3_set_names_fn_6, eval=FALSE}
 purrr::set_names(1:4, c("a", "b"))
 ```
 
 `setNames()` function will allow the names to be shorter than the vector being named, and will set the missing names to `NA`.
 
-```{r ex20.4.3_setNames_fn_7, eval=FALSE}
+```{r 14-ex20.4.3_setNames_fn_7, eval=FALSE}
 setNames(1:4, c("a", "b"))
 ```
 
@@ -589,14 +591,14 @@ setNames(1:4, c("a", "b"))
   - Hence, suitable to represent hierarchical or tree-like structures.
 - Use `list()` to create lists.
 
-```{r create_lists, eval=FALSE}
+```{r 14-create_lists, eval=FALSE}
 (xl <- list(1, 2, 3))
 
 ```
 
 - We use the function `str()` to assess the structure.
 
-```{r str_lists, eval=FALSE}
+```{r 14-str_lists, eval=FALSE}
 str(xl)
 dplyr::glimpse(xl)
 #seems one and the same thing?
@@ -604,21 +606,21 @@ dplyr::glimpse(xl)
 
 - Lists can be named:
 
-```{r naming_lists, eval=FALSE}
+```{r 14-naming_lists, eval=FALSE}
 xl_named <- list(a = 1, b = 2, c = 3)
 str(xl_named)
 ```
 
 - `list()` can contain a mix of objects unlike atomic vectors.
 
-```{r lists_with_mix_objects, eval=FALSE}
+```{r 14-lists_with_mix_objects, eval=FALSE}
 yl <- list("a", 1L, 1.5, TRUE)
 str(yl)
 ```
 
 - Lists can contain other lists!
 
-```{r lists_within_lists, eval=FALSE}
+```{r 14-lists_within_lists, eval=FALSE}
 zl <- list(list(1, 2), list(3, 4))
 str(zl)
 ```
@@ -627,7 +629,7 @@ str(zl)
 
 - Let's see a visual representation of lists. E.g., 
 
-```{r visual_rep_lists, eval=FALSE}
+```{r 14-visual_rep_lists, eval=FALSE}
 x1 <- list(c(1, 2), c(3, 4))
 x2 <- list(list(1, 2), list(3, 4))
 x3 <- list(1, list(2, list(3)))
@@ -649,13 +651,13 @@ There are three principles:
 
 - We can subset lists using three ways, let's see the example below.
 
-```{r subsetting_lists, eval=FALSE}
+```{r 14-subsetting_lists, eval=FALSE}
 a <- list(a = 1:3, b = "a string", c = pi, d = list(-1, -5))
 ```
 
 1. `[` extracts a sub-list. And the result will always be a list.
 
-```{r str_sublists1, eval=FALSE}
+```{r 14-str_sublists1, eval=FALSE}
 str(a[1:2])
 
 str(a[4])
@@ -664,7 +666,7 @@ We can also subset lists with a logical, integer or character vector as seen in 
 
 2. `[[` extracts a single component from a list. It removes a level of hierarchy from the list.
 
-```{r str_sublists2, eval=FALSE}
+```{r 14-str_sublists2, eval=FALSE}
 str(a[[1]])
 
 str(a[[4]])
@@ -672,7 +674,7 @@ str(a[[4]])
 
 3. `$` is a shorthand to extract named elements of a list. It works similarly to `[[` except that you don’t need to use quotes.
 
-```{r subsetting_named_lists, eval=FALSE}
+```{r 14-subsetting_named_lists, eval=FALSE}
 a$a
 
 a[["a"]]
@@ -708,7 +710,7 @@ a[["a"]]
 
 1. Draw the following lists as nested sets:
 
-```{r ex20.5.1_draw_lists, eval = FALSE}
+```{r 14-ex20.5.1_draw_lists, eval = FALSE}
 list(list(list(list(list(list(a))))))
 list(a, b, list(c, d), list(e, f))
 ```
@@ -728,7 +730,7 @@ Subsetting a tibble works the same way as a list; a data frame can be thought of
 
 The key difference between a list and a tibble -> **all the elements (columns) of a tibble must have the same length (number of rows). Lists can have vectors with different lengths as elements.**
 
-```{r ex20.5.2_diff_lists_tibbles, eval=FALSE}
+```{r 14-ex20.5.2_diff_lists_tibbles, eval=FALSE}
 x <- tibble(a = 1:2, b = 3:4)
 x[["a"]]
 x["a"]
@@ -742,7 +744,7 @@ x[1, ]
   - Can be thought as named list of vectors that can be attached to any object.
 - We can get and set individual attribute values with `attr()` or see them all at once with `attributes()`.
 
-```{r attributes, eval=FALSE}
+```{r 14-attributes, eval=FALSE}
 x <- 1:10
 attr(x, "greeting")
 attr(x, "greeting") <- "Hi!"
@@ -761,7 +763,7 @@ attributes(x)
   - Generic functions are key to object programming since they make functions behave differently for different classes of input. The discussion of object programming is covered in details in Advanced R: http://adv-r.had.co.nz/OO-essentials.html#s3
 - An example of generic function:
 
-```{r generic_fn, eval=FALSE}
+```{r 14-generic_fn, eval=FALSE}
 as.Date
 ```
 
@@ -771,18 +773,18 @@ as.Date
 
 - To list all the methods for a generic, use `methods()`:
 
-```{r method_generic_fn, eval=FALSE}
+```{r 14-method_generic_fn, eval=FALSE}
 methods("as.Date")
 ```
 
 - For example, if `x` is a character vector, `as.Date()` will call `as.Date.character()`; if it’s a factor, it’ll call `as.Date.factor().`
 - We can see the specific implementation of a method with `getS3method()`:
 
-```{r implementation_of_method_default, eval=FALSE}
+```{r 14-implementation_of_method_default, eval=FALSE}
 getS3method("as.Date", "default")
 ```
 
-```{r implementation_of_method_numeric, eval=FALSE}
+```{r 14-implementation_of_method_numeric, eval=FALSE}
 getS3method("as.Date", "numeric")
 ```
 
@@ -805,7 +807,7 @@ getS3method("as.Date", "numeric")
 - They are designed to represent categorical data that can take a fixed set of possible values.
 - They are built on top of integers and have a levels attribute:
 
-```{r augmented_factors, eval=FALSE}
+```{r 14-augmented_factors, eval=FALSE}
 x_factor <- factor(c("ab", "cd", "ab"), levels = c("ab", "cd", "ef"))
 typeof(x_factor)
 attributes(x_factor)
@@ -815,7 +817,7 @@ attributes(x_factor)
 
 - In R, dates are numeric vectors that represent the number of days since 1 January 1970.
 
-```{r augmented_dates, eval=FALSE}
+```{r 14-augmented_dates, eval=FALSE}
 x_date <- as.Date("1971-01-01")
 unclass(x_date)
 
@@ -827,7 +829,7 @@ attributes(x_date)
 
 > Note: "POSIXct” stands for “Portable Operating System Interface”, calendar time.
 
-```{r augmented_date_time, eval=FALSE}
+```{r 14-augmented_date_time, eval=FALSE}
 x_date_time <- lubridate::ymd_hm("1970-01-01 01:00")
 unclass(x_date_time)
 
@@ -838,7 +840,7 @@ attributes(x_date_time)
 
 The `tzone` attribute is optional--> controls how the time is printed, not what absolute time it refers to.
 
-```{r augmented_date_time_tzone, eval=FALSE}
+```{r 14-augmented_date_time_tzone, eval=FALSE}
 attr(x_date_time, "tzone") <- "US/Pacific"
 x_date_time
 
@@ -851,7 +853,7 @@ x_date_time
 
 - Another type of date-times called POSIXlt which are built on top of named lists:
 
-```{r augmented_date_time_POSIXlt, eval=FALSE}
+```{r 14-augmented_date_time_POSIXlt, eval=FALSE}
 y_date_time <- as.POSIXlt(x_date_time)
 typeof(y_date_time)
 attributes(y_date_time)
@@ -868,7 +870,7 @@ POSIXct’s are always easier to work with, so if we have a POSIXlt, we should a
 - Tibbles are augmented lists.
   - They have class “tbl_df” + “tbl” + “data.frame”, and names (column) and row.names attributes:
   
-```{r augmented_tibbles, eval=FALSE}
+```{r 14-augmented_tibbles, eval=FALSE}
 tb <- tibble::tibble(x = 1:5, y = 5:1)
 typeof(tb)
 attributes(tb)
@@ -879,7 +881,7 @@ attributes(tb)
     - All functions that work with tibbles enforce this constraint.
 - Traditional data.frames have a very similar structure:
 
-```{r augmented_df, eval=FALSE}
+```{r 14-augmented_df, eval=FALSE}
 df <- data.frame(x = 1:5, y = 5:1)
 typeof(df)
 attributes(df)
@@ -893,7 +895,7 @@ The class of tibble includes “data.frame” which means tibbles inherit the re
 
 1. What does hms::hms(3600) return? How does it print? What primitive type is the augmented vector built on top of? What attributes does it use?
 
-```{r ex20.7.1_hms, eval=FALSE}
+```{r 14-ex20.7.1_hms, eval=FALSE}
 (x <- hms::hms(3600))
 class(x)
 
@@ -906,13 +908,13 @@ The attributes it uses are **units** and **class**
 
 2. Try and make a tibble that has columns with different lengths. What happens?
 
-```{r ex20.7.2_1_scalar, eval=FALSE}
+```{r 14-ex20.7.2_1_scalar, eval=FALSE}
 tibble(x = 1, y = 1:5)
 ```
 
 The "scalar" 1 is recycled to the length of the longer vector.
 
-```{r ex20.7.2_2_tibbles_cols_diff_lengths, eval=FALSE}
+```{r 14-ex20.7.2_2_tibbles_cols_diff_lengths, eval=FALSE}
 tibble(x = 1:3, y = 1:4)
 ```
 
@@ -920,7 +922,7 @@ Creating a tibble with two vectors of different lengths will give an error.
 
 3. Based on the definition above, is it ok to have a list as a column of a tibble?
 
-```{r ex20.7.3_lists_within_tibbles, eval=FALSE}
+```{r 14-ex20.7.3_lists_within_tibbles, eval=FALSE}
 tibble(x = 1:3, y = list("a", 1, list(1:3)))
 ```
 

@@ -46,7 +46,7 @@ In the next chapters we will see how modeling is an important part of the explor
   - Alternatively, you can refer to a package every time you use it, such as `ggplot2::ggplot()`. "ggplot2" is the package, "ggplot()" is the function call, "::" tells R "look up this function in this package."
   
 
-```{r library}
+```{r 02-library}
 library(tidyverse)
 ```
 
@@ -64,7 +64,7 @@ library(tidyverse)
 The `{ggplot2}` package is one of the `{tidyverse}` packages, it lets us build up plots layer by layer. 
 
 
-```{r 03-02, echo=FALSE, fig.align='center', fig.cap='ggplot2 package', out.width='25%'} 
+```{r 02-02, echo=FALSE, fig.align='center', fig.cap='ggplot2 package', out.width='25%'} 
 knitr::include_graphics("images/ggplot2_logo.png")
 ```
 
@@ -91,7 +91,7 @@ Other little things brought out here:
 
 After having loaded the library you can start building your plot. Let's start with making an empty plot:
 
-```{r 03-03}
+```{r 02-03}
 ggplot() +
   geom_blank() 
 ```
@@ -153,14 +153,14 @@ As an example we load the data provided in {ggplot2}:
     ggplot2::mpg    
     
 Display the data head of the first 3 rows:
-```{r 03-04}
+```{r 02-04}
 head(mpg,3)
 ```
     
 
 Add a <GEOM_FUNCTION> to `ggplot(<DATA>)` with:
 
-```{r 03-05}
+```{r 02-05}
 ggplot(data=mpg) +
   geom_point(mapping = aes(x = displ, y = hwy), color = "blue")
 ```
@@ -172,7 +172,7 @@ Here the color appears outside the **mapping** but what if it will be set inside
 A super common error: Trying to set the color *inside* the `aes` call results in random effects because `aes()` automatically figures out the necessary **scale** for your data.
   
   
-```{r 03-bad-mapping}
+```{r 02-bad-mapping}
 ggplot(data = mpg) + 
   geom_point(mapping = aes(x = displ, y = hwy, color = "blue"))
 ```
@@ -243,7 +243,7 @@ There are 2 versions of this function in `ggplot2`:
     facet_wrap() the variable that you pass to facet_wrap() should be discrete
     facet_grid() the formula should contain two variable names separated by a ~
 
-```{r 03-07}
+```{r 02-07}
 ggplot(data = mpg) + 
   geom_point(mapping = aes(x = displ, y = hwy)) + 
   facet_wrap(~ class, nrow = 2)
@@ -261,7 +261,7 @@ You can either use `~` or `vars()`
 
 - Lots of geoms use transformed data. For example, `geom_bar(aes(x = cut))` calculates a count for each `cut`.
 
-```{r 03-counts}
+```{r 02-counts}
 ggplot(data = diamonds) + 
   geom_bar(mapping = aes(x = cut))
 ```
@@ -280,7 +280,7 @@ ggplot(data = diamonds) +
   - Sample values include "stack", "identity", "fill", "dodge", and "jitter".
 - `geom_jitter()` is a shortcut for `geom_point(position = "jitter")` because it's super useful.
 
-```{r 03-jitter}
+```{r 02-jitter}
 dat <- tibble(
   x = rep(1:3, 3),
   y = rep(1:3, 3)
@@ -293,7 +293,7 @@ ggplot(dat, aes(x, y)) +
 
 - Use `width` and `height` arguments of `geom_jitter` to more specifically specify range.
 
-```{r 03-jitter2}
+```{r 02-jitter2}
 ggplot(dat, aes(x, y)) +
   geom_jitter(width = 0.1, height = 0.5)
 ```
@@ -330,7 +330,7 @@ By default, `{ggplot}` uses `coord_cartesian()` but you can add other functions:
 
 Once your data are imported, tidied and transformed adeguately for obtaing desired visualization you can start setting up a plot with extra features:
 
-```{r 03-theme, eval = FALSE}
+```{r 02-theme, eval = FALSE}
 ?theme
 ```
 
@@ -348,7 +348,7 @@ It is possible to add a `theme()` function to your `ggplot`, this is done to cus
 
 For example if you would like to customize the background of your plot:
 
-```{r 03-12}
+```{r 02-12}
 ggplot() +
   geom_blank() +
   theme(plot.background = element_rect(color = "red", size = 2, fill = "gold"),
@@ -375,7 +375,7 @@ just to name a few, those function then can be further customize by adding the `
 
 `{ggplot}` implements the "layered grammar of graphics."
 
-```{r 03-gg, eval = FALSE}
+```{r 02-gg, eval = FALSE}
 ggplot(data = <DATA>) + 
   <GEOM_FUNCTION>(
      mapping = aes(<MAPPINGS>),

@@ -33,7 +33,7 @@ Conceptually, everything we do in R is a series of commands. The console is wher
 
 By default, entering `<thing>` means "print out `<thing>`."
 
-```{r 04-01}
+```{r 03-01}
 4
 ```
 
@@ -41,13 +41,13 @@ By default, entering `<thing>` means "print out `<thing>`."
 
 R has some pre-defined named objects:
 
-```{r 04-02}
+```{r 03-02}
 pi
 ```
 
 This one is surprisingly useful:
 
-```{r 04-03}
+```{r 03-03}
 letters
 ```
 
@@ -55,7 +55,7 @@ letters
 
 What it means to "print out" a thing depends on what kind of thing it is.
 
-```{r 04-05}
+```{r 03-05}
 ggplot2::diamonds
 ```
 
@@ -63,13 +63,13 @@ ggplot2::diamonds
 
 Actually, entering `<thing>` really means "**evaluate** and print `<thing>`."
 
-```{r 04-06}
+```{r 03-06}
 cos(pi)
 ```
 
 I use R as a desktop calculator a lot.
 
-```{r 04-07}
+```{r 03-07}
 60*60*24
 ```
 
@@ -79,7 +79,7 @@ I use R as a desktop calculator a lot.
 Sometimes you don't just want to print out a thing, especially if it's a complex evaluation. You want to save it to a named object so that you can do more stuff with it. 
 Use the assignment arrow (`<-`) for this.
 
-```{r 04-08}
+```{r 03-08}
 tau <- 2*pi
 ```
 
@@ -91,7 +91,7 @@ Objects that you have named will show up in the "Environment" panel.
 
 By default, when you make an assignment, the result of the evaluation **is not** printed in the console. To assign **and** print in one command, surround the assignment with parentheses:
 
-```{r 04-09}
+```{r 03-09}
 (tau <- 2*pi)
 ```
 
@@ -131,13 +131,13 @@ A function in R is like a function in math: it's a box that takes in input and r
 
 Functions can take zero, one, or more than one object as input. When you *call* a function, you specify values (*arguments*) for the inputs. Evaluating the function call gives the output of the function.
 
-```{r 04-10}
+```{r 03-10}
 length(letters)
 ```
 
 Or:
 
-```{r 04-12}
+```{r 03-12}
 nrow(ggplot2::diamonds)
 ```
 
@@ -145,19 +145,19 @@ nrow(ggplot2::diamonds)
 
 The inputs (the function *parameters*) have names. When you pass in the function arguments, you can do so by name:
 
-```{r 04-13}
+```{r 03-13}
 seq(from = 1, to = 10)
 ```
 
 Specifying names is (usually) optional, but it can make your code more readable, so it's a good habit to get into. If you name the arguments, it doesn't matter what order you put them in:
 
-```{r 04-14}
+```{r 03-14}
 seq(to = 10, from = 1)
 ```
 
 If you don't specify names, the function matches the arguments to the parameters in the order they appear in the function definition.
 
-```{r 04-15}
+```{r 03-15}
 seq(10, 1)
 ```
 

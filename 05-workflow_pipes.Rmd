@@ -1,4 +1,4 @@
-# Pipes
+# Workflow: Pipes
 
 **Learning objectives:**
 
@@ -13,7 +13,7 @@
 - If you use ***ANY*** tidyverse libraries, `{magrittr}` is already included (how to validate this statement)
 - For learning humans... read the `%>%` operator as semantically: *and then*
 
-```{r, Loading magrittr, eval=FALSE}
+```{r, 05-Loading magrittr, eval=FALSE}
 library(magrittr)
 ```
 
@@ -22,7 +22,7 @@ library(magrittr)
 
 The following example will highlight a code snippet **without** piping (Object Assignment and Nested) and **with** piping.
 
-```{r, Example without Pipe, eval = FALSE}
+```{r, 05-Example without Pipe, eval = FALSE}
 a <- dplyr::filter(mtcars, carb > 1)
 b <- dplyr::group_by(a, cyl)
 c <- dplyr::summarise(b, Avg_mpg = mean(mpg))
@@ -34,7 +34,7 @@ Above, objects `a-d` are created as "placeholders". Objects that are nothing mor
 > One of my favorite talks: [Jenny Bryant at Plotcon, 2016](https://youtu.be/4MfUCX_KpdE). Specific to the topic, start at min 15:00. The discussion is related to Dataframes and the key takeaway is wrangle your data once.
 
 But couldn't I just nest my function?
-```{r, Nested Call, eval = FALSE}
+```{r, 05-Nested Call, eval = FALSE}
 dplyr::arrange(
    dplyr::summarize(
        dplyr::group_by(
@@ -49,7 +49,7 @@ dplyr::arrange(
 Nesting a long function is acceptable and in some languages preferred. However, given the structure of RStudio and its plethora of packages, there is no need.
 
 Using the Pipe
-```{r, Example with Pipe, eval=FALSE}
+```{r, 05-Example with Pipe, eval=FALSE}
 mtcars %>%
         dplyr::filter(carb > 1) %>%
         dplyr::group_by(cyl) %>%
@@ -96,7 +96,7 @@ Alternative Pipes
   - When working with more complex pipes, it's sometimes useful to call a function for its side-effects
     - Returns the left-hand side instead of the right-hand side
   
-```{r, Tee Pipe, include=TRUE}
+```{r, 05-Tee Pipe, include=TRUE}
 library(magrittr)
 rnorm(100) %>%
   matrix(ncol = 2) %>%
@@ -113,7 +113,7 @@ rnorm(100) %>%
 - **Exposition** pipe: `%$%`
   - It *explodes* out the variables in a data frame so that you can refer to them explicitly
  
-```{r, Exposition Pipe, include = TRUE}
+```{r, 05-Exposition Pipe, include = TRUE}
 # Output the correlation of `disp` to `mpg`
 mtcars %$%
   cor(disp, mpg)
@@ -122,14 +122,14 @@ mtcars %$%
 - **Assignment** pipe: `%<>%`
   - Allows you to replace code
  
-```{r, Without Assignment, include = TRUE}
+```{r, 05-Without Assignment, include = TRUE}
 mtcars <- mtcars %>% 
   transform(cyl = cyl * 2)
 ```
 
 Using the Assignment Operator `%<>%`
 
-```{r, With Assignment, include = TRUE}
+```{r, 05-With Assignment, include = TRUE}
 mtcars %<>% transform(cyl = cyl * 2)
 ```
 

@@ -18,21 +18,21 @@ dplyr is a package that provides functions to manipulate data frames. Data frame
 
 dplyr is part of the tidyverse. You can install and load the all the packages from tidyverse (ggplot2, dplyr, tidyr, readr, purrr, tibble, stringr, forcats)
 
-```{r 05-01, eval=FALSE}
+```{r 04-01, eval=FALSE}
 install.packages("tidyverse")
 ```
 
-```{r 05-02}
+```{r 04-02}
 library(tidyverse)
 ```
 
 Or just install and load dplyr.
 
-```{r 05-03, eval=FALSE}
+```{r 04-03, eval=FALSE}
 install.packages("dplyr")
 ```
 
-```{r 05-04}
+```{r 04-04}
 library(dplyr)
 ```
 
@@ -40,11 +40,11 @@ library(dplyr)
 
 The data set `nycflights13` contains data about flights that departed New York City in 2013.
 
-```{r 05-05, eval=FALSE}
+```{r 04-05, eval=FALSE}
 install.packages("nycflights13")
 ```
 
-```{r 05-06}
+```{r 04-06}
 library(nycflights13)
 ```
 
@@ -52,24 +52,24 @@ When you use data set for the first time, it's good practice to quickly browse t
 
 To view the flights data in the R console.  .
 
-```{r 05-07}
+```{r 04-07}
 flights
 ```
 To view the flights data in a spreadsheet-like viewer.
 
-```{r 05-08, eval=FALSE}
+```{r 04-08, eval=FALSE}
 View(flights)
 ```
 
 Use `?flights` to open the help viewer to get info about all the variables.
 
-```{r 05-09, eval=FALSE}
+```{r 04-09, eval=FALSE}
 ?flights
 ```
 
 Check the size of the flights data frame using `nrow()`, `ncol()`, `length()`, and `dim()`.
 
-```{r 05-10, eval=FALSE}
+```{r 04-10, eval=FALSE}
 # number of rows
 nrow(flights)
 # [1] 336776
@@ -89,7 +89,7 @@ dim(flights)
 
 get the column names with `colnames()`
 
-```{r 05-11}
+```{r 04-11}
 colnames(flights)
 ```
 
@@ -109,7 +109,7 @@ In math we use `=` for equality. In programming we use `==` for equality, and `=
 
 compare numbers
 
-```{r 05-12, eval=FALSE}
+```{r 04-12, eval=FALSE}
 1 > 2
 # [1] FALSE
 1 >= 2
@@ -126,7 +126,7 @@ compare numbers
 
 compare characters
 
-```{r 05-13, eval=FALSE}
+```{r 04-13, eval=FALSE}
 'a' > 'b'
 # [1] FALSE
 'a' >= 'b'
@@ -143,7 +143,7 @@ compare characters
 
 Case matters when comparing characters. For English, lowercase letters are less than uppercase letters.
 
-```{r 05-14, eval=FALSE}
+```{r 04-14, eval=FALSE}
 'a' > 'A'
 # [1] FALSE
 'a' >= 'A'
@@ -162,7 +162,7 @@ We can change case when comparing characters.
 
 `tolower()` will change characters to lower case. `toupper()` will change characters to upper case.
 
-```{r 05-15, eval=FALSE}
+```{r 04-15, eval=FALSE}
 tolower('A')
 # [1] "a"
 
@@ -171,7 +171,7 @@ toupper('a')
 ```
 
 
-```{r 05-16, eval=FALSE}
+```{r 04-16, eval=FALSE}
 'a' == tolower('A')
 # [1] TRUE
 
@@ -183,7 +183,7 @@ toupper('a') == 'A'
 
 `&` and; all expressions must be true in order to return true
 
-```{r 05-17, eval=FALSE}
+```{r 04-17, eval=FALSE}
 TRUE & TRUE
 # [1] TRUE
 TRUE & FALSE
@@ -192,7 +192,7 @@ TRUE & FALSE
 
 `|` or; one or more expressions must be true in order to return true; `|` is the key above the return key, not lowercase letter l.
 
-```{r 05-18, eval=FALSE}
+```{r 04-18, eval=FALSE}
 TRUE | TRUE
 # [1] TRUE
 TRUE | FALSE
@@ -201,7 +201,7 @@ TRUE | FALSE
 
 `!` not; negate the expression
 
-```{r 05-19, eval=FALSE}
+```{r 04-19, eval=FALSE}
 !TRUE
 # [1] FALSE
 !FALSE
@@ -212,14 +212,14 @@ TRUE | FALSE
 
 assign objects
 
-```{r 05-20}
+```{r 04-20}
 a <- 1
 b <- 5
 ```
 
 compare object and numbers
 
-```{r 05-21, eval=FALSE}
+```{r 04-21, eval=FALSE}
 a < 3
 # [1] TRUE
 a > 3
@@ -232,7 +232,7 @@ a != 3
 
 compare objects
 
-```{r 05-22, eval=FALSE}
+```{r 04-22, eval=FALSE}
 a < b
 # [1] TRUE
 a > b
@@ -245,7 +245,7 @@ a != b
 
 comparison and logical operators
 
-```{r 05-23, eval=FALSE}
+```{r 04-23, eval=FALSE}
 
 a > 3
 # [1] FALSE
@@ -271,52 +271,52 @@ The first argument to `filter()` is a data frame, the subsequent arguments are t
 
 Combine comparisons and logical operators on the columns to select rows.
 
-```{r 05-24}
+```{r 04-24}
 # number of rows and columns
 dim(flights)
 ```
 
-```{r 05-25}
+```{r 04-25}
 # get the column names
 colnames(flights)
 ```
 
-```{r 05-26}
+```{r 04-26}
 # select flights from November
 filter(flights, month == 11)
 ```
 `A tibble: 27,268 × 19` tells you 27,268 rows match the criteria
 
 
-```{r 05-27}
+```{r 04-27}
 # select flights from December
 filter(flights, month == 12)
 ```
 
-```{r 05-28}
+```{r 04-28}
 # select flights not from December (e.g. January to November)
 filter(flights, month != 12)
 ```
 
-```{r 05-29}
+```{r 04-29}
 # select flights from November or December
 filter(flights, month == 11 | month == 12)
 ```
 `&` (and)  vs `|` (or)
 
-```{r 05-30}
+```{r 04-30}
 # select flights from November or from 1st day of any month
 filter(flights, month == 11 | day == 1)
 ```
 
-```{r 05-31}
+```{r 04-31}
 # select flights from November 1st
 filter(flights, month == 11 & day == 1)
 ```
 
 If you provide multiple comma-separated expressions, dplyr will automatically use `&` to combine the expressions.
 
-```{r 05-32, eval=FALSE}
+```{r 04-32, eval=FALSE}
 # both will select flights from November 1st
 
 filter(flights, month == 11 & day == 1)
@@ -326,7 +326,7 @@ filter(flights, month == 11, day == 1)
 
 dplyr functions do not change the original data. To save the results from a function, you need to assign the results to a object.
 
-```{r 05-33, eval=FALSE}
+```{r 04-33, eval=FALSE}
 nov1 <- filter(flights, month == 11, day == 1)
 
 nrow(nov1)
@@ -343,7 +343,7 @@ Often times, rows will not have data for certain columns. In spreadsheets, csv, 
 
 Operations with `NA` will return `NA`.
 
-```{r 05-34, eval=FALSE}
+```{r 04-34, eval=FALSE}
 NA > 5
 # [1] NA
 
@@ -362,7 +362,7 @@ NA == NA
 
 To check if value is missing use `is.na()`
 
-```{r 05-35, eval=FALSE}
+```{r 04-35, eval=FALSE}
 is.na(NA)
 # [1] TRUE
 ```
@@ -371,19 +371,19 @@ By default, `filter()` excludes `NA` values. To include `NA` values, you must ad
 
 tibble is the tidyverse version of a data frame. tibble haves some extra functions that normal data frames do not have.
 
-```{r 05-36}
+```{r 04-36}
 # create a tibble with a column named "x", with 3 values
 df <- tibble(x = c(1, NA, 3))
 df
 ```
 
 
-```{r 05-37}
+```{r 04-37}
 # select rows with values greater than 1
 filter(df, x > 1)
 ```
 
-```{r 05-38}
+```{r 04-38}
 # select rows with NA or values greater than 1
 filter(df, is.na(x) | x > 1)
 ```
@@ -396,26 +396,26 @@ Ascending (small to big) is the default order.
 
 Use `desc()` for descending order (big to small).
 
-```{r 05-39}
+```{r 04-39}
 # sort flights by depature delay using ascending order
 arrange(flights, dep_delay)
 ```
 
-```{r 05-40}
+```{r 04-40}
 # sort flights by depature delay using descending order.
 arrange(flights, desc(dep_delay))
 ```
 
 sort by multiple columns
 
-```{r 05-41}
+```{r 04-41}
 # sort flights by year, month, and day using ascending order
 arrange(flights, year, month, day)
 ```
 
 `arrange()` puts `NA` values at the end.
 
-```{r 05-42}
+```{r 04-42}
 # create tibble with 3 values
 df <- tibble(x = c(1, NA, 3))
 
@@ -427,24 +427,24 @@ arrange(df, x)
 
 `select()` lets you pick which columns (variables) to use. The first argument to `select()` is a data frame, the subsequent arguments are columns to use.
 
-```{r 05-43}
+```{r 04-43}
 # colnames() retrieves the column names
 colnames(flights)
 ```
 
 the order you list the columns will determine the order of the columns returned by `select()`.
 
-```{r 05-44}
+```{r 04-44}
 # select year, month, and day columns.
 select(flights, year, month, day)
 ```
 
-```{r 05-45}
+```{r 04-45}
 # use ':' to select columns from year to day (inclusive).
 select(flights, year:day)
 ```
 
-```{r 05-46}
+```{r 04-46}
 # use '-' to select columns except from year to day (inclusive).
 select(flights, -(year:day))
 ```
@@ -453,28 +453,28 @@ helper functions for `select()`
 
 `starts_with()`
 
-```{r 05-47}
+```{r 04-47}
 # select columns that start with "dep"
 select(flights, starts_with("dep"))
 ```
 
 `ends_with()`
 
-```{r 05-48}
+```{r 04-48}
 # select columns that end with "delay"
 select(flights, ends_with("delay"))
 ```
 
 `contains()`
 
-```{r 05-49}
+```{r 04-49}
 # select columns that contain  "dep"
 select(flights, contains("dep"))
 ```
 
 `matches()`
 
-```{r 05-50}
+```{r 04-50}
 # select columns that matches regular expression.
 # "^a(.)r" means it starts with a, has any character, and then r.
 select(flights, matches("^a(.)r"))
@@ -482,7 +482,7 @@ select(flights, matches("^a(.)r"))
 
 `num_range()`
 
-```{r 05-51}
+```{r 04-51}
 # create tibble with columns x1, x2, x3, x4
 df <- tibble(x1 = c(1, 2), x2 = c(2, 3), x3 = c(4, 5), x4 = c(6, 7))
 
@@ -492,7 +492,7 @@ select(df, num_range("x", 1:3))
 
 `rename()` changes the column names. `rename(data_frame, new_name = old_name)`
 
-```{r 05-52}
+```{r 04-52}
 # rename the column dep_time to departure_time
 
 rename(flights, departure_time = dep_time)
@@ -500,7 +500,7 @@ rename(flights, departure_time = dep_time)
 
 use `select()` and `everything()` to move some columns to start of the dataframe
 
-```{r 05-53}
+```{r 04-53}
 # rearrange columns to time_hour, air_time, rest of the columns
 select(flights, time_hour, air_time, everything())
 ```
@@ -509,7 +509,7 @@ select(flights, time_hour, air_time, everything())
 
 `mutate()` adds new columns based on values from existing columns. Data frame includes existing and new columns.
 
-```{r 05-54}
+```{r 04-54}
 # create data frame with  7 columns: year, month, day, dep_delay, arr_delay, distance, air_time
 
 flights_7_columns <- select(flights,
@@ -520,7 +520,7 @@ flights_7_columns <- select(flights,
 )
 ```
 
-```{r 05-55}
+```{r 04-55}
 # calculate and add columns for gain, hours, and gain_per_hour
 
 mutate(flights_7_columns,
@@ -532,7 +532,7 @@ mutate(flights_7_columns,
 
 `transmute()` adds new columns based on values from existing columns. Data frame only includes new columns.
 
-```{r 05-56}
+```{r 04-56}
 # calculate and add columns for gain, hours, and gain_per_hour
 transmute(flights_7_columns,
   gain = dep_delay - arr_delay,
@@ -563,7 +563,7 @@ Ranking: `min_rank(x)` gives ranks from smallest to largest. `min_rank(desc(x))`
 
 Testing out various functions to see what they do.
 
-```{r 05-57}
+```{r 04-57}
 transmute(flights,
   dep_time,
   arr_time,
@@ -579,7 +579,7 @@ transmute(flights,
 )
 ```
 
-```{r 05-58}
+```{r 04-58}
 transmute(flights,
   dep_time,
   arr_time,
@@ -601,21 +601,21 @@ transmute(flights,
 
 By default, summarize includes NA values. `summarize()` will return `NA` if any values are `NA`.
 
-```{r 05-59}
+```{r 04-59}
 # calculate the mean departure delay for all the flights. Include NA.
 summarize(flights, delay = mean(dep_delay))
 ```
 
 Need to use `na.rm = TRUE` to remove NA values.
 
-```{r 05-60}
+```{r 04-60}
 # calculate the mean departure delay for all the flights. Remove NA.
 summarize(flights, delay = mean(dep_delay, na.rm = TRUE))
 ```
 
 You  use `nrow()`, `filter()`, and `is.na()` check the number of `NA` values for a column.
 
-```{r 05-61}
+```{r 04-61}
 # total rows in flights
 nrow(flights)
 # [1] 336776
@@ -632,7 +632,7 @@ nrow(filter(flights, !is.na(dep_delay)))
 
 Use `summarize()` and `group_by()` to calculate values for each group.
 
-```{r 05-62}
+```{r 04-62}
 # group flights by year, month and day to get daily flights
 by_day <- group_by(flights, year, month, day)
 
@@ -646,7 +646,7 @@ Use pipe `%>%` to perform multiple operations on a data set. Do step 1, and then
 
 pipe makes code more readable.
 
-```{r 05-63}
+```{r 04-63}
 # groyup flights by day, and then calculate mean departure delay for each day
 flights %>%
   group_by(year, month, day) %>%
@@ -657,7 +657,7 @@ flights %>%
 
 Whenever you do any aggregation, you should include a count of values `n()`, or a count of non-missing values `sum(!is.na(x))` to check number of items per group.
 
-```{r 05-64}
+```{r 04-64}
 
 #  get  flights that were not cancelled
 not_cancelled <- flights %>%
@@ -678,7 +678,7 @@ combine dplyr with ggplot to rearrange and plot data.
 
 dplyr and rest of tidyverse uses `%\>% `; ggplot uses `+`
 
-```{r 05-65}
+```{r 04-65}
 
 # pick the delayed flights with more than 25 flights, and then plot the flights.
 delays %>%
@@ -704,14 +704,14 @@ Counts: `n()` returns the size of the current group. `sum(!is.na(x))` returns th
 
 `count()` is a shortcut for `group_by()` and `summarize()` to return count by group.
 
-```{r 05-66}
+```{r 04-66}
 # count the number of flights per destination
 not_cancelled %>%
   group_by(dest) %>%
   summarize(n = n())
 ```
 
-```{r 05-67}
+```{r 04-67}
 # count the number of flights per destination
 not_cancelled %>%
   count(dest)
@@ -719,7 +719,7 @@ not_cancelled %>%
 
 use `sort=TRUE` with `count()` to sort the counts
 
-```{r 05-68}
+```{r 04-68}
 # count the number of flights per destination, and sort the results
 not_cancelled %>%
   count(dest, sort=TRUE)
@@ -727,7 +727,7 @@ not_cancelled %>%
 
 optionally provide a weight variable to get a sum of that variable.
 
-```{r 05-69}
+```{r 04-69}
 # get the total number of miles planes flew for each destination
 not_cancelled %>%
   count(dest, wt = distance)
@@ -735,7 +735,7 @@ not_cancelled %>%
 
 When used with numeric functions, `TRUE` is converted to 1 and `FALSE` is converted to 0.
 
-```{r 05-70, eval=FALSE}
+```{r 04-70, eval=FALSE}
 sum(TRUE)
 # [1] 1
 sum(5 > 0)
@@ -750,14 +750,14 @@ sum(5 < 0)
 
 Counts and proportions of logical values: `sum(x)` gives the number of TRUEs, and `mean(x)` gives the proportion of TRUEs.
 
-```{r 05-71}
+```{r 04-71}
 #  number of flight per day delayed by more than an 60 minutes
 not_cancelled %>%
   group_by(year, month, day) %>%
   summarize(hour_count = sum(arr_delay > 60))
 ```
 
-```{r 05-72}
+```{r 04-72}
 #  proportion of flights per day delayed by more than an 60 minutes
 not_cancelled %>%
   group_by(year, month, day) %>%
@@ -768,22 +768,22 @@ not_cancelled %>%
 
 progressively rolling up summaries for sums and counts
 
-```{r 05-73}
+```{r 04-73}
 # group flights by day
 daily <- group_by(flights, year, month, day)
 ```
 
-```{r 05-74}
+```{r 04-74}
 # number flights per day
 (per_day <- summarize(daily, flights = n()))
 ```
 
-```{r 05-75}
+```{r 04-75}
  # number flights per month
 (per_month <- summarize(per_day, flights = sum(flights)))
 ```
 
-```{r 05-76}
+```{r 04-76}
 # number of flights per year
 (per_year  <- summarize(per_month, flights = sum(flights)))
 ```
@@ -792,7 +792,7 @@ daily <- group_by(flights, year, month, day)
 
 `ungroup()` removes grouping.
 
-```{r 05-77}
+```{r 04-77}
 # ungroup the daily flights to count the total number of flights
 daily %>%
   ungroup() %>%
@@ -806,7 +806,7 @@ If during analysis the data doesn't look right, you can try to use `ungroup()` t
 use `group()` with `mutate()` and `filter()`
 
 
-```{r 05-78}
+```{r 04-78}
 # get the flights with the top 10  largest arrival delays per day
 top_delay <- flights_7_columns %>%
   group_by(year, month, day) %>%
@@ -814,7 +814,7 @@ top_delay <- flights_7_columns %>%
 top_delay
 ```
 
-```{r 05-79}
+```{r 04-79}
 # add rank column, and sort the rows by day and rank to check if top_delay
 # is returning what we expect
 top_delay %>%

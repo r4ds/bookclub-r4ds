@@ -1,4 +1,4 @@
-# Model basics
+# Model basics {-}
 
 **Learning objectives:**
 
@@ -41,7 +41,7 @@ To make the formula in Rmarkdown have a look at this resource: [markdown-extensi
 ----------
 
 Here is the visualization of simulated data from {modelr} package, we have a look at different slope levels.
-```{r 23-plot1, message=FALSE, warning=FALSE, paged.print=FALSE}
+```{r 99-23-plot1, message=FALSE, warning=FALSE, paged.print=FALSE}
 library(tidyverse)
 library(manipulate)
 library(modelr)

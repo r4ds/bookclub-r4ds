@@ -1,0 +1,3 @@
+# (PART) Removed chapters {-}
+
+These chapters have been removed from the book since the time that older cohorts covered them. We're keeping the old notes in case anybody finds them useful.

@@ -11,15 +11,11 @@
 - **Diagnose problems** that may arise when using the `read_*()` functions.
 - **Write data** to disk using the `readr::write_*()` family of functions.
 
+## SLIDE TITLE
 
-## Slide 1
-
-Slide contents. 
-Keep it short and slide-like!
-
-## Slide 2
-
-Slide contents.
+- ADD NEW SLIDES USING ##. 
+- TRY TO KEEP THE FEEL SLIDE-LIKE
+  - BULLETED LISTS, NOT PARAGRAPHS
 
 ## Meeting Videos
 

@@ -1,6 +1,4 @@
-# (PART) Communicate {-}
-
-# Introduction
+# (PART) Import {-}
 
 **Learning objectives:**
 

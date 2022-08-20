@@ -1,4 +1,4 @@
-# Tidy data
+# Data tidying
 
 **Learning objectives:**
 
@@ -9,14 +9,11 @@
 - Combine functions to **tidy a dataset.**
 - Recognize reasons that **non-tidy data** might be preferred in some cases.
 
-## Slide 1
+## SLIDE TITLE
 
-Slide contents. 
-Keep it short and slide-like!
-
-## Slide 2
-
-Slide contents.
+- ADD NEW SLIDES USING ##. 
+- TRY TO KEEP THE FEEL SLIDE-LIKE
+  - BULLETED LISTS, NOT PARAGRAPHS
 
 ## Meeting Videos
 

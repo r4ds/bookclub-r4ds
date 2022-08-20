@@ -1,6 +1,6 @@
-# Introduction (Preface)
+# Introduction
 
-The preface gives an overview of what the book covers.
+The Introduction gives an overview of what the book covers.
 
 **Learning objectives:**
 
