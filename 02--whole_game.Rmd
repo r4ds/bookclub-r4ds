@@ -1,0 +1,16 @@
+# (PART) Whole game {-}
+
+![](images/data-science-explore.png)
+
+In this section, we'll learn the basics about:
+
+- **Data visualization**
+- **Workflow basics**
+- **Data transformation**
+- **Workflows with pipes**
+- **Data tidying**
+- **Coding style**
+- **Data import**
+- **Script and projects**
+- **Exploratory data analysis**
+- **Getting help**

@@ -1,0 +1,35 @@
+# Workflow: getting help
+
+**Learning objectives:**
+
+- ADD ABOUT ONE THING PER SECTION DESCRIBING WHAT YOU LEARN IN THIS CHAPTER.
+
+## SLIDE TITLE
+
+- ADD NEW SLIDES USING ##. 
+- TRY TO KEEP THE FEEL SLIDE-LIKE
+  - BULLETED LISTS, NOT PARAGRAPHS
+
+## Meeting Videos
+
+### Cohort 7
+
+`r knitr::include_url("https://www.youtube.com/embed/URL")`
+
+<details>
+  <summary> Meeting chat log </summary>
+```
+LOG
+```
+</details>
+
+### Cohort 8
+
+`r knitr::include_url("https://www.youtube.com/embed/URL")`
+
+<details>
+  <summary> Meeting chat log </summary>
+```
+LOG
+```
+</details>
