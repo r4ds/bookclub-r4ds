@@ -17,7 +17,7 @@
 - Call a function for its **side effects** using the **`walk`** family of functions from `{purrr}`.
 - Recognize the **other iteration functions** from `{purrr}`.
 
-## 21.1 Intro
+## Intro
 
 **Good iteration - Pre-allocate the shape/structure and then fill in the data**.
 
@@ -27,7 +27,7 @@
 
 Packages: `library(tidyverse)`, `library(purrr)`
 
-## 21.2 For loops
+## For loops
 
 Each loop has three components:
 
@@ -39,7 +39,7 @@ Each loop has three components:
 
 -   **body** - This is the code that does the work.
 
-## 21.3 For loop variations
+## For loop variations
 
 There are four variations on the basic theme of the `for` loop:
 
@@ -65,7 +65,7 @@ There are four variations on the basic theme of the `for` loop:
 
     -   Use a `while` loop.
 
-## 21.4 For loops vs. functionals
+## For loops vs. functionals
 
 `For` loops are not as important in R as they are in other languages because R is a functional programming language.
 
@@ -73,7 +73,7 @@ This means that it's possible to put `for` loops in a function, and call that fu
 
 Base R and the `purrr` package have functions for many common loops.
 
-## 21.5 The map functions
+## The map functions
 
 -   `map(.x, .f, ...)` makes a list.
 
@@ -101,7 +101,7 @@ Base R and the `purrr` package have functions for many common loops.
 
 -   `vapply(X, FUN, FUN.VALUE, ..., USE.NAMES = TRUE)` safe alternative to `sapply`, can make a matix
 
-## 21.6 Dealing with failure
+## Dealing with failure
 
 `safely()` - designed to work with `map`
 
@@ -113,7 +113,7 @@ Base R and the `purrr` package have functions for many common loops.
 
 `quietly()` - instead of capturing errors, it captures printed output, messages, and warnings.
 
-## 21.7 Mapping over multiple arguments
+## Mapping over multiple arguments
 
 `map2()` and `pmap()` functions are for multiple related inputs that you need iterate along in parallel.
 
@@ -121,13 +121,13 @@ Base R and the `purrr` package have functions for many common loops.
 
 *Read the help in purrr on these functons. If you need to do this read Advanced R. `invoke_map` is retired.*
 
-## 21.8 Walk
+## Walk
 
 `walk()` is an alternative to `map()` that you use when you want to call a function for its side effects, rather than for its return value.
 
 `walk2` and `pwalk` - more useful than `walk`.
 
-## 21.9 Other patterns of for loops
+## Other patterns of for loops
 
 **Predicate functions -** return `TRUE` or `FALSE`
 
