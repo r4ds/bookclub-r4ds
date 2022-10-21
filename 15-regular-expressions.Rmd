@@ -39,7 +39,7 @@ Note: Since these slides were made, this chapter has been split into "Strings" a
 ### Pre-Requisites
 We will be utilizing the `{stringr}` package which is part of the core tidyverse.
 
-```{r 17-Load Library, include = TRUE}
+```{r 15-Load Library, include = TRUE}
 library(tidyverse)
 ```
 
@@ -48,14 +48,14 @@ library(tidyverse)
 - You can create strings with either single quotes `'` or with double quotes `"`. The computer doesn't care.
   - However, which ever you choose, just stick with the format throughout your script.
   
-```{r 17-String Quote Example, include = TRUE}
+```{r 15-String Quote Example, include = TRUE}
 string1 <- 'This is also a string, but uses single quotes'
 string2 <- "This is a string with double quotes"
 ```
 
 During scripting, if you do not close a string but try to start a new line you will see the `+` line entry. But how do you quit so you can add the closing quote? Just hit the escape key.
 
-```{r 17-Rookie Mistake, include = TRUE, eval = FALSE}
+```{r 15-Rookie Mistake, include = TRUE, eval = FALSE}
 "This is a string, but I forgot to close the quote
 
 
@@ -64,7 +64,7 @@ Help, I'm stuck! (Hit the escape key)
 
 One of the more tricky things to remember when using regular expressions is the `\` backslash when you literally want to use a special character in a search.
 
-```{r 17-The magical escape backslash, include = TRUE}
+```{r 15-The magical escape backslash, include = TRUE}
 doublequote <- "\"" # or '"'
 singlequote <- '\'' # or "'"
 print(doublequote)
@@ -73,7 +73,7 @@ print(singlequote)
 
 Evaluating the above makes you question if my environment is correct. Yes it is. By printing to the screen, we are treating the output as a string...confused? To execute this as a regular expression however, we have to use `writeLines()`.
 
-```{r 17-But Wait-Theres More, include = TRUE}
+```{r 15-But Wait-Theres More, include = TRUE}
 doublequote <- "\"" # or '"'
 singlequote <- '\'' # or "'"
 writeLines(doublequote)
@@ -82,7 +82,7 @@ writeLines(singlequote)
 
 There are a handful of other special characters. The most common are `\n`, newline, and `\t`, tab, but you can see the complete list by requesting help on `: ?'"'`, or `?"'"`. You’ll also sometimes see strings like `\u00b5`, this is a way of writing non-English characters that works on all platforms:
 
-```{r 17-Unicode example, include = TRUE}
+```{r 15-Unicode example, include = TRUE}
 x <- "\u00b5"
 x
 y <- "\U1F44D"
@@ -95,7 +95,7 @@ Another way to think "non-English" would be to say these are [Unicode](https://e
 
 Multiple strings are often stored in a character vector, which you can create with c():
 
-```{r 17-Combining a string, include = TRUE}
+```{r 15-Combining a string, include = TRUE}
 c("one", "two", "three")
 ```
 
@@ -105,7 +105,7 @@ Base R has many functions that can work with String Length. Unfortunetely, these
 
 - All string functions in `{stringr}` start with the root `str_` making use of the package quite intuitive.
 
-```{r 17-String Length Example, include = TRUE}
+```{r 15-String Length Example, include = TRUE}
 str_length(c("a", "R for Data Science", NA))
 ```
 
@@ -117,7 +117,7 @@ This is a excellent way to quickly call on a particular `{stringr}` function!
 
 To combine two or more strings, use `str_c()`
 
-```{r 17-Combine Strings, include = TRUE}
+```{r 15-Combine Strings, include = TRUE}
 str_c("x", "y")
 str_c("x", "y", "z")
 
@@ -125,12 +125,12 @@ str_c("x", "y", "z")
 
 You can also add the `sep` argument to control how the strings are seperated.
 
-```{r 17-Combine Strings using sep, include = TRUE}
+```{r 15-Combine Strings using sep, include = TRUE}
 str_c("x", "y", sep = ", ")
 ```
 Like many other functions in R, if you have missing data, you can add `NA`.
 
-```{r 17-Strings and NA, include = TRUE}
+```{r 15-Strings and NA, include = TRUE}
 x <- c("abc", NA)
 str_c("|-", x, "-|")
 str_c("|-", str_replace_na(x), "-|")
@@ -138,7 +138,7 @@ str_c("|-", str_replace_na(x), "-|")
 
 As shown above, `str_c()` is vectorised, and it automatically recycles shorter vectors to the same length as the longest:
 
-```{r 17-recycle shorter vectors, include = TRUE}
+```{r 15-recycle shorter vectors, include = TRUE}
 str_c("prefix-", c("a", "b", "c"), "-suffix")
 ```
 
@@ -146,7 +146,7 @@ str_c("prefix-", c("a", "b", "c"), "-suffix")
 
 Objects of length 0 are silently dropped. This is particularly useful in conjunction with `if`:
 
-```{r 17-using if, include = TRUE}
+```{r 15-using if, include = TRUE}
 name <- "Ryan"
 time_of_day <- "afternon"
 birthday <- FALSE
@@ -162,7 +162,7 @@ str_c(
 
 Finally, if you would like to collapse a vector of strings into a single string, use the `collapse` argument.
 
-```{r 17-Collapse String, include = TRUE}
+```{r 15-Collapse String, include = TRUE}
 str_c(c("x", "y", "z"))
 str_c(c("x", "y", "z"), collapse = ", ")
 ```
@@ -172,7 +172,7 @@ str_c(c("x", "y", "z"), collapse = ", ")
 
 You can extract parts of a string using `str_sub()`. As well as the string, `str_sub()` takes start and end arguments which give the (inclusive) position of the substring:
 
-```{r 17-Subsetting, include = TRUE}
+```{r 15-Subsetting, include = TRUE}
 x <- c("Apple", "Banana", "Pear")
 str_sub(x, 1, 3)
 
@@ -183,13 +183,13 @@ str_sub(x, -3, -1)
 
 Note that str_sub() won’t fail if the string is too short: it will just return as much as possible:
 
-```{r 17-Short Subsetting, include = TRUE}
+```{r 15-Short Subsetting, include = TRUE}
 str_sub("a", 1, 5)
 ```
 
 You can also use the assignment form of `str_sub()` to modify strings:
 
-```{r 17-Modify Strings, include = TRUE}
+```{r 15-Modify Strings, include = TRUE}
 str_sub(x, 1, 1) <- str_to_lower(str_sub(x, 1, 1))
 x
 ```
@@ -200,7 +200,7 @@ x
 - Changing case is a bit more complicated then it first appears
 - Different languages have different rules for changing case
 
-```{r 17-Local in Capitalization, include = TRUE}
+```{r 15-Local in Capitalization, include = TRUE}
 # Turkish has two i's: with and without a dot, and it
 # has a different rule for capitalising them:
 str_to_upper(c("i", "ı"))
@@ -214,7 +214,7 @@ str_to_upper(c("i", "ı"), locale = "tr")
   - Base R only applies the system Locale
   - Using `{stringr}` adds a `local=` argument
   
-```{r 17-Locale Sorting, include = TRUE}
+```{r 15-Locale Sorting, include = TRUE}
 x <- c("apple", "eggplant", "banana")
 
 str_sort(x, locale = "en")  # English
@@ -248,7 +248,7 @@ str_sort(x, locale = "haw") # Hawaiian
 
 6. Write a function that turns (e.g.) a vector c("a", "b", "c") into the string a, b, and c. Think carefully about what it should do if given a vector of length 0, 1, or 2.
 
-```{r 17-Exercise 6, Include = TRUE}
+```{r 15-Exercise 6, Include = TRUE}
 z <- str_c("a", "b", "c", sep = ", ")
 z
 
@@ -267,7 +267,7 @@ To learn regular expressions (regexs) we'll use `str_view()` and `str_view_all()
 
 The simplest expressions are pattern matching:
 
-```{r 17-Pattern Matching, include=TRUE}
+```{r 15-Pattern Matching, include=TRUE}
 x <- c("apple", "banana", "pear")
 str_view(x, "an")
 ```
@@ -275,13 +275,13 @@ str_view(x, "an")
 >NOTE: If you run this locally, the window that opens looks empty. In truth, it is printed "white" on "white" and therefore hard to read.
 
 The next step up in complexity is ., which matches any character (except a newline):
-```{r 17-Match any Character, include = TRUE}
+```{r 15-Match any Character, include = TRUE}
 str_view(x, ".a.")
 ```
 
 The trick here is if "`.`" matches any character...what if we want to search for "`.`"? We have to escape the term by using "`\`". Yet...this leads to another problem. Since "`\`" is part of a string, we have to escape it twice. Therefore, it looks like this: "`\\.`".
 
-```{r 17-Matching ".", include = TRUE}
+```{r 15-Matching ".", include = TRUE}
 # To create the regular expression, we need \\
 dot <- "\\."
 
@@ -296,7 +296,7 @@ str_view(c("abc", "a.c", "bef"), "a\\.c")
 
 Good, we figured out how to search for periods (`.`) by using the escape character `\`. Ok, but what if we want to search for `\`? Hmmmm....we need to "escape the escape". HA! Therefore, we need four backslashes! "`\\\\`".
 
-```{r 17-Escaping the Escape, include = TRUE}
+```{r 15-Escaping the Escape, include = TRUE}
 x <- "a\\b"
 writeLines(x)
 #> a\b
@@ -326,7 +326,7 @@ str_view(x, "\\\\")
 
 By default, regular expressions will match anywhere in a string. However, if you want the beginning or end of a string, you can "anchor" the regular expression. Lets see how this works:
 
-```{r 17-match Anything, include=TRUE}
+```{r 15-match Anything, include=TRUE}
 # The following matches anywhere "a" shows up
 x <- c("apple", "banana", "pear")
 str_view(x, "a")
@@ -334,13 +334,13 @@ str_view(x, "a")
 
 >Intesting, I thought when searching for "a", it would highlight every insteance of "a". So "banana" would hit three times. Nevermind...`str_view_all()` is required to list ALL instances of a search term.
 
-```{r 17-match beginning, include=TRUE}
+```{r 15-match beginning, include=TRUE}
 # The following matches only the beginning of the string where "a" shows up
 x <- c("apple", "banana", "pear")
 str_view(x, "^a")
 ```
 
-```{r 17-match end, include=TRUE}
+```{r 15-match end, include=TRUE}
 # The following matches only the end of the string where "a" shows up
 x <- c("apple", "banana", "pear")
 str_view(x, "a$")
@@ -348,12 +348,12 @@ str_view(x, "a$")
 
 - To remember which pattern to use, remember the mnemonic "if you begin with power (`^`), you end up with money (`$`). [Evan Misshula](https://twitter.com/emisshula/status/323863393167613953)
 
-```{r 17-Anchor before, include = TRUE}
+```{r 15-Anchor before, include = TRUE}
 x <- c("apple pie", "apple", "apple cake")
 str_view(x, "apple")
 ```
 
-```{r 17-Anchor after, include = TRUE}
+```{r 15-Anchor after, include = TRUE}
 str_view(x, "^apple$")
 ```
 
@@ -379,16 +379,16 @@ There are a number of special patterns that match more than one character.
 
 Remember, to create a regular expression containing `\d` or `\s`, you’ll need to escape the `\` for the string, so you’ll type "`\\d`" or "`\\s`".
 
-```{r 17-easier readable expressions (a), include = TRUE}
+```{r 15-easier readable expressions (a), include = TRUE}
 # Look for a literal character that normally has special meaning in a regex
 str_view(c("abc", "a.c", "a*c", "a c"), "a[.]c")
 ```
 
-```{r 17-easeir readable expressions (b), include = TRUE}
+```{r 15-easeir readable expressions (b), include = TRUE}
 str_view(c("abc", "a.c", "a*c", "a c"), ".[*]c")
 ```
 
-```{r 17-easeir readable expressions (c), include = TRUE}
+```{r 15-easeir readable expressions (c), include = TRUE}
 str_view(c("abc", "a.c", "a*c", "a c"), "a[ ]")
 ```
 
@@ -396,7 +396,7 @@ This works for most (but not all) regex metacharacters: `$` `.` `|` `?` `*` `+` 
 
 You can also use *alternation* to pick between one or more alternative patterns. If precedence ever gets confusing, use parentheses to make it clear what you want:
 
-```{r 17-Alternation, include = TRUE}
+```{r 15-Alternation, include = TRUE}
 str_view(c("grey", "gray"), "gr(e|a)y")
 ```
 
@@ -425,16 +425,16 @@ Controlling how many time a pattern iterates is the next sequence of control. Th
 - `+`: 1 or more
 - `*`: 0 or more
 
-```{r 17-Repetition - 0 or 1, include = TRUE}
+```{r 15-Repetition - 0 or 1, include = TRUE}
 x <- "1888 is the longest year in Roman numerals: MDCCCLXXXVIII"
 str_view(x, "CC?")
 ```
 
-```{r 17-Repetition - 1 or more, include = TRUE}
+```{r 15-Repetition - 1 or more, include = TRUE}
 str_view(x, "CC+")
 ```
 
-```{r 17-Repetition - 0 or more with term, include = TRUE}
+```{r 15-Repetition - 0 or more with term, include = TRUE}
 str_view(x, 'C[LX]+')
 ```
 
@@ -447,25 +447,25 @@ You can also specify the number of matches precisely:
 - `{,m}`: at most m
 - `{n,m}`: between n and m
 
-```{r 17-Repetition - exactly n, include = TRUE}
+```{r 15-Repetition - exactly n, include = TRUE}
 str_view(x, "C{2}")
 ```
 
-```{r 17-Repetition - n or more, include = TRUE}
+```{r 15-Repetition - n or more, include = TRUE}
 str_view(x, "C{2,}")
 ```
 
-```{r 17-Repetition - between n and m, include = TRUE}
+```{r 15-Repetition - between n and m, include = TRUE}
 str_view(x, "C{2,3}")
 ```
 
 By default, these form of searches are greedy, which matches the longest string possible. To make them lazy (searching for the shortest string), you can add `?` at the end.
 
-```{r 17-Repetition - between n and m - lazy, include = TRUE}
+```{r 15-Repetition - between n and m - lazy, include = TRUE}
 str_view(x, 'C{2,3}?')
 ```
 
-```{r 17-Repetition - 0 or more with term - lazy, include = TRUE}
+```{r 15-Repetition - 0 or more with term - lazy, include = TRUE}
 str_view(x, 'C[LX]+?')
 ```
 
@@ -496,7 +496,7 @@ str_view(x, 'C[LX]+?')
 
 For example, the following regular expression finds all fruits that have a repeated pair of letters.
 
-```{r 17-Grouping and Backreferences}
+```{r 15-Grouping and Backreferences}
 str_view(fruit, "(..)\\1", match = TRUE)
 ```
 
@@ -545,7 +545,7 @@ A word of caution before we continue: because regular expressions are so powerfu
 ### Detect Matches
 To determine if a character vector matches a pattern, use str_detect(). It returns a logical vector the same length as the input:
 
-```{r 17-String Detect, include = TRUE}
+```{r 15-String Detect, include = TRUE}
 x <- c("apple", "banana", "pear")
 str_detect(x, "e")
 ```
@@ -555,7 +555,7 @@ str_detect(x, "e")
   - FALSE = 0
 - Makind functions like `sum()` and `mean()` useful.
 
-```{r 17-SUM-MEAN, include = TRUE}
+```{r 15-SUM-MEAN, include = TRUE}
 # How many common words start with t?
 sum(str_detect(words, "^t"))
 
@@ -566,7 +566,7 @@ mean(str_detect(words, "[aeiou]$"))
 
 When you create large logical conditions, you may be able to break them down to simpler search terms and then combine them together. Always try to start simple.
 
-```{r 17-Think Simple, include = TRUE}
+```{r 15-Think Simple, include = TRUE}
 # Find all words containing at least one vowel, and negate
 no_vowels_1 <- !str_detect(words, "[aeiou]")
 # Find all words consisting only of consonants (non-vowels)
@@ -576,7 +576,7 @@ identical(no_vowels_1, no_vowels_2)
 
 A common use of `str_detect()` is to match a pattern. You can do this with logical sub-setting or the convenient `str_subset()` wrapper:
 
-```{r 17-Pattern Match, include = TRUE}
+```{r 15-Pattern Match, include = TRUE}
 words[str_detect(words, "x$")]
 
 str_subset(words, "x$")
@@ -587,7 +587,7 @@ str_subset(words, "x$")
 
 Filter is another tool that can make string detection easier.
 
-```{r 17-Using Filter, include = TRUE}
+```{r 15-Using Filter, include = TRUE}
 df <- tibble(
   word = words, 
   i = seq_along(word)
@@ -598,7 +598,7 @@ df %>%
 
 A variation on `str_detect()` is `str_count()`: rather than a simple yes or no, it tells you how many matches there are in a string:
 
-```{r 17-String Count, include = TRUE}
+```{r 15-String Count, include = TRUE}
 x <- c("apple", "banana", "pear")
 str_count(x, "a")
 
@@ -608,7 +608,7 @@ mean(str_count(words, "[aeiou]"))
 
 It’s natural to use `str_count()` with `mutate()`:
 
-```{r 17-String Count with Mutate, include = TRUE}
+```{r 15-String Count with Mutate, include = TRUE}
 df %>% 
   mutate(
     vowels = str_count(word, "[aeiou]"),
@@ -618,7 +618,7 @@ df %>%
 
 Note that matches never overlap. For example, in "abababa", how many times will the pattern "aba" match? Regular expressions say two, not three:
 
-```{r 17-abababa, include = TRUE}
+```{r 15-abababa, include = TRUE}
 str_count("abababa", "aba")
 
 str_view_all("abababa", "aba")
@@ -643,7 +643,7 @@ str_view_all("abababa", "aba")
 - Use `str_extract()` to extract the actual text of a match
 - [Harvard Sentences](https://en.wikipedia.org/wiki/Harvard_sentences)
 
-```{r 17-Harvard Sentences, include = TRUE}
+```{r 15-Harvard Sentences, include = TRUE}
 
 length(sentences)
 
@@ -658,7 +658,7 @@ Imagine we want to find all sentences that contain a color.
 1. Create a vector of color names
 2. Then turn it into a single regular expression
 
-```{r 17-Color Names, include = TRUE}
+```{r 15-Color Names, include = TRUE}
 colors <- c("red", "orange", "yellow", "green", "blue", "purple")
 color_match <- str_c(colors, collapse = "|")
 color_match
@@ -667,7 +667,7 @@ color_match
 3. Select the sentences that contain a color
 4. Extract the color to figure out which one it is
 
-```{r 17-Select and Extract, Include = TRUE}
+```{r 15-Select and Extract, Include = TRUE}
 has_color <- str_subset(sentences, color_match)
 matches <- str_extract(has_color, color_match)
 head(matches)
@@ -675,24 +675,24 @@ head(matches)
 
 >Note that `str_extract()` only extracts the first match.
 
-```{r 17-Sting Extract, include = TRUE}
+```{r 15-Sting Extract, include = TRUE}
 more <- sentences[str_count(sentences, color_match) > 1]
 str_view_all(more, color_match)
 ```
 
-```{r 17-Extract More, include = TRUE}
+```{r 15-Extract More, include = TRUE}
 str_extract(more, color_match)
 ```
 
 To get all matches, use `str_extract_all()`.
 
-```{r 17-String Extact All, include = TRUE}
+```{r 15-String Extact All, include = TRUE}
 str_extract_all(more, color_match)
 ```
 
 If you pass the argument `simplify = TRUE`, `str_extract_all()` will return a matrix with short matches expanded to the same length as the longest.
 
-```{r 17-Simplify String Extract All, include = TRUE}
+```{r 15-Simplify String Extract All, include = TRUE}
 str_extract_all(more, color_match, simplify = TRUE)
 
 x <- c("a", "a b", "a b c")
@@ -713,7 +713,7 @@ str_extract_all(x, "[a-z]", simplify = TRUE)
 
 Earlier we discussed using parentheses for clarifying precedence and for backreferences. ou can also use parentheses to extract parts of a complex match.
 
-```{r 17-Noun, include = TRUE}
+```{r 15-Noun, include = TRUE}
 noun <- "(a|the) ([^ ]+)"
 
 has_noun <- sentences %>%
@@ -727,7 +727,7 @@ has_noun %>%
 - `str_extract()` gives us the complete match
 - `str_match()` gives each individual component
 
-```{r 17-String Match, include = TRUE}
+```{r 15-String Match, include = TRUE}
 has_noun %>% 
   str_match(noun)
 ```
@@ -736,7 +736,7 @@ has_noun %>%
 
 If your data is in a tibble, it’s often easier to use `tidyr::extract()`. It works like `str_match()` but requires you to name the matches, which are then placed in new columns.
 
-```{r 17-TidyR, include = TRUE}
+```{r 15-TidyR, include = TRUE}
 tibble(sentence = sentences) %>% 
   tidyr::extract(
     sentence, c("article", "noun"), "(a|the) ([^ ]+)", 
@@ -756,7 +756,7 @@ tibble(sentence = sentences) %>%
 
 `str_replace()` and `str_replace_all()` allow you to replace matches with new strings.
 
-```{r 17-String Replace, include = TRUE}
+```{r 15-String Replace, include = TRUE}
 x <- c("apple", "pear", "banana")
 str_replace(x, "[aeiou]", "-")
 str_replace_all(x, "[aeiou]", "-")
@@ -764,14 +764,14 @@ str_replace_all(x, "[aeiou]", "-")
 
 With `str_replace_all()` you can perform multiple replacements by supplying a named vector
 
-```{r 17-String Replace All}
+```{r 15-String Replace All}
 x <- c("1 house", "2 cars", "3 people")
 str_replace_all(x, c("1" = "one", "2" = "two", "3" = "three"))
 ```
 
 Instead of replacing with a fixed string you can use backreferences to insert components of the match.
 
-```{r 17-Sting Replace Backreference}
+```{r 15-Sting Replace Backreference}
 sentences %>% 
   str_replace("([^ ]+) ([^ ]+) ([^ ]+)", "\\1 \\3 \\2") %>% 
   head(5)
@@ -790,7 +790,7 @@ Switch the first and last letters in `words`. Which of those strings are still w
 
 Use str_split() to split a string up into pieces.
 
-```{r 17-Splitting, include = TRUE}
+```{r 15-Splitting, include = TRUE}
 sentences %>%
   head(5) %>% 
   str_split(" ")
@@ -798,7 +798,7 @@ sentences %>%
 
 If you’re working with a length-1 vector, the easiest thing is to just extract the first element of the list.
 
-```{r 17-Lenght-1 Vector, include = TRUE}
+```{r 15-Lenght-1 Vector, include = TRUE}
 "a|b|c|d" %>% 
   str_split("\\|") %>% 
   .[[1]]
@@ -806,7 +806,7 @@ If you’re working with a length-1 vector, the easiest thing is to just extract
 
 You can use `simplify = TRUE` to return a matrix:
 
-```{r 17-Splitting, Simplify, include = TRUE}
+```{r 15-Splitting, Simplify, include = TRUE}
 sentences %>%
   head(5) %>% 
   str_split(" ", simplify = TRUE)
@@ -814,19 +814,19 @@ sentences %>%
 
 You can also request a maximum number of pieces
 
-```{r 17-Splitting - Maximum, include = TRUE}
+```{r 15-Splitting - Maximum, include = TRUE}
 fields <- c("Name: Hadley", "Country: NZ", "Age: 35")
 fields %>% str_split(": ", n = 2, simplify = TRUE)
 ```
 
 Instead of splitting up strings by patterns, you can also split up by character, line, sentence and word `boundary()`s.
 
-```{r 17-Splitting - Boundary}
+```{r 15-Splitting - Boundary}
 x <- "This is a sentence.  This is another sentence."
 str_view_all(x, boundary("word"))
 ```
 
-```{r 17-Another Boundary split, include = TRUE}
+```{r 15-Another Boundary split, include = TRUE}
 str_split(x, " ")[[1]]
 
 str_split(x, boundary("word"))[[1]]
@@ -849,7 +849,7 @@ str_split(x, boundary("word"))[[1]]
 ## Other types of Pattern
 When you use a pattern that’s a string, it’s automatically wrapped into a call to `regex()`.
 
-```{r 17-RegEx, include = TRUE}
+```{r 15-RegEx, include = TRUE}
 # The regular call:
 str_view(fruit, "nana")
 # Is shorthand for
@@ -860,18 +860,18 @@ You can use the other arguments of `regex()` to control details of the match:
 
 - `ignore_case = TRUE` allows characters to match either their uppercase or lowercase forms. This always uses the current locale.
 
-```{r 17-Ignore Case Example 1, include = TRUE}
+```{r 15-Ignore Case Example 1, include = TRUE}
 bananas <- c("banana", "Banana", "BANANA")
 str_view(bananas, "banana")
 ```
 
-```{r 17-Ignore Case Example 2, include = TRUE}
+```{r 15-Ignore Case Example 2, include = TRUE}
 str_view(bananas, regex("banana", ignore_case = TRUE))
 ```
 
 - `multiline = TRUE` allows `^` and `$` to match the start and end of each line rather than the start and end of the complete string.
 
-```{r 17-Mulitline, include = TRUE}
+```{r 15-Mulitline, include = TRUE}
 x <- "Line 1\nLine 2\nLine 3"
 str_extract_all(x, "^Line")[[1]]
 
@@ -881,7 +881,7 @@ str_extract_all(x, regex("^Line", multiline = TRUE))[[1]]
 
 - `comments = TRUE` allows you to use comments and white space to make complex regular expressions more understandable. Spaces are ignored, as is everything after `#`. To match a literal space, you’ll need to escape it: `"\\ "`.
 
-```{r 17-Comments, include = TRUE}
+```{r 15-Comments, include = TRUE}
 phone <- regex("
   \\(?     # optional opening parens
   (\\d{3}) # area code
@@ -903,7 +903,7 @@ There are three other functions you can use instead of `regex()`:
 
 >Note, I had to install the microbenchmark package before running the next code snippet.
 
-```{r 17-Fixed, include = TRUE}
+```{r 15-Fixed, include = TRUE}
 #install.packages("microbenchmark")
 library(microbenchmark)
 microbenchmark::microbenchmark(
@@ -915,7 +915,7 @@ microbenchmark::microbenchmark(
 
 Beware using `fixed()` with non-English data. It is problematic because there are often multiple ways of representing the same character. For example, there are two ways to define “á”: either as a single character or as an “a” plus an accent:
 
-```{r 17-Accents, include = TRUE}
+```{r 15-Accents, include = TRUE}
 a1 <- "\u00e1"
 a2 <- "a\u0301"
 c(a1, a2)
@@ -926,7 +926,7 @@ a1 == a2
 
 They render identically, but because they’re defined differently, `fixed()` doesn’t find a match. Instead, you can use `coll()`, defined next, to respect human character comparison rules:
 
-```{r 17-COLL, include = TRUE}
+```{r 15-COLL, include = TRUE}
 str_detect(a1, fixed(a2))
 
 str_detect(a1, coll(a2))
@@ -935,7 +935,7 @@ str_detect(a1, coll(a2))
 
 - `coll()`: compare strings using standard collation rules. This is useful for doing case insensitive matching. Note that coll() takes a locale parameter that controls which rules are used for comparing characters. Unfortunately different parts of the world use different rules!
 
-```{r 17-COLL agian, include = TRUE}
+```{r 15-COLL agian, include = TRUE}
 # That means you also need to be aware of the difference
 # when doing case insensitive matches:
 i <- c("I", "İ", "i", "ı")
@@ -946,7 +946,7 @@ str_subset(i, coll("i", ignore_case = TRUE, locale = "tr"))
 
 Both `fixed()` and `regex()` have ignore_case arguments, but they do not allow you to pick the locale: they always use the default locale.
 
-```{r 17-stringi example, include = TRUE}
+```{r 15-stringi example, include = TRUE}
 stringi::stri_locale_info()
 ```
 
@@ -954,12 +954,12 @@ The downside of `coll()` is speed; because the rules for recognising which chara
 
 - As you saw with `str_split()` you can use boundary() to match boundaries. You can also use it with the other functions:
 
-```{r 17-String View All, include = TRUE}
+```{r 15-String View All, include = TRUE}
 x <- "This is a sentence."
 str_view_all(x, boundary("word"))
 ```
 
-```{r 17-String View All with Boundary, include = TRUE}
+```{r 15-String View All with Boundary, include = TRUE}
 str_extract_all(x, boundary("word"))
 ```
 
@@ -975,13 +975,13 @@ There are two useful function in base R that also use regular expressions:
 
 - `apropos()` searches all objects available from the global environment. This is useful if you can’t quite remember the name of the function.
 
-```{r 17-Apropos, include = TRUE}
+```{r 15-Apropos, include = TRUE}
 apropos("replace")
 ```
 
 - `dir()` lists all the files in a directory. The `pattern` argument takes a regular expression and only returns file names that match the pattern.
 
-```{r 17-Dir call, include = TRUE}
+```{r 15-Dir call, include = TRUE}
 head(dir(pattern = "\\.Rmd$"))
 ```
 
