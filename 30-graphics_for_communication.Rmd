@@ -237,12 +237,25 @@ https://exts.ggplot2.tidyverse.org/gallery/
 
 ### Cohort 6
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/qQrnNef9fkM")`
 
 <details>
   <summary> Meeting chat log </summary>
   
 ```
-LOG
+00:09:51	Marielena Soilemezidi:	http://www.thefunctionalart.com/p/instructors-guide.html
+https://www.dropbox.com/s/gyqyz3hei7lhhmt/R_RESOURCES.txt?dl=0
+https://exts.ggplot2.tidyverse.org/gallery/
+00:26:20	Daniel:	underscore
+00:26:32	Daniel:	It is called an “underscore”
+00:42:17	Daniel:	I can’t see the screen anymore
+00:43:00	Daniel:	All good now
+00:44:57	Marielena Soilemezidi:	https://github.com/jrnold/ggthemes)
+00:55:42	Daniel:	https://stackoverflow.com/questions/23957278/how-to-add-table-of-contents-in-rmarkdown
+01:03:59	Daniel:	It’s fine, sorry my internet went off
+01:04:17	Marielena Soilemezidi:	http://shiny.rstudio.com/.
+01:05:04	Marielena Soilemezidi:	http://rmarkdown.rstudio.com/rmarkdown_websites.html.
+01:07:21	Marielena Soilemezidi:	http://colinpurrington.com/tips/lab-notebooks
+01:10:02	Marielena Soilemezidi:	https://quarto.org/
 ```
 </details>
