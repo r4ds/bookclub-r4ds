@@ -342,3 +342,26 @@ y ~ x1*x2 = y ~ x1 + x2 + x1:x2
 00:45:14	Daniel Adereti:	https://personal.math.ubc.ca/~anstee/math104/newtonmethod.pdf
 ```
 </details>
+
+`r knitr::include_url("https://www.youtube.com/embed/LD2xOX_svU0")`
+
+<details>
+  <summary> Meeting chat log </summary>
+  
+```
+00:17:56	Daniel Adereti:	http://vita.had.co.nz/papers/model-vis.html
+00:28:26	Daniel Adereti:	https://www.jstor.org/stable/2346786
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/VrFzuaGDiJo")`
+
+<details>
+  <summary> Meeting chat log </summary>
+  
+```
+00:16:05	Daniel:	http://bit.ly/wilkrog
+00:40:08	Adeyemi Olusola:	Apologies for coming late.
+00:40:30	Marielena Soilemezidi:	no worries! :)
+```
+</details>

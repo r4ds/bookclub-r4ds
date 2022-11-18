@@ -56,12 +56,14 @@ Slide contents.
 
 ### Cohort 6
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/dG5PcCDMDdI")`
 
 <details>
   <summary> Meeting chat log </summary>
   
 ```
-LOG
+00:18:56	Marielena Soilemezidi:	https://rstudio.com/resources/cheatsheets/
+00:19:07	Daniel:	Thanks
+00:59:42	Marielena Soilemezidi:	http://rmarkdown.rstudio.com/developer_parameterized_reports.html#parameter_user_interfaces
 ```
 </details>
