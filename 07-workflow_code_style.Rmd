@@ -21,7 +21,7 @@ library(tidyverse)
 library(nycflights13)
 ```
 
-## 7.1 Names
+## Names
 
 Remember that variable names (those created by <- and those created by mutate()) should use only:\
   1. lowercase letters,\
@@ -41,7 +41,7 @@ Prefer long, descriptive names that are easy to understand, rather than concise 
 If you have a bunch of names for related things, do your best to be consistent.\
 
 
-## 7.2 Spaces
+## Spaces
 
 *Put spaces on either side of mathematical operators apart from ^ (i.e., +, -, ==, <, …), and around the assignment operator (<-).\
 
@@ -81,7 +81,7 @@ flights |>
 ```
 
 
-## 7.3 Pipes
+## Pipes
 
 |> should always have a space before it and should typically be the last thing on a line.\
 
@@ -167,7 +167,7 @@ Try to Limit your pipes around 10-15 lines.\
 
 Try to break them up into smaller sub-tasks, giving each task an informative name.\
 
-## 7.4 ggplot2
+## ggplot2
 
 **The same basic rules that apply to the pipe also apply to ggplot2; just treat + the same way as |>.**\
 
@@ -202,7 +202,7 @@ flights |>
   geom_point()
 ```
 
-## 7.5 Selectioning comments
+## Selectioning comments
 
 As your scripts get longer, you can use sectioning comments to break up your file into manageable pieces:\
 
