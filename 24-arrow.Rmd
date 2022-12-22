@@ -1,4 +1,4 @@
-# Data rectangling
+# Arrow
 
 **Learning objectives:**
 

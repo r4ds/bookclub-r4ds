@@ -1,4 +1,6 @@
-# Graphics for communication
+# Communication
+
+***Note: This was chapter 28 when these slides were last edited. They likely need to be updated to match the current chapter order.***
 
 **Learning objectives:**
 
@@ -17,7 +19,7 @@
 
 The book focuses on what you need to think about in order to create effective graphics.
 
-```{r 30-01,fig.cap="Credit:The Truthful Art, by Albert Cairo",fig.align='center', include=FALSE}
+```{r 13-01,fig.cap="Credit:The Truthful Art, by Albert Cairo",fig.align='center', include=FALSE}
 knitr::include_graphics("images/28_book_cairo.png")
 ```
 
@@ -27,7 +29,7 @@ knitr::include_graphics("images/28_book_cairo.png")
 - https://www.dropbox.com/s/gyqyz3hei7lhhmt/R_RESOURCES.txt?dl=0
 - https://exts.ggplot2.tidyverse.org/gallery/
 
-```{r 30-02,message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
+```{r 13-02,message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
 library(tidyverse)
 ```
 
@@ -38,12 +40,12 @@ library(tidyverse)
 -Time
 -Demand
 
-```{r 30-03}
+```{r 13-03}
 BOD 
 ```
 
 
-```{r 30-04,message=FALSE, warning=FALSE, paged.print=FALSE}
+```{r 13-04,message=FALSE, warning=FALSE, paged.print=FALSE}
 ggplot(BOD, aes(Time, demand)) +
   geom_point(size=2) +
   geom_smooth() +
@@ -58,7 +60,7 @@ ggplot(BOD, aes(Time, demand)) +
 2.  Second dataset is found in the book and made of some random uniform distributions.
 Here we see how we can coustomise axis title with maths formula.
 
-```{r 30-05}
+```{r 13-05}
 df <- tibble(
   x = runif(10),
   y = runif(10)
@@ -75,12 +77,12 @@ ggplot(df, aes(x, y)) +
 3. Third dataset is the Annual Precipitation in US Cities, the set is made of one observation each column, about the average amount of precipitation (rainfall) in inches for each of 70 United States (and Puerto Rico) cities.
 Here we see how to add text to a plot with `geom_text()`
 
-```{r 30-06}
+```{r 13-06}
 precip[1:10]
 length(precip)
 ```
 
-```{r 30-07}
+```{r 13-07}
 cities <- precip%>%names
 
 df <- data.frame(cities,precip)
@@ -101,7 +103,7 @@ df %>%
 
 4. This is the Edgar Anderson's Iris Data. It gives the measurements in centimeters of the variables sepal length and width and petal length and width, respectively, for 50 flowers from each of 3 species of iris. The species are Iris setosa, versicolor, and virginica.
 
-```{r 30-08}
+```{r 13-08}
 ggplot(iris,aes(Sepal.Length,Sepal.Width,group=Species))+
   geom_point(aes(color=Species)) +
   geom_text(data=iris%>%
@@ -117,7 +119,7 @@ ggplot(iris,aes(Sepal.Length,Sepal.Width,group=Species))+
 5. This is Fuel economy data from 1999 to 2008 for 38 popular models of cars. This dataset contains a subset of the fuel economy data that the EPA makes available on https://fueleconomy.gov/. It contains only models which had a new release every year between 1999 and 2008 - this was used as a proxy for the popularity of the car.
 
 Here we learn how to set the lable in specific place inside the plot.
-```{r 30-09}
+```{r 13-09}
 label <- mpg %>%
   summarise(
     displ = max(displ),
@@ -153,7 +155,7 @@ The `scale_<functions>` are very useful in many ways, among which is to set a co
 
 Here the dataset is made of random normal of 10 000 values.
 
-```{r 30-10, fig.asp = 0.618}
+```{r 13-10, fig.asp = 0.618}
 df <- tibble(
   x = rnorm(10000),
   y = rnorm(10000)

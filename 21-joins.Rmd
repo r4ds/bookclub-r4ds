@@ -31,13 +31,13 @@ There are three families of verbs designed to work with relational data:
 
 How to make a custom table with different data sets
 
-```{r 19-01, message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
+```{r 21-01, message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
 library(nycflights13)
 library(tidyverse)
 ```
 
 
-```{r 19-02, eval=FALSE, include=T}
+```{r 21-02, eval=FALSE, include=T}
 nycflights13::airlines
 nycflights13::airports
 nycflights13::flights
@@ -56,7 +56,7 @@ Relations:
 - **flights** connects to **weather** via **origin** (the location), and **year**, **month**, **day** and **hour** (the time).
 
 
-```{r 19-03, echo=FALSE, fig.align='center', fig.cap='nycfilghts13 package', out.width='100%'} 
+```{r 21-03, echo=FALSE, fig.align='center', fig.cap='nycfilghts13 package', out.width='100%'} 
 knitr::include_graphics('images/nycfilghts13.png')
 ```
 
@@ -112,26 +112,26 @@ We have seen the **inner_join()** function operating now we see the other three 
 ### Understanding joins
 
 
-```{r 19-venndiagram, echo=FALSE, fig.align='center', fig.cap='Venn diagram', out.width='100%'} 
+```{r 21-venndiagram, echo=FALSE, fig.align='center', fig.cap='Venn diagram', out.width='100%'} 
 knitr::include_graphics("images/venn_diagram.png")
 ```
 
 Suppose we have two tables with two variables: id and the observations
-```{r 19-twotables, echo=FALSE, fig.align='center', fig.cap='Two tables', out.width='30%'} 
+```{r 21-twotables, echo=FALSE, fig.align='center', fig.cap='Two tables', out.width='30%'} 
 knitr::include_graphics("images/twotables.png")
 ```
 
 ### Inner join
 
 
-```{r 19-04}
+```{r 21-04}
 flights %>% 
   slice(1:100) %>%
   select(origin,year,month) %>%
   inner_join(select(weather,origin,temp,wind_dir),by = "origin")
 ```
 
-```{r 19-innerjoin, echo=FALSE, fig.align='center', fig.cap='inner join', out.width='100%'} 
+```{r 21-innerjoin, echo=FALSE, fig.align='center', fig.cap='inner join', out.width='100%'} 
 knitr::include_graphics("images/innerjoin.png")
 ```
 
@@ -141,14 +141,14 @@ knitr::include_graphics("images/innerjoin.png")
 - A right join keeps all observations in y
 - A full join keeps all observations in x and y
 
-```{r 19-outerjoins, echo=FALSE, fig.align='center', fig.cap='Outer joins', out.width='60%'} 
+```{r 21-outerjoins, echo=FALSE, fig.align='center', fig.cap='Outer joins', out.width='60%'} 
 knitr::include_graphics("images/outerjoins.png")
 ```
 
 
 - left_join 
 
-```{r 19-05}
+```{r 21-05}
 flights %>% 
   select(year:day, hour, origin, dest, tailnum, carrier) %>%
   select(-origin, -dest) %>% 
@@ -157,7 +157,7 @@ flights %>%
 
 - same thing with `mutate()`
 
-```{r 19-06}
+```{r 21-06}
 flights %>% 
   select(year:day, hour, origin, dest, tailnum, carrier) %>%
   select(-origin, -dest) %>% 
@@ -166,7 +166,7 @@ flights %>%
 
 - right_join 
 
-```{r 19-07}
+```{r 21-07}
 weather %>% 
   select(origin,temp, humid, wind_dir, precip) %>%
   right_join(airports, by = c("origin" = "faa"))
@@ -174,7 +174,7 @@ weather %>%
 
 - full_join
 
-```{r 19-08}
+```{r 21-08}
 airports %>%
   select(name,lat,lon) %>%
   full_join(airlines,by = "name")
@@ -187,13 +187,13 @@ What happens when the keys are not unique?
 
 1. Table with duplicates
 
-```{r 19-duplicates, echo=FALSE, fig.align='center', fig.cap='Duplicates', out.width='60%'} 
+```{r 21-duplicates, echo=FALSE, fig.align='center', fig.cap='Duplicates', out.width='60%'} 
 knitr::include_graphics("images/duplicates.png")
 ```
 
 2. Both tables have duplicate keys
 
-```{r 19-duplicates2, echo=FALSE, fig.align='center', fig.cap='Duplicates', out.width='60%'} 
+```{r 21-duplicates2, echo=FALSE, fig.align='center', fig.cap='Duplicates', out.width='60%'} 
 knitr::include_graphics("images/duplicates2.png")
 ```
 
@@ -213,12 +213,12 @@ The `base::merge()` function can perform all four types of mutating join.
 
 The difference between the **joins** and **merge()** is really important. dplyr’s joins are considerably faster and don’t mess with the order of the rows.
 
-```{r 19-merge, echo=FALSE, fig.align='center', fig.cap='Implementations', out.width='60%'} 
+```{r 21-merge, echo=FALSE, fig.align='center', fig.cap='Implementations', out.width='60%'} 
 knitr::include_graphics("images/merge.png")
 ```
 
 SQL is the inspiration for dplyr’s conventions
-```{r 19-sql,echo=FALSE, fig.align='center', fig.cap='Implementation', out.width='60%'} 
+```{r 21-sql,echo=FALSE, fig.align='center', fig.cap='Implementation', out.width='60%'} 
 knitr::include_graphics("images/sql.png")
 ```
 
@@ -241,11 +241,11 @@ It uses a slightly different syntax in SQL:
     semi_join()
 
 
-```{r 19-semijoin, echo=FALSE, fig.align='center', fig.cap='Semi-join', out.width='60%'} 
+```{r 21-semijoin, echo=FALSE, fig.align='center', fig.cap='Semi-join', out.width='60%'} 
 knitr::include_graphics("images/semijoin.png")
 ```
 
-```{r 19-09, message=FALSE, warning=FALSE, paged.print=FALSE}
+```{r 21-09, message=FALSE, warning=FALSE, paged.print=FALSE}
 top_dest <- flights %>%
   count(dest, sort = TRUE) %>%
   head(10)
@@ -258,7 +258,7 @@ flights %>%
 
 Filtering joins never duplicate rows like mutating joins do:
 
-```{r 19-semijoin2, echo=FALSE, fig.align='center', fig.cap='Semi-join', out.width='60%'} 
+```{r 21-semijoin2, echo=FALSE, fig.align='center', fig.cap='Semi-join', out.width='60%'} 
 knitr::include_graphics("images/semijoin2.png")
 ```
 
@@ -266,13 +266,13 @@ The inverse of a semi-join is an **anti-join**:
 
     anti_join()
 
-```{r 19-10}
+```{r 21-10}
 flights %>%
   anti_join(planes, by = "tailnum") %>%
   count(tailnum, sort = TRUE) # keeps the rows that don’t have a match
 ```
 
-```{r 19-antijoin, echo=FALSE, fig.align='center', fig.cap='Anti-join', out.width='60%'} 
+```{r 21-antijoin, echo=FALSE, fig.align='center', fig.cap='Anti-join', out.width='60%'} 
 knitr::include_graphics("images/antijoin.png")
 ```
 
