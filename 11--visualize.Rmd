@@ -1,0 +1,8 @@
+# (PART) Visualize {-}
+
+
+In this section, we'll learn the basics about:
+
+-   **Layers**
+-   **Exploratory data analysis**
+-   **Communication**

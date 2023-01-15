@@ -1,4 +1,4 @@
-# Column-wise operations
+# Arrow
 
 **Learning objectives:**
 

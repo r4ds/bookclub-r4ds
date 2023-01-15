@@ -565,12 +565,16 @@ identical(use_purrr, use_rowwise)
 
 ### Cohort 6
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/v1OawROf1ZQ")`
+
+`r knitr::include_url("https://www.youtube.com/embed/PX7y2jlRYuU")`
 
 <details>
   <summary> Meeting chat log </summary>
   
 ```
-LOG
+00:14:37	Marielena Soilemezidi:	they're called quotes/quote marks!
+00:14:43	Marielena Soilemezidi:	I also got a brain freeze xD
+00:42:28	Daniel:	https://github.com/tidyverse/broom
 ```
 </details>

@@ -1,0 +1,222 @@
+# Exploratory Data Analysis
+
+## Learning objectives
+
+```{r 12-setup, include = FALSE}
+library(tidyverse)
+```
+
+- Recognize the **two types of questions** that will always be useful for making discoveries within your data: "What type of variation occurs within my variables?" and "What type of covariation occurs between my variables?"
+- Explore the **variation** within the variables of your observations.
+- Deal with outliers and **missing values** in your data.
+- Explore the **covariation** between the variables of your observations.
+- Recognize how **models** can be used to explore **patterns** in your data.
+
+## Overall Vocabulary
+
+- **variable:** a quantity, quality, or property that you can measure.
+- **value:** the state of a variable when you measure it. Can change.
+- **observation:** a set of measurements made under similar conditions. One value per variable.
+- **tabular data:** observations of variables.
+- **tidy data:** 1 observation per row, 1 variable per column, 1 value per cell. Definition of "tidy" for a dataset can depend on what you're trying to answer.
+
+## Variation
+
+- **variation:** the tendency of values of a variable to change between measurements.
+- **categorical variable:** can only take certain values. Visualize variation with bar chart.
+
+```{r 12-variation-categorical}
+ggplot(data = diamonds) +
+  aes(x = cut) +
+  geom_bar()
+```
+
+- **continuous variables:** can take on infinite set of ordered values. Visualize variation with histogram.
+
+```{r 12-variation-continuous}
+ggplot(data = diamonds) +
+  aes(x = carat) +
+  geom_histogram(binwidth = 0.5)
+```
+
+- `geom_freqpoly` is `geom_histogram` alternative that doesn't show bars.
+- Reminder: the `%>%` pipe = "and then".
+- `{ggplot2}` uses `+` to add layers, read it as "with" or "and".
+
+```{r 12-variation-freqpoly}
+smaller <- diamonds %>% 
+  filter(carat < 3) 
+ggplot(smaller) +
+  aes(x = carat, colour = cut) +
+  geom_freqpoly(binwidth = 0.1)
+```
+
+- Use the visualizations to develop questions!
+  - Which values are the most common? Why?
+  - Which values are rare? Why? Does that match your expectations?
+  - Can you see any unusual patterns? What might explain them?
+
+```{r 12-var-questions1}
+ggplot(smaller, mapping = aes(x = carat)) +
+  geom_histogram(binwidth = 0.01)
+```
+
+- Subgroups create more questions:
+  - How are the observations within each cluster similar to each other?
+  - How are the observations in separate clusters different from each other?
+  - How can you explain or describe the clusters?
+  - Why might the appearance of clusters be misleading?
+
+- Use `coord_cartesian` to zoom in to see unusual values.
+- Can be ok to drop weird values, especially if you can explain where they came from.
+- Always disclose that you did that, though.
+
+## Missing values
+
+2 options to deal with weird values:
+
+- Drop the entire row. <-- probably don't do this
+- Replace bad data with NA.
+
+```{r 12-replace-weird}
+diamonds2 <- diamonds %>% 
+  mutate(y = ifelse(y < 3 | y > 20, NA, y))
+```
+
+- `{ggplot2}` will give a warning when values are missing, can suppress with `na.rm = TRUE`.
+
+## Covariation
+
+- **covariation:** tendency of values of different variables to vary *together* in a related way.
+- Visualizing covariance depends on types of variables in the pair:
+
+### categorical + continuous
+
+- `x = categorical`
+- `y = continuous`.
+- `geom_boxplot`
+- Lots of options exist to do this better. See [Cedric Scherer's tutorial](https://www.cedricscherer.com/2021/06/06/visualizing-distributions-with-raincloud-plots-with-ggplot2/)!
+
+### categorical + categorical
+
+- `geom_count`
+- `dplyr::count` then `geom_tile`
+
+### continuous + continuous
+
+- `geom_point`
+- `geom_bin2d`
+- `geom_hex`
+
+
+## Finding Patterns
+
+**Ask yourself:**
+
+- Could this pattern be due to coincidence (i.e. random chance)?
+- How can you describe the relationship implied by the pattern?
+- How strong is the relationship implied by the pattern?
+- What other variables might affect the relationship?
+- Does the relationship change if you look at individual subgroups of the data?
+
+## Simplified ggplot2
+
+```{r 12-ggplot-simplified}
+ggplot(data = faithful, mapping = aes(x = eruptions)) + 
+  geom_freqpoly(binwidth = 0.25)
+
+ggplot(faithful, aes(eruptions)) + 
+  geom_freqpoly(binwidth = 0.25)
+
+# Or Jon's crazy way
+ggplot(faithful) +
+  aes(eruptions) +
+  geom_freqpoly(binwidth = 0.25)
+```
+
+## Learning More
+
+- [r4ds.io/join](r4ds.io/join) for more book clubs!
+- [R Graph Gallery](https://www.r-graph-gallery.com/ggplot2-package.html)
+- The [Graphs section](http://www.cookbook-r.com/Graphs/) of the R Cookbook
+
+## Meeting Videos
+
+### Cohort 5
+
+`r knitr::include_url("https://www.youtube.com/embed/ujOn-4esnDo")`
+
+<details>
+  <summary> Meeting chat log </summary>
+  
+```
+00:13:43	Njoki Njuki Lucy:	Is it best to visualize the variation in a categorical variable with only two levels using a bar chart? If not, what's the chart to use if I may ask?
+00:16:00	Ryan Metcalf:	Great question Njoki, Categorical, by definition is a set that a variable can have. Say, Male / Female / Other. This example indicates a variable can have three states. It depends on your data set.
+00:16:51	Eileen:	bar or pie chart?
+00:16:51	Ryan Metcalf:	There are other forms of presentation other than a bar chart. I.E “quantifying” each category.
+00:18:37	Eileen:	box chart
+00:18:46	Njoki Njuki Lucy:	thank you so much  everyone :)
+00:24:31	lucus w:	This website is excellent in determining geom to use: www.data-to-viz.com
+00:25:22	Njoki Njuki Lucy:	awesome, thanks
+00:25:44	Eileen:	Box charts are great for showing outliers
+00:26:31	Federica Gazzelloni:	other interesting resources:
+00:26:34	Federica Gazzelloni:	https://www.r-graph-gallery.com/ggplot2-package.html
+00:26:51	Federica Gazzelloni:	http://www.cookbook-r.com/Graphs/
+00:34:19	Amitrajit:	what is the difference in putting aes()  inside geom_count() rather than main ggplot() call?
+00:35:38	Ryan Metcalf:	Like maybe Supply vs Demand curves?
+00:41:16	Federica Gazzelloni:	what about the factor() that we add to a variable when we apply a color?
+00:42:33	Susie Neilson:	I do aes your way Jon!
+00:43:07	Federica Gazzelloni:	and grouping inside the aes
+00:49:27	Amitrajit:	thanks!
+00:49:32	Federica Gazzelloni:	thanks
+00:49:35	Njoki Njuki Lucy:	thank you, bye
+00:49:45	Eileen:	Thank you!
+```
+</details>
+
+### Cohort 6
+
+`r knitr::include_url("https://www.youtube.com/embed/mYTD9DbM174")`
+
+<details>
+  <summary> Meeting chat log </summary>
+  
+```
+00:06:21	Matthew Efoli:	good evening Daniel and Esmeralda
+00:07:39	Matthew Efoli:	hello everyone
+00:08:08	Daniel Adereti:	Hello Matthew!
+00:08:44	Daniel Adereti:	I guess we can start? so we can finish the 2 chapters as Exploratory Data Analysis is quite long and involved
+00:09:04	Freya Watkins:	Sounds good! Hi all :)
+00:10:55	Freya Watkins:	yes can see
+00:23:14	Daniel Adereti:	na > Not available
+00:23:32	Maria Eleni Soilemezidi:	rm = remove
+00:25:49	Esmeralda Cruz:	yes
+00:26:29	Esmeralda Cruz:	to remove the outliers maybe?
+00:29:20	Adeyemi Olusola:	No
+00:29:22	Freya Watkins:	we can't see it no
+00:29:27	Maria Eleni Soilemezidi:	no we can't see it!
+00:29:38	Maria Eleni Soilemezidi:	thank you! Yes
+00:32:57	Daniel Adereti:	Cedric's article is a nice one! Helpful to understand descriptive use case of different plot ideas
+00:43:19	Daniel Adereti:	we can do the exercises
+00:43:27	Esmeralda Cruz:	ok
+00:43:28	Maria Eleni Soilemezidi:	yes, sure!
+00:45:20	Adeyemi Olusola:	we can try reorder
+00:45:28	Adeyemi Olusola:	from the previous example
+00:51:44	Maria Eleni Soilemezidi:	that's a good idea
+00:52:28	Daniel Adereti:	Thanks!
+00:52:42	Daniel Adereti:	cut_in_color_graph <- diamonds %>% 
+  group_by(color, cut) %>% 
+  summarise(n = n()) %>% 
+  mutate(proportion_cut_in_color = n/sum(n)) %>%
+  ggplot(aes(x = color, y = cut))+
+  geom_tile(aes(fill = proportion_cut_in_color))+
+  labs(fill = "proportion\ncut in color")
+00:53:32	Esmeralda Cruz:	😮
+00:53:47	Adeyemi Olusola:	smiles
+00:54:13	Adeyemi Olusola:	but lets try reorder...I think we should be able to pull something from it, though not sure about the heatmap thingy
+00:54:26	Adeyemi Olusola:	on our own though*
+01:05:38	Maria Eleni Soilemezidi:	no worries! Thank you for the presentation, Matthew! :)
+01:05:39	Freya Watkins:	Thanks Matthew!
+01:06:44	Maria Eleni Soilemezidi:	bye everyone, see you next week!
+```
+</details>

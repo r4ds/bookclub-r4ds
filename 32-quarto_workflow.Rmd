@@ -1,4 +1,7 @@
-# R Markdown workflow
+# Quarto workflow
+
+Note: This chapter was about R Markdown when previous cohorts read it.
+When you update these slides to reflect the updated chapter, please remove this note.
 
 **Learning objectives:**
 

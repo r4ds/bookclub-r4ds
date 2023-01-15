@@ -16,7 +16,7 @@ If you would like to present, please see the sign-up sheet for your cohort (link
 - Cohort 3 (started 2020-12-08, ended 2021-11-09): [meeting videos](https://www.youtube.com/playlist?list=PL3x6DOfs2NGiiKcrDqW4m9qhlpbiQ7HCt)
 - Cohort 4 (started 2020-12-16, ended 2021-06-23): [meeting videos](https://www.youtube.com/playlist?list=PL3x6DOfs2NGjtn1_4BSX99R5wrLjK7XvY)
 - Cohort 5 (started 2021-07-24, ended 2022-04-23): [meeting videos](https://www.youtube.com/playlist?list=PL3x6DOfs2NGjk1sPsrn2CazGiel0yZrhc)
-- [Cohort 6](https://docs.google.com/spreadsheets/d/1zy2nXNkvcdqWuF8rQ5ApWRkVQG_UJt0azu3h_mEnY2E/edit#gid=0) (started 2021-10-15): [Thursdays, 11:30am CST/CDT](https://www.timeanddate.com/worldclock/converter.html?iso=20220526T163000&p1=24) | [meeting videos](https://www.youtube.com/playlist?list=PL3x6DOfs2NGiYnQdq8mgMBeob3YONUWRM)
+- Cohort 6 (started 2021-10-15, ended 2022-11-17): [meeting videos](https://www.youtube.com/playlist?list=PL3x6DOfs2NGiYnQdq8mgMBeob3YONUWRM)
 - [Cohort 7](https://docs.google.com/spreadsheets/d/1kDhZkrd0wy4YN_pra84kmhipX7yrLm9v9XmVh9HRRZ0/edit?usp=sharing) (starts 2022-08-29): [Mondays, 11:00am CST/CDT](https://www.timeanddate.com/worldclock/converter.html?iso=20220829T160000&p1=1440&p2=24&p3=125&p4=197&p5=179) | [meeting videos](https://youtube.com/playlist?list=PL3x6DOfs2NGi3qrPu8xxURdUoYAJpko5G)
 - [Cohort 8](https://docs.google.com/spreadsheets/d/1reByMPb5Og3OHbRgplzV5Jkz_o6CkEYz_adBGfHTFwg/edit?usp=sharing) (start date TBD): [TBD, TBD CST/CDT](https://www.timeanddate.com/) | [meeting videos](https://youtube.com/playlist?list=PL3x6DOfs2NGjeq_14X43I3OHYxuE2mO4I)
 
@@ -28,13 +28,8 @@ To present, follow these instructions:
 
 Do these steps once:
 
-1. [Setup Github Locally](https://www.youtube.com/watch?v=hNUNPkoledI) (also see [_Happy Git and GitHub for the useR_](https://happygitwithr.com/github-acct.html))
-2. Install {usethis} and {devtools} `install.packages(c("usethis", "devtools"))`
-3. Set up a default {usethis} directory:
-  - `usethis::edit_r_profile()` to open your profile for editing.
-  - Add this line: `options(usethis.destdir = "YOURDIR")` (replace `YOURDIR` with the root directory under which you want your R projects to appear; or you can skip these steps, and the project will be saved to your Desktop).
-  - Restart your R session (Session/Restart R in Rstudio).
-4. `usethis::create_from_github("r4ds/bookclub-r4ds")` (cleanly creates your own copy of this repository).
+1. [Setup Git and GitHub to work with RStudio](https://github.com/r4ds/bookclub-setup) (click through for detailed, step-by-step instructions; I recommend checking this out even if you're pretty sure you're all set).
+2. `usethis::create_from_github("r4ds/bookclub-r4ds")` (cleanly creates your own copy of this repository).
 
 Do these steps each time you present another chapter:
 

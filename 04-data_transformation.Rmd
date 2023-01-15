@@ -859,6 +859,32 @@ top_delay %>%
 ```
 </details>
 
+`r knitr::include_url("https://www.youtube.com/embed/KtDeYCfurz4")`
+
+<details>
+  <summary> Meeting chat log </summary>
+```
+00:04:33	Susan Neilson:	Yes!
+00:27:11	shamsuddeen:	https://stackoverflow.com/questions/51901398/what-does-a-tilde-in-front-of-a-single-variable-mean-facet-wrap/53835451#53835451
+00:27:30	Federica Gazzelloni:	https://www.rdocumentation.org/packages/tibble/versions/3.1.2/topics/tribble
+00:27:54	shamsuddeen:	http://uc-r.github.io/integer_double/
+00:28:15	shamsuddeen:	1L, 2L
+00:28:50	Federica Gazzelloni:	tribble() creates tibbles using an easier to read row-by-row layout.
+00:37:49	Becki R. (she/her):	the audio is out
+01:08:20	Susie N.:	I have to head out everyone - thank you all so much for an excellent class and discussion!
+01:08:32	Federica Gazzelloni:	info for lealeft: https://rstudio.github.io/leaflet/map_widget.html
+01:09:32	Federica Gazzelloni:	the documentation says: ~ x means the variable x in the data object
+01:10:21	shamsuddeen:	https://dplyr.tidyverse.org/reference/pull.html
+01:10:44	Njoki Njuki Lucy:	thanks you
+01:10:51	Njoki Njuki Lucy:	thank*
+01:12:24	shamsuddeen:	Strings
+01:12:35	shamsuddeen:	Chapter
+01:12:38	Federica Gazzelloni:	thanks
+01:12:40	shamsuddeen:	I can do
+```
+</details>
+
+
 ### Cohort 6
 
 `r knitr::include_url("https://www.youtube.com/embed/DNwioC-SgKQ")`
