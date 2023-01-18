@@ -23,6 +23,7 @@ Imports:
     tufte,
     tidyverse,
     tvthemes,
-    viridis
+    viridis,
+    maps
 Remotes: 
     hadley/emo
