@@ -1,141 +1,309 @@
 # Layers
 
-***Since these notes were created, this chapter has been split into "Layers" and "Exploratory data analysis".***
-
-```{r 11-setup, include = FALSE}
-library(tidyverse)
-```
 
 **Learning objectives**
 
--   **These likely need to be edited.**
--   Recognize the **two types of questions** that will always be useful for making discoveries within your data: "What type of variation occurs within my variables?" and "What type of covariation occurs between my variables?"
--   Explore the **variation** within the variables of your observations.
--   Deal with outliers and **missing values** in your data.
--   Explore the **covariation** between the variables of your observations.
--   Recognize how **models** can be used to explore **patterns** in your data.
+- We are going to learn about the layered grammar of graphics
 
-## Overall Vocabulary
+```{r}
+library(tidyverse)
+```
 
-- **variable:** a quantity, quality, or property that you can measure.
-- **value:** the state of a variable when you measure it. Can change.
-- **observation:** a set of measurements made under similar conditions. One value per variable.
-- **tabular data:** observations of variables.
-- **tidy data:** 1 observation per row, 1 variable per column, 1 value per cell. Definition of "tidy" for a dataset can depend on what you're trying to answer.
+## Introduction
 
-## Variation
+![](images/ge_all.png)
 
-- **variation:** the tendency of values of a variable to change between measurements.
-- **categorical variable:** can only take certain values. Visualize variation with bar chart.
 
-```{r 11-variation-categorical}
-ggplot(data = diamonds) +
-  aes(x = cut) +
+## Aesthetic mappings
+
+- We will be working with the **mpg** data frame that is bundled with the ggplot2 package which contains 234 observations collected by the US Environmental Protection Agency on 38 car models.
+
+```{r}
+mpg
+```
+
+
+```{r, figures-side1, fig.show="hold", out.width="50%"}
+
+par(mar = c(4, 4, .1, .1))
+
+# Left
+ggplot(mpg, aes(x = displ, y = hwy, color = class))+
+geom_point()
+
+# Right
+ggplot(mpg, aes(x = displ, y = hwy, shape = class))+
+geom_point()
+```
+
+**Similarly, we can map class to size or alpha (transparency) aesthetics as well.**
+
+```{r, figures-side, fig.show="hold", out.width="50%"}
+par(mar = c(4, 4, .1, .1))
+
+# Left
+ggplot(mpg, aes(x = displ, y = hwy, size = class))+
+geom_point()
+
+# Right
+ggplot(mpg, aes(x = displ, y = hwy, alpha = class))+
+geom_point()
+```
+
+**Both of these produce warnings as well:**
+
+- Mapping a non-ordinal discrete (categorical) variable (class) to an ordered aesthetic (size or alpha) is generally not a good idea because it implies a ranking that does not in fact exist.
+
+- Similarly, we could have mapped class to the alpha aesthetic, which controls the transparency of the points, or to the shape aesthetic, which controls the shape of the points.
+
+- Once you map an aesthetic, ggplot2 takes care of the rest. It selects a reasonable scale to use with the aesthetic, and it constructs a legend that explains the mapping between levels and values. For x and y aesthetics, ggplot2 does not create a legend, but it creates an axis line with tick marks and a label. The axis line acts as a legend; it explains the mapping between locations and values.
+
+- We can also set the aesthetic properties of your geom manually. For example, we can make all of the points in our plot blue:
+
+```{r}
+ggplot(mpg, aes(x = displ, y = hwy)) + 
+  geom_point(color = "blue")
+```
+
+
+![](images/shape.png)
+
+ We can learn more about aesthetics mapping by looking at this vignettes [**aesthetic specifications vignette**](https://ggplot2.tidyverse.org/articles/ggplot2-specs.html)
+ 
+ 
+ **11.2.1 Exercises**
+
+## Geometric objects
+
+```{r, figures-side3, fig.show="hold", out.width="50%"}
+
+par(mar = c(4, 4, .1, .1))
+
+# Left
+ggplot(mpg, aes(x = displ, y = hwy)) + 
+  geom_point()
+
+# Right
+ggplot(mpg, aes(x = displ, y = hwy)) + 
+  geom_smooth()
+```
+
+```{r, figures-side4, fig.show="hold", out.width="50%"}
+
+par(mar = c(4, 4, .1, .1))
+
+# Left
+ggplot(mpg, aes(x = displ, y = hwy, shape = drv))+
+geom_smooth()
+
+# Right
+ggplot(mpg, aes(x = displ, y = hwy, linetype = drv))+ 
+geom_smooth()
+```
+
+```{r, figures-side5, fig.show="hold", out.width="50%"}
+
+par(mar = c(4, 4, .1, .1))
+
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_smooth()
+              
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_smooth(aes(group = drv))
+    
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_smooth(aes(color = drv), show.legend = FALSE)+geom_smooth()
+```
+
+- We can also specify different data for different layer. Here, we use red points as well as open circles to highlight two-seater cars. The local data argument in geom_smooth() overrides the global data argument in ggplot() for that layer only.
+
+
+```{r}
+ggplot(mpg, aes(x = displ, y = hwy)) + 
+  geom_point() + 
+  geom_point(
+    data = mpg |> filter(class == "2seater"), 
+    color = "red"
+  ) +
+  geom_point(
+    data = mpg |> filter(class == "2seater"), 
+    shape = "circle open", size = 3, color = "red"
+  )
+```
+
+- The histogram and density plot below reveal that the distribution of highway mileage is bimodal and right skewed while the boxplot reveals two potential outliers.
+
+
+```{r, figures-side8, fig.show="hold", out.width="50%"}
+
+par(mar = c(4, 4, .1, .1))
+
+# Left
+ggplot(mpg, aes(x = hwy)) +
+  geom_histogram(binwidth = 2)
+
+# Middle
+ggplot(mpg, aes(x = hwy)) +
+  geom_density()
+
+# Right
+ggplot(mpg, aes(x = hwy)) +
+  geom_boxplot()
+```
+
+ggplot2 provides more than 40 geoms but these don’t cover all possible plots one could make. If you need a different geom, we recommend looking into extension packages first to see if someone else has already implemented it [**here**](https://exts.ggplot2.tidyverse.org/gallery/)
+
+The best place to get a comprehensive overview of all of the geoms ggplot2 offers, as well as all functions in the package, is the reference page:[**ggplot2-reference page**](https://ggplot2.tidyverse.org/reference)
+
+
+**Exercises 11.3.1**
+
+## Facets
+
+Facet is used to splits a plot into subplots that each display one subset of the data based on a categorical variable.
+
+```{r, figures-side7, fig.show="hold", out.width="50%"}
+
+par(mar = c(4, 4, .1, .1))
+
+# Left
+ggplot(mpg, aes(x = displ, y = hwy)) + 
+  geom_point() + 
+  facet_wrap(~cyl)
+
+
+# Right
+ggplot(mpg, aes(x = displ, y = hwy)) + 
+  geom_point() + 
+  facet_grid(drv ~ cyl)
+```
+
+## Statistical transformations
+
+```{r}
+ggplot(diamonds, aes(x = cut)) + 
   geom_bar()
 ```
 
-- **continuous variables:** can take on infinite set of ordered values. Visualize variation with histogram.
+![](images/visualization-stat-bar.png)
 
-```{r 11-variation-continuous}
-ggplot(data = diamonds) +
-  aes(x = carat) +
-  geom_histogram(binwidth = 0.5)
+- We can learn which stat a geom uses by inspecting the default value for the stat argument. For example, ?geom_bar shows that the default value for stat is “count”, which means that geom_bar() uses stat_count(). stat_count() is documented on the same page as geom_bar().
+
+- We might want to override the default mapping from transformed variables to aesthetics. For example, you might want to display a bar chart of proportions, rather than counts:
+
+```{r}
+ggplot(diamonds, aes(x = cut, y = after_stat(prop), group = 1))+ 
+geom_bar()
 ```
 
-- `geom_freqpoly` is `geom_histogram` alternative that doesn't show bars.
-- Reminder: the `%>%` pipe = "and then".
-- `{ggplot2}` uses `+` to add layers, read it as "with" or "and".
+- We might want to draw greater attention to the statistical transformation in your code. For example, you might use stat_summary(), which summarizes the y values for each unique x value, to draw attention to the summary that you’re computing:
 
-```{r 11-variation-freqpoly}
-smaller <- diamonds %>% 
-  filter(carat < 3) 
-ggplot(smaller) +
-  aes(x = carat, colour = cut) +
-  geom_freqpoly(binwidth = 0.1)
+```{r}
+ggplot(diamonds) + 
+  stat_summary(
+    aes(x = cut, y = depth),
+    fun.min = min,
+    fun.max = max,
+    fun = median
+  )
 ```
 
-- Use the visualizations to develop questions!
-  - Which values are the most common? Why?
-  - Which values are rare? Why? Does that match your expectations?
-  - Can you see any unusual patterns? What might explain them?
+- **ggplot2 provides more than 20 stats for you to use. Each stat is a function, so you can get help in the usual way, e.g. ?stat_bin.**
 
-```{r 11-var-questions1}
-ggplot(smaller, mapping = aes(x = carat)) +
-  geom_histogram(binwidth = 0.01)
+## Position adjustments
+
+```{r, fig.show="hold", out.width="50%"}
+
+par(mar = c(4, 4, .1, .1))
+
+ggplot(diamonds, aes(x = cut, color = cut)) + 
+  geom_bar()
+
+ggplot(diamonds, aes(x = cut, fill = cut)) + 
+  geom_bar()
 ```
 
-- Subgroups create more questions:
-  - How are the observations within each cluster similar to each other?
-  - How are the observations in separate clusters different from each other?
-  - How can you explain or describe the clusters?
-  - Why might the appearance of clusters be misleading?
-
-- Use `coord_cartesian` to zoom in to see unusual values.
-- Can be ok to drop weird values, especially if you can explain where they came from.
-- Always disclose that you did that, though.
-
-## Missing values
-
-2 options to deal with weird values:
-
-- Drop the entire row. <-- probably don't do this
-- Replace bad data with NA.
-
-```{r 11-replace-weird}
-diamonds2 <- diamonds %>% 
-  mutate(y = ifelse(y < 3 | y > 20, NA, y))
+```{r}
+ggplot(diamonds, aes(x = cut, fill = clarity)) + 
+  geom_bar()
 ```
 
-- `{ggplot2}` will give a warning when values are missing, can suppress with `na.rm = TRUE`.
+- The stacking is performed automatically using the position adjustment specified by the position argument. If you don’t want a stacked bar chart, you can use one of three other options: **"identity"**, **"dodge"** or **"fill"**.
 
-## Covariation
+- N/B: position = "identity" will place each object exactly where it falls in the context of the graph. This is not very useful for bars, because it overlaps them. To see that overlapping we either need to make the bars slightly transparent by setting alpha to a small value, or completely transparent by setting fill = NA.
 
-- **covariation:** tendency of values of different variables to vary *together* in a related way.
-- Visualizing covariance depends on types of variables in the pair:
+```{r, fig.show="hold", out.width="50%"}
 
-### categorical + continuous
+par(mar = c(4, 4, .1, .1))
 
-- `x = categorical`
-- `y = continuous`.
-- `geom_boxplot`
-- Lots of options exist to do this better. See [Cedric Scherer's tutorial](https://www.cedricscherer.com/2021/06/06/visualizing-distributions-with-raincloud-plots-with-ggplot2/)!
+ggplot(diamonds, aes(x = cut, fill = clarity))+ 
+geom_bar(alpha = 1/5, position = "identity")
 
-### categorical + categorical
-
-- `geom_count`
-- `dplyr::count` then `geom_tile`
-
-### continuous + continuous
-
-- `geom_point`
-- `geom_bin2d`
-- `geom_hex`
-
-
-## Finding Patterns
-
-**Ask yourself:**
-
-- Could this pattern be due to coincidence (i.e. random chance)?
-- How can you describe the relationship implied by the pattern?
-- How strong is the relationship implied by the pattern?
-- What other variables might affect the relationship?
-- Does the relationship change if you look at individual subgroups of the data?
-
-## Simplified ggplot2
-
-```{r 11-ggplot-simplified}
-ggplot(data = faithful, mapping = aes(x = eruptions)) + 
-  geom_freqpoly(binwidth = 0.25)
-
-ggplot(faithful, aes(eruptions)) + 
-  geom_freqpoly(binwidth = 0.25)
-
-# Or Jon's crazy way
-ggplot(faithful) +
-  aes(eruptions) +
-  geom_freqpoly(binwidth = 0.25)
+ggplot(diamonds, aes(x = cut, color = clarity))+ 
+geom_bar(fill = NA, position = "identity")
 ```
+
+- Avoiding over-plotting
+
+```{r}
+ggplot(mpg, aes(x = displ, y = hwy)) + 
+  geom_point(position = "jitter")
+```
+
+## Coordinate systems
+
+Coordinate systems are probably the most complicated part of ggplot2. The default coordinate system is the Cartesian coordinate system where the x and y positions act independently to determine the location of each point. There are two other coordinate systems that are occasionally helpful.
+
+![](images/visualization-coordinate-systems.png)
+
+- coord_quickmap() sets the aspect ratio correctly for maps. This is very important if you’re plotting spatial data with ggplot2. We don’t have the space to discuss maps in this book, but you can learn more in the [Maps chapter](https://ggplot2-book.org/maps.html) of ggplot2: Elegant graphics for data analysis.
+
+```{r, fig.show="hold", out.width="50%"}
+
+par(mar = c(4, 4, .1, .1))
+
+nz <- map_data("nz")
+
+ggplot(nz, aes(x = long, y = lat, group = group)) +
+  geom_polygon(fill = "white", color = "black")
+
+ggplot(nz, aes(x = long, y = lat, group = group)) +
+  geom_polygon(fill = "white", color = "black") +
+  coord_quickmap()
+```
+
+```{r, fig.show="hold", out.width="50%"}
+
+par(mar = c(4, 4, .1, .1))
+
+bar <- ggplot(data = diamonds) + 
+  geom_bar(
+    mapping = aes(x = cut, fill = cut), 
+    show.legend = FALSE,
+    width = 1
+  ) + 
+  theme(aspect.ratio = 1) +
+  labs(x = NULL, y = NULL)
+
+bar + coord_flip()
+bar + coord_polar()
+```
+
+## Summary
+
+- In this chapter we learned about the layered grammar of graphics starting with aesthetics and geometries to build a simple plot. 
+
+- We used facets for splitting the plot into subsets.
+
+- Statistics for understanding how geoms are calculated.
+
+- Position adjustments for controlling the fine details of position when geoms might otherwise overlap.
+
+- Coordinate systems allow us to fundamentally change what x and y mean. 
+
+- One layer we have not yet touched on is theme, which we will introduce in **Section 13.5**.
+
+- Two very useful resources for getting an overview of the complete ggplot2 functionality are the ggplot2 cheatsheet [which you can find at](https://posit.co/resources/cheatsheets) [and the ggplot2 package website](https://ggplot2.tidyverse.org).
 
 ## Learning More
 
