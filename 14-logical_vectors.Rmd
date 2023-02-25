@@ -2,7 +2,7 @@
 
 **Learning objectives:**
 
--   What are Vectors and Why we talking about Logical Vectors
+-   What are Vectors and Why are we talking about Logical Vectors
 
 -   How to use logical vectors & Boolean Algebra in
 
