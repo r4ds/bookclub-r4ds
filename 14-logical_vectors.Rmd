@@ -1,1045 +1,229 @@
-# Logical vectors
-
-Note: Since these slides were made, this chapter has been split into multiple chapters. After you edit these slides, remove this note.
+# Logical Vectors
 
 **Learning objectives:**
 
-- Compare and contrast **atomic vectors** and **lists**.
-  - Recognize the **six types of atomic vectors**.
-  - Determine the key properties (`typeof` and `length`) of vectors.
-  - Recognize the three important types of **augmented vectors**.
-- Construct **logical** vectors.
-- Construct **numeric** vectors.
-  - Differentiate between the two types of numeric vectors, **double** and **integer**.
-- Construct **character** vectors.
-- Recognize the different types of missing values.
-- **Coerce vectors** between different types.
-- **Test** whether a vector has a given type.
-- Recognize when a vector will be **recycled** to match the length of another vector, and when it will not.
-- **Name** the elements of vectors.
-- **Subset** vectors.
-- Construct **lists**.
-- Differentiate between `[`, `[[`, and `$` for **subsetting lists**.
-- Use **attributes** to provide additional information about vectors.
-- Recognize the **S3 object-oriented system**.
-- Construct **factors**.
-- Construct **dates** and **date-times**.
-- Recognize that **tibbles are augmented lists.**
+-   What are Vectors and Why we talking about Logical Vectors
 
-## Introduction
+-   How to use logical vectors & Boolean Algebra in
 
-- Since we have already learnt about tibbles, in this chapter we will study vectors that underlie them.
+    -   Comparison
 
-### Prerequisites
+    -   Identifying missing values
 
-- Here we focus on base R data structures, hence no need to load any packages.
-- But we will a couple of functions from `purrr` package to avoid some inconsistencies in base R.
+-   What are the logical summery functions we could leverage in R?
 
-```{r 14-load_tidyverse, message=FALSE, eval=FALSE} 
+-   Conditional Transformations using `if_else()` and `case_when()` functions
+
+## What is logical Vectors
+
+-   Vectors in R are the same as the arrays in C language, which are used to hold multiple data values of the same type
+
+-   The mental model for using Logical Vectors
+
+    -   Defining constraints on your data to answer Binary Questions
+
+## How to use logical vectors & Boolean Algebra
+
+![](images/14_venn_diagrams.png)
+
+-   Combining logical vectors using Boolean algebra
+
+    -   Venn Diagrams here shows the logical relations between logical vectors
+
+### Comparison
+
+-   numeric comparison creates logical vectors, and you can see that in the following example
+
+```{r}
 library(tidyverse)
+library(nycflights13)
 ```
 
-## Vector basics
-
-- There are two types of vectors:
-  - Atomic vectors, of which there are six types: 
-    - <span style="color: blue;">logical</span>
-    - <span style="color: blue;">integer</span>
-    - <span style="color: blue;">double</span>
-    - <span style="color: blue;">character</span>
-    - <span style="color: blue;">complex</span>
-    - <span style="color: blue;">raw</span>
-  - Integer and double vectors are collectively called **numeric** vectors.
-  - Lists, at times, are called recursive vectors because lists can contain other lists.
-- The main difference between vectors and lists:
-  - Atomic vectors are homogeneous i.e., contain only one type (in my understanding).
-  - Lists are heterogeneous i.e., can have different types.
-- Another related object: `NULL`. It is often used to represent the absence of a vector (unlike `NA` which is used to represent the absence of a value). `NULL` typically acts as a vector of length 0.
-
-Figure 20.1: The hierarchy of R’s vector types:
-
-![](images/data-structures-overview.png)
-
-- Two key properties for each vector:
-  - Its **type**, which can be determined with `typeof()`.
-  
-```{r 14-type_of, eval=FALSE}
-typeof(letters)
-
-typeof(1:10)
-```
-
-  - Its **length**, which can be determined with `length()`.
-  
-```{r 14-length_vector, eval=FALSE}
-x1 <- list("a", "b", 1:10); length(x1)
-
-x2 <- c("a", "b"); length(x2)
-```
-
-> Qn: does this imply that the length of a list is the # of elements in a list for example (x1)?
-
-- Vectors can also contain arbitrary additional metadata in the form of attributes.
-  - Which are then used to create **augmented vectors** which build on additional behaviour. There are three important types of augmented vectors:
-    - Factors are built on top of integer vectors.
-    - Dates and date-times are built on top of numeric vectors.
-    - Data frames and tibbles are built on top of lists.
-
-## Important types of atomic vector
-
-- The four most important types of atomic vectors: logical, integer, double, and character.
-
-> Note: Raw and complex are rarely used during a data analysis, hence not part of this of discussion.
-
-### Logical
-
-- Simplest type of atomic vector --> can take only three possible values: `FALSE`, `TRUE`, and `NA`.
-- They are constructed with comparison operators.
-- OR, can create them by hand with `c()`:
-
-```{r 14-logical_vector, eval=FALSE}
-1:10 %% 3 == 0
-
-c(TRUE, TRUE, FALSE, NA)
-```
-
-> Qn: what exactly is %% doing here? I understand is x modulus y...
-
-### Numeric
-
-- As learnt, integer and double are known collectively as numeric vectors.
-- In R, numbers are doubles by default.
-- To create an integer, place `L` after the number.
-
-```{r 14-numeric_vector, eval=FALSE}
-typeof(1)
-
-typeof(1L)
-
-1.5L
-```
-
-> Note: the warning after running 1.5L is because that integers only take whole numbers. I think.
-
-- Two important differences between doubles and integers:
-  1. Doubles are approximations. They represent floating point numbers that can't be precisely represented with a fixed amount of memory. Therefore, we should consider all doubles as approximations. E.g., the square root of two:
-  
-```{r 14-doubles_vector, eval=FALSE}
-(x3 <- sqrt(2) ^ 2)
-
-options(scipen = 999)
-x3 - 2
-```
-
-> Side note: `options(scipen = 999)` to remove the scientific numbers as I often confuse reading e- or e+.
-
-- When working with floating point numbers, it is common that the calculations include some approximation.
-  - Hence, when we compare floating point numbers we should use `dplyr::near()` instead of `==` as it allows for some numerical tolerance. (*what does this mean?*)
-  
-```{r 14-dplyr_near, eval=FALSE}
-dplyr::near(1.745, 2)
-# compares if 1.745 is the same as 2
-# FALSE
-```
-
-2. Integers have one special value: `NA` while doubles have four: `NA`, `NaN`, `Inf` and `-Inf`. 
-    - `NaN`, `Inf` and `-Inf` can arise during division:
-    
-```{r 14-special_missing_val_numeric, eval=FALSE}
-c(-1, 0, 1) / 0
-```
-
-  - To check for these special values, let's use the helper functions `is.finite()`, `is.infinite()`, and `is.nan()` instead of using `==`.
-  
-```{r 14-checking_special_missing_val_numeric, eval=FALSE}
-is.finite(c(-1, 0, 1) / 0)
-is.infinite(c(-1, 0, 1) / 0)
-is.na(c(-1, 0, 1) / 0)
-is.nan(c(-1, 0, 1) / 0)
-```
-
-![](images/special_missing_values_doubles.png)
-
-### Character
-
-- Most complex atomic vector because each element of a character vector is a string, and a string contains an arbitrary amount of data.
-- R uses a global string pool.
-  - Implying that each unique string is only stored in memory once.
-  - And every use of the string points to that representation.
-    - This reduces the amount of memory needed by duplicated strings. To see this, let's use `pryr::object_size()`:
-    
-```{r 14-checking_memory_character, eval=FALSE}
-x <- "This is a reasonably long string."
-pryr::object_size(x)
-
-y <- rep(x, 1000)
-pryr::object_size(y)
-```
-
-`y` doesn’t take up 1,000x as much memory as `x`, because each element of `y` is just a pointer to that same string. 
-
-A pointer is 8 bytes, so 1000 pointers to a 152 B string is 8 * 1000 + 152 = 8.14 kB.
-
-### Missing values
-
-- Each atomic vector has its own missing value:
-
-```{r 14-atomic_vec_missing_value, eval=FALSE}
-NA            # logical
-
-NA_integer_   # integer
-
-NA_real_      # double
-
-NA_character_ # character
-```
-
-- But we don't need to know about these different types since we can always use `NA` and it'll be converted to the correct type using the implicit coercion rules.
-
-- **However, there are some functions that are strict about their inputs, so it’s useful to have this knowledge sitting in your back pocket so you can be specific when needed.**
-
-### Exercises
-
-1. Describe the difference between is.finite(x) and !is.infinite(x).
-
-```{r 14-diff_finite_inifinite, eval=FALSE}
-(x <- c(-1/0, 0/0, 1/0, 5, 5L, NA))
-is.finite(x)
-is.infinite(x)
-!is.infinite(x)
-```
-
-`is.finite()` function does consider non-missing numeric values to be finite, and `-Inf`, `NaN`,  `Inf` are considered not to be finite.
-
-`is.infinite()` considers only `-Inf` and `Inf` as infinite. Hence, `!is.infinite()` considers `-Inf` and `Inf` to be finite while non-missing numeric values, `NaN`, and `NA` not to be infinite.
-
-2. Read the source code for dplyr::near() (Hint: to see the source code, drop the ()). How does it work?
-
-```{r 14-info_dplyr_near, eval=FALSE}
-dplyr::near()
-```
-
-It doesn't check equality as I first thought, but it checks if two numbers are within a certain tolerance (`tol`), usually given as `.Machine$double.eps^0.5`, which is the smallest floating point number that the computer can represent. (Good to know!!)
-
-3. A logical vector can take 3 possible values. How many possible values can an integer vector take? How many possible values can a double take? Use google to do some research.
-
-```{r 14-possible_values_numeric, eval=FALSE}
-help(integer)
-help(double)
-```
-
-For integers vectors, R uses a 32-bit representation. I.e., it can represent $2^{32}$ different values with the integers. But one of these values is set aside for `NA_integer_`.
-
-```{r 14-max_integer_value, eval=FALSE}
-.Machine$integer.max
-.Machine$integer.max + 1L
-```
-
-The range of integers values represented in R is $+- 2^{31}-1$. Hence, the maximum integer is $2^{31}-1$ instead of $2^{32}$ because 1 bit is used to represent the sign $(+ -)$ and one value is to represent $NA_integer_$.
-
-An integer greater than that value, R will return `NA` values.
-
-For double vectors, R uses a 64-bit representation, i.e., they can hold up to $2^{64}$ values. But, some of those values are assigned to special values: `-Inf`, `Inf`, `NA_real_`, and `NaN`.
-
-```{r 14-max_idouble_value, eval=FALSE}
-.Machine$double.xmax
-```
-
-4. Brainstorm at least four functions that allow you to convert a double to an integer. How do they differ? Be precise.
-
-The difference between conversion of a double to an integer differs in how they deal with the fractional part of the double.
-
-- Round down, towards $-\infty$ i.e., taking the `floor` of a number --> `floor()`.
-- Round up, towards $\infty$ i.e., taking the `ceiling` of a number --> `ceiling()`.
-- Round towards zero --> `trunc()` and `as.integer()`.
-- Round away from zero.
-- Round to the nearest integer. If ties exists, then numbers are defined with a fractional part of 0.5?
-  - Round half down, towards $-\infty$.
-  - Round half up, towards $\infty$
-  - Round half towards zero
-  - Round half away from zero
-  - Round half towards the even integer --> `round()`.
-  - Round half towards the odd integer.
-  
-```{r 14-rounding_double, eval=FALSE}
-tibble(
-  x = c(1.8, 1.5, 1.2, 0.8, 0.5, 0.2, 
-        -0.2, -0.5, -0.8, -1.2, -1.5, -1.8),
-  `Round down` = floor(x),
-  `Round up` = ceiling(x),
-  `Round towards zero` = trunc(x),
-  `Nearest, round half to even` = round(x) # 0.5 is rounded to 0
-) 
-```
-
-5. What functions from the readr package allow you to turn a string into logical, integer, and double vector?
-
-`parse_logical()` parses logical values, which can appear as variations of TRUE/FALSE or 1/0.
-
-```{r 14-parse_logical, eval=FALSE}
-parse_logical(c("TRUE", "FALSE", "1", "0", "true", "t", "NA"))
-```
-
-`parse_integer()` parses integer values.
-
-```{r 14-parse_integer, eval=FALSE}
-parse_integer(c("1235", "0134", "NA"))
-```
-
-In case of any non-numeric characters in the string such as commas, decimals, `parse_integer()` will throw an error unlike `parse_numeric()` which ignores all the non-numeric characters before or after the first number.
-
-```{r 14-parse_integer_nonNumeric, eval=FALSE}
-parse_integer(c("1000", "$1,000", "10.00"))
-```
-
-```{r 14-parse_numeric_nonNumeric, eval=FALSE}
-parse_number(c("1.0", "3.5", "$1,000.00", "NA", "ABCD12234.90", "1234ABC", "A123B", "A1B2C"))
-```
-
-## Using atomic vectors
-
-- Let's review some of the important tools for working with the different types of atomic vectors:
-  - How to convert from one type to another, and when that happens automatically.
-  - How to tell if an object is a specific type of vector.
-  - What happens when you work with vectors of different lengths.
-  - How to name the elements of a vector.
-  - How to pull out elements of interest.
-  
-### Coercion
-
-- We can coerce or convert one type of vector to another in two ways:
-
-1. Explicit coercion -> call a function like `as.logical()`, `as.integer()`, `as.double()`, or `as.character()`.  Before doing this, check the type of the vector. For example,  you may need to tweak your readr `col_types` specification.
-
-2. Implicit coercion -> use a vector in a specific context that expects a certain type of vector. For example, using a logical vector with a numeric summary function or using a double vector where an integer vector is expected.
-
-- Our focus here will be implicit coercion as explicit coercion is relatively rarely used in data analysis plus easy to understand.
-- An important type of implicit coercion: using a logical vector in a numeric context. 
-  - `TRUE` is converted to `1` and `FALSE` is converted to `0`. Hence, summing the logical vector is the # of trues and the mean of a logical vector is the proportion of trues.
-  
-```{r 14-implicit_coerce_logical_to_numeric, eval=FALSE}
-x <- sample(20, 100, replace = TRUE)
-y <- x > 10
-sum(y)  # how many are greater than 10?
-
-mean(y) # what proportion are greater than 10?
-```
-
-Or, some code that relies  on implicit coercion in the opposite direction, from integer to logical:
-
-```{r 14-implicit_coerce_numeric_to_logical, eval=FALSE}
-if (length(x)) {
-  # do something
-}
-```
-
-Here, 0 is converted to `FALSE` and everything else is converted to `TRUE`. For easier understanding of the code, let's be explicit: `length(x) > 0`.
-
-> NOTE1: When we create a vector containing multiple types with `c()`: the most complex type always wins. --> *Aha moment!*
-
-```{r 14-coerce_vector_with_multiple_types, eval=FALSE}
-typeof(c(TRUE, 1L)) #integer wins
-
-typeof(c(1L, 1.5)) #double wins 
-#why? Thinking here, because integer is created from a double?
-
-typeof(c(1.5, "a")) #character wins
-```
-
-> NOTE2: An atomic vector **can not** only have a mix of different types since the type is a property of the complete vector, not the individual elements. For a mix of multiple types in the same vector, use a list.
-
-### Test functions
-
-- Suppose we want to have different things based on the type of vector:
-  - One option is to use `typeof()`.
-  - Or, use a test function which returns a `TRUE` or `FALSE`.
-    - Not recommended: base R functions -> `is.vector()` and `is.atomic()`.
-    - Instead let's use the `is_*` functions provided by purrr , summarised below.
-    
-![](images/test_functions.png)
-
-### Scalars and recycling rules
-
-- Not only does R implicitly coerce the types of vectors to be compatible, but it also implicitly coerce the length of vectors. 
-  - This is called vector **recycling** because the shorter vector is repeated (or recycled) to the same length as the longer vector.
-- Mostly useful when we are mixing vectors and "scalars". Note, R doesn't have scalars instead, a single number is a vector of length 1.
-  - Since there are no scalars, most built-in functions are **vectorised** meaning that they will operate on a vector of numbers. Hence, such a code will work:
-  
-```{r 14-scalars, eval=FALSE}
-sample(10) + 100
-
-runif(10) > 0.5
-```
-
-- What happens if we add two vectors of different lengths?
-
-```{r 14-adding_vectors_with_lengths_differ, eval=FALSE}
-1:10 + 1:2
-```
-
-R expands the shortest vector to the same length as the longest --> recycling. 
-
-But what if the length of the longer is not an integer multiple of the length of the shorter:
-
-```{r 14-adding_vec_with_lengths_differ_not_multiple, eval=FALSE}
-1:10 + 1:3
-```
-
-Vector recycling can silently conceal the problem, hence, the vectorised functions in tidyverse will throw errors when recycling anything other than a scalar. We can use `rep()` to do recycling ourselves.
-
-```{r 14-adding_cols_with_lengths_differ, eval=FALSE}
-tibble(x = 1:4, y = 1:2)
-
-tibble(x = 1:4, y = rep(1:2, 2))
-
-tibble(x = 1:4, y = rep(1:2, each = 2))
-```
-
-### Naming vectors  
-
-- We can name all types of vectors during creation with `c()`:
-
-```{r 14-naming_vec_at_creation, eval=FALSE}
-c(x = 1, y = 2, z = 4)
-```
-
-- Or, with `purrr::set_names()`:
-
-```{r 14-naming_vec_using_purrr, eval=FALSE}
-set_names(1:3, c("a", "b", "c"))
-```
-
-> Why name vectors? Because are useful in subsetting. 
-
-### Subsetting
-
-- To filter vectors, we use the subsetting function -> `[` and is called like `x[a]`.There are four types of things that you can subset a vector with:
-
-1. A numeric vector containing only integers, and these must either be all positive, all negative, or zero.
-
-Subsetting with positive integers keeps the elements at those positions:
-
-```{r 14-subset_vec_positive_integers, eval=FALSE}
-x <- c("one", "two", "three", "four", "five")
-x[c(3, 2, 5)]
-```
-
-If we repeat a position, we can actually make a longer output than input:
-
-```{r 14-subset_vec_positive_integers1, eval=FALSE}
-x[c(1, 1, 5, 5, 5, 2)]
-```
-
-Negative values drop the elements at the specified positions:
-
-```{r 14-subset_vec_negative_integers, eval=FALSE}
-x[c(-1, -3, -5)]
-```
-
-It’s an error to mix positive and negative values:
-
-```{r 14-subset_vec_positive_and negative_integers, eval=FALSE}
-x[c(1, -1)]
-```
-
-The error message mentions subsetting with zero, which returns no values:
-
-```{r 14-subset_vec_zero, eval=FALSE}
-x[0]
-```
-
-This is useful if we want to create unusual data structures to functions with. (Jon, please expound!)
-
-2. Subsetting with a logical vector keeps all values corresponding to a `TRUE` value; often useful in conjunction with the comparison functions.
-
-```{r 14-subset_vec_logical, eval=FALSE}
-x <- c(10, 3, NA, 5, 8, 1, NA)
-
-# All non-missing values of x
-x[!is.na(x)]
-
-# All even (or missing!) values of x
-x[x %% 2 == 0]
-```
-
-3. If you have a named vector, you can subset it with a character vector:
-
-```{r 14-subset_named_vec_with_character_vec, eval=FALSE}
-x <- c(abc = 1, def = 2, xyz = 5)
-x[c("xyz", "def")]
-```
-
-We can also use a character vector to duplicate individual entries.
-
-```{r 14-subset_named_vec_with_character_vec1, eval=FALSE}
-x[c("xyz", "xyz", "def", "def")]
-```
-
-4. The simplest type of subsetting is nothing, `x[]`, which returns the complete `x`. This is mostly useful when subsetting matrices (and other high dimensional structures) because we can select all the rows or all the columns, by leaving that index blank. E.g., if `x` is 2d, `x[1, ]` selects the first row and all the columns.
-
-Learn more about the applications of subsetting: “Subsetting” chapter of Advanced R: http://adv-r.had.co.nz/Subsetting.html#applications.
-
-An important difference between `[` and `[[` -> `[[` extracts only a single element, and always drops names. Use it whenever we want to make it clear that we're extracting a single item, as in a for loop.
-
-### Exercises
-
-1. What does `mean(is.na(x))` tell you about a vector `x`? What about `sum(!is.finite(x))`?
-
-```{r 14-ex20.4.1_is.na_is_is.finite, eval=FALSE}
-x <- c(-Inf, -1, 0, 1, Inf, NA, NaN)
-mean(is.na(x))
-sum(!is.finite(x))
-```
-
-`mean(is.na(x))` calculates the proprtion of missing (`NA`) and not-a-number (`NaN`) values in a vector. The result of 0.286 is equal to 2 / 7 as expected.
-
-`sum(!is.finite(x))` calculates the number of elements in the vector that are equal to missing (`NA`), not-a-number (`NaN`), or infinity (`Inf`).
-
-2. Carefully read the documentation of `is.vector()`. What does it actually test for? Why does `is.atomic()` not agree with the definition of atomic vectors above?
-
-`is.vector()` checks whether an object has no attributes other than names.
-
-```{r 14-ex20.4.2_is_vector_TRUE, eval=FALSE}
-is.vector(list(a = 1, b = 2))
-```
-
-But any object that has an attribute apart from names is not:
-
-```{r 14-ex20.4.2_is_vector_FALSE, eval=FALSE}
-x <- 1:10
-attr(x, "something") <- TRUE
-is.vector(x)
-```
-
-`is.atomic()` explicitly checks whether an object is one of the atomic types (“logical”, “integer”, “numeric”, “complex”, “character”, and “raw”) or NULL.
-
-```{r 14-ex20.4.2_is_atomic, eval=FALSE}
-is.atomic(1:10)
-is.atomic(list(a = 1))
-```
-
-`is.atomic()` will consider objects to be atomic even if they have extra attributes.
-
-```{r 14-ex20.4.2_is_atomic_attr, eval=FALSE}
-is.atomic(x)
-```
-
-3. Compare and contrast `setNames()` with `purrr::set_names()`.
-
-`setNames()` takes two arguments, a vector to be named and a vector of names to apply to its elements.
-
-```{r 14-ex20.4.3_setNames_fn, eval=FALSE}
-setNames(1:4, c("a", "b", "c", "d"))
-setNames(nm = c("a", "b", "c", "d"))
-```
-
-`set_names()` has more ways to set names than `setNames()`. We can specify the names the same way as `setNames()`:
-
-```{r 14-ex20.4.3_set_names_fn_2, eval=FALSE}
-purrr::set_names(1:4, c("a", "b", "c", "d"))
-```
-
-The names can also be specified as unnamed arguments:
-
-```{r 14-ex20.4.3_set_names_fn_3, eval=FALSE}
-purrr::set_names(1:4, "a", "b", "c", "d")
-```
-
-`set_names()` will name an object with itself if no `nm` argument is provided (the opposite of `setNames()` behavior).
-
-```{r 14-ex20.4.3_set_names_fn_4, eval=FALSE}
-purrr::set_names(c("a", "b", "c", "d"))
-```
-
-The main difference between `set_names()` and `setNames()` is that **`set_names()` allows for using a function or formula to transform the existing names.**
-
-```{r 14-ex20.4.3_set_names_fn_5, eval=FALSE}
-purrr::set_names(c(a = 1, b = 2, c = 3), toupper)
-
-purrr::set_names(c(a = 1, b = 2, c = 3), ~toupper(.))
-```
-
-`set_names()` function also checks that the length of the names argument is the same length as the vector that is being named, and will raise an error if it is not.
-
-```{r 14-ex20.4.3_set_names_fn_6, eval=FALSE}
-purrr::set_names(1:4, c("a", "b"))
-```
-
-`setNames()` function will allow the names to be shorter than the vector being named, and will set the missing names to `NA`.
-
-```{r 14-ex20.4.3_setNames_fn_7, eval=FALSE}
-setNames(1:4, c("a", "b"))
-```
-
-4. Create functions that take a vector as input and returns:
-
-  1. The last value. Should you use `[` or `[[`?
-
-  2. The elements at even numbered positions.
-
-  3. Every element except the last value.
-
-  4. Only even numbers (and no missing values).
-
-5. Why is `x[-which(x > 0)]` not the same as `x[x <= 0]`?
-
-6. What happens when you subset with a positive integer that’s bigger than the length of the vector? What happens when you subset with a name that doesn’t exist?
-
-## Recursive vectors (lists)
-
-- Lists can contain other lists implying that are more complex than atomic vectors.
-  - Hence, suitable to represent hierarchical or tree-like structures.
-- Use `list()` to create lists.
-
-```{r 14-create_lists, eval=FALSE}
-(xl <- list(1, 2, 3))
-
-```
-
-- We use the function `str()` to assess the structure.
-
-```{r 14-str_lists, eval=FALSE}
-str(xl)
-dplyr::glimpse(xl)
-#seems one and the same thing?
-```
-
-- Lists can be named:
-
-```{r 14-naming_lists, eval=FALSE}
-xl_named <- list(a = 1, b = 2, c = 3)
-str(xl_named)
-```
-
-- `list()` can contain a mix of objects unlike atomic vectors.
-
-```{r 14-lists_with_mix_objects, eval=FALSE}
-yl <- list("a", 1L, 1.5, TRUE)
-str(yl)
-```
+-   There is an intermediate execution step that form the logical vectors behind the scene when you use `filter()`
 
-- Lists can contain other lists!
-
-```{r 14-lists_within_lists, eval=FALSE}
-zl <- list(list(1, 2), list(3, 4))
-str(zl)
-```
-
-### Visualising lists
-
-- Let's see a visual representation of lists. E.g., 
-
-```{r 14-visual_rep_lists, eval=FALSE}
-x1 <- list(c(1, 2), c(3, 4))
-x2 <- list(list(1, 2), list(3, 4))
-x3 <- list(1, list(2, list(3)))
-```
-
-A visual drawing of the lists:
-
-![](./images/visual_rep_lists.PNG)
-
-There are three principles:
-
-1. Lists have rounded corners. Atomic vectors have square corners.
-
-2. Children are drawn inside their parent, and have a slightly darker background to make it easier to see the hierarchy.
-
-3. The orientation of the children (i.e. rows or columns) isn’t important, a row or column orientation are picked to either save space or illustrate an important property in the example. ??
-
-### Subsetting
-
-- We can subset lists using three ways, let's see the example below.
-
-```{r 14-subsetting_lists, eval=FALSE}
-a <- list(a = 1:3, b = "a string", c = pi, d = list(-1, -5))
-```
-
-1. `[` extracts a sub-list. And the result will always be a list.
-
-```{r 14-str_sublists1, eval=FALSE}
-str(a[1:2])
-
-str(a[4])
-```
-We can also subset lists with a logical, integer or character vector as seen in vectors.
-
-2. `[[` extracts a single component from a list. It removes a level of hierarchy from the list.
-
-```{r 14-str_sublists2, eval=FALSE}
-str(a[[1]])
-
-str(a[[4]])
-```
-
-3. `$` is a shorthand to extract named elements of a list. It works similarly to `[[` except that you don’t need to use quotes.
-
-```{r 14-subsetting_named_lists, eval=FALSE}
-a$a
-
-a[["a"]]
-```
-
-- Difference between `[` and `[[` is important for lists:
-  - `[[` drills down into the list while `[` returns a new, smaller list. Let's compare the code and output above with the visual shown below.
-  
-![](./images/subsetting_lists.PNG)
-
-### Lists of condiments
-
-- Let's discuss an illustration of the difference between `[` and `[[` to solidify our understanding! :)
-- Below we see an usual pepper shaker, and let it be our list `x`.
-
-![](./images/list_pepper_ill.PNG)
-
-- `x[1]` is a pepper shaker containing a single pepper packet:
-
-![](./images/list_pepper_ill_subset1.PNG)
-
-`x[2]` would look the same, but would contain the second packet. `x[1:2]` would be a pepper shaker containing two pepper packets.
-
-- `x[[1]]` is:
-
-![](./images/list_pepper_ill_subset2.PNG)
-
-- `x[[1]][[1]]` to get the content of the pepper package:
-
-![](./images/list_pepper_ill_subset3.PNG)
-
-### Exercises
-
-1. Draw the following lists as nested sets:
-
-```{r 14-ex20.5.1_draw_lists, eval = FALSE}
-list(list(list(list(list(list(a))))))
-list(a, b, list(c, d), list(e, f))
-```
-To draw pretty a visual diagram, refer to [DiagramR](http://rich-iannone.github.io/DiagrammeR/graphviz_and_mermaid.html) R Package to render [Graphviz](https://www.graphviz.org/) diagrams.
-
-But what I have is hand-drawn. Not pretty!! :)
-
-For a:
-![](./images/ex20_5_1_a.jpg)
-
-For b:
-
-![](./images/ex20_5_1_b.jpg)
-2. What happens if you subset a tibble as if you’re subsetting a list? What are the key differences between a list and a tibble?
-
-Subsetting a tibble works the same way as a list; a data frame can be thought of as a list of columns. 
-
-The key difference between a list and a tibble -> **all the elements (columns) of a tibble must have the same length (number of rows). Lists can have vectors with different lengths as elements.**
-
-```{r 14-ex20.5.2_diff_lists_tibbles, eval=FALSE}
-x <- tibble(a = 1:2, b = 3:4)
-x[["a"]]
-x["a"]
-x[1]
-x[1, ]
+```{r}
+flights |> filter(dep_time > 600 & dep_time < 2000 & abs(arr_delay) < 20)
 ```
 
-## Attributes
-
-- Any vector can contain arbitrary additional metadata through its **attributes**.
-  - Can be thought as named list of vectors that can be attached to any object.
-- We can get and set individual attribute values with `attr()` or see them all at once with `attributes()`.
-
-```{r 14-attributes, eval=FALSE}
-x <- 1:10
-attr(x, "greeting")
-attr(x, "greeting") <- "Hi!"
-attr(x, "farewell") <- "Bye!"
-attributes(x)
-```
+-   To separate this intermediate step in it's own variable we use `mutate`
 
-- Three very important attributes that used to implement fundamental parts of R:
-  -  **Names** are used to name the elements of a vector.
-  - **Dimensions** (dims, for short) make a vector behave like a matrix or array.
-  - **Class** is used to implement the S3 object oriented system.
- 
-> Note: We have learnt of the names, and we won't discuss matrices in this discussion as matrices aren;t used in this book!
-
-- Class controls how **generic functions** work.
-  - Generic functions are key to object programming since they make functions behave differently for different classes of input. The discussion of object programming is covered in details in Advanced R: http://adv-r.had.co.nz/OO-essentials.html#s3
-- An example of generic function:
-
-```{r 14-generic_fn, eval=FALSE}
-as.Date
+```{r}
+flights |> mutate( daytime = dep_time > 600 & dep_time < 2000, approx_ontime = abs(arr_delay) < 20, .keep = "used" )
 ```
-
-- The call to "UseMethod" means that this is a generic function, and it calls a specific **method**, a function, based on the class of the first argument. 
-
-> Note: All methods are functions; not all functions are methods.
-
-- To list all the methods for a generic, use `methods()`:
 
-```{r 14-method_generic_fn, eval=FALSE}
-methods("as.Date")
-```
+-   R doesn't round by default the float numeric value, but R console is rounding close number to integers
 
-- For example, if `x` is a character vector, `as.Date()` will call `as.Date.character()`; if it’s a factor, it’ll call `as.Date.factor().`
-- We can see the specific implementation of a method with `getS3method()`:
+    -   To round numbers we could use `dplyr::near` function
 
-```{r 14-implementation_of_method_default, eval=FALSE}
-getS3method("as.Date", "default")
+```{r}
+x <- c(1 / 49 * 49, sqrt(2) ^ 2)
+typeof(x) # double
 ```
 
-```{r 14-implementation_of_method_numeric, eval=FALSE}
-getS3method("as.Date", "numeric")
-```
+```{r}
+print(x)
+print(x,digits = 16)
 
-- The most important S3 generic is `print()` -> controls how the object is printed when we type its name at the console.
-- Subsetting functions: `[`, `[[` and `$` are other important generics.
-
-## Augmented vectors
-
-- Atomics vectors and lists are building blocks for other important vector types like factors and dates.
-  - These are called **augmented vectors** because they are vectors with additional **attributes**, including class.
-    - Because augmented vectors have a class, they behave differently to the atomic vector on which they are built.
-- Here, we will discuss four important augmented vectors:
-  - Factors
-  - Dates
-  - Date-times
-  - Tibbles
-  
-### Factors
-
-- They are designed to represent categorical data that can take a fixed set of possible values.
-- They are built on top of integers and have a levels attribute:
-
-```{r 14-augmented_factors, eval=FALSE}
-x_factor <- factor(c("ab", "cd", "ab"), levels = c("ab", "cd", "ef"))
-typeof(x_factor)
-attributes(x_factor)
 ```
 
-### Dates and date-times
+### Identifying Missing Values
 
-- In R, dates are numeric vectors that represent the number of days since 1 January 1970.
+-   There is no indication what's so ever about the `NA` value if it's a logical vector, although the author says that a missing value in a logical vector means that the value could either be `TRUE` or `FALSE`
+-   `TRUE | TRUE` and `FALSE | TRUE` are both `TRUE`, so `NA | TRUE` must also be `TRUE`. Similar reasoning applies with `NA & FALSE`
 
-```{r 14-augmented_dates, eval=FALSE}
-x_date <- as.Date("1971-01-01")
-unclass(x_date)
+```{r}
+df <- tibble(x = c(TRUE, FALSE, NA))
 
-typeof(x_date)
-
-attributes(x_date)
+df |> 
+  mutate(
+    and = x & (NA),
+    or = x | NA
+  )
 ```
-- Dates-times are numeric vectors with class `POSIXct` that represent the # of seconds since 1 January 1970.
-
-> Note: "POSIXct” stands for “Portable Operating System Interface”, calendar time.
 
-```{r 14-augmented_date_time, eval=FALSE}
-x_date_time <- lubridate::ymd_hm("1970-01-01 01:00")
-unclass(x_date_time)
+-   For identifying missing values we use `is.na(x)` function which works with any type of vector and returns TRUE for missing values and FALSE for everything else.
 
-typeof(x_date_time)
-
-attributes(x_date_time)
+```{r}
+is.na(c(TRUE, NA, FALSE))
+#> [1] FALSE  TRUE FALSE
+is.na(c(1, NA, 3))
+#> [1] FALSE  TRUE FALSE
+is.na(c("a", NA, "b"))
+#> [1] FALSE  TRUE FALSE
 ```
-
-The `tzone` attribute is optional--> controls how the time is printed, not what absolute time it refers to.
 
-```{r 14-augmented_date_time_tzone, eval=FALSE}
-attr(x_date_time, "tzone") <- "US/Pacific"
-x_date_time
+-   `%in%` is like asking does a set A of values is included in a set B of values
 
-attr(x_date_time, "tzone") <- "US/Eastern"
-x_date_time
-
+```{r}
+1:12 %in% c(1, 5, 11)
 ```
 
-> Qn: how to find the other time zones?
+## What are the logical summery functions we could leverage in R?
 
-- Another type of date-times called POSIXlt which are built on top of named lists:
-
-```{r 14-augmented_date_time_POSIXlt, eval=FALSE}
-y_date_time <- as.POSIXlt(x_date_time)
-typeof(y_date_time)
-attributes(y_date_time)
-```
+-   Main logical summaries: `any()` and `all()`
 
-POSIXlts are rare inside the tidyverse. But pop up in base R, because they are needed to extract specific components of a date, like the year or month. 
+-   Numeric logical summaries: `mean()` and `sum()` specially when you want to calculate the percentages of applied constraint or condition
 
-Since lubridate provides helpers for us to do this instead, we don’t need them. 
+## Conditional Transformations using `if_else()` and `case_when()` functions
 
-POSIXct’s are always easier to work with, so if we have a POSIXlt, we should always convert it to a regular data time `lubridate::as_date_time()`.
+-   We see these type of transformations everywhere when we clean data
 
-### Tibbles
+-   Its inspired by the SQL way of doing conditional transformations
 
-- Tibbles are augmented lists.
-  - They have class “tbl_df” + “tbl” + “data.frame”, and names (column) and row.names attributes:
-  
-```{r 14-augmented_tibbles, eval=FALSE}
-tb <- tibble::tibble(x = 1:5, y = 5:1)
-typeof(tb)
-attributes(tb)
-```
+-   We use [dplyr::if_else()](https://dplyr.tidyverse.org/reference/if_else.html) when we have just one condition and we want to map it to only two outcomes
 
-- The difference between a tibble and a list:
-  - All the elements of a data frame must be vectors with the same length.
-    - All functions that work with tibbles enforce this constraint.
-- Traditional data.frames have a very similar structure:
-
-```{r 14-augmented_df, eval=FALSE}
-df <- data.frame(x = 1:5, y = 5:1)
-typeof(df)
-attributes(df)
+```{r}
+x <- c(-3:3, NA)
+if_else(x > 0, "+ve", "-ve", "???")
 ```
-
-**The main difference is the class**.
-
-The class of tibble includes “data.frame” which means tibbles inherit the regular data frame behaviour by default.
-
-### Exercises
-
-1. What does hms::hms(3600) return? How does it print? What primitive type is the augmented vector built on top of? What attributes does it use?
 
-```{r 14-ex20.7.1_hms, eval=FALSE}
-(x <- hms::hms(3600))
-class(x)
+-   We use dplyr's `case_when()` when we want to map multiple conditions to multiple different outcomes.
 
-attributes(x)
+```{r}
+x <- c(-3:3, NA)
+case_when(
+  x == 0   ~ "0",
+  x < 0    ~ "-ve", 
+  x > 0    ~ "+ve",
+  is.na(x) ~ "???"
+)
 ```
 
-`hms::hms` returns an object of class, and prints the time in “%H:%M:%S” format.
+-   Note that both [`if_else()`](https://dplyr.tidyverse.org/reference/if_else.html) and [`case_when()`](https://dplyr.tidyverse.org/reference/case_when.html) require **compatible** types in the output
 
-The attributes it uses are **units** and **class**
+## Summary
 
-2. Try and make a tibble that has columns with different lengths. What happens?
+-   Logical Vectors is just a list of Boolean elements
 
-```{r 14-ex20.7.2_1_scalar, eval=FALSE}
-tibble(x = 1, y = 1:5)
-```
-
-The "scalar" 1 is recycled to the length of the longer vector.
+-   R designed to evaluate logical vectors based on Boolean Algebra rules
 
-```{r 14-ex20.7.2_2_tibbles_cols_diff_lengths, eval=FALSE}
-tibble(x = 1:3, y = 1:4)
-```
+-   Logical summaries is a powerful tool for summarizing data based on logic or condition
 
-Creating a tibble with two vectors of different lengths will give an error.
+-   Conditional Transformation is tool for powering data analysis transformation process and also help you answer a Yes Or No questions about the data
 
-3. Based on the definition above, is it ok to have a list as a column of a tibble?
-
-```{r 14-ex20.7.3_lists_within_tibbles, eval=FALSE}
-tibble(x = 1:3, y = list("a", 1, list(1:3)))
-```
+## Learning More
 
-Tibbles can have atomic vectors (with additional attributes)of different types: doubles, character, integers, logical, factor, date. Hence, they can have a list vector as long as its the same length!
+-   [r4ds.io/join](r4ds.io/join) for more book clubs!
+-   [R Graph Gallery](https://www.r-graph-gallery.com/ggplot2-package.html)
+-   The [Graphs section](http://www.cookbook-r.com/Graphs/) of the R Cookbook
 
 ## Meeting Videos
 
 ### Cohort 5
 
-`r knitr::include_url("https://www.youtube.com/embed/rsRImj294pM")`
+`r knitr::include_url("https://www.youtube.com/embed/ujOn-4esnDo")`
 
 <details>
-  <summary> Meeting chat log </summary>
-  
-```
 
-00:39:35	Jon Harmon (jonthegeek):	.Machine$double.eps
-00:40:36	Jon Harmon (jonthegeek):	> .Machine$integer.max
-[1] 2147483647
-00:41:23	Federica Gazzelloni:	?`.Machine`
-00:42:11	Ryan Metcalf:	Some really fun reading about CPU “inner” workings: https://www.geeksforgeeks.org/computer-organization-von-neumann-architecture/
-00:42:35	Jon Harmon (jonthegeek):	> typeof(.Machine$integer.max + 1)
-[1] "double"
-00:42:55	Jon Harmon (jonthegeek):	> .Machine$integer.max + 1L
-[1] NA
-Warning message:
-In .Machine$integer.max + 1L : NAs produced by integer overflow
-00:43:52	Becki R. (she/her):	thanks for the link, Ryan!
-00:44:44	Jon Harmon (jonthegeek):	> sqrt(2)**2 == 2
-[1] FALSE
-00:45:16	Jon Harmon (jonthegeek):	> dplyr::near(sqrt(2)**2, 2)
-[1] TRUE
-00:57:52	Ryan Metcalf:	Not directly related to Cache or RAM….But similar. It is where you get FAT, FAT32, NTFS, ExFat, EXT, EXT3, etc…etc… there are hundreds of file allocation.
-00:59:29	Sandra Muroy:	thanks Ryan!
-01:02:08	Becki R. (she/her):	I'm finding the info on computer architecture (?) fascinating so I appreciate the detour.
-01:03:05	Sandra Muroy:	I'm glad :)
-01:10:01	Ryan Metcalf:	I think I just had an epiphany!!! Is this were the “Big Endian” and “Little Endian” comes in? The leading bit representing positive and negative?
-01:10:27	Jon Harmon (jonthegeek):	> typeof(0L)
-[1] "integer"
-01:12:42	Jon Harmon (jonthegeek):	> .Machine$double.xmax
-[1] 1.797693e+308
-01:15:53	Jon Harmon (jonthegeek):	> 1:10 + 1
- [1]  2  3  4  5  6  7  8  9 10 11
-01:16:19	Jon Harmon (jonthegeek):	> 1:10 + 2:11
- [1]  3  5  7  9 11 13 15 17 19 21
-```
-</details>
+<summary>Meeting chat log</summary>
 
-`r knitr::include_url("https://www.youtube.com/embed/EfOPxmQ9R-c")`
+    00:13:43    Njoki Njuki Lucy:   Is it best to visualize the variation in a categorical variable with only two levels using a bar chart? If not, what's the chart to use if I may ask?
+    00:16:00    Ryan Metcalf:   Great question Njoki, Categorical, by definition is a set that a variable can have. Say, Male / Female / Other. This example indicates a variable can have three states. It depends on your data set.
+    00:16:51    Eileen: bar or pie chart?
+    00:16:51    Ryan Metcalf:   There are other forms of presentation other than a bar chart. I.E “quantifying” each category.
+    00:18:37    Eileen: box chart
+    00:18:46    Njoki Njuki Lucy:   thank you so much  everyone :)
+    00:24:31    lucus w:    This website is excellent in determining geom to use: www.data-to-viz.com
+    00:25:22    Njoki Njuki Lucy:   awesome, thanks
+    00:25:44    Eileen: Box charts are great for showing outliers
+    00:26:31    Federica Gazzelloni:    other interesting resources:
+    00:26:34    Federica Gazzelloni:    https://www.r-graph-gallery.com/ggplot2-package.html
+    00:26:51    Federica Gazzelloni:    http://www.cookbook-r.com/Graphs/
+    00:34:19    Amitrajit:  what is the difference in putting aes()  inside geom_count() rather than main ggplot() call?
+    00:35:38    Ryan Metcalf:   Like maybe Supply vs Demand curves?
+    00:41:16    Federica Gazzelloni:    what about the factor() that we add to a variable when we apply a color?
+    00:42:33    Susie Neilson:  I do aes your way Jon!
+    00:43:07    Federica Gazzelloni:    and grouping inside the aes
+    00:49:27    Amitrajit:  thanks!
+    00:49:32    Federica Gazzelloni:    thanks
+    00:49:35    Njoki Njuki Lucy:   thank you, bye
+    00:49:45    Eileen: Thank you!
 
-<details>
-  <summary> Meeting chat log </summary>
-  
-```
-00:03:09	Becki R. (she/her):	I have a buzz in my audio so I'm staying muted.
-00:30:48	Federica Gazzelloni:	http://adv-r.had.co.nz/Subsetting.html
-00:33:31	Jon Harmon (jonthegeek):	mtcars["mpg"]
-mtcars[["mpg"]]
-00:35:19	Jon Harmon (jonthegeek):	months <- purrr::set_names(month.name, month.abb)
-00:35:40	Jon Harmon (jonthegeek):	months["Jan"]
-00:35:46	Jon Harmon (jonthegeek):	Jan 
-"January"
-00:36:10	Jon Harmon (jonthegeek):	> months[["Jan"]]
-[1] "January"
-00:38:28	Federica Gazzelloni:	it acts like unlist()
-00:38:48	Jon Harmon (jonthegeek):	> unlist(mtcars["mpg"])
- mpg1  mpg2  mpg3  mpg4  mpg5  mpg6  mpg7  mpg8  mpg9 mpg10 mpg11 mpg12 mpg13 mpg14 
- 21.0  21.0  22.8  21.4  18.7  18.1  14.3  24.4  22.8  19.2  17.8  16.4  17.3  15.2 
-mpg15 mpg16 mpg17 mpg18 mpg19 mpg20 mpg21 mpg22 mpg23 mpg24 mpg25 mpg26 mpg27 mpg28 
- 10.4  10.4  14.7  32.4  30.4  33.9  21.5  15.5  15.2  13.3  19.2  27.3  26.0  30.4 
-mpg29 mpg30 mpg31 mpg32 
- 15.8  19.7  15.0  21.4
-00:39:13	Jon Harmon (jonthegeek):	> unname(unlist(mtcars["mpg"]))
- [1] 21.0 21.0 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 17.8 16.4 17.3 15.2 10.4 10.4
-[17] 14.7 32.4 30.4 33.9 21.5 15.5 15.2 13.3 19.2 27.3 26.0 30.4 15.8 19.7 15.0 21.4
-00:39:29	Jon Harmon (jonthegeek):	single <- mtcars["mpg"]
-00:39:50	Jon Harmon (jonthegeek):	> attributes(single) <- NULL
-> single
-[[1]]
- [1] 21.0 21.0 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 17.8 16.4 17.3 15.2 10.4 10.4
-[17] 14.7 32.4 30.4 33.9 21.5 15.5 15.2 13.3 19.2 27.3 26.0 30.4 15.8 19.7 15.0 21.4
-00:42:51	Jon Harmon (jonthegeek):	> str(months[[1]])
- chr "January"
-> str(months[1])
- Named chr "January"
- - attr(*, "names")= chr "Jan"
-00:43:41	Jon Harmon (jonthegeek):	?`[`
-00:44:15	Jon Harmon (jonthegeek):	The most important distinction between [, [[ and $ is that the [ can select more than one element whereas the other two select a single element.
-00:47:28	Ryan Metcalf:	BRB
-00:56:31	Jon Harmon (jonthegeek):	The tangent I obsessed on just now:
-> pillar:::glimpse.default
-function (x, width = NULL, max.level = 3, ...) 
-{
-    str(x, width = get_width_glimpse(width), max.level = max.level, 
-        ...)
-    invisible(x)
-}
-
-(huh, "glimpse" technically comes from the {pillar} package)
-01:12:09	Jon Harmon (jonthegeek):	> round(c(1.5, 2.5, 3.5, 4.5))
-[1] 2 2 4 4
-01:14:08	Jon Harmon (jonthegeek):	Note that for rounding off a 5, the IEC 60559 standard (see also ‘IEEE 754’) is expected to be used, ‘go to the even digit’. Therefore round(0.5) is 0 and round(-1.5) is -2. However, this is dependent on OS services and on representation error (since e.g. 0.15 is not represented exactly, the rounding rule applies to the represented number and not to the printed number, and so round(0.15, 1) could be either 0.1 or 0.2).
-```
 </details>
 
 ### Cohort 6
 
-`r knitr::include_url("https://www.youtube.com/embed/bRwmyUbario")`
+`r knitr::include_url("https://www.youtube.com/embed/mYTD9DbM174")`
 
 <details>
-  <summary> Meeting chat log </summary>
-  
-```
-00:36:56	Daniel Adereti:	Lucky I am not a python user. lol
-00:37:05	Marielena Soilemezidi:	😂
-00:38:03	Marielena Soilemezidi:	python will come and get you too, Daniel!
-00:38:18	Daniel Adereti:	lol! can't avoid it!
-00:42:11	Daniel Adereti:	Unfortunately, we have a strict 18 mins to end the lessons, let's see where we end up. Thanks
-```
+
+<summary>Meeting chat log</summary>
+
+    00:06:21    Matthew Efoli:  good evening Daniel and Esmeralda
+    00:07:39    Matthew Efoli:  hello everyone
+    00:08:08    Daniel Adereti: Hello Matthew!
+    00:08:44    Daniel Adereti: I guess we can start? so we can finish the 2 chapters as Exploratory Data Analysis is quite long and involved
+    00:09:04    Freya Watkins:  Sounds good! Hi all :)
+    00:10:55    Freya Watkins:  yes can see
+    00:23:14    Daniel Adereti: na > Not available
+    00:23:32    Maria Eleni Soilemezidi:    rm = remove
+    00:25:49    Esmeralda Cruz: yes
+    00:26:29    Esmeralda Cruz: to remove the outliers maybe?
+    00:29:20    Adeyemi Olusola:    No
+    00:29:22    Freya Watkins:  we can't see it no
+    00:29:27    Maria Eleni Soilemezidi:    no we can't see it!
+    00:29:38    Maria Eleni Soilemezidi:    thank you! Yes
+    00:32:57    Daniel Adereti: Cedric's article is a nice one! Helpful to understand descriptive use case of different plot ideas
+    00:43:19    Daniel Adereti: we can do the exercises
+    00:43:27    Esmeralda Cruz: ok
+    00:43:28    Maria Eleni Soilemezidi:    yes, sure!
+    00:45:20    Adeyemi Olusola:    we can try reorder
+    00:45:28    Adeyemi Olusola:    from the previous example
+    00:51:44    Maria Eleni Soilemezidi:    that's a good idea
+    00:52:28    Daniel Adereti: Thanks!
+    00:52:42    Daniel Adereti: cut_in_color_graph <- diamonds %>% 
+      group_by(color, cut) %>% 
+      summarise(n = n()) %>% 
+      mutate(proportion_cut_in_color = n/sum(n)) %>%
+      ggplot(aes(x = color, y = cut))+
+      geom_tile(aes(fill = proportion_cut_in_color))+
+      labs(fill = "proportion\ncut in color")
+    00:53:32    Esmeralda Cruz: 😮
+    00:53:47    Adeyemi Olusola:    smiles
+    00:54:13    Adeyemi Olusola:    but lets try reorder...I think we should be able to pull something from it, though not sure about the heatmap thingy
+    00:54:26    Adeyemi Olusola:    on our own though*
+    01:05:38    Maria Eleni Soilemezidi:    no worries! Thank you for the presentation, Matthew! :)
+    01:05:39    Freya Watkins:  Thanks Matthew!
+    01:06:44    Maria Eleni Soilemezidi:    bye everyone, see you next week!
+
 </details>
