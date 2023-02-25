@@ -28,7 +28,7 @@
 
 -   Combining logical vectors using Boolean algebra
 
-    -   Venn Diagrams here shows the logical relations between logical vectors
+    -   Venn diagram here shows the logical relations between logical vectors
 
 ### Comparison
 
