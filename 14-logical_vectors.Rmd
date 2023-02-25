@@ -51,7 +51,7 @@ flights |> filter(dep_time > 600 & dep_time < 2000 & abs(arr_delay) < 20)
 flights |> mutate( daytime = dep_time > 600 & dep_time < 2000, approx_ontime = abs(arr_delay) < 20, .keep = "used" )
 ```
 
--   R doesn't round by default the float numeric value, but R console is rounding close number to integers
+-   R doesn't round the float numeric value by default, but R console is rounding close number to integers
 
     -   To round numbers we could use `dplyr::near` function
 
