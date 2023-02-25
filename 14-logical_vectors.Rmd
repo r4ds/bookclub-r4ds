@@ -39,7 +39,7 @@ library(tidyverse)
 library(nycflights13)
 ```
 
--   There is an intermediate execution step that form the logical vectors behind the scene when you use `filter()`
+-   There is an intermediate execution step that forma the logical vector behind the scenes when you use `filter()`
 
 ```{r}
 flights |> filter(dep_time > 600 & dep_time < 2000 & abs(arr_delay) < 20)
