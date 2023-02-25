@@ -14,7 +14,7 @@
 
 -   Conditional Transformations using `if_else()` and `case_when()` functions
 
-## What is logical Vectors
+## What are Logical Vectors
 
 -   Vectors in R are the same as the arrays in C language, which are used to hold multiple data values of the same type
 
