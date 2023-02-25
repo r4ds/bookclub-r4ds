@@ -10,7 +10,7 @@
 
     -   Identifying missing values
 
--   What are the logical summery functions we could leverage in R?
+-   What are the logical summary functions we could leverage in R?
 
 -   Conditional Transformations using `if_else()` and `case_when()` functions
 
