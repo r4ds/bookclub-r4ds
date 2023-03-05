@@ -25,7 +25,7 @@ library(tidyverse)
 
 ## Factor basics
 
--   Imagine that we have a variable that records month:
+- Imagine that we have a variable that records month:
 
 ```{r}
 x1 <- c("Dec", "Apr", "Jan", "Mar")
@@ -33,19 +33,19 @@ x1 <- c("Dec", "Apr", "Jan", "Mar")
 
 Using a string to record this variable has two problems:
 
--   There are only twelve possible months, and there's nothing saving you from typos:
+- There are only twelve possible months, and there's nothing saving you from typos:
 
 ```{r}
 x2 <- c("Dec", "Apr", "Jam", "Mar")
 ```
 
--   It doesn't sort in a useful way:
+- It doesn't sort in a useful way:
 
 ```{r}
 sort(x1)
 ```
 
--   We can fix both of these problems with a factor. To create a factor you must start by creating a list of the valid levels:
+- We can fix both of these problems with a factor. To create a factor you must start by creating a list of the valid levels:
 
 ```{r}
 month_levels <- c(
@@ -56,7 +56,7 @@ month_levels <- c(
 month_levels
 ```
 
--   Now we can create a factor:
+- Now we can create a factor:
 
 ```{r}
 y1 <- factor(x1, levels = month_levels)
@@ -68,7 +68,7 @@ y1
 sort(y1)
 ```
 
--   Any values not in the level will be silently converted to NA:
+- Any values not in the level will be silently converted to NA:
 
 ```{r}
 y2 <- factor(x2, levels = month_levels)
@@ -92,7 +92,7 @@ f2
 levels(f2)
 ```
 
--   We can also create a factor when reading your data with readr with [col_factor():]('https://readr.tidyverse.org/reference/parse_factor.html')
+- We can also create a factor when reading your data with readr with [col_factor():]('https://readr.tidyverse.org/reference/parse_factor.html')
 
 ```{r}
 csv <- "
@@ -114,7 +114,7 @@ df$month
 gss_cat
 ```
 
--   When factors are stored in a tibble, we can't see their levels so easily. One way to view them is with count():
+- When factors are stored in a tibble, we can't see their levels so easily. One way to view them is with count():
 
 ```{r}
 gss_cat |>
@@ -139,11 +139,11 @@ ggplot(relig_summary, aes(x = tvhours, y = relig)) +
 
 It is hard to read this plot because there's no overall pattern. We can improve it by reordering the levels of relig using [fct_reorder()]('https://forcats.tidyverse.org/reference/fct_reorder.html'). [fct_reorder()]('https://forcats.tidyverse.org/reference/fct_reorder.html') takes three arguments:
 
--   f, the factor whose levels you want to modify.
+- f, the factor whose levels you want to modify.
 
--   x, a numeric vector that you want to use to reorder the levels.
+- x, a numeric vector that you want to use to reorder the levels.
 
--   Optionally, fun, a function that's used if there are multiple values of x for each value of f. The default value is median.
+- Optionally, fun, a function that's used if there are multiple values of x for each value of f. The default value is median.
 
 
 ```{r}
@@ -155,7 +155,7 @@ relig_summary |>
   geom_point()
 ```
 
--   Changing the levels of a factor
+- Changing the levels of a factor
 
 ```{r}
 rincome_summary <- gss_cat |>
@@ -188,7 +188,7 @@ ggplot(by_age, aes(x = age, y = prop, color = fct_reorder2(marital, age, prop)))
   labs(color = "marital")
 ```
 
--   Changing the order of a bar plot in decreasing frequency with [fct_infreq()]('https://forcats.tidyverse.org/reference/fct_inorder.html') and in increasing frequency with [fct_rev()]('https://forcats.tidyverse.org/reference/fct_rev.html')
+- Changing the order of a bar plot in decreasing frequency with [fct_infreq()]('https://forcats.tidyverse.org/reference/fct_inorder.html') and in increasing frequency with [fct_rev()]('https://forcats.tidyverse.org/reference/fct_rev.html')
 
 ```{r}
 gss_cat |>
@@ -214,7 +214,7 @@ gss_cat |>
   count(partyid)
 ```
 
--   To combine groups, we can assign multiple old levels to the same new level:
+- To combine groups, we can assign multiple old levels to the same new level:
 
 ```{r}
 gss_cat |>
@@ -234,7 +234,7 @@ gss_cat |>
   count(partyid)
 ```
 
--   If we want to collapse a lot of levels, [fct_collapse()]('https://forcats.tidyverse.org/reference/fct_collapse.html') is a useful variant of [fct_recode().]('https://forcats.tidyverse.org/reference/fct_recode.html') For each new variable, you can provide a vector of old levels:
+- If we want to collapse a lot of levels, [fct_collapse()]('https://forcats.tidyverse.org/reference/fct_collapse.html') is a useful variant of [fct_recode().]('https://forcats.tidyverse.org/reference/fct_recode.html') For each new variable, you can provide a vector of old levels:
 
 ```{r}
 gss_cat |>
@@ -259,7 +259,7 @@ gss_cat |>
 
 ## Summary
 
--   This chapter introduced us to the handy forcats package for working with factors, introducing you to the most commonly used functions that we may need in our data analysis process.
+- This chapter introduced us to the handy forcats package for working with factors, introducing you to the most commonly used functions that we may need in our data analysis process.
 
 ## Meeting Videos
 
