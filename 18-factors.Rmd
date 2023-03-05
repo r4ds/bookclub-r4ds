@@ -2,28 +2,264 @@
 
 **Learning objectives:**
 
-- **Create `factor()`** variables.
-- **Explore** the **General Social Survey** dataset via `forcats::gss_cat`.
-- **Reorder factor levels.**
-  - `forcats::fct_reorder()`
-  - `forcats::fct_relevel()`
-  - `forcats::fct_reorder2()`
-  - `forcats::fct_infreq()`
-  - `forcats::fct_rev()`
-- **Modify factor levels.**
-  - `forcats::fct_recode()`
-  - `forcats::fct_collapse()`
-  - `forcats::fct_lump()`
+-   **Create `factor()`** variables.
+-   **Explore** the **General Social Survey** dataset via `forcats::gss_cat`.
+-   **Reorder factor levels.**
+    -   `forcats::fct_reorder()`
+    -   `forcats::fct_relevel()`
+    -   `forcats::fct_reorder2()`
+    -   `forcats::fct_infreq()`
+    -   `forcats::fct_rev()`
+-   **Modify factor levels.**
+    -   `forcats::fct_recode()`
+    -   `forcats::fct_collapse()`
+    -   `forcats::fct_lump()`
+
+## Introduction
+
+-   Factors are used for categorical variables, variables that have a fixed and known set of possible values. They are also useful when you want to display character vectors in a non-alphabetical order.
+
+```{r}
+library(tidyverse)
+```
+
+## Factor basics
+
+- Imagine that we have a variable that records month:
+
+```{r}
+x1 <- c("Dec", "Apr", "Jan", "Mar")
+```
+
+Using a string to record this variable has two problems:
+
+- There are only twelve possible months, and there's nothing saving you from typos:
+
+```{r}
+x2 <- c("Dec", "Apr", "Jam", "Mar")
+```
+
+- It doesn't sort in a useful way:
+
+```{r}
+sort(x1)
+```
+
+- We can fix both of these problems with a factor. To create a factor you must start by creating a list of the valid levels:
+
+```{r}
+month_levels <- c(
+  "Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+)
+
+month_levels
+```
+
+- Now we can create a factor:
+
+```{r}
+y1 <- factor(x1, levels = month_levels)
+
+y1
+```
+
+```{r}
+sort(y1)
+```
+
+- Any values not in the level will be silently converted to NA:
+
+```{r}
+y2 <- factor(x2, levels = month_levels)
+
+y2
+```
+
+- Sometimes we'd prefer that the order of the levels matches the order of the first appearance in the data. We can do that when creating the factor by setting levels to unique(x), or after the fact, with [fct_inorder():]('https://forcats.tidyverse.org/reference/fct_inorder.html')
+
+```{r}
+f1 <- factor(x1, levels = unique(x1))
+f1
+```
+
+```{r}
+f2 <- x1 |> factor() |> fct_inorder()
+f2
+```
+
+```{r}
+levels(f2)
+```
+
+- We can also create a factor when reading your data with readr with [col_factor():]('https://readr.tidyverse.org/reference/parse_factor.html')
+
+```{r}
+csv <- "
+month,value
+Jan,12
+Feb,56
+Mar,12"
+```
+
+```{r}
+df <- read_csv(csv, col_types = cols(month = col_factor(month_levels)))
+
+df$month
+```
+
+## General Social Survey
+
+```{r}
+gss_cat
+```
+
+- When factors are stored in a tibble, we can't see their levels so easily. One way to view them is with count():
+
+```{r}
+gss_cat |>
+  count(race)
+```
+
+## Modifying factor order
+
+```{r}
+relig_summary <- gss_cat |>
+  group_by(relig) |>
+  summarize(
+    age = mean(age, na.rm = TRUE),
+    tvhours = mean(tvhours, na.rm = TRUE),
+    n = n()
+  )
 
 
-## Slide 1
+ggplot(relig_summary, aes(x = tvhours, y = relig)) + 
+  geom_point()
+```
 
-Slide contents. 
-Keep it short and slide-like!
+It is hard to read this plot because there's no overall pattern. We can improve it by reordering the levels of relig using [fct_reorder()]('https://forcats.tidyverse.org/reference/fct_reorder.html'). [fct_reorder()]('https://forcats.tidyverse.org/reference/fct_reorder.html') takes three arguments:
 
-## Slide 2
+- f, the factor whose levels you want to modify.
 
-Slide contents.
+- x, a numeric vector that you want to use to reorder the levels.
+
+- Optionally, fun, a function that's used if there are multiple values of x for each value of f. The default value is median.
+
+
+```{r}
+relig_summary |>
+  mutate(
+    relig = fct_reorder(relig, tvhours)
+  ) |>
+  ggplot(aes(x = tvhours, y = relig)) +
+  geom_point()
+```
+
+- Changing the levels of a factor
+
+```{r}
+rincome_summary <- gss_cat |>
+  group_by(rincome) |>
+  summarize(
+    age = mean(age, na.rm = TRUE),
+    tvhours = mean(tvhours, na.rm = TRUE),
+    n = n()
+  )
+
+
+ggplot(rincome_summary, aes(x = age, y = fct_relevel(rincome, "Not applicable"))) +
+  geom_point()
+```
+
+```{r}
+by_age <- gss_cat |>
+  filter(!is.na(age)) |>
+  count(age, marital) |>
+  group_by(age) |>
+  mutate(
+    prop = n / sum(n)
+  )
+
+ggplot(by_age, aes(x = age, y = prop, color = marital)) +
+  geom_line(na.rm = TRUE)
+
+ggplot(by_age, aes(x = age, y = prop, color = fct_reorder2(marital, age, prop))) +
+  geom_line() +
+  labs(color = "marital")
+```
+
+- Changing the order of a bar plot in decreasing frequency with [fct_infreq()]('https://forcats.tidyverse.org/reference/fct_inorder.html') and in increasing frequency with [fct_rev()]('https://forcats.tidyverse.org/reference/fct_rev.html')
+
+```{r}
+gss_cat |>
+  mutate(marital = marital |> fct_infreq() |> fct_rev()) |>
+  ggplot(aes(x = marital)) +
+  geom_bar()
+```
+
+## Modifying factor levels
+
+```{r}
+gss_cat |>
+  mutate(
+    partyid = fct_recode(partyid,
+      "Republican, strong"    = "Strong republican",
+      "Republican, weak"      = "Not str republican",
+      "Independent, near rep" = "Ind,near rep",
+      "Independent, near dem" = "Ind,near dem",
+      "Democrat, weak"        = "Not str democrat",
+      "Democrat, strong"      = "Strong democrat"
+    )
+  ) |>
+  count(partyid)
+```
+
+- To combine groups, we can assign multiple old levels to the same new level:
+
+```{r}
+gss_cat |>
+  mutate(
+    partyid = fct_recode(partyid,
+      "Republican, strong"    = "Strong republican",
+      "Republican, weak"      = "Not str republican",
+      "Independent, near rep" = "Ind,near rep",
+      "Independent, near dem" = "Ind,near dem",
+      "Democrat, weak"        = "Not str democrat",
+      "Democrat, strong"      = "Strong democrat",
+      "Other"                 = "No answer",
+      "Other"                 = "Don't know",
+      "Other"                 = "Other party"
+    )
+  ) |>
+  count(partyid)
+```
+
+- If we want to collapse a lot of levels, [fct_collapse()]('https://forcats.tidyverse.org/reference/fct_collapse.html') is a useful variant of [fct_recode().]('https://forcats.tidyverse.org/reference/fct_recode.html') For each new variable, you can provide a vector of old levels:
+
+```{r}
+gss_cat |>
+  mutate(
+    partyid = fct_collapse(partyid,
+      "other" = c("No answer", "Don't know", "Other party"),
+      "rep" = c("Strong republican", "Not str republican"),
+      "ind" = c("Ind,near rep", "Independent", "Ind,near dem"),
+      "dem" = c("Not str democrat", "Strong democrat")
+    )
+  ) |>
+  count(partyid)
+```
+
+```{r}
+gss_cat |>
+  mutate(relig = fct_lump_lowfreq(relig)) |>
+  count(relig)
+```
+
+-   Read the documentation to learn about [fct_lump_min()]('https://forcats.tidyverse.org/reference/fct_lump.html') and [fct_lump_prop()]('https://forcats.tidyverse.org/reference/fct_lump.html') which are useful in other cases.
+
+## Summary
+
+- This chapter introduced us to the handy forcats package for working with factors, introducing you to the most commonly used functions that we may need in our data analysis process.
 
 ## Meeting Videos
 
@@ -32,15 +268,15 @@ Slide contents.
 `r knitr::include_url("https://www.youtube.com/embed/2ySAk-lgT88")`
 
 <details>
-  <summary> Meeting chat log </summary>
-  
-```
-00:05:04	Federica Gazzelloni:	Hello
-00:23:34	Jon Harmon (jonthegeek):	Useful: R has month.name and month.abb character vectors built in. So you can do things like y3 <- factor(month.abb, levels = month.abb)
-00:35:46	Ryan Metcalf:	Open ended question for the team. If Factors are a built-in enumeration in categorical data….what if the data in review has a dictionary and the variable (column) of each record is entered as a numeral. Would a best practice to use a join or mutate to enter the text instead of a numeral.
-01:00:25	Ryan Metcalf:	I’m not finding a direct definition of “level” in the Forecats text. Would it be appropriate to state a “level” in this Factor chapter is the “quantity of a given category?”
-01:05:05	Jon Harmon (jonthegeek):	state.abb
-```
+
+<summary>Meeting chat log</summary>
+
+    00:05:04    Federica Gazzelloni:    Hello
+    00:23:34    Jon Harmon (jonthegeek):    Useful: R has month.name and month.abb character vectors built in. So you can do things like y3 <- factor(month.abb, levels = month.abb)
+    00:35:46    Ryan Metcalf:   Open ended question for the team. If Factors are a built-in enumeration in categorical data….what if the data in review has a dictionary and the variable (column) of each record is entered as a numeral. Would a best practice to use a join or mutate to enter the text instead of a numeral.
+    01:00:25    Ryan Metcalf:   I’m not finding a direct definition of “level” in the Forecats text. Would it be appropriate to state a “level” in this Factor chapter is the “quantity of a given category?”
+    01:05:05    Jon Harmon (jonthegeek):    state.abb
+
 </details>
 
 ### Cohort 6
@@ -48,16 +284,16 @@ Slide contents.
 `r knitr::include_url("https://www.youtube.com/embed/Xaax7EX-WIQ")`
 
 <details>
-  <summary> Meeting chat log </summary>
-  
-```
-00:12:43	Daniel Adereti:	https://simplystatistics.org/posts/2015-07-24-stringsasfactors-an-unauthorized-biography/
-00:13:46	Adeyemi Olusola:	Its freezing but I don’t know if it’s from my end
-00:15:05	Shannon:	Yes, Adeyemi, it's freezing a bit...cleared up for now
-00:19:52	Adeyemi Olusola:	I guess as.factor( ) does the same without aorting
-01:01:46	Marielena Soilemezidi:	thank you Daniel!
-01:01:52	Adeyemi Olusola:	Thank you Daniel
-01:02:34	Marielena Soilemezidi:	bye all!
-01:02:40	Daniel Adereti:	Bye!
-```
+
+<summary>Meeting chat log</summary>
+
+    00:12:43    Daniel Adereti: https://simplystatistics.org/posts/2015-07-24-stringsasfactors-an-unauthorized-biography/
+    00:13:46    Adeyemi Olusola:    Its freezing but I don’t know if it’s from my end
+    00:15:05    Shannon:    Yes, Adeyemi, it's freezing a bit...cleared up for now
+    00:19:52    Adeyemi Olusola:    I guess as.factor( ) does the same without aorting
+    01:01:46    Marielena Soilemezidi:  thank you Daniel!
+    01:01:52    Adeyemi Olusola:    Thank you Daniel
+    01:02:34    Marielena Soilemezidi:  bye all!
+    01:02:40    Daniel Adereti: Bye!
+
 </details>
