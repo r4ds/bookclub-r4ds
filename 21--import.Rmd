@@ -1,5 +1,0 @@
-# (PART) Import {-}
-
-**Learning objectives:**
-
-- There are no separate learning objectives for this introduction.
