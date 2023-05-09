@@ -257,13 +257,13 @@ A quick note about the name of the package: googlesheets4 uses v4 of the Sheets 
 ![](https://r4ds.hadley.nz/screenshots/import-googlesheets-students.png)
 - The first argument to read_sheet() is the URL of the file to read, and it returns a tibble:
 
-```{r,message=FALSE,warning=FALSE}
+```{r,message=FALSE,warning=FALSE,eval=FALSE}
 students_url <- "https://docs.google.com/spreadsheets/d/1V1nPp1tzOuutXFLb3G9Eyxi3qxeEhnOXUzL5_BcCQ0w"
 
 students <- read_sheet(students_url)
 ```
 
-```{r,message=FALSE,warning=FALSE}
+```{r,message=FALSE,warning=FALSE,eval=FALSE}
 students <- read_sheet(
   students_url,
   col_names = c("student_id", "full_name", "favourite_food", "meal_plan", "age"),
@@ -275,7 +275,7 @@ students <- read_sheet(
 
 - Note that we defined column types a bit differently here, using short codes. For example, “dcccc” stands for “double, character, character, character, character”.
 
-```{r,message=FALSE,warning=FALSE}
+```{r,message=FALSE,warning=FALSE,eval=FALSE}
 penguins_url <- "https://docs.google.com/spreadsheets/d/1aFu8lnD_g0yjF5O-K6SFgSEWiHPpgvFCF0NY9D6LXnY"
 
 read_sheet(penguins_url, sheet = "Torgersen Island")
@@ -283,13 +283,13 @@ read_sheet(penguins_url, sheet = "Torgersen Island")
 
 We can obtain a list of all sheets within a Google Sheet with sheet_names():
 
-```{r}
+```{r,eval=FALSE,warning=FALSE,message=FALSE}
 sheet_names(penguins_url)
 ```
 
 - Reading in a portion of the sheet
 
-```{r,message=FALSE,warning=FALSE}
+```{r,message=FALSE,warning=FALSE,eval=FALSE}
 deaths_url <- gs4_example("deaths")
 
 deaths <- read_sheet(deaths_url, range = "A5:F15")
@@ -301,7 +301,7 @@ deaths
 
 We can write from R to Google Sheets with write_sheet(). The first argument is the data frame to write, and the second argument is the name (or other identifier) of the Google Sheet to write to:
 
-```{r,message=FALSE,warning=FALSE}
+```{r,message=FALSE,warning=FALSE,eval=FALSE}
 write_sheet(deaths)
 ```
 
