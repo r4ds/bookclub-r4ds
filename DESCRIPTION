@@ -14,6 +14,7 @@ Imports:
     emo,
     gapminder,
     ggthemes,
+    googlesheets4,
     hrbrthemes,
     htmlwidgets,
     lubridate,
@@ -22,10 +23,12 @@ Imports:
     microbenchmark,
     nycflights13,
     patchwork,
+    readxl,
     tidyverse,
     tufte,
     tvthemes,
-    viridis
+    viridis,
+    writexl
 Remotes: 
     hadley/emo
 Encoding: UTF-8
