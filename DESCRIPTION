@@ -10,7 +10,10 @@ Depends:
 Imports: 
     babynames,
     bookdown,
+    DBI,
+    dbplyr,
     details,
+    duckdb,
     emo,
     gapminder,
     ggthemes,
