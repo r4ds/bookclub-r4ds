@@ -351,8 +351,8 @@ For example if you would like to customize the background of your plot:
 ```{r 02-12}
 ggplot() +
   geom_blank() +
-  theme(plot.background = element_rect(color = "red", size = 2, fill = "gold"),
-        panel.background = element_rect(color = "grey", size = 5, fill = "darkblue"))
+  theme(plot.background = element_rect(color = "red", linewidth = 2, fill = "gold"),
+        panel.background = element_rect(color = "grey", linewidth = 5, fill = "darkblue"))
 ```
 
 Or you can customize a `theme_`, there are many different themes provided by defauld by `ggplo2` such as:

@@ -2,13 +2,256 @@
 
 **Learning objectives:**
 
-- ADD ABOUT ONE THING PER SECTION DESCRIBING WHAT YOU LEARN IN THIS CHAPTER.
+- We are going to learn the basics of the Data Base Interface (DBI) package: how to use it to connect to a database and then retrieve data with a SQL.
 
-## SLIDE TITLE
+- We are going to learn how to use dbplyr to translate dplyr code to SQL
 
-- ADD NEW SLIDES USING ##. 
-- TRY TO KEEP THE FEEL SLIDE-LIKE
-  - BULLETED LISTS, NOT PARAGRAPHS
+## Prerequisites
+
+```{r,message=FALSE,warning=FALSE}
+library(DBI) 
+library(dbplyr) 
+library(tidyverse) 
+```
+
+## Database basics
+
+![](https://media.tenor.com/OUpv1OW0bJMAAAAM/database-db.gif)
+
+ A database as a collection of data frames, called tables in database terminology. Like a data.frame, a database table is a collection of named columns, where every value in the column is the same type.
+ 
+ There are three high level differences between data frames and database tables:
+ 
+ - Database tables are stored on disk and can be arbitrarily large. Data frames are stored in memory, and are fundamentally limited.
+ 
+ - Database tables almost always have indexes. Much like the index of a book, a database index makes it possible to quickly find rows of interest without having to look at every single row. Data frames and tibbles don’t have indexes, but data.tables do, which is one of the reasons that they’re so fast.
+
+- Most classical databases are optimized for rapidly collecting data, not analyzing existing data. These databases are called row-oriented because the data is stored row-by-row, rather than column-by-column like R. More recently, there’s been much development of column-oriented databases that make analyzing the existing data much faster.
+
+##  Connecting to a database
+
+To connect to the database from R, you’ll use a pair of packages:
+
+- You’ll always use DBI (database interface) because it provides a set of generic functions that connect to the database, upload data, run SQL queries, etc.
+
+- You’ll also use a package tailored for the DBMS you’re connecting to. This package translates the generic DBI commands into the specifics needed for a given DBMS. There’s usually one package for each DBMS, e.g. RPostgres for Postgres and RMariaDB for MySQL.
+ 
+ If you can’t find a specific package for your DBMS, you can usually use the odbc package instead. This uses the ODBC protocol supported by many DBMS. odbc requires a little more setup because you’ll also need to install an ODBC driver and tell the odbc package where to find it.
+ 
+ 
+```{r}
+con <- DBI::dbConnect(duckdb::duckdb())
+```
+ 
+- When using duckdb in a project
+```{r,eval=FALSE,warning=FALSE,message=FALSE}
+
+con <- DBI::dbConnect(duckdb::duckdb(), dbdir = "duckdb")
+
+```
+
+##  Load some data
+
+```{r}
+dbWriteTable(con, "mpg", ggplot2::mpg)
+dbWriteTable(con, "diamonds", ggplot2::diamonds)
+```
+
+## DBI basics
+```{r}
+dbListTables(con)
+
+
+con |> 
+  dbReadTable("diamonds") |> 
+  as_tibble()
+```
+
+- SQL Syntax
+
+```{r}
+sql <- "
+  SELECT carat, cut, clarity, color, price 
+  FROM diamonds 
+  WHERE price > 15000
+"
+```
+
+```{r}
+as_tibble(dbGetQuery(con, sql))
+```
+## dbplyr basics
+```{r}
+diamonds_db <- tbl(con, "diamonds")
+
+diamonds_db
+```
+
+```{r}
+big_diamonds_db <- diamonds_db |> 
+  filter(price > 15000) |> 
+  select(carat:clarity, price)
+
+big_diamonds_db
+```
+
+```{r}
+big_diamonds_db |>
+  show_query()
+```
+
+- To get all the data back into R
+
+```{r}
+big_diamonds <- big_diamonds_db |> 
+  collect()
+big_diamonds
+```
+
+## SQL
+
+```{r}
+dbplyr::copy_nycflights13(con)
+
+
+flights <- tbl(con, "flights")
+planes <- tbl(con, "planes")
+```
+## SQL basics
+
+The top-level components of SQL are called statements. Common statements include CREATE for defining new tables, INSERT for adding data, and SELECT for retrieving data. We will focus on SELECT statements, also called queries, because they are almost exclusively what you’ll use as a data scientist.
+
+```{r}
+flights |> show_query()
+
+planes |> show_query()
+
+```
+- WHERE and ORDER BY control which rows are included and how they are ordered:
+
+```{r}
+flights |> 
+  filter(dest == "IAH") |> 
+  arrange(dep_delay) |>
+  show_query()
+```
+- GROUP BY converts the query to a summary, causing aggregation to happen:
+
+```{r}
+flights |> 
+  group_by(dest) |> 
+  summarize(dep_delay = mean(dep_delay, na.rm = TRUE)) |> 
+  show_query()
+```
+
+## SELECT
+
+The SELECT clause is the workhorse of queries and performs the same job as select(), mutate(), rename(), relocate(), and, as you’ll learn in the next section, summarize().
+
+select(), rename(), and relocate() have very direct translations to SELECT as they just affect where a column appears (if at all) along with its name:
+
+```{r}
+planes |> 
+  select(tailnum, type, manufacturer, model, year) |>
+  show_query()
+
+
+planes |> 
+  select(tailnum, type, manufacturer, model, year) |> rename(year_built = year) |> 
+  show_query()
+
+
+planes |> 
+  select(tailnum, type, manufacturer, model, year) |>
+  relocate(manufacturer, model, .before = type) |> 
+  show_query()
+```
+
+## Subqueries
+
+Sometimes it’s not possible to translate a dplyr pipeline into a single SELECT statement and you need to use a subquery. A subquery is just a query used as a data source in the FROM clause, instead of the usual table.
+
+```{r}
+flights |> 
+  mutate(
+    year1 = year + 1,
+    year2 = year1 + 1
+  ) |> 
+  show_query()
+```
+
+## Joins
+
+If we’re familiar with dplyr’s joins, SQL joins are very similar. Here’s a simple example:
+
+```{r}
+flights |> 
+  left_join(planes |> rename(year_built = year), by = "tailnum") |> 
+  show_query()
+```
+
+## Other verbs
+dbplyr also translates other verbs like distinct(), slice_*(), and intersect(), and a growing selection of tidyr functions like pivot_longer() and pivot_wider(). The easiest way to see the full set of what’s currently available is to visit the dbplyr website:[https://dbplyr.tidyverse.org/reference/.](https://dbplyr.tidyverse.org/reference/.)
+
+## Function translations
+
+So far we’ve focused on the big picture of how dplyr verbs are translated to the clauses of a query. Now we’re going to zoom in a little and talk about the translation of the R functions that work with individual columns, e.g., what happens when you use mean(x) in a summarize()?
+
+To help see what’s going on, we’ll use a couple of little helper functions that run a summarize() or mutate() and show the generated SQL. That will make it a little easier to explore a few variations and see how summaries and transformations can differ.
+
+```{r}
+summarize_query <- function(df, ...) {
+  df |> 
+    summarize(...) |> 
+    show_query()
+}
+mutate_query <- function(df, ...) {
+  df |> 
+    mutate(..., .keep = "none") |> 
+    show_query()
+}
+```
+
+```{r}
+flights |> 
+  group_by(year, month, day) |>  
+  summarize_query(
+    mean = mean(arr_delay, na.rm = TRUE),
+    median = median(arr_delay, na.rm = TRUE)
+  )
+```
+
+```{r}
+flights |> 
+  group_by(year, month, day) |>  
+  mutate_query(
+    mean = mean(arr_delay, na.rm = TRUE),
+  )
+```
+
+```{r}
+flights |> 
+  group_by(dest) |>  
+  arrange(time_hour) |> 
+  mutate_query(
+    lead = lead(arr_delay),
+    lag = lag(arr_delay)
+  )
+```
+
+![](https://media.tenor.com/Tw8HXQ1V4lsAAAAM/homer-simpson-dancing.gif)
+
+## Summary
+
+In this chapter we learned how to access data from databases. We focused on dbplyr, a dplyr “backend” that allows us to write the dplyr code you’re familiar with, and have it be automatically translated to SQL. We used that translation to teach you a little SQL; it’s important to learn some SQL because it’s the most commonly used language for working with data and knowing some will it easier for you to communicate with other data folks who don’t use R. If you’ve finished this chapter and would like to learn more about SQL. We have two recommendations:
+
+- [SQL for Data Scientists](https://sqlfordatascientists.com/) by Renée M. P. Teate is an introduction to SQL designed specifically for the needs of data scientists, and includes examples of the sort of highly interconnected data you’re likely to encounter in real organizations.
+
+- [Practical SQL](https://www.practicalsql.com/) by Anthony DeBarros is written from the perspective of a data journalist (a data scientist specialized in telling compelling stories) and goes into more detail about getting your data into a database and running your own DBMS.
+
+```{r clean-up}
+dbDisconnect(con, shutdown = TRUE) 
+```
 
 ## Meeting Videos
 
