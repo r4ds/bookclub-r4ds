@@ -1,3 +1,9 @@
 # (PART) Removed chapters {-}
 
 These chapters have been removed from the book since the time that older cohorts covered them. We're keeping the old notes in case anybody finds them useful.
+
+All code blocks for these chapters have been disabled to avoid mystery bugs.
+
+```{r 99-eval-off, include=FALSE}
+knitr::opts_chunk$set(eval = FALSE)
+```

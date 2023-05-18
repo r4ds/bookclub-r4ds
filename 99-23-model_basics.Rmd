@@ -186,7 +186,7 @@ head(data_pred)
 ```{r}
 ggplot(sim1, aes(x,y)) +
   geom_point() +
-  geom_line(aes(y = pred), data = data_pred, colour = "red", size = 2)+
+  geom_line(aes(y = pred), data = data_pred, colour = "red", linewidth = 2)+
   geom_smooth(method="lm",se=F)
 ```
     

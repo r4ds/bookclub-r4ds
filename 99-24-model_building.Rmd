@@ -39,7 +39,7 @@ grid <- diamonds2 %>%
 ggplot(diamonds2) +
   aes(carat, price) +
   geom_hex(bins = 50) +
-  geom_line(data = grid, color = "red", size = 1)
+  geom_line(data = grid, color = "red", linewidth = 1)
 ```
 
 ## Examine Residuals
@@ -177,7 +177,7 @@ daily %>%
   add_residuals(mod2, "resid") %>% 
   ggplot() + 
   aes(date, resid) +
-  geom_hline(yintercept = 0, size = 2, colour = "white") + 
+  geom_hline(yintercept = 0, linewidth = 2, colour = "white") + 
   geom_line()
 ```
 

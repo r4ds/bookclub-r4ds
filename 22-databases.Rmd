@@ -249,7 +249,9 @@ In this chapter we learned how to access data from databases. We focused on dbpl
 
 - [Practical SQL](https://www.practicalsql.com/) by Anthony DeBarros is written from the perspective of a data journalist (a data scientist specialized in telling compelling stories) and goes into more detail about getting your data into a database and running your own DBMS.
 
-
+```{r clean-up}
+dbDisconnect(con, shutdown = TRUE) 
+```
 
 ## Meeting Videos
 

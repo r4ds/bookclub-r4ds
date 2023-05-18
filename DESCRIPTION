@@ -18,6 +18,7 @@ Imports:
     gapminder,
     ggthemes,
     googlesheets4,
+    hexbin,
     hrbrthemes,
     htmlwidgets,
     lubridate,

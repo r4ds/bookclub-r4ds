@@ -33,13 +33,13 @@ Where do I begin to express the awesomness of Hans Rosling (27 July 1948 -- 7 Fe
 
 Furthermore, we can thank Jenny Bryan for authoring the gapminder package!
 
-```{r 99-25-Load Gapminder, eval=TRUE}
+```{r 99-25-Load Gapminder}
 library(gapminder)
 ```
 
 To gain some insight to the data, we ask the question: "How does life expectancy (lifeExp) change over time (year) for each country (country)?"
 
-```{r 99-25-Plot Gapmider, eval=TRUE}
+```{r 99-25-Plot Gapmider}
 gapminder %>%
   ggplot(aes(year, lifeExp, group = country)) +
     geom_line(alpha = 1/3)
@@ -50,7 +50,7 @@ At first glance, it appears life expectancy is increasing...but not for all coun
 
 To make it easier to view, we fit a model with a linear trend. The model captures steady growth over time, and the residuals will show what's left.
 
-```{r 99-25-Linear Trend, eval=TRUE}
+```{r 99-25-Linear Trend}
 nz <- filter(gapminder, country == "New Zealand")
 nz %>%
   ggplot(aes(year, lifeExp)) +
@@ -67,7 +67,7 @@ nz %>%
 nz %>%
   add_residuals(nz_mod) %>%
   ggplot(aes(year, resid)) +
-  geom_hline(yintercept = 0, colour = "white", size = 3) +
+  geom_hline(yintercept = 0, colour = "white", linewidth = 3) +
   geom_line() +
   ggtitle("Remaining pattern")
 ```
@@ -79,7 +79,7 @@ To make life easier for us (and ensure we are not copying and pasting forever), 
 
 Here, we are going to make a **nested data frame**.
 
-```{r 99-25-Nested Data Frame, eval=TRUE}
+```{r 99-25-Nested Data Frame}
 by_country <- gapminder %>%
   group_by(country, continent) %>%
   nest()
@@ -90,7 +90,7 @@ This creates a data frame that has one row per group (per country), and a rather
 
 >Note: Don't use the Structure function `str()` as it will be difficult to view. Instead, just view a single line of your nested dataframe.
 
-```{r 99-25-View the Nested Dataframe, eval=TRUE}
+```{r 99-25-View the Nested Dataframe}
 by_country$data[[1]]
 
 ```
@@ -100,7 +100,7 @@ by_country$data[[1]]
 
 Now, lets fit some models!
 
-```{r 99-25-Fit some Models, eval=TRUE}
+```{r 99-25-Fit some Models}
 country_model <- function(df) {
   lm(lifeExp ~ year, data = df)
 }
@@ -109,7 +109,7 @@ models <- map(by_country$data, country_model)
 
 Yet, this may be too costly, so instead, lets modify (be more elegant) with our data. Storing related objects in columns is a key part of the value of data frames.
 
-```{r 99-25-Mutate, eval=TRUE}
+```{r 99-25-Mutate}
 by_country <- by_country %>%
   mutate(model = map(data, country_model))
 by_country
@@ -117,7 +117,7 @@ by_country
 
 This is a huge advantage: because all the related objects are stored together, you don’t need to manually keep them in sync when you filter or arrange.
 
-```{r 99-25-Filter by Country, eval=TRUE}
+```{r 99-25-Filter by Country}
 by_country %>%
   filter(continent == "Europe")
 
@@ -130,7 +130,7 @@ by_country %>%
 ### Unnesting
 Previously, we were working with only one country. Now, lets compute the residuals of ALL countries.
 
-```{r 99-25-Compute Residuals, eval=TRUE}
+```{r 99-25-Compute Residuals}
 by_country <- by_country %>%
   mutate(
     resids = map2(data, model, add_residuals)
@@ -139,13 +139,13 @@ by_country
 ```
 By now, you should ask yourself: "How can I plot a bunch of dataframes?". This isn't required. We have to *un-nest*.
 
-```{r 99-25-Un-Nest, eval=TRUE}
+```{r 99-25-Un-Nest}
 resids <- unnest(by_country, resids)
 resids
 ```
 Now, we can plot ALL the residuals.
 
-```{r 99-25-Plot Residuals, eval=TRUE}
+```{r 99-25-Plot Residuals}
 resids %>%
   ggplot(aes(year, resid)) +
     geom_line(aes(group = country), alpha = 1 / 3) +
@@ -153,7 +153,7 @@ resids %>%
 ```
 We can now plot each country as a facet.
 
-```{r 99-25-Facet by Country, eval=TRUE}
+```{r 99-25-Facet by Country}
 resids %>%
   ggplot(aes(year, resid, group = country)) +
     geom_line(alpha = 1 / 3) +
@@ -167,12 +167,12 @@ Instead of looking at the residuals from the model, we could look at some genera
 
 We’ll use `broom::glance()` to extract some model quality metrics.
 
-```{r 99-25-Broom::Glance, eval=TRUE}
+```{r 99-25-Broom::Glance}
 broom::glance(nz_mod)
 ```
 We can use mutate() and unnest() to create a data frame with a row for each country.
 
-```{r Broom:Glance Un-Nested, eval=TRUE}
+```{r Broom:Glance Un-Nested}
 by_country %>%
   mutate(glance = map(model, broom::glance)) %>%
   unnest(glance)
@@ -181,7 +181,7 @@ This isn’t quite the output we want, because it still includes all the list co
 
 >Note, `.drop=TRUE` has been depricated.
 
-```{r 99-25-"Un-Nest w/ .drop=TRUE", eval=TRUE}
+```{r 99-25-"Un-Nest w/ .drop=TRUE"}
 glance <- by_country %>%
   mutate(glance = map(model, broom::glance)) %>%
   unnest(glance, .drop = TRUE)
@@ -190,7 +190,7 @@ glance
 
 Now, we can look for countries that don't fit our model well.
 
-```{r 99-25-Sort by Residuals, eval=TRUE}
+```{r 99-25-Sort by Residuals}
 glance %>%
   arrange(r.squared)
 ```
@@ -198,7 +198,7 @@ The worst fitting models seem to be in Africa. We'll add `geom_jitter()` to make
 
 We can also plot the particular bad $$R^2$$ and plot the data.
 
-```{r 99-25-Geom_Jitter plus bad R2, eval=TRUE}
+```{r 99-25-Geom_Jitter plus bad R2}
 glance %>%
   ggplot(aes(continent, r.squared)) +
     geom_jitter(width = 0.5)
@@ -217,7 +217,7 @@ The relation of this visual is the tragidies of HIV/AIDs epidemic and the Rwanda
 - List-Columns are implicit in the definition of the data frame: a data frame is a named list of equal length vectors.
 - Base-R doesn't make it easy to create list-columns, and `data.frame()` treats a list as a list of columns.
 
-```{r 99-25-List of Columns, eval=TRUE}
+```{r 99-25-List of Columns}
 data.frame(x = list(1:3, 3:5))
 ```
 
@@ -225,7 +225,7 @@ data.frame(x = list(1:3, 3:5))
 
 `I()` stands for **Inhibit Interpretation/Conversion of Objects**: Change the class of an object to indicate that is should be treated *as is*.
 
-```{r 99-25-using I, eval=TRUE}
+```{r 99-25-using I}
 data.frame(
   x = I(list(1:3, 3:5)),
   y = c("1, 2", "3, 4, 5")
@@ -236,7 +236,7 @@ data.frame(
 
 >Note where the quotes are placed
 
-```{r 99-25-List with Tibble, eval=TRUE}
+```{r 99-25-List with Tibble}
 tibble(
   x = list(1:3, 3:5),
   y = c("1, 2", "3, 4, 5")
@@ -244,7 +244,7 @@ tibble(
 ```
 - `tribble()` can automatically work out that you need a list.
 
-```{r 99-25-Tribble Example, eval=TRUE}
+```{r 99-25-Tribble Example}
 tribble(
    ~x, ~y,
   1:3, "1, 2",
@@ -278,14 +278,14 @@ When creating list-columns, make sure they are homogeneous.
 
 - When applied to a group data frame, `nest()` keeps the grouping columns *as is*.
 
-```{r 99-25-Gapminder Grouped, eval=TRUE}
+```{r 99-25-Gapminder Grouped}
 gapminder %>%
   group_by(country, continent) %>%
   nest()
 ```
 - You can also use it on an un-grouped data frame, specifying which columns you want to nest.
 
-```{r 99-25-Specify Columns, eval=TRUE}
+```{r 99-25-Specify Columns}
 gapminder %>%
   nest(data = c(year:gdpPercap))
 ```
@@ -295,7 +295,7 @@ gapminder %>%
 
 > Again, note where the quotes are placed.
 
-```{r 99-25-Vectorized Functions, eval=TRUE}
+```{r 99-25-Vectorized Functions}
 df <- tribble(
   ~x1,
   "a,b,c",
@@ -307,7 +307,7 @@ df %>%
 ```
 - And now `unnest()` knows how to handle these list of vectors.
 
-```{r 99-25-Un-Nested list of vectors, eval=TRUE}
+```{r 99-25-Un-Nested list of vectors}
 df %>%
   mutate(x2 = stringr::str_split(x1, ",")) %>%
   unnest(x2)
@@ -318,7 +318,7 @@ df %>%
 Another example uses `map(), `map2()`, and pmap()`. We could re-write [Invoking different functions](https://r4ds.had.co.nz/iteration.html#invoking-different-functions) and rewrite it to use `mutate()`.
 
 Previous Example Code:
-```{r 99-25-Chapter 21 Code Example, eval=TRUE}
+```{r 99-25-Chapter 21 Code Example}
 sim <- tribble(
   ~f,      ~params,
   "runif", list(min = -1, max = 1),
@@ -331,7 +331,7 @@ sim %>%
 
 Refactored Code using `mutate()`
 
-```{r 99-25-Refactored using Mutate, eval=TRUE}
+```{r 99-25-Refactored using Mutate}
 sim <- tribble(
   ~f,      ~params,
   "runif", list(min = -1, max = 1),
@@ -348,7 +348,7 @@ sim %>%
 
 One restriction of `summarise()` is it only works with summary functions that return a single value. Implying, you can't use it with functions like `quantile()` that return a vector of arbitrary length.
 
-```{r 99-25-mtcars with summarise, eval=TRUE}
+```{r 99-25-mtcars with summarise}
 mtcars %>%
   group_by(cyl) %>%
   summarise(q = quantile(mpg))
@@ -356,14 +356,14 @@ mtcars %>%
 
 You can however, wrap the result in a list! This obeys the contract of summarise(), because each summary is now a list (a vector) of length 1.
 
-```{r 99-25-Summarise with list, eval=TRUE}
+```{r 99-25-Summarise with list}
 mtcars %>%
   group_by(cyl) %>%
   summarise(q = list(quantile(mpg)))
 ```
 To make useful results with `unnest90`, you'll also ned to capture probabilities.
 
-```{r 99-25-Capture Probabilities, eval=TRUE}
+```{r 99-25-Capture Probabilities}
 probs <- c(0.01, 0.25, 0.5, 0.75, 0.99)
 mtcars %>%
   group_by(cyl) %>%
@@ -378,7 +378,7 @@ What do you do if you want to iterate over both the contents of a list and its e
 
 You can use `tibble::enframe()`.
 
-```{r 99-25-Tibble Enframe, eval=TRUE}
+```{r 99-25-Tibble Enframe}
 x <- list(
   a = 1:5,
   b = 3:4,
@@ -391,7 +391,7 @@ df
 
 Now, if we want to iterate over names and values in parrallel, we can use `map2()`.
 
-```{r 99-25-map2, eval=TRUE}
+```{r 99-25-map2}
 df %>%
   mutate(
     smry = map2_chr(name, value, ~ stringr::str_c(.x, ": ", .y[1]))
@@ -409,7 +409,7 @@ To simplify the list-column back to a regular column (an atomic vector) or set o
 
 You can always summarise an object with its type and length, so this code will work regardless of what sort of list-column you have.
 
-```{r 99-25-List Column, eval=TRUE}
+```{r 99-25-List Column}
 df <- tribble(
   ~x,
   letters[1:5],
@@ -429,7 +429,7 @@ Don’t forget about the `map_*()` shortcuts - you can use `map_chr(x, "apple")`
 
 Use the `.null` argument to provide a value to use if the element is missing (instead of returning NULL).
 
-```{r 99-25-List with Null, eval=TRUE}
+```{r 99-25-List with Null}
 df <- tribble(
   ~x,
   list(a = 1, b = 2),
@@ -445,13 +445,13 @@ df %>% mutate(
 
 `unnest()` works by repeating the regular columns once for each element of the list-column.
 
-```{r 99-25-Unnest with Tibble, eval=TRUE}
+```{r 99-25-Unnest with Tibble}
 tibble(x = 1:2, y = list(1:4, 1)) %>% unnest(y)
 ```
 
 You cannot simultaneously unnest two columns that contain different number of elements.
 
-```{r 99-25-Unnest Error, eval=TRUE}
+```{r 99-25-Unnest Error}
 # Ok, because y and z have the same number of elements in
 # every row
 df1 <- tribble(
