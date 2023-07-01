@@ -17,8 +17,9 @@ If you would like to present, please see the sign-up sheet for your cohort (link
 - Cohort 4 (started 2020-12-16, ended 2021-06-23): [meeting videos](https://www.youtube.com/playlist?list=PL3x6DOfs2NGjtn1_4BSX99R5wrLjK7XvY)
 - Cohort 5 (started 2021-07-24, ended 2022-04-23): [meeting videos](https://www.youtube.com/playlist?list=PL3x6DOfs2NGjk1sPsrn2CazGiel0yZrhc)
 - Cohort 6 (started 2021-10-15, ended 2022-11-17): [meeting videos](https://www.youtube.com/playlist?list=PL3x6DOfs2NGiYnQdq8mgMBeob3YONUWRM)
-- [Cohort 7](https://docs.google.com/spreadsheets/d/1kDhZkrd0wy4YN_pra84kmhipX7yrLm9v9XmVh9HRRZ0/edit?usp=sharing) (starts 2022-08-29): [Mondays, 11:00am CST/CDT](https://www.timeanddate.com/worldclock/converter.html?iso=20220829T160000&p1=1440&p2=24&p3=125&p4=197&p5=179) | [meeting videos](https://youtube.com/playlist?list=PL3x6DOfs2NGi3qrPu8xxURdUoYAJpko5G)
-- [Cohort 8](https://docs.google.com/spreadsheets/d/1reByMPb5Og3OHbRgplzV5Jkz_o6CkEYz_adBGfHTFwg/edit?usp=sharing) (start date TBD): [TBD, TBD CST/CDT](https://www.timeanddate.com/) | [meeting videos](https://youtube.com/playlist?list=PL3x6DOfs2NGjeq_14X43I3OHYxuE2mO4I)
+- [Cohort 7](https://docs.google.com/spreadsheets/d/1kDhZkrd0wy4YN_pra84kmhipX7yrLm9v9XmVh9HRRZ0/edit?usp=sharing) (started 2022-08-29): [Mondays, 11:00am CST/CDT](https://www.timeanddate.com/worldclock/converter.html?iso=20220829T160000&p1=1440&p2=24&p3=125&p4=197&p5=179) | [meeting videos](https://youtube.com/playlist?list=PL3x6DOfs2NGi3qrPu8xxURdUoYAJpko5G)
+- [Cohort 8](https://docs.google.com/spreadsheets/d/1reByMPb5Og3OHbRgplzV5Jkz_o6CkEYz_adBGfHTFwg/edit?usp=sharing) (started 2022-09-24): [Saturdays, 14:00 CST/CDT](https://www.timeanddate.com/worldclock/converter.html?iso=20220924T190000&p1=24&p2=1440) | [meeting videos](https://www.youtube.com/playlist?list=PL3x6DOfs2NGjeq_14X43I3OHYxuE2mO4I)
+- [Cohort 9](https://docs.google.com/spreadsheets/d/1GU583YU_iURVDRKdKYwissDH5irSdoylMQtNwpEtPTA/edit?usp=sharing) (starts 2023-07-30): [Sundays, 19:00 CST/CDT](https://www.timeanddate.com/worldclock/converter.html?iso=20230717T000000&p1=24&p2=137&p3=179&p4=1440) | [meeting videos](https://www.youtube.com/playlist?list=PL3x6DOfs2NGjVMs1NtbWu4s_ZgGhGKnrN)
 
 
 ## How to Present
