@@ -2,21 +2,19 @@
 
 **Learning objectives:**
 
-- Write **functions** to **automate common tasks** in R.
-  - **Name** R functions using **consistent rules.**
-  - Effectively **use comments** in R functions to **explain the "why"** of your code.
-- **Conditionally execute code** in R functions.
-  - Use **`if`** and **`else`** statements to conditionally execute R code.
-  - Use **`switch`** statements to conditionally execute R code.
-  - Use **`cut`** to **discretize continuous variables.**
-- Use **consistent arguments** for R functions.
-  - Give **default values** to arguments in R functions.
-  - **Check values** of arguments to make safer functions in R.
-  - Use **`...` arguments** in R functions.
-- **Return** values from R functions.
-  - Use **explicit `return`s** to **return early** from an R function.
-  - Use **`invisible`** to **invisibly return values** from R functions.
-- Recognize how R utilizes **environments** and **lexical scoping** to find the value associated with a name.
+We are going to learn about three useful type of function:
+
+- Vector functions take one or more vectors as input and return a vector as output.
+
+- Data frame functions take a data frame as input and return a data frame as output.
+
+- Plot functions that take a data frame as input and return a plot as output.
+
+## Prerequisites
+```{r}
+library(tidyverse) |> suppressPackageStartupMessages()
+library(nycflights13)
+```
 
 ## Introduction
 
@@ -48,7 +46,7 @@ Key steps in creating a function:
 
 ## Functions are for computers *and* humans
 
-Be consistent in you naming and coding of functions
+Be consistent in your naming and coding of functions
 
 **Names:**
 
@@ -66,75 +64,278 @@ Use comments to explain the 'why' of the code
 
 Use lines of - or = to break up code into sections
 
-## Conditional execution
+## Vector functions
+```{r}
+df <- tibble(
+  a = rnorm(5),
+  b = rnorm(5),
+  c = rnorm(5),
+  d = rnorm(5),
+)
 
-`if` statements conditionally execute code. The condition must evaluate to `TRUE` or `FALSE`.
+df |> mutate(
+  a = (a - min(a, na.rm = TRUE)) / 
+    (max(a, na.rm = TRUE) - min(a, na.rm = TRUE)),
+  b = (b - min(b, na.rm = TRUE)) / 
+    (max(b, na.rm = TRUE) - min(a, na.rm = TRUE)),
+  c = (c - min(c, na.rm = TRUE)) / 
+    (max(c, na.rm = TRUE) - min(c, na.rm = TRUE)),
+  d = (d - min(d, na.rm = TRUE)) / 
+    (max(d, na.rm = TRUE) - min(d, na.rm = TRUE)),
+)
 
-Be careful: **`==`** is vectorised.
+# Can you spot out the error in the above code?
+```
+## Writing a function
 
-Use \|\| (OR) and && (AND) to combine multiple logical expressions.
+```{r,eval=FALSE}
+(a - min(a, na.rm = TRUE)) / (max(a, na.rm = TRUE) - min(a, na.rm = TRUE))
+(b - min(b, na.rm = TRUE)) / (max(b, na.rm = TRUE) - min(b, na.rm = TRUE))
+(c - min(c, na.rm = TRUE)) / (max(c, na.rm = TRUE) - min(c, na.rm = TRUE))
+(d - min(d, na.rm = TRUE)) / (max(d, na.rm = TRUE) - min(d, na.rm = TRUE))  
+```
 
-You can string multiple if statements together: `if`, `else if`, `else`
+To make this a bit clearer we can replace the bit that varies with █:
 
-For a long series of chained if statements, use `switch()`
+```{r,eval=FALSE}
+(█ - min(█, na.rm = TRUE)) / (max(█, na.rm = TRUE) - min(█, na.rm = TRUE))
+```
 
-Use `cut()` to 'discretise continuous variables'
+To turn this into a function you need three things:
 
-**Format:**
+- **A name**. Here we’ll use rescale01 because this function rescales a vector to lie between 0 and 1.
 
-Your function or `if` statement followed by a curly brace
+- **The arguments**. The arguments are things that vary across calls and our analysis above tells us that we have just one. We’ll call it x because this is the conventional name for a numeric vector.
 
-New line, indent 2 spaces.
+- **The body**. The body is the code that’s repeated across all the calls.
 
-Ending brace on its own line, unless followed by else.
+```{r}
+rescale01 <- function(x) {
+  (x - min(x, na.rm = TRUE)) / (max(x, na.rm = TRUE) - min(x, na.rm = TRUE))
+}
 
-## Function arguments
+```
 
-One set supplies the **data** to compute on
+```{r}
+rescale01(c(-10, 0, 10))
 
-One set supplies arguments that control the **details** of the computation.
+rescale01(c(1, 2, 3, NA, 5))
+```
 
-Generally, data comes first, and details go on the end and usually have default values.
+Then you can rewrite the call to mutate() as:
 
-Choose names that are longer and descriptive or use common ones:
+```{r}
+df |> mutate(
+  a = rescale01(a),
+  b = rescale01(b),
+  c = rescale01(c),
+  d = rescale01(d),
+)
+```
 
--   x, y, z: vectors
+We may  want to strip percent signs, commas, and dollar signs from a string before converting it into a number:
 
--   w: a vector of weights
+```{r}
+# https://twitter.com/NVlabormarket/status/1571939851922198530
 
--   df: a data frame
+clean_number <- function(x) {
+  is_pct <- str_detect(x, "%")
+  num <- x |> 
+    str_remove_all("%") |> 
+    str_remove_all(",") |> 
+    str_remove_all(fixed("$")) |> 
+    as.numeric(x)
+  if_else(is_pct, num / 100, num)
+}
 
--   i, j: numeric indices (rows/columns)
+clean_number("$12,300")
 
--   n: length, or number of rows
+clean_number("45%")
+```
 
--   p: number of columns
+## Data frame functions
 
-Put checks in your functions to make constraints explicit.
+When you notice yourself copying and pasting multiple verbs multiple times, you might think about writing a data frame function. 
 
-Use `.` as an argument that takes an arbitrary number of values
+Data frame functions work like dplyr verbs: they take a data frame as the first argument, some extra arguments that say what to do with it, and return a data frame or vector.
 
-Lazy evaluation - arguments in R are not computed until they're needed.
+##  Indirection and tidy evaluation
 
-## Return values
+```{r}
+grouped_mean <- function(df, group_var, mean_var) {
+  df |> 
+    group_by(group_var) |> 
+    summarize(mean(mean_var))
+}
+```
 
-Two things to consider when returning a value:
+```{r,error=TRUE}
+diamonds |> 
+  grouped_mean(cut, carat)
+```
 
-1.  Does returning early make your function easier to read?
+- To make the problem a bit more clear, we can use a made up data frame:
 
-> R, by default, returns the last value of a function. You can return a value with or without an explicit return statement.
+```{r}
+df <- tibble(
+  mean_var = 1,
+  group_var = "g",
+  group = 1,
+  x = 10,
+  y = 100
+)
 
-2.  Can you make your function pipeable?
+df |> 
+  grouped_mean(group, x)
 
-> There are two basic types of pipeable functions:
->
-> -   With **transformations**, an object is passed to the function's first argument and a modified object is returned.
->
-> -   With **side-effects**, the passed object is not transformed. Instead, the function performs an action on the object, like drawing a plot or saving a file.
 
-## Environment
+df |> 
+  grouped_mean(group, y)
+```
 
-**Lexical scoping** - R will look outside the function, in the environment, for definitions of variables, if it is not defined within.
+- Regardless of how we call grouped_mean() it always does df |> group_by(group_var) |> summarize(mean(mean_var)), instead of df |> group_by(group) |> summarize(mean(x)) or df |> group_by(group) |> summarize(mean(y)). This is a problem of indirection, and it arises because dplyr uses tidy evaluation to allow you to refer to the names of variables inside your data frame without any special treatment.
+
+
+- To overcome this problem we are going to use Tidy evaluation which have a solution to this problem called embracing 🤗. Embracing a variable means to wrap it in braces so (e.g.) var becomes {{ var }}.
+
+```{r}
+grouped_mean <- function(df, group_var, mean_var) {
+  df |> 
+    group_by({{ group_var }}) |> 
+    summarize(mean({{ mean_var }}))
+}
+
+df |>
+  grouped_mean(group, x)
+```
+
+## When to embrace?
+
+So the key challenge in writing data frame functions is figuring out which arguments need to be embraced.
+
+- Data-masking: this is used in functions like arrange(), filter(), and summarize() that compute with variables.
+
+- Tidy-selection: this is used for functions like select(), relocate(), and rename() that select variables.
+
+## Common use cases
+
+```{r}
+summary6 <- function(data, var) {
+  data |> summarize(
+    min = min({{ var }}, na.rm = TRUE),
+    mean = mean({{ var }}, na.rm = TRUE),
+    median = median({{ var }}, na.rm = TRUE),
+    max = max({{ var }}, na.rm = TRUE),
+    n = n(),
+    n_miss = sum(is.na({{ var }})),
+    .groups = "drop"
+  )
+}
+
+diamonds |>
+  summary6(carat)
+
+
+diamonds |> 
+  group_by(cut) |> 
+  summary6(carat)
+  
+```
+
+## Plot functions
+
+```{r}
+histogram <- function(df, var, binwidth = NULL) {
+  df |> 
+    ggplot(aes(x = {{ var }})) + 
+    geom_histogram(binwidth = binwidth)
+}
+
+diamonds |> 
+  histogram(carat, 0.1)
+```
+
+```{r}
+diamonds |> 
+  histogram(carat, 0.1) +
+  labs(x = "Size (in carats)", y = "Number of diamonds")
+```
+
+## More variables
+
+It’s straightforward to add more variables to the mix. For example, maybe you want an easy way to eyeball whether or not a dataset is linear by overlaying a smooth line and a straight line:
+
+```{r}
+# https://twitter.com/tyler_js_smith/status/1574377116988104704
+linearity_check <- function(df, x, y) {
+  df |>
+    ggplot(aes(x = {{ x }}, y = {{ y }})) +
+    geom_point() +
+    geom_smooth(method = "loess", formula = y ~ x, color = "red", se = FALSE) +
+    geom_smooth(method = "lm", formula = y ~ x, color = "blue", se = FALSE) 
+}
+
+starwars |> 
+  filter(mass < 1000) |> 
+  linearity_check(mass, height)
+```
+
+## Combining with other tidyverse
+
+```{r}
+sorted_bars <- function(df, var) {
+  df |> 
+    mutate({{ var }} := fct_rev(fct_infreq({{ var }})))  |>
+    ggplot(aes(y = {{ var }})) +
+    geom_bar()
+}
+
+diamonds |> 
+  sorted_bars(clarity)
+```
+- We have to use a new operator here, :=, because we are generating the variable name based on user-supplied data. Variable names go on the left hand side of =, but R’s syntax doesn’t allow anything to the left of = except for a single literal name. 
+
+```{r}
+conditional_bars <- function(df, condition, var) {
+  df |> 
+    filter({{ condition }}) |> 
+    ggplot(aes(x = {{ var }})) + 
+    geom_bar()
+}
+
+diamonds |> 
+  conditional_bars(cut == "Good", clarity)
+```
+
+## Labeling
+
+```{r}
+histogram <- function(df, var, binwidth) {
+  label <- rlang::englue("A histogram of {{var}} with binwidth {binwidth}")
+  
+  df |> 
+    ggplot(aes(x = {{ var }})) + 
+    geom_histogram(binwidth = binwidth) + 
+    labs(title = label)
+}
+
+diamonds |> 
+  histogram(carat, 0.1)
+```
+
+## Summary
+
+- In this chapter we learned how to write functions for three useful scenarios: **creating a vector**, **creating a data frames**, or **creating a plot**.
+
+
+- To learn more about programming with tidy evaluation, see useful recipes in [programming with dplyr](https://dplyr.tidyverse.org/articles/programming.html); and [programming with tidyr](https://tidyr.tidyverse.org/articles/programming.html); learn more about the theory in [What is data-masking and why do I need](https://rlang.r-lib.org/reference/topic-data-mask.html)
+
+
+- To learn more about reducing duplication in your ggplot2 code, read the 
+[ Programming with ggplot2](https://ggplot2-book.org/programming.html) chapter of the ggplot2 book.
+
+- For more advice on function style, see the [ tidyverse style guide](https://style.tidyverse.org/functions.html)
+
 
 ## Meeting Videos
 
