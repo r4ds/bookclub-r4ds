@@ -1,15 +1,12 @@
 # Introduction
 
-The Introduction gives an overview of what the book covers.
-
 **Learning objectives:**
 
-- Describe a **typical data science project.**
-- Explain the reasoning behind the **order of content in this book.**
-- Recognize topics that are explicitly **not covered by this book.**
-- **Set up an environment** in which you can learn the topics in this book.
-- Describe how **code in the book** differs from **code in your console.**
-- Recall ways to **get help with R code.**
+- Describe a *typical* data science project.
+- Explain the reasoning behind the order of content in this book.
+- Recognize topics that are not covered by this book.
+- Set up an environment in which you can learn the topics in this book.
+- Describe how code in the book differs from code in your console.
 
 
 ## A typical data science project
@@ -19,29 +16,29 @@ The Introduction gives an overview of what the book covers.
 
 The steps of the data science process are:
 
-- (1) **Import** and **tidy** data, also known as wrangling data
+- (1) **Importing** and **tidying** data, also known as wrangling data
 - (2) Understand your data with an iterative cycle of **transforming, visualizing, and modeling** 
-- (3) **Communicate** your results to other humans
+- (3) **Communicating** your results to other humans
 
-**Program:** Programming aids the entire process by unlocking things that wouldn't be possible to determine by hand.
+**Programming:** Programming aids the entire process by allowing you to automate common tasks and solve new problems with greater ease.
 
 ## Wrangle the data
 
-- **Import:** Get a data from a file, database, or web app into R.
-- **Tidy:** Make sure each (1) *column* in your data is a *variable* and (2) each *row* in your data is an *observeration.*
-- **Transform:** Filter your data to specific observations, mutate existing columns into new columns, and summarize data.
+Importing, tidying and transforming your data are called ***wrangling*** because getting your data in a form that’s natural to work with often feels like a fight.
 
-## Understand the data
-- **Visualize:** Visualization is an important component of data exploration, but usually isn't very useful for automated processes.
+- **Import:** Get data from a file, database, or web app into R. If you can’t get your data into R, you can’t do data science on it!
+
+- **Tidy:** Tidy data is important because the consistent structure lets you focus your efforts on answering questions about the data, not fighting to get the data into the right form for different functions. Ideally each (1) *column* in your data is a *variable* and (2) each *row* in your data is an *observeration.*
+
+- **Transform:** This comprises of narrowing in on observations of interest (e.g. filter), creating new variables that are functions of existing variables (e.g. mutate), and calculating a set of summary statistics (e.g. summarize).
+
+## Understand & communitcate the data
+- **Visualize:** A good visualization will show you things you did not expect or raise new questions about the data, or it might also hint that you’re asking the wrong question and need to collect different data. 
   - The [ggplot2 book](http://ggplot2-book.org/) provides more in depth details than are covered in this book.
 
-- **Model:** Once you know what you're asking, you can use a model to answer those questions. Models tend to scale well.
+- **Model:** A complementary tools to visualization, once you know what you're asking, you can use a model to answer those questions. 
 
-  - [Tidy Modelling with R](https://www.tmwr.org/) by Max Kuhn and Julia Silge, and the [`tidymodels`](https://www.tidymodels.org/) package are useful resources to learn more about modelling.
-
-## Communicate the data
-
-- **Communicate:** Communication is a critical part of data science! It doesn't matter how good your models are if nobody knows about them.
+- **Communicate:** Communication is a critical part of data science. It doesn't matter how good your models are if nobody knows about them.
 
   - ***Note:*** The second edition of this book will focus on [Quarto](https://quarto.org/) in the "Communicate" section of the book rather than [RMarkdown](https://quarto.org/) as in the first edition.
   
@@ -49,34 +46,38 @@ The steps of the data science process are:
 
 ## The order of content in this book
 
-- Import & Tidy are boring, so we jump to *Visualization & Transformation.*
+- *Import* & *Tidy* are boring, so we jump to *Visualization* & *Transformation*.
 - After that we learn to wrangle (import & tidy) data, because that is a necessary skill.
-- Those baseline skills enables us to start Programming. Learning to program helps us simplify the other steps.
-- We might then get into Modeling and Communicating, or we might pick those up in books that are more specifically devoted to those skills.
+- Those baseline skills enables us to start *Programming*. Learning to program helps us simplify the other steps.
+- Each chapter start with some motivating examples so you can see the bigger picture, and then dive into the details
+- Each section of the book is paired with exercises to help you practice what you’ve learned. **Practice makes progress!**
 
 ## Not covered by this book
 
-- **Big data:** Working with big data is problem-specific. If you need to work with big data, other tools will be useful to learn.
-- **Other programming languages:**, i.e. Python, Julia, etc. This book focuses on R. Master one tool at a time, but maybe go on to other tools later.
-- **Non-rectangular data:** Honestly even a lot of things that aren't naturally table-like can be coerced to be table-like, so it makes sense to start with tables.
-- **Hypothesis confirmation:** This book focuses on exploratory data analysis.
+- **Modelling:** Modeling is super important for data science, but it’s too big a topic to cover in this book.
+  - [Tidy Modelling with R](https://www.tmwr.org/) by Max Kuhn and Julia Silge, and the [`tidymodels`](https://www.tidymodels.org/) package are useful resources to learn more about modelling.
 
-## Setting up an environment
+- **Big data:** Working with big data is problem-specific. If you need to work with big data, other tools will be useful to learn.
+
+- **Other programming languages:**, i.e. Python, Julia, etc. This book focuses on R. Master one tool at a time, but maybe go on to other tools later.
+
+
+## Prerequisites
 
 We'll need:
 
-- [**R**](https://cran.r-project.org/)
+- Numeric literacy and basic programming skills.
+  - [Hands on Programming with R](https://rstudio-education.github.io/hopr/) by Garrett Grolemund is a useful corequisite for this book.
+- **R:**(https://cran.r-project.org/) To download R, go to [CRAN](https://cloud.r-project.org), the **c**omprehensive **R** **a**rchive **n**etwork 
 
 
-- [**Rstudio**](https://posit.co/download/rstudio-desktop/)
+- [**Rstudio,**](https://posit.co/download/rstudio-desktop/) an integrated development environment, or IDE, for R programming
   - Here's a useful [cheat sheet](https://rstudio.github.io/cheatsheets/html/rstudio-ide.html) for the RStudio IDE
 
 
 - The [**tidyverse**](https://tidyverse.tidyverse.org/), a collection of functions, data, and documentation that share a common philosophy of data and R programming, and are designed to work together to extend the capabilities of base R
 
-  - `install.packages("tidyverse")` loads nine packages ([`dplyr`](https://dplyr.tidyverse.org/), [`forcats`](https://forcats.tidyverse.org/), [`ggplot2`](https://ggplot2.tidyverse.org/), [`lubridate`](https://github.com/tidyverse/lubridate), [`purrr`](https://purrr.tidyverse.org/), [`readr`](https://readr.tidyverse.org/), [`stringr`](https://stringr.tidyverse.org/), [`tibble`](https://tibble.tidyverse.org/), [`tidyr`](https://tidyr.tidyverse.org/)) that are considered the core of the tidyverse
-
-  - 
+  - `install.packages("tidyverse")` loads nine packages ([`dplyr`](https://dplyr.tidyverse.org/), [`forcats`](https://forcats.tidyverse.org/), [`ggplot2`](https://ggplot2.tidyverse.org/), [`lubridate`](https://github.com/tidyverse/lubridate), [`purrr`](https://purrr.tidyverse.org/), [`readr`](https://readr.tidyverse.org/), [`stringr`](https://stringr.tidyverse.org/), [`tibble`](https://tibble.tidyverse.org/), [`tidyr`](https://tidyr.tidyverse.org/)), which are considered the core packages of the tidyverse
 
 
 - **Additional packages** which provide interesting datasets
@@ -87,12 +88,12 @@ We'll need:
     "repurrrsive", "tidymodels", "writexl")
   )`
 
-## Running R code in your console
+## Conventions within the book
 
 
-The best way to learn R from this book is to run the code yourself. The code in the book has some slight differences from the code output you may see in your console.
+- The code in the book has some slight differences from the code output you may see in your console.
 
-- `#>`: In the book, **`#`** is used in front of the *prompt*, **`>`**, and the code following it to **comment out** the code. 
+  - `#>`: In the book, **`#`** is used in front of the *prompt*, **`>`**, and the code following it to **comment out** the code. 
 
 
 ```{r eval=FALSE}
@@ -100,26 +101,26 @@ The best way to learn R from this book is to run the code yourself. The code in 
 #> [1] 3
 ```
 
-- This allows you to copy and past code from the book into your console and run it without errors.
-
-## Conventions to refer to code
-
-The book uses a consistent set of conventions to refer to code:
-
-- Functions are displayed in a code font and followed by parentheses, like `sum()` or `mean()`.
-
-- Other R objects (such as data or function arguments) are in a code font, without parentheses, like `flights` or `x`.
-
-- To clarify which package an object comes from, we’ll sometimes use the package name followed by two colons, like `dplyr::mutate()` instead of just `mutate()`. 
+  - This allows you to copy and past code from the book into your console and run it without errors.
 
 
+- The book uses a consistent set of conventions to refer to code:
 
-## Resources for getting help
+  - Functions are displayed in a code font and followed by parentheses, like `sum()` or `mean()`.
+
+  - Other R objects (such as data or function arguments) are in a code font, without parentheses, like `flights` or `x`.
+
+  - To clarify which package an object comes from, we’ll sometimes use the package name followed by two colons, like `dplyr::mutate()` instead of just `mutate()`. 
+
+
+
+## Bonus: Resources for getting help
 
 - **Pay attention to error messages.** 
   - Tidyverse error messages can be helpful in debugging, but if you can't figure out what an error is on your own, copy/paste it into Google.
-- **Stackoverflow.com** *can* be helpful, but beware.
+  - **Stackoverflow.com** *can* also be helpful, but beware.
 - The [**R4DS Online Learning Community**](r4ds.io/join) is a friendly Slack community with volunteer R tutors.
+  - Navigate to [r4ds.io/join](r4ds.io/join) to request acces to the Slack Workspace.
 - When you ask for help, make a [**reprex**](https://reprex.tidyverse.org/) if possible.
   - State up front what *packages* you use (we'll learn about loading packages very soon).
   - Provide (a subset of) any data you use with [`dput()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/dput).
