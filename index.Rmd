@@ -14,7 +14,7 @@ description: "This is the product of the R4DS Online Learning Community's Book C
 # Welcome {-}
 
 This is a companion for the book [R for Data Science](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund.
-This companion is available at [r4ds.io/r4ds](r4ds.io/r4ds).
+This companion is available at [r4ds.io/r4ds](https://r4ds.io/r4ds).
 
 This website is being developed by the [R4DS Online Learning Community](https://rfordatasci.com). Follow along, and [join the community](https://r4ds.io/join) to participate.
 
