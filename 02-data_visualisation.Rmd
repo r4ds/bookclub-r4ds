@@ -604,12 +604,19 @@ In addition it is possible to subset data inside the `ggplot()` function or insi
 
 ### Cohort 8
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/RRxtbv5QCA4")`
 
 <details>
 <summary> Meeting chat log </summary>
 
 ```
-LOG
+00:11:18	shamsuddeen:	https://www.youtube.com/playlist?list=PL3x6DOfs2NGhS_PhklqT6PwK1Fh7blgP2
+00:12:09	Mary Emeraghi:	Hello everyone
+00:13:16	Mary Emeraghi:	Hello Shamsuddeen. Please kindly share the link to the GitHub note page
+00:13:41	shamsuddeen:	https://happygitwithr.com/
+00:13:48	shamsuddeen:	https://www.youtube.com/playlist?list=PL3x6DOfs2NGhS_PhklqT6PwK1Fh7blgP2
+00:14:22	shamsuddeen:	https://r4ds.github.io/bookclub-r4ds/
+01:24:50	Bidemi Agbozuadu:	Thank you very much! Nice presentation
+01:25:32	shamsuddeen:	https://docs.google.com/spreadsheets/d/1reByMPb5Og3OHbRgplzV5Jkz_o6CkEYz_adBGfHTFwg/edit#gid=0
 ```
 </details>

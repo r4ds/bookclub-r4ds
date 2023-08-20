@@ -276,11 +276,6 @@ dbDisconnect(con, shutdown = TRUE)
 
 ### Cohort 8
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/ylTfwbQq1v0")`
 
-<details>
-  <summary> Meeting chat log </summary>
-```
-LOG
-```
-</details>
+`r knitr::include_url("https://www.youtube.com/embed/HnJ3ZY1seY4")`

@@ -212,12 +212,4 @@ We'll need:
 
 ### Cohort 8
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
-
-<details>
-<summary> Meeting chat log </summary>
-
-```
-LOG
-```
-</details>
+`r knitr::include_url("https://www.youtube.com/embed/KK7dJe9AoXs")`

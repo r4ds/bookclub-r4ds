@@ -436,11 +436,6 @@ A keyboard shortcut to create these headers is (Cmd/Ctrl + Shift + R)\
 
 ### Cohort 8
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/uEYKR3xs4Y0")`
 
-<details>
-  <summary> Meeting chat log </summary>
-```
-LOG
-```
-</details>
+`r knitr::include_url("https://www.youtube.com/embed/MvzrbyCuFLw")`

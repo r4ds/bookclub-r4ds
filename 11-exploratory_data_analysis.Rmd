@@ -229,12 +229,13 @@ ggplot(faithful) +
 
 ### Cohort 8
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/kWcA_ES2VtI")`
 
 <details>
 <summary> Meeting chat log </summary>
 
 ```
-LOG
+00:42:29	Ahmed:	https://www.causact.com/index.html#welcome
+00:42:54	Abdou:	Thanks!
 ```
 </details>

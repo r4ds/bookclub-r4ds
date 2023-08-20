@@ -474,12 +474,21 @@ See Chapter 20 for the part of the log that's relevant to that chapter.
 
 ### Cohort 8
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/10mBNkkLdo0")`
 
 <details>
 <summary> Meeting chat log </summary>
 
 ```
-LOG
+00:10:01	Abdou:	Hi everyone
+00:10:12	Shamsuddeen Hassan Muhammad:	hello
+00:10:31	Shamsuddeen Hassan Muhammad:	Ahmad can hear me
+00:10:37	Shamsuddeen Hassan Muhammad:	Abdul we can hear you
+00:10:46	Abdou:	No
+00:10:54	Shamsuddeen Hassan Muhammad:	Can u hear me Abduol?
+00:11:07	Abdou:	No I can’t
+00:11:12	Shamsuddeen Hassan Muhammad:	Re-join
+00:14:21	Ahmed Mamdouh:	Start
+00:47:09	Abdou:	Stop
 ```
 </details>

@@ -650,12 +650,13 @@ Thanks Shannon for the wonderful presentation!
 
 ### Cohort 8
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/AiIZ0U6zMvU")`
 
 <details>
 <summary> Meeting chat log </summary>
 
 ```
-LOG
+00:27:26	shamsuddeen: https://github.com/rstudio/cheatsheets/blob/main/strings.pdf
+00:27:37	Abdou: Thanks!
 ```
 </details>

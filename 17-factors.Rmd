@@ -306,12 +306,16 @@ gss_cat |>
 
 ### Cohort 8
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/PeJICZRmwvI")`
 
 <details>
 <summary> Meeting chat log </summary>
 
 ```
-LOG
+00:39:21	shamsuddeen:	https://forcats.tidyverse.org/reference/fct_lump.html
+00:39:43	Abdou:	Sometimes you just want to lump together the small groups to make a plot or table simpler
+00:39:52	shamsuddeen:	yes
+00:39:55	shamsuddeen:	exactly
+00:40:50	Abdou:	Reacted to "https://forcats.tidy..." with 👍
 ```
 </details>

@@ -1052,12 +1052,14 @@ function (x, width = NULL, max.level = 3, ...)
 
 ### Cohort 8
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/KXTa8_58ITQ")`
 
 <details>
 <summary> Meeting chat log </summary>
 
 ```
-LOG
+00:12:58	shamsuddeen: https://r4ds.github.io/bookclub-r4ds/escapes.html
+00:25:53	shamsuddeen: https://dplyr.tidyverse.org/reference/distinct.html
+00:29:23	Ahmed: https://dplyr.tidyverse.org/reference/n_distinct.html?q=n_distinct#null
 ```
 </details>
