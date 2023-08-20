@@ -257,14 +257,22 @@ dbDisconnect(con, shutdown = TRUE)
 
 ### Cohort 7
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/0AWywckm3W4")`
 
 <details>
   <summary> Meeting chat log </summary>
 ```
-LOG
+00:09:36	Oluwafemi Oyedele:	Hi Tim, Good Evening!!!
+00:10:59	Tim Newby:	Hi Oluwafemi :-)
+00:14:10	Oluwafemi Oyedele:	start
+00:48:43	Oluwafemi Oyedele:	https://dbplyr.tidyverse.org/reference/
+00:48:58	Oluwafemi Oyedele:	https://dbplyr.tidyverse.org/articles/dbplyr.html
+00:56:01	Oluwafemi Oyedele:	https://sqlfordatascientists.com/
+00:56:09	Oluwafemi Oyedele:	https://www.practicalsql.com/
+00:57:28	Oluwafemi Oyedele:	stop
 ```
 </details>
+
 
 ### Cohort 8
 

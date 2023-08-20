@@ -353,3 +353,21 @@ band_members %>% right_join(band_instruments)
 LOG
 ```
 </details>
+
+
+### Cohort 7
+
+`r knitr::include_url("https://www.youtube.com/embed/BWk9H1yrB7o")`
+
+
+### Cohort 8
+
+`r knitr::include_url("https://www.youtube.com/embed/URL")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+LOG
+```
+</details>

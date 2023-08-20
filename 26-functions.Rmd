@@ -451,3 +451,35 @@ See Chapter 20 for the part of the log that's relevant to that chapter.
 00:44:24	Daniel:	Hello all, please remember we need volunteers for next week's class: Vectors
 ```
 </details>
+
+
+### Cohort 7
+
+`r knitr::include_url("https://www.youtube.com/embed/c5FtLt0bGRs")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:15:05	Oluwafemi Oyedele:	start
+00:58:23	Oluwafemi Oyedele:	https://dplyr.tidyverse.org/articles/programming.html
+00:58:37	Oluwafemi Oyedele:	https://tidyr.tidyverse.org/articles/programming.html
+00:58:47	Oluwafemi Oyedele:	https://rlang.r-lib.org/reference/topic-data-mask.html
+00:58:54	Oluwafemi Oyedele:	https://ggplot2-book.org/programming.html
+00:59:01	Oluwafemi Oyedele:	https://style.tidyverse.org/functions.html
+00:59:43	Oluwafemi Oyedele:	stop
+```
+</details>
+
+
+### Cohort 8
+
+`r knitr::include_url("https://www.youtube.com/embed/URL")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+LOG
+```
+</details>

@@ -297,3 +297,21 @@ gss_cat |>
     01:02:40    Daniel Adereti: Bye!
 
 </details>
+
+
+### Cohort 7
+
+`r knitr::include_url("https://www.youtube.com/embed/KUTSJFGy3kY")`
+
+
+### Cohort 8
+
+`r knitr::include_url("https://www.youtube.com/embed/URL")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+LOG
+```
+</details>

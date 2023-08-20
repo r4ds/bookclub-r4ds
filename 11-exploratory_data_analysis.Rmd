@@ -220,3 +220,21 @@ ggplot(faithful) +
 01:06:44	Maria Eleni Soilemezidi:	bye everyone, see you next week!
 ```
 </details>
+
+
+### Cohort 7
+
+`r knitr::include_url("https://www.youtube.com/embed/F-vr9yl_hmQ")`
+
+
+### Cohort 8
+
+`r knitr::include_url("https://www.youtube.com/embed/URL")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+LOG
+```
+</details>

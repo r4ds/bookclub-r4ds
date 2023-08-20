@@ -585,3 +585,31 @@ In addition it is possible to subset data inside the `ggplot()` function or insi
 01:12:52	Matthew Efoli:	bye
 ```
 </details>
+
+
+### Cohort 7
+
+`r knitr::include_url("https://www.youtube.com/embed/eqQJ5tmEGco")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:08:24	Oluwafemi Oyedele:	Let wait for about 5 minute for others to join
+01:02:00	Aditi S:	Thank you! I have to leave now but hope to join again next week.
+01:05:04	Oluwafemi Oyedele:	geom_jitter is very useful if you want to avoid over-plotting
+```
+</details>
+
+
+### Cohort 8
+
+`r knitr::include_url("https://www.youtube.com/embed/URL")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+LOG
+```
+</details>

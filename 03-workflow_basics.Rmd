@@ -192,3 +192,29 @@ Explore on your own:
 01:22:41	Becki R. (she/her):	Thanks everyone! I will not be here next week.
 ```
 </details>
+
+
+### Cohort 7
+
+`r knitr::include_url("https://www.youtube.com/embed/JDOQDfpYBmY")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:29:38	Dolleen Osundwa:	is a tibble similar to the table () function?
+```
+</details>
+
+
+### Cohort 8
+
+`r knitr::include_url("https://www.youtube.com/embed/URL")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+LOG
+```
+</details>

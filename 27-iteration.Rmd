@@ -227,3 +227,34 @@ mtcars %>%
 00:58:28	Adeyemi Olusola:	olusolaadeyemi.ao@gmail.com
 ```
 </details>
+
+
+### Cohort 7
+
+`r knitr::include_url("https://www.youtube.com/embed/vPEgWgs0q7s")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:06:31	Oluwafemi Oyedele:	Hi Tim!!!
+00:06:47	Tim Newby:	Hi Oluwafemi,  can you here me?
+00:06:48	Oluwafemi Oyedele:	We will start in 6 minutes time!!!
+00:13:26	Oluwafemi Oyedele:	start
+00:56:02	Oluwafemi Oyedele:	https://adv-r.hadley.nz/functionals.html
+00:56:25	Oluwafemi Oyedele:	stop
+```
+</details>
+
+
+### Cohort 8
+
+`r knitr::include_url("https://www.youtube.com/embed/URL")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+LOG
+```
+</details>

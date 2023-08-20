@@ -188,3 +188,36 @@ We'll need:
 00:40:28	Marielena Soilemezidi:	have a great day you all! :)
 ```
 </details>
+
+
+### Cohort 7
+
+`r knitr::include_url("https://www.youtube.com/embed/wBH7pqql_uU")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:09:07	Oluwafemi Oyedele:	We will start in 2 minute time
+00:14:02	Lucio:	yes
+00:20:48	timnewby:	Hi - my microphone isn’t working.  I’m Tim from Wales.  I have a degree in Chemistry (UK) recently started a new job as Business Information Developer.  Keen to learn more about R
+00:40:56	Betsy Muriithi:	yes
+00:43:31	Lucio:	no question. all good
+00:43:51	Dolleen Osundwa:	no question at the moment
+00:43:54	Lucio:	please proceed
+01:02:15	Lucio:	thank you!!
+```
+</details>
+
+
+### Cohort 8
+
+`r knitr::include_url("https://www.youtube.com/embed/URL")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+LOG
+```
+</details>

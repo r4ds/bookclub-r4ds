@@ -341,14 +341,8 @@ Microsoft Excel and Google Sheets are two of the most popular spreadsheet system
 
 ### Cohort 7
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/1OeA2Ogi5is")`
 
-<details>
-  <summary> Meeting chat log </summary>
-```
-LOG
-```
-</details>
 
 ### Cohort 8
 

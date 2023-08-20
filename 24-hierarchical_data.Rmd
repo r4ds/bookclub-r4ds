@@ -14,12 +14,20 @@
 
 ### Cohort 7
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/5t0xD2XsKYM")`
 
 <details>
   <summary> Meeting chat log </summary>
 ```
-LOG
+00:04:06	Oluwafemi Oyedele:	Hi Tim, Good Evening!!!
+00:04:46	Tim Newby:	Good evening - I’m struggling with a new webcam so not sure if sound/video will be working for me tonight!
+00:04:49	Oluwafemi Oyedele:	Let us wait a few minute for others to join!!!
+00:05:08	Oluwafemi Oyedele:	No problem!!!
+00:05:22	Oluwafemi Oyedele:	You can use the chat!!!
+00:11:49	Oluwafemi Oyedele:	start
+00:21:08	Oluwafemi Oyedele:	https://tidyr.tidyverse.org/reference/unnest_wider.html
+00:21:21	Oluwafemi Oyedele:	https://tidyr.tidyverse.org/reference/unnest_longer.html
+00:52:48	Oluwafemi Oyedele:	stop
 ```
 </details>
 

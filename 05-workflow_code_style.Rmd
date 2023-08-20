@@ -416,14 +416,23 @@ A keyboard shortcut to create these headers is (Cmd/Ctrl + Shift + R)\
 
 ### Cohort 7
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/wlYh2KewQcI")`
 
 <details>
   <summary> Meeting chat log </summary>
 ```
-LOG
+00:21:34	Oluwafemi Oyedele:	https://towardsdatascience.com/understanding-the-native-r-pipe-98dea6d8b61b
+00:22:15	Christine (she/her):	Thanks, Oluwafemi!
+00:22:51	Oluwafemi Oyedele:	https://stackoverflow.com/questions/67633022/what-are-the-differences-between-rs-new-native-pipe-and-the-magrittr-pipe
+00:37:22	Oluwafemi Oyedele:	https://github.com/daranzolin/ViewPipeSteps
+00:49:42	timnewby:	https://towardsdatascience.com/an-introduction-to-the-pipe-in-r-823090760d64 Talks a bit about when pipes work well and when they might not
+00:50:13	Oluwafemi Oyedele:	http://127.0.0.1:22120/session/Rvig.11e05a207606.html
+01:03:47	Dolleen Osundwa:	thank you Kumar
 ```
 </details>
+
+`r knitr::include_url("https://www.youtube.com/embed/LHYUEAXaYoM")`
+
 
 ### Cohort 8
 

@@ -81,3 +81,33 @@ https://exts.ggplot2.tidyverse.org/gallery/
 01:10:02	Marielena Soilemezidi:	https://quarto.org/
 ```
 </details>
+
+
+### Cohort 7
+
+`r knitr::include_url("https://www.youtube.com/embed/vkjYlBK9-9c")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:08:34	Oluwafemi Oyedele:	We will start in 5 minute time!!!
+00:14:37	Oluwafemi Oyedele:	start
+00:52:30	Oluwafemi Oyedele:	https://github.com/quarto-dev/quarto-cli/tree/main/src/resources/formats/revealjs/themes
+01:09:33	Oluwafemi Oyedele:	https://quarto.org/docs/journals/templates.html
+01:10:52	Oluwafemi Oyedele:	stop
+```
+</details>
+
+
+### Cohort 8
+
+`r knitr::include_url("https://www.youtube.com/embed/URL")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+LOG
+```
+</details>

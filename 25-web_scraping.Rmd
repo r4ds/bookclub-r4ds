@@ -14,14 +14,22 @@
 
 ### Cohort 7
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/G5_pr9HxbT4")`
 
 <details>
   <summary> Meeting chat log </summary>
 ```
-LOG
+00:04:47	Oluwafemi Oyedele:	Hi Tim!!!
+00:05:27	Tim Newby:	Hi Oluwafemi - can you hear me?
+00:05:37	Oluwafemi Oyedele:	Yes
+00:11:53	Oluwafemi Oyedele:	start
+00:33:49	Oluwafemi Oyedele:	https://rvest.tidyverse.org/articles/selectorgadget.html
+00:40:24	Oluwafemi Oyedele:	stop
 ```
 </details>
+
+`r knitr::include_url("https://www.youtube.com/embed/HnJ3ZY1seY4")`
+
 
 ### Cohort 8
 

@@ -106,3 +106,29 @@
 01:13:16	Folashade Bayode:	Thank you
 ```
 </details>
+
+
+### Cohort 7
+
+`r knitr::include_url("https://www.youtube.com/embed/2zHJ9v8Or9Y")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:54:04	Betsy Muriithi:	Sorry for joining so late; I got the dates mixed up.. I though I was doing my presentation next Monday 😔
+```
+</details>
+
+
+### Cohort 8
+
+`r knitr::include_url("https://www.youtube.com/embed/URL")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+LOG
+```
+</details>

@@ -14,12 +14,21 @@
 
 ### Cohort 7
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/qsgZAgmmpt4")`
 
 <details>
   <summary> Meeting chat log </summary>
 ```
-LOG
+00:06:25	Oluwafemi Oyedele:	Hi Tim, Good Evening!!!
+00:06:41	Tim Newby:	Hi Oluwafemi
+00:07:10	Oluwafemi Oyedele:	We will start the meeting in 5 minute time!!!
+00:08:15	Tim Newby:	Reacted to "We will start the me..." with 👍
+00:11:45	Oluwafemi Oyedele:	https://github.com/hadley/r4ds/issues/1374
+00:12:27	Oluwafemi Oyedele:	start
+00:13:56	Oluwafemi Oyedele:	https://parquet.apache.org/
+00:14:53	Oluwafemi Oyedele:	https://data.seattle.gov/Community/Checkouts-by-Title/tmmm-ytt6
+00:28:35	Oluwafemi Oyedele:	https://data.seattle.gov/Community/Checkouts-by-Title/tmmm-ytt6
+00:40:49	Oluwafemi Oyedele:	stop
 ```
 </details>
 

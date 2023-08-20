@@ -14,12 +14,13 @@
 
 ### Cohort 7
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/kmc54BI9GTg")`
 
 <details>
   <summary> Meeting chat log </summary>
 ```
-LOG
+00:27:53	Oluwafemi Oyedele:	https://www.youtube.com/watch?v=5gqksthQ0cM
+00:43:48	Oluwafemi Oyedele:	#TidyTuesday
 ```
 </details>
 

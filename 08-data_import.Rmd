@@ -140,3 +140,38 @@ is     fixed  width
 01:07:59	Adeyemi Olusola:	Thank you
 ```
 </details>
+
+
+### Cohort 7
+
+`r knitr::include_url("https://www.youtube.com/embed/hb7eSpCMGDU")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:06:17	Oluwafemi Oyedele:	Let us give others some time to join !!!
+00:08:02	Olukunle Bashir:	alright
+00:18:27	Oluwafemi Oyedele:	read_csv function is from readr package
+00:18:59	Christine (she/her):	do you need to load the package first?
+00:19:25	Oluwafemi Oyedele:	yes @Christine
+00:20:01	Oluwafemi Oyedele:	https://readr.tidyverse.org
+00:28:16	Christine (she/her):	Thanks!
+00:29:05	Oluwafemi Oyedele:	https://jrnold.github.io/r4ds-exercise-solutions/data-import.html
+00:34:57	Dolleen Osundwa:	Thanks for this.
+00:47:39	Olukunle Bashir:	thank you for the presentation
+```
+</details>
+
+
+### Cohort 8
+
+`r knitr::include_url("https://www.youtube.com/embed/URL")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+LOG
+```
+</details>

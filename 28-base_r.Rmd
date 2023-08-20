@@ -15,28 +15,34 @@ Slide contents.
 
 ## Meeting Videos
 
-<!--
+
+
 ### Cohort 7
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/0v3qdKUc7n8")`
 
 <details>
-  <summary> Meeting chat log </summary>  
+<summary> Meeting chat log </summary>
+
 ```
-LOG
+00:01:16	Oluwafemi Oyedele:	Sorry for joining late
+00:01:32	Oluwafemi Oyedele:	We will start in 7 minute time!!!
+00:01:42	Tim Newby:	Hi Oluwafemi - no problem :-)
+00:09:27	Oluwafemi Oyedele:	start
+00:12:54	Oluwafemi Oyedele:	this is nice!!!
+00:55:22	Oluwafemi Oyedele:	stop
 ```
 </details>
--->
 
-<!--
+
 ### Cohort 8
 
 `r knitr::include_url("https://www.youtube.com/embed/URL")`
 
 <details>
-  <summary> Meeting chat log </summary>  
+<summary> Meeting chat log </summary>
+
 ```
 LOG
 ```
 </details>
--->
