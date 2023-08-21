@@ -451,3 +451,44 @@ See Chapter 20 for the part of the log that's relevant to that chapter.
 00:44:24	Daniel:	Hello all, please remember we need volunteers for next week's class: Vectors
 ```
 </details>
+
+
+### Cohort 7
+
+`r knitr::include_url("https://www.youtube.com/embed/c5FtLt0bGRs")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:15:05	Oluwafemi Oyedele:	start
+00:58:23	Oluwafemi Oyedele:	https://dplyr.tidyverse.org/articles/programming.html
+00:58:37	Oluwafemi Oyedele:	https://tidyr.tidyverse.org/articles/programming.html
+00:58:47	Oluwafemi Oyedele:	https://rlang.r-lib.org/reference/topic-data-mask.html
+00:58:54	Oluwafemi Oyedele:	https://ggplot2-book.org/programming.html
+00:59:01	Oluwafemi Oyedele:	https://style.tidyverse.org/functions.html
+00:59:43	Oluwafemi Oyedele:	stop
+```
+</details>
+
+
+### Cohort 8
+
+`r knitr::include_url("https://www.youtube.com/embed/10mBNkkLdo0")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:10:01	Abdou:	Hi everyone
+00:10:12	Shamsuddeen Hassan Muhammad:	hello
+00:10:31	Shamsuddeen Hassan Muhammad:	Ahmad can hear me
+00:10:37	Shamsuddeen Hassan Muhammad:	Abdul we can hear you
+00:10:46	Abdou:	No
+00:10:54	Shamsuddeen Hassan Muhammad:	Can u hear me Abduol?
+00:11:07	Abdou:	No I can’t
+00:11:12	Shamsuddeen Hassan Muhammad:	Re-join
+00:14:21	Ahmed Mamdouh:	Start
+00:47:09	Abdou:	Stop
+```
+</details>

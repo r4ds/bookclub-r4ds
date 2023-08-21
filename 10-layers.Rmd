@@ -391,3 +391,30 @@ bar + coord_polar()
 01:06:44	Maria Eleni Soilemezidi:	bye everyone, see you next week!
 ```
 </details>
+
+
+### Cohort 7
+
+`r knitr::include_url("https://www.youtube.com/embed/UW8cfioTAVc")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:10:31	Oluwafemi Oyedele:	We will start the discussion in the next 5 minutes!!!
+00:18:34	Tim Newby:	Hi the audio is still bad at my end, can anyone else hear?
+00:57:01	Oluwafemi Oyedele:	https://exts.ggplot2.tidyverse.org/gallery/
+01:19:03	Oluwafemi Oyedele:	https://ggplot2-book.org/maps.html
+01:23:07	Oluwafemi Oyedele:	https://ggplot2.tidyverse.org/
+01:24:34	Tim Newby:	diamonds |> 
+  group_by(cut) |> 
+  mutate(y = median(depth), ymin = min(depth), ymax = max(depth)) |> 
+ggplot() +
+  geom_pointrange(aes(x = cut, y = y, ymin = ymin, ymax = ymax))
+```
+</details>
+
+
+### Cohort 8
+
+`r knitr::include_url("https://www.youtube.com/embed/cDO1JD_Qlkw")`

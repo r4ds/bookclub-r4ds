@@ -154,3 +154,25 @@
 00:49:45	Esmeralda Cruz:	ok
 ```
 </details>
+
+
+### Cohort 7
+
+`r knitr::include_url("https://www.youtube.com/embed/xrZdzkOC_Ts")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:36:35	Oluwafemi Oyedele:	It is CMD + Enter on Mac
+00:37:22	Oluwafemi Oyedele:	CMD + Enter will run the code on Mac
+00:53:06	Oluwafemi Oyedele:	https://rstats.wtf/project-oriented-workflow.html#dilemma-and-a-solution
+00:53:11	Oluwafemi Oyedele:	http://127.0.0.1:12193/library/here/doc/here.html
+00:53:58	Oluwafemi Oyedele:	https://www.tidyverse.org/blog/2017/12/workflow-vs-script/
+```
+</details>
+
+
+### Cohort 8
+
+`r knitr::include_url("https://www.youtube.com/embed/Tf1wyQojaQk")`

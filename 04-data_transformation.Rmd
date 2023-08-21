@@ -948,3 +948,33 @@ top_delay %>%
 00:59:45	Daniel Adereti:	Thank you!
 ```
 </details>
+
+
+### Cohort 7
+
+`r knitr::include_url("https://www.youtube.com/embed/LsU9XZ8iNws")`
+
+
+### Cohort 8
+
+`r knitr::include_url("https://www.youtube.com/embed/aJFrAAmTCVE")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:55:33	shamsuddeen:	https://r4ds.github.io/bookclub-r4ds/data-transformation.html
+01:09:35	shamsuddeen:	https://juliasilge.com
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/_NbdlBznxIE")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:50:43	shamsuddeen:	https://docs.google.com/spreadsheets/d/1reByMPb5Og3OHbRgplzV5Jkz_o6CkEYz_adBGfHTFwg/edit#gid=0
+00:51:50	shamsuddeen:	Ctrl + Shift + M
+```
+</details>

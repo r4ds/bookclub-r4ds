@@ -14,22 +14,9 @@
 
 ### Cohort 7
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/H9vdMIyEtfA")`
 
-<details>
-  <summary> Meeting chat log </summary>
-```
-LOG
-```
-</details>
 
 ### Cohort 8
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
-
-<details>
-  <summary> Meeting chat log </summary>
-```
-LOG
-```
-</details>
+`r knitr::include_url("https://www.youtube.com/embed/oL8fMJqBWVs")`

@@ -261,3 +261,13 @@ https://exts.ggplot2.tidyverse.org/gallery/
 01:10:02	Marielena Soilemezidi:	https://quarto.org/
 ```
 </details>
+
+
+### Cohort 7
+
+`r knitr::include_url("https://www.youtube.com/embed/fOA271r3MGo")`
+
+
+### Cohort 8
+
+`r knitr::include_url("https://www.youtube.com/embed/etTi7a_HJTc")`

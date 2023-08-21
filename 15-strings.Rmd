@@ -623,3 +623,40 @@ Thanks Shannon for the wonderful presentation!
 00:51:47	Marielena Soilemezidi:	weird!
 ```
 </details>
+
+
+### Cohort 7
+
+`r knitr::include_url("https://www.youtube.com/embed/NQq6EoCCsR0")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:16:35	Oluwafemi Oyedele:	https://github.com/rstudio/cheatsheets/blob/main/strings.pdf
+00:16:54	Oluwafemi Oyedele:	https://stringr.tidyverse.org/
+00:19:37	Olukunle Tunde:	no sir
+00:20:33	Oluwafemi Oyedele:	https://style.tidyverse.org/syntax.html#character-vectors
+00:33:16	Oluwafemi Oyedele:	https://glue.tidyverse.org/
+00:40:47	Oluwafemi Oyedele:	https://tidyr.tidyverse.org/reference/separate_longer_delim.html
+00:42:51	Oluwafemi Oyedele:	https://tidyr.tidyverse.org/reference/separate_longer_delim.html
+00:51:51	Oluwafemi Oyedele:	https://stringr.tidyverse.org/reference/str_length.html
+00:59:39	Oluwafemi Oyedele:	https://rdrr.io/r/base/rawConversion.html
+01:02:17	Oluwafemi Oyedele:	http://kunststube.net/encoding/
+01:06:49	Olukunle Bashir:	thank you very much oluwafemi. it's well understood
+```
+</details>
+
+
+### Cohort 8
+
+`r knitr::include_url("https://www.youtube.com/embed/AiIZ0U6zMvU")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:27:26	shamsuddeen: https://github.com/rstudio/cheatsheets/blob/main/strings.pdf
+00:27:37	Abdou: Thanks!
+```
+</details>

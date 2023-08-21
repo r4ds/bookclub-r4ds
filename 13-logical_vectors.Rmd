@@ -261,3 +261,13 @@ function (x, width = NULL, max.level = 3, ...)
 00:42:11	Daniel Adereti:	Unfortunately, we have a strict 18 mins to end the lessons, let's see where we end up. Thanks
 ```
 </details>
+
+
+### Cohort 7
+
+`r knitr::include_url("https://www.youtube.com/embed/crc1zcEKBWQ")`
+
+
+### Cohort 8
+
+`r knitr::include_url("https://www.youtube.com/embed/BNPvXGGcQMI")`

@@ -154,3 +154,13 @@ Intervals are way to do arithmetic with durations and periods? syntax???
 LOG
 ```
 </details>
+
+
+### Cohort 7
+
+`r knitr::include_url("https://www.youtube.com/embed/pGbCWFB4Rz4")`
+
+
+### Cohort 8
+
+`r knitr::include_url("https://www.youtube.com/embed/QXFhZjc9S0o")`

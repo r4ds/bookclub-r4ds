@@ -220,3 +220,22 @@ ggplot(faithful) +
 01:06:44	Maria Eleni Soilemezidi:	bye everyone, see you next week!
 ```
 </details>
+
+
+### Cohort 7
+
+`r knitr::include_url("https://www.youtube.com/embed/F-vr9yl_hmQ")`
+
+
+### Cohort 8
+
+`r knitr::include_url("https://www.youtube.com/embed/kWcA_ES2VtI")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:42:29	Ahmed:	https://www.causact.com/index.html#welcome
+00:42:54	Abdou:	Thanks!
+```
+</details>

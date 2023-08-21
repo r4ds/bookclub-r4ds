@@ -98,3 +98,44 @@ Slide contents.
 00:59:42	Marielena Soilemezidi:	http://rmarkdown.rstudio.com/developer_parameterized_reports.html#parameter_user_interfaces
 ```
 </details>
+
+
+### Cohort 7
+
+`r knitr::include_url("https://www.youtube.com/embed/J9UTG7zxelw")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:08:43	Tim Newby:	Hello Oluwafemi!
+00:09:47	Oluwafemi Oyedele:	start
+00:19:45	Oluwafemi Oyedele:	This is cool!!!
+00:37:04	Oluwafemi Oyedele:	https://rstudio-conf-2022.github.io/get-started-quarto/
+01:01:50	Oluwafemi Oyedele:	https://github.com/citation-style-language/styles
+01:01:57	Oluwafemi Oyedele:	stop
+```
+</details>
+
+
+### Cohort 8
+
+`r knitr::include_url("https://www.youtube.com/embed/7kW7DEWPVZ8")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:01:59	Shamsuddeen Muhammad:	start
+00:10:33	Ahmed Mamdouh:	Im here
+00:10:47	Ahmed Mamdouh:	The internet is so bad sorry
+00:12:18	Ahmed Mamdouh:	Oh interesting
+00:18:39	Ahmed Mamdouh:	It like packaging all dependencies
+00:25:58	Ahmed Mamdouh:	Renv is like venv in python
+00:29:57	Ahmed Mamdouh:	Yup
+00:31:32	Ahmed Mamdouh:	Awesome
+00:32:25	Shamsuddeen Muhammad:	stop
+00:32:27	Ahmed Mamdouh:	Thanks alot man
+00:32:50	Ahmed Mamdouh:	Bye
+```
+</details>

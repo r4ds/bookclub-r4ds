@@ -353,3 +353,24 @@ band_members %>% right_join(band_instruments)
 LOG
 ```
 </details>
+
+
+### Cohort 7
+
+`r knitr::include_url("https://www.youtube.com/embed/BWk9H1yrB7o")`
+
+
+### Cohort 8
+
+`r knitr::include_url("https://www.youtube.com/embed/O57XwU3Erus")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:09:40	shamsuddeen:	start
+01:04:02	shamsuddeen:	https://dplyr.tidyverse.org/reference/setops.html
+01:05:16	Abdou:	Reacted to "https://dplyr.tidyve..." with 👍
+01:06:07	shamsuddeen:	end
+```
+</details>

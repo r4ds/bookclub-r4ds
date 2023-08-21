@@ -192,3 +192,36 @@ Explore on your own:
 01:22:41	Becki R. (she/her):	Thanks everyone! I will not be here next week.
 ```
 </details>
+
+
+### Cohort 7
+
+`r knitr::include_url("https://www.youtube.com/embed/JDOQDfpYBmY")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:29:38	Dolleen Osundwa:	is a tibble similar to the table () function?
+```
+</details>
+
+
+### Cohort 8
+
+`r knitr::include_url("https://www.youtube.com/embed/FeSYfRx2esU")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:06:13	Shamsuddeen Muhammad:	book_club-py4da
+00:06:16	Shamsuddeen Muhammad:	#book_club-py4da
+00:08:47	Shamsuddeen Muhammad:	https://www.youtube.com/watch?v=8tq1C8spV_g
+00:09:03	Abdou Daffeh:	Hey everyone
+00:34:25	Abdou Daffeh:	sorry do you mean vscode?
+00:34:45	Hamza:	Yes he is using VSCode
+00:35:13	Abdou Daffeh:	thanks, I have to check it out
+00:41:22	Shamsuddeen Muhammad:	https://www.rscreencasts.com/content_pages/hbcu-enrollment.html
+```
+</details>

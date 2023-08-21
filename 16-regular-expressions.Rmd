@@ -1139,3 +1139,35 @@ Thanks Shannon for the wonderful presentation!
 00:51:47	Marielena Soilemezidi:	weird!
 ```
 </details>
+
+
+### Cohort 7
+
+`r knitr::include_url("https://www.youtube.com/embed/RFSURwQ0-eg")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:05:33	Oluwafemi Oyedele:	Good Evening All, we will start in two minute time!!!
+00:06:21	Olukunle Tunde:	Okay
+00:37:40	Oluwafemi Oyedele:	https://stringr.tidyverse.org/articles/regular-expressions.html
+00:47:09	Oluwafemi Oyedele:	https://github.com/gadenbuie/regexplain
+00:47:17	Oluwafemi Oyedele:	https://www.garrickadenbuie.com/project/regexplain/
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/5uuYHs3b_U8")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:29:46	Oluwafemi Oyedele: https://stringr.tidyverse.org/articles/regular-expressions.html
+```
+</details>
+
+
+### Cohort 8
+
+`r knitr::include_url("https://www.youtube.com/embed/wDVJ1zWGTzA")`

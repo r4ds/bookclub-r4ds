@@ -585,3 +585,38 @@ In addition it is possible to subset data inside the `ggplot()` function or insi
 01:12:52	Matthew Efoli:	bye
 ```
 </details>
+
+
+### Cohort 7
+
+`r knitr::include_url("https://www.youtube.com/embed/eqQJ5tmEGco")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:08:24	Oluwafemi Oyedele:	Let wait for about 5 minute for others to join
+01:02:00	Aditi S:	Thank you! I have to leave now but hope to join again next week.
+01:05:04	Oluwafemi Oyedele:	geom_jitter is very useful if you want to avoid over-plotting
+```
+</details>
+
+
+### Cohort 8
+
+`r knitr::include_url("https://www.youtube.com/embed/RRxtbv5QCA4")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:11:18	shamsuddeen:	https://www.youtube.com/playlist?list=PL3x6DOfs2NGhS_PhklqT6PwK1Fh7blgP2
+00:12:09	Mary Emeraghi:	Hello everyone
+00:13:16	Mary Emeraghi:	Hello Shamsuddeen. Please kindly share the link to the GitHub note page
+00:13:41	shamsuddeen:	https://happygitwithr.com/
+00:13:48	shamsuddeen:	https://www.youtube.com/playlist?list=PL3x6DOfs2NGhS_PhklqT6PwK1Fh7blgP2
+00:14:22	shamsuddeen:	https://r4ds.github.io/bookclub-r4ds/
+01:24:50	Bidemi Agbozuadu:	Thank you very much! Nice presentation
+01:25:32	shamsuddeen:	https://docs.google.com/spreadsheets/d/1reByMPb5Og3OHbRgplzV5Jkz_o6CkEYz_adBGfHTFwg/edit#gid=0
+```
+</details>
