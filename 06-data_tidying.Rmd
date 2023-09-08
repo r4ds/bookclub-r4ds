@@ -1,3 +1,8 @@
+```{r, include=F}
+library(tidyverse)
+```
+
+
 # Data tidying
 
 **Learning objectives:**
@@ -9,11 +14,199 @@
 - Combine functions to **tidy a dataset.**
 - Recognize reasons that **non-tidy data** might be preferred in some cases.
 
-## SLIDE TITLE
+## Introduction
+- Previous chapters taught you how to write clean, efficient code and play with the data
+- Here, we will learn about **tidy data**, a framework for organizing and working with data that the `tidyverse` packages follow
+- We will see the concept of tidy data in action using pivoting, for example.
 
-- ADD NEW SLIDES USING ##. 
-- TRY TO KEEP THE FEEL SLIDE-LIKE
-  - BULLETED LISTS, NOT PARAGRAPHS
+## Tidy data
+- Here are examples of tidy data:
+```{r}
+table1
+```
+```{r}
+table2
+```
+
+```{r}
+table3
+```
+
+The rules of **tidy data** are as follows:
+
+1. Each variable is a column; each column is a variable.
+2. Each observation is a row; each row is an observation.
+3. Each value is a cell; each cell is a single value.
+
+![](images\6-tidy-1.png)
+
+Having your data be tidy helps with:
+
+1. Having uniform consistency with storing data
+2. Works best with R's tendency to represent and work with data as vectors
+
+All `tidyverse` packages (i.e., `dplyr`, `ggplot2`, etc) work through using the tidy data framework. 
+```{r}
+# Compute rate per 10,000
+table1 |>
+  mutate(rate = cases / population * 10000)
+```
+
+```{r}
+# Compute total cases per year
+table1 |> 
+  group_by(year) |> 
+  summarize(total_cases = sum(cases))
+```
+
+```{r}
+# Visualize changes over time
+ggplot(table1, aes(x = year, y = cases)) +
+  geom_line(aes(group = country), color = "grey50") +
+  geom_point(aes(color = country, shape = country)) +
+  scale_x_continuous(breaks = c(1999, 2000)) # x-axis breaks at 1999 and 2000
+```
+
+- Note that despite the good examples of tidy data earlier, real data isn't always tidy (mostly due to lack of time or lack of knowledge of tidy data). 
+
+## Lengthening data
+- One way to help tidy data is the ability to **pivot** data into tidy form with variables being columns and observations being rows.
+- You can do so with the functions `pivot_longer()` and `pivot_wider()`.
+
+### Turning columns into row data
+- Looking at the `billboard` data set, we can see the columns `wk1`, `wk2`, etc. are billboard song rankings for each week in the year 2000.
+- We can use `pivot_longer()` to put data in the column names into a new column and the data in each of the pivoted columns to another new column.
+- Ex. the column names `wk1`, `wk2`, etc. are values in a new column called `week` and the corresponding values for `wk1`, `wk2`, etc go into a new column called `rank`.
+```{r}
+billboard
+```
+
+Here is the `billboard` data set after using the `pivot_longer()` function.
+```{r}
+billboard |> 
+  pivot_longer(
+    cols = starts_with("wk"), # which columns to pivot
+    names_to = "week", # new column to put column names in
+    values_to = "rank" # new column with pivoted columns' values
+  )
+```
+
+- Note that we have missing values for some rows as the data format mandates having data for multiple weeks (even if a song isn't in top 100 for that many weeks).
+- We can add the argument `values_drop_na = TRUE` to remove `NA`s in the data (an issue that we will explore more of in Chapter 19).
+```{r}
+billboard |> 
+  pivot_longer(
+    cols = starts_with("wk"), 
+    names_to = "week", 
+    values_to = "rank",
+    values_drop_na = TRUE
+  )
+```
+
+- To make the data easier to read, we can just extract the week numbers from the values of `week` with the `mutate()` function and `readr::parse_number()`.
+```{r}
+billboard_longer <- billboard |> 
+  pivot_longer(
+    cols = starts_with("wk"), 
+    names_to = "week", 
+    values_to = "rank",
+    values_drop_na = TRUE
+  ) |> 
+  mutate(
+    # get number from string
+    week = parse_number(week) 
+  )
+billboard_longer
+```
+
+- Let's see how the rank of songs change over time.
+```{r}
+billboard_longer |> 
+  ggplot(aes(x = week, y = rank, group = track)) + 
+  geom_line(alpha = 0.25) + 
+  scale_y_reverse()
+```
+
+- Here's a visual representation of how basic pivoting works:
+![](images\6-column-names.png)
+
+- Here, the pivoted column headers (i.e., `bp1`, `bp2`) in the table on the left become values in a new column named `measurement` in the table on the right.
+- The original values of `bp1` and `bp2` on the leftmost table are now stored in a column called `value` in the rightmost table.
+- Note how for instance, `A` repeats twice (one for each column being pivoted - `bp1` and `bp2`).
+
+### Having many variables in column names
+- Let's look at the WHO data on tuberculosis diagnoses under the name `who2`.
+```{r}
+who2
+```
+
+- Note for columns after the one called `year`, the column names have the format `diagnosis method_gender_age range` - a collection of column names separated by `_`.
+- You can pivot a column into multiple columns by having the column names for the chosen columns go to a vector of column names with the `names_to` argument.
+- You can specify the character separating the different column values with the argument `names_sep`.
+- Note that the order of the list of new columns names matter in relation to order of values in the names of the pivoted columns.
+
+```{r}
+who2 |> 
+  pivot_longer(
+    cols = !(country:year),
+    names_to = c("diagnosis", "gender", "age"), 
+    names_sep = "_",
+    values_to = "count"
+  )
+```
+
+- Here's a visual demonstration of what's happening when we pivot a column into two new columns in general.
+![](images\6-multiple-names.png)
+
+### What if the data and variable names are both column headers?
+- Consider the `household` data set.
+- Ex. column header `dob_child1` has the variable name `dob` (for date of birth - a value in the column) as well as `child1` (a value indicating which child the data is for).
+```{r}
+household
+```
+
+- We repeat the procedure we did for splitting one column header into many columns, but in a modified way.
+- Here, we still give a vector of new column names to `names_to`, but we have the special argument value `.value` (which tells `pivot_longer()` where to get the column values from to pass to the argument `values_to` automatically).
+- Ex. For column `dob_child1`, `.value` tells `pivot_longer()` to use the first string `dob` in the name  `dob_child1`  as the name of a new column holding data for `dob_child1`.
+- Then, `child1` (the second name in the column header `dob_child1`) is a value entered in a new column called `child`.
+```{r}
+household |> 
+  pivot_longer(
+    cols = !family, 
+    names_to = c(".value", "child"), 
+    names_sep = "_", 
+    values_drop_na = TRUE
+  )
+```
+
+- Here's a visual demonstration of how pivoting works in examples similar to the one above.
+![](images\6-names-and-values.png)
+
+## Widening data
+### The issue
+- Instead of adding more rows and reducing the number of columns (as it is with pivoting), we can widen data sets with the function `pivot_wider()` (i.e., more columns, less rows).
+- Consider the `cms_patient_experience` (a dataset on patient experiences in the Centers of Medicare and Medicaid services).
+```{r}
+cms_patient_experience
+```
+
+- The problem here is that data for each organization is stretched across multiple rows instead of contained on a single row for each organization.
+- Thus, we want it where each row contains data for one medical service provider instead of separate rows for different pieces of data for that same provider using the `pivot_wider()` function.
+
+### The solution
+- The way it works is for the function `pivot_wider()`, we first use the argument `id_cols` to specify which columns contain data we use to uniquely identify each row.
+- We then indicate with the argument `names_from` where the column names for the new columns will come from.
+- Finally, we use the argument `values_from` to select the column that contains the values for each of the new columns that will be labeled using the names from the argument `names_from`.
+- See the example below for details.
+```{r}
+cms_patient_experience |> 
+  pivot_wider(
+    id_cols = starts_with("org"),
+    names_from = measure_cd,
+    values_from = prf_rate
+  )
+```
+
 
 ## Meeting Videos
 
