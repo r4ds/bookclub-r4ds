@@ -38,7 +38,7 @@ The rules of **tidy data** are as follows:
 2. Each observation is a row; each row is an observation.
 3. Each value is a cell; each cell is a single value.
 
-![](images\6-tidy-1.png)
+![](images/6-tidy-1.png)
 
 Having your data be tidy helps with:
 
@@ -128,7 +128,7 @@ billboard_longer |>
 ```
 
 - Here's a visual representation of how basic pivoting works:
-![](images\6-column-names.png)
+![](images/6-column-names.png)
 
 - Here, the pivoted column headers (i.e., `bp1`, `bp2`) in the table on the left become values in a new column named `measurement` in the table on the right.
 - The original values of `bp1` and `bp2` on the leftmost table are now stored in a column called `value` in the rightmost table.
@@ -180,7 +180,7 @@ household |>
 ```
 
 - Here's a visual demonstration of how pivoting works in examples similar to the one above.
-![](images\6-names-and-values.png)
+![](images/6-names-and-values.png)
 
 ## Widening data
 ### The issue
