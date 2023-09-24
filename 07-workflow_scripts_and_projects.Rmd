@@ -8,11 +8,89 @@
 - Recognize the similarities and differences between **Windows paths and Mac/Linux paths.**
 - Create an **Rstudio project.**
 
-## SLIDE TITLE
+## Scripts
 
-- ADD NEW SLIDES USING ##. 
-- TRY TO KEEP THE FEEL SLIDE-LIKE
-  - BULLETED LISTS, NOT PARAGRAPHS
+- The keyboard shortcut: `Cmd/Ctrl+Shift+N`
+  - a place for experimenting your R code
+- Edit the script and re-run the code
+- Save it as a R code file: `yourfilename.R`
+
+:::{style="text-align:center;"}  
+![Figure 7.1: Opening the script editor adds a new pane at the top-left of the IDE](https://r4ds.hadley.nz/diagrams/rstudio/script.png)
+:::
+<br/>
+
+### Running Code
+- The keyboard shortcuts
+  - `Cmd/Ctrl+Enter` to run the complete command
+  - `Alt/Alt+Enter` to run the complete command and move the cursor to the next complete command code block
+  - `Cmd/Ctrl+Shift+S` to run the script
+- Tip: **Always start your script with the packages you need**
+
+
+### RStudio Dianostics
+
+:::{style="text-align:left;"}
+![](https://r4ds.hadley.nz/screenshots/rstudio-diagnostic-tip.png)
+:::
+<br/>
+
+:::{style="text-align:left;"}
+![](https://r4ds.hadley.nz/screenshots/rstudio-diagnostic-warn.png)
+:::
+
+
+### Saving and Naming
+1. File names should be **machine readable**
+    - avoid spaces, symbols, and special characters. Don’t rely on case sensitivity to distinguish files.
+2. File names should be **human readable**
+    - use file names to describe what’s in the file.
+3. File names should **play well with default ordering**
+    - start file names with numbers so that alphabetical sorting puts them in the order they get used.
+
+[More File Naming Conventions](https://huridocs.org/resource-library/organising-a-collection-of-human-rights-information/file-naming-conventions/#:~:text=To%20ensure%20that%20files%20are,%2C%20then%20month%2C%20then%20date.)
+
+
+## Projects   
+
+### What Is the Source of Truth?
+- Instruct RStudio not to preserve your workspace between sessions. 
+  - `usethis::use_blank_slate()`
+- `Cmd/Ctrl+Shift+0/F10` to start R
+- `Cmd/Ctrl+Shift+S` to rerun the R script
+
+### Where Does Your Analysis Live?
+- `getwd()` to identify the current working directory
+- `setwd()` to change the working directory (an absolute path) : **not recommended**
+
+### RStudio Projects
+![Figure 7.3: To create new project: (top) first click New Directory, then (middle) click New Project, then (bottom) fill in the directory (project) name, choose a good subdirectory for its home and click Create Project.](https://r4ds.hadley.nz/diagrams/new-project.png)
+
+### Relative and Absolute Paths
+- A relative path is relative to the working directory, i.e. the project’s home. 
+- Absolute paths point to the same place regardless of your working directory.
+  - Mac/Linux: a slash `/`
+    - `/Users/hadley/Documents/r4ds/data/diamonds.csv`
+  - Windows: two backlashes `\\`
+    - `\\Users\\hadley\\Documents\\r4ds\\data\\diamonds.csv`
+- You should **never use absolute paths in your scripts, because they hinder sharing.**
+
+```{r}
+library(tidyverse)
+
+ggplot(diamonds, aes(x = carat, y = price)) + 
+  geom_hex()
+ggsave("diamonds.png")
+
+write_csv(diamonds, "data/diamonds.csv")
+```
+
+
+### Exercise
+1. Go to the RStudio Tips Twitter account, https://twitter.com/rstudiotips and find one tip that looks interesting. Practice using it!
+
+2. What other common mistakes will RStudio diagnostics report? Read https://support.posit.co/hc/en-us/articles/205753617-Code-Diagnostics to find out.
+
 
 ## Meeting Videos
 
