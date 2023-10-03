@@ -2,13 +2,71 @@
 
 **Learning objectives:**
 
-- ADD ABOUT ONE THING PER SECTION DESCRIBING WHAT YOU LEARN IN THIS CHAPTER.
+- Describe a few tips beyond the book on how to get help and to help you keep learning.
 
-## SLIDE TITLE
+## Google
 
-- ADD NEW SLIDES USING ##. 
-- TRY TO KEEP THE FEEL SLIDE-LIKE
-  - BULLETED LISTS, NOT PARAGRAPHS
+- If you get an R error message and you have no idea what it means, chances are that someone else has been confused by it in the past, and there will be help somewhere on the web. 
+
+- Typically adding “R” to a Google query is enough to restrict it to relevant results, but if the search isn’t useful, try adding package names like “tidyverse” or “ggplot2” to narrow down the results
+
+  - e.g., “how to make a boxplot in R” vs. “how to make a boxplot in R with ggplot2”.
+
+  - If the error message isn’t in English, run `Sys.setenv(LANGUAGE = "en")` and re-run the code as you’re more likely to find help for English error messages.
+
+- If Google doesn’t help, try spending a little time searching [Stack Overflow](https://stackoverflow.com/) for an existing answer, including [R], to restrict your search to questions and answers that use R.
+
+## Reprex
+
+- If your googling doesn’t find anything useful, it’s a really good idea to prepare a **reprex**, short for minimal **repr**oducible **ex**ample. 
+
+-  A good reprex makes it easier for other people to help you, and often you’ll figure out the problem yourself in the course of making it. 
+
+- There are two parts to creating a reprex:
+  - *Make your code reproducible*: Capture everything, i.e. include any `library()` calls and create all necessary objects.
+  -  *Make your code minimal*. Strip away everything that is not directly related to your problem by creating a much smaller and simpler R object than the one you’re facing in real life or even using built-in data.
+
+- Creating a reprex may sound like a lot of work, but it has a great payoff:
+
+  - Creating an excellent reprex often reveals the source of your problem and may allow you to answer your own question.
+
+  - You'll capture the essence of your problem in a way that is easy for others to play with which improves your chances of getting help.
+
+- The easiest way to avoid the mistake of accidentally miss something problem when creating a reprex by hand is by using the [`reprex`](https://reprex.tidyverse.org/) package.
+
+
+## Making reprexes reproducible
+
+- There are three things you need to include to make your example reproducible: required packages, data, and code.
+
+- Packages should be loaded at the top of the script so it’s easy to see which ones the example needs, and check that you’re using the latest version of each package; 
+  - you may have discovered a bug that’s been fixed since you installed or last updated the package. For packages in the tidyverse, the easiest way to check is to run `tidyverse_update()`.
+
+- The easiest way to include data is to use `dput()` to generate the R code needed to recreate it. For example, to recreate the mtcars dataset in R, perform the following steps:
+
+  - Run dput(mtcars) in R
+  - Copy the output
+  - In reprex, type mtcars <-, then paste.
+
+- Spend a little bit of time ensuring that your code is easy for others to read:
+
+  - Make sure you’ve used spaces and your variable names are concise yet informative.
+
+  - Use comments to indicate where your problem lies.
+
+  - Do your best to remove everything that is not related to the problem because the shorter your code is, the easier it is to understand and the easier it is to fix.
+
+- Try to use the smallest subset of your data that still reveals the problem, and finish by checking that you have actually made a reproducible example by starting a fresh R session and copying and pasting your script.
+
+
+## Investing in yourself
+
+- It will take some practice to learn to create good, truly minimal reprexes, however learning to ask questions that include the code, and investing the time to make it reproducible will continue to pay off as you learn and master R.
+
+- Also, spend time preparing yourself to solve problems before they occur by investing a little time in learning R each day will pay off handsomely in the long run. 
+
+  - One way is to follow what the tidyverse team is doing on the [tidyverse blog](https://www.tidyverse.org/blog/). 
+  - To keep up with the R community more broadly, we recommend reading [R Weekly](https://rweekly.org/), a community effort to aggregate the most interesting news in the R community each week.
 
 ## Meeting Videos
 
