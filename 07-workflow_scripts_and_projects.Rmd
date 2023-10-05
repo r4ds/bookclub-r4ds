@@ -80,11 +80,13 @@ library(tidyverse)
 
 ggplot(diamonds, aes(x = carat, y = price)) + 
   geom_hex()
+```
+
+```{r eval=FALSE}
 ggsave("diamonds.png")
 
 write_csv(diamonds, "data/diamonds.csv")
 ```
-
 
 ### Exercise
 1. Go to the RStudio Tips Twitter account, https://twitter.com/rstudiotips and find one tip that looks interesting. Practice using it!

@@ -212,7 +212,7 @@ bake_sale <- tibble(
 bake_sale
 ```
 
-```{r}
+```{r eval=FALSE}
 write_xlsx(bake_sale, path = "data/bake-sale.xlsx")
 ```
 
@@ -223,7 +223,7 @@ write_xlsx(bake_sale, path = "data/bake-sale.xlsx")
 
 Just like reading from a CSV, information on data type is lost when we read the data back in. This makes Excel files unreliable for caching interim results as well. For alternatives, see [Section 8.5.](https://r4ds.hadley.nz/data-import.html#sec-writing-to-a-file)
 
-```{r}
+```{r eval=FALSE}
 read_excel("data/bake-sale.xlsx")
 ```
 
