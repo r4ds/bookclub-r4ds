@@ -343,7 +343,7 @@ sales_files
 
 - Note that the variable type information that you just set up is lost when you save to CSV because you’re starting over with reading from a plain text file again.
 
-```{r}
+```{r eval=FALSE}
 students
 write_csv(students, "students-2.csv")
 read_csv("students-2.csv")
@@ -355,7 +355,7 @@ read_csv("students-2.csv")
 
 - These store data in R’s custom binary format called RDS, which means that when you reload the object, you are loading the exact same R object that you stored.
 
-```{r}
+```{r eval=FALSE}
 write_rds(students, "students.rds")
 read_rds("students.rds")
 
@@ -372,10 +372,9 @@ read_rds("students.rds")
 library(arrow)
 ```
 
-``` {r}
+``` {r eval=FALSE}
 write_parquet(students, "students.parquet")
 read_parquet("students.parquet")
-
 ```
 
 
