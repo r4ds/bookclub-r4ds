@@ -1,6 +1,5 @@
 --- 
 title: "R for Data Science Book Club"
-author: "The R4DS Online Learning Community"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
@@ -22,8 +21,43 @@ This companion follows the [R4DS Online Learning Community Code of Conduct](http
 
 ## Book club meetings {-}
 
-- Each week, a volunteer will present a chapter from the book.
-  - **This is the best way to learn the material.**
-- Presentations will usually consist of a review of the material, a discussion, and/or a demonstration of the principles presented in that chapter.
-- More information about how to present is available in the [github repo](https://github.com/r4ds/bookclub-r4ds).
-- Presentations will be recorded, and will be available on the [R4DS Online Learning Community YouTube Channel](https://r4ds.io/youtube).
+-   Volunteer leads discussion of a chapter
+    -   **This is the best way to learn the material.**
+-   Presentations: 
+    -   Review of material
+    -   Questions you have
+    -   Maybe live demo
+-   More info about editing: [this github repo](https://github.com/r4ds/bookclub-r4ds).
+-   Recorded, available on the [R4DS Online Learning Community YouTube Channel](https://r4ds.io/youtube).
+
+## Pace {-}
+
+-   **Goal:** 1 chapter/week
+-   Ok to split overwhelming chapters
+-   Ok to combine short chapters
+-   Meet ***every*** week except holidays, etc
+    -   We'll discuss even if presenter unavailable
+
+## Learning objectives {-}
+
+-   Students who study with LOs in mind ***retain more.***
+-   **Tips:**
+    -   "After today's session, you will be able to..."
+    -   *Very* roughly **1 per section.**
+-   Likely need to be refined
+
+## Today's learning objectives {-}
+
+After today's session, you will be able to...
+
+-   Explain how our weekly meetings work.
+-   Sign up to lead a discussion.
+-   Edit notes on GitHub.
+-   (More LOs coming in Chapter 1)
+
+## GitHub {-}
+
+-   Even tech bros can figure it out, ***you'll be fine!***
+-   See README for setup instructions
+    -   [Cohort 9 Week 1](https://youtu.be/9ar16FGFgT0) included a walk-through
+-   Ok to edit directly in browser!
