@@ -57,7 +57,7 @@ After today's session, you will be able to...
 
 ## GitHub {-}
 
--   Even tech bros can figure it out, ***you'll be fine!***
+-   Even *tech bros* can figure it out, ***you'll be fine!***
 -   See README for setup instructions
     -   [Cohort 9 Week 1](https://youtu.be/9ar16FGFgT0) included a walk-through
 -   Ok to edit directly in browser!
