@@ -10,7 +10,6 @@ After today's session, you will be able to...
 - Set up an environment in which you can learn the topics in this book.
 - Describe how code in the book differs from code in your console.
 
-
 ## A typical data science project {-}
 
 ![](images/data-science.png)
@@ -44,12 +43,11 @@ After today's session, you will be able to...
     -   [ggplot2 book](http://ggplot2-book.org/) has more in-depth details
 - **Model:** 
     -   Extract patterns from data
-    -   Not covered in-depth here, see [tmwr.org][https://tmwr.org]
+    -   Not covered in-depth here, see [tmwr.org](https://tmwr.org)
 - **Communicate:** 
     -   Critical part of DS!
     -   It doesn't matter how good your models are if nobody knows about them.
     - ***Note:*** R4DS 2e focuses on [Quarto](https://quarto.org/), vs [RMarkdown](https://quarto.org/) in 1e
-
 
 ## The order of content in this book {-}
 
@@ -74,28 +72,25 @@ After today's session, you will be able to...
     -   Master 1 tool at a time
     -   Maybe go on to other tools later
 
-
 ## Prerequisites {-}
 
-We'll need:
-
--   Numeric literacy & basic programming skills
+-   Numeric literacy
+-   Basic programming skills (but ok if you're brand new)
     -   [Hands on Programming with R](https://rstudio-education.github.io/hopr/) by Garrett Grolemund =  useful corequisite for this book
 -   **R:** Download from [CRAN](https://cran.r-project.org), the **c**omprehensive **R** **a**rchive **n**etwork
 -   [**Rstudio:**](https://posit.co/download/rstudio-desktop/) integrated development environment (IDE) for R (and others)
     -   A useful [cheat sheet](https://rstudio.github.io/cheatsheets/html/rstudio-ide.html) for RStudio
 
-
 ## Prerequisites: Install these packages {-}
 
--   The [**tidyverse**](https://tidyverse.tidyverse.org/) = collection of functions, data, & documentation 
+-   📦 = collection of functions, data, & documentation
+-   The [**tidyverse**](https://tidyverse.tidyverse.org/) = 📦📦📦📦📦📦📦📦📦
     -   Shared philosophy (concept of this book)
     -   `install.packages("tidyverse")`
         -   [`dplyr`](https://dplyr.tidyverse.org/), [`forcats`](https://forcats.tidyverse.org/), [`ggplot2`](https://ggplot2.tidyverse.org/), [`lubridate`](https://github.com/tidyverse/lubridate), [`purrr`](https://purrr.tidyverse.org/), [`readr`](https://readr.tidyverse.org/), [`stringr`](https://stringr.tidyverse.org/), [`tibble`](https://tibble.tidyverse.org/), [`tidyr`](https://tidyr.tidyverse.org/)
 -   Additional packages which provide interesting datasets
-    -   `install.packages(c("arrow", "babynames", "curl", "duckdb", "gapminder", "ggrepel", "ggridges", "ggthemes", "hexbin", "janitor", "Lahman", "leaflet", "maps", "nycflights13", "openxlsx", "palmerpenguins", "repurrrsive", "tidymodels", "writexl"))`
-
-
+    -   When you see `Error in library(ggrepel) : there is no package called ‘ggrepel’`,
+    -   Run `install.packages("ggrepel")`
 
 ## Conventions within the book: #> {-}
 
@@ -118,7 +113,6 @@ Code in book slightly different from output you'll see
     -   `flights` or `x`
 -   `dplyr::filter()` = "dplyr's filter"
 
-
 ## Bonus: Resources for getting help {-}
 
 -   **Pay attention to error messages.**
@@ -136,7 +130,6 @@ Code in book slightly different from output you'll see
         -   `library(dplyr)`, etc
     -   Provide (a subset of) any data you use with [`dput()`](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/dput)
     -   Try to make your code *easy to read* (clean spacing, clear variable names, comments)
-
 
 ## Meeting Videos {-}
 
