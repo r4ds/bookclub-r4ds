@@ -47,7 +47,7 @@ After today's session, you will be able to...
 - **Communicate:** 
     -   Critical part of DS!
     -   It doesn't matter how good your models are if nobody knows about them.
-    - ***Note:*** R4DS 2e focuses on [Quarto](https://quarto.org/), vs [RMarkdown](https://quarto.org/) in 1e
+    - ***Note:*** R4DS 2e focuses on [Quarto](https://quarto.org/), vs [RMarkdown](https://rmarkdown.rstudio.com/) in 1e
 
 ## The order of content in this book {-}
 
