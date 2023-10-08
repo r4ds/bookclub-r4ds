@@ -21,13 +21,16 @@ After today's session, you will be able to...
     -   Automate common tasks
     -   Solve new problems with greater ease.
 
-## Wrangle the data {-}
-
--   🤠 Importing + tidying + transforming = ***wrangling*** 
-    -   🥊 Making data usable often feels like a fight.
+## Import the data {-}
 
 -   **Import:** (file, database, web app) ➡️ R
     -   Can't data science it 'til it's in R!
+
+## Wrangle the data {-}
+
+-   🤠 Tidying + transforming = ***wrangling*** 
+    -   🥊 Making data usable often feels like a fight.
+
 -   **Tidy:** Consistent structure makes everything easier
     -   ↕↕↕️ Columns = variables
     -   ↔️ Rows = observations
