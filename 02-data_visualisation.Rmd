@@ -670,3 +670,214 @@ But more than likely, you misspelled something.
 -   Visualize **distributions and relationships** in data
 -   Produce **small multiples** with `facet()`
 -   [Make this](https://r4ds.hadley.nz/data-visualize_files/figure-html/unnamed-chunk-7-1.png): ![](https://r4ds.hadley.nz/data-visualize_files/figure-html/unnamed-chunk-7-1.png)
+
+[R4DS book](https://r4ds.had.co.nz/data-visualisation.html)
+
+
+
+### Exercises:
+
+[R for Data Science: Exercise Solutions](https://jrnold.github.io/r4ds-exercise-solutions/)
+
+
+
+### Resources:
+
+
+- [A Layered Grammar of Graphics](http://vita.had.co.nz/papers/layered-grammar.pdf)
+- [{ggplot2}](https://cran.r-project.org/web/packages/ggplot2/index.html)
+- [ggplot2 extensions - gallery](https://exts.ggplot2.tidyverse.org/gallery/)
+- [R Graphics Cookbook](https://r-graphics.org/)
+- [Gina Reynolds' ggplot flipbook](https://evamaerey.github.io/ggplot_flipbook/ggplot_flipbook_xaringan.html)
+
+
+## Meeting Videos
+
+### Cohort 5
+
+`r knitr::include_url("https://www.youtube.com/embed/0NdiQuuM0vw")`
+
+<details>
+  <summary> Meeting chat log </summary>
+  
+```
+00:11:14	Jon Harmon (jonthegeek):	r4ds.io/r4ds
+00:12:06	Saeed Shafiei Sabet:	Hi everyone!
+00:12:29	Sandra Muroy:	Hi Saeed!
+00:13:05	Becki R. (she/her):	Hello!
+00:13:30	Sandra Muroy:	Hi Becki!
+00:22:41	Saeed Shafiei Sabet:	Can also by using ggplot2 do some 3D surface plots?
+00:24:01	shamsuddeen:	https://ggplot2.tidyverse.org/reference/geom_contour.html
+00:24:12	shamsuddeen:	2D contours of a 3D surface
+00:25:34	Saeed Shafiei Sabet:	Thanks @shamsuddeen ;)
+00:25:50	Jon Harmon (jonthegeek):	ggplot2 is 2D. There are other packages for 3D visualization, I'll try to link some in your question on the Slack once we're done!
+00:26:29	Saeed Shafiei Sabet:	@Jon Thanks a lot! :)
+00:26:34	shamsuddeen:	I guess this package provides 3D plotting https://www.rayshader.com/index.html
+00:27:24	Jon Harmon (jonthegeek):	Yup, that's the one I was going to recommend: https://cran.r-project.org/web/packages/rayshader/index.html
+00:28:28	Jon Harmon (jonthegeek):	I found it super helpful to figure out how to read some of these things as words:
+%>% = "and then"
+~ = "by" (usually)
+00:28:30	shamsuddeen:	Looks at some practical examples of the package here: https://www.tylermw.com/3d-ggplots-with-rayshader/
+00:29:54	Saeed Shafiei Sabet:	Thank you!
+00:36:02	docksbox@pm.me:	https://jrnold.github.io/r4ds-exercise-solutions/
+00:40:57	Jon Harmon (jonthegeek):	?ggplot2::mpg will show all the details of the dataset
+00:41:50	Sandra Muroy:	thanks Jon :)
+00:42:40	Jon Harmon (jonthegeek):	hwy = "highway miles per gallon", cty = "city miles per gallon" in that set, so usually that's what you'd want on y.
+00:43:38	Becki R. (she/her):	Did I hear correctly that the dependent variable goes on the y-axis?
+00:44:04	Jon Harmon (jonthegeek):	Generally, yes. But it's whatever you specify as "y" in the "aes" call.
+00:44:16	Becki R. (she/her):	ok thanks
+00:49:24	Jon Harmon (jonthegeek):	The "labs" function is for all of the labels for your plot.
+00:51:26	Jon Harmon (jonthegeek):	https://twitter.com/search?q=%23tidytuesday&src=typed_query
+00:51:48	Hector:	Is there any specific use for the ggtitle() function in contrast with labs() ?
+00:52:09	Njoki Njuki Lucy:	what is there a difference between stat="count" and stat="identity"? I understand stat = "count returns count per each level.
+00:53:23	Jon Harmon (jonthegeek):	@Hector: ggtitle is equivalent to labs() for just the title and subtitle parts. It's just to make it easier to focus on those specific bits.
+00:53:56	Jon Harmon (jonthegeek):	@Njoki: "count" means "how many entries have this value?", vs "identity" means "what value is in this cell?"
+00:54:59	Hector:	Thank you!
+00:55:04	Njoki Njuki Lucy:	thank you.
+00:56:26	Jon Harmon (jonthegeek):	"color" = outside, "fill" = inside
+00:58:53	docksbox@pm.me:	labs()
+01:04:36	Ryan Metcalf:	Could it be stated that “labs” is a more eloquent way of labeling than explicitly calling each field directly? Less lines of code maybe?
+01:05:47	Jon Harmon (jonthegeek):	I'm not sure I'd say "eloquent," but it's just another option. They provide the separate functions in case you're looking for them, basically.
+01:07:23	Jon Harmon (jonthegeek):	Sorry about that!
+01:08:23	Susie Neilson:	This was a great presentation - thank you so much Federica!
+01:12:31	docksbox@pm.me:	example would be the use of a map data
+01:12:51	Saeed Shafiei Sabet:	Thanks Federica :)
+01:13:43	docksbox@pm.me:	great thanks!
+01:13:46	Fodil:	thank you everyone was very interesting.
+01:13:51	Becki R. (she/her):	Thanks, Federica!
+01:13:56	Njoki Njuki Lucy:	Thank you.
+01:13:56	Saeed Shafiei Sabet:	Thank you
+01:13:58	Saeed Shafiei Sabet:	bye
+```
+</details>
+
+### Cohort 6
+
+`r knitr::include_url("https://www.youtube.com/embed/5IMg8AC-1IA")`
+
+<details>
+  <summary> Meeting chat log </summary>
+  
+```
+00:16:33	Daniel Adereti:	do I have to run library(tidyverse) everytime I start my R?
+00:17:15	Zaynaib Giwa, @zaynaib:	You only need to call it once when you open R Studio
+00:21:14	Shannon:	To double check that you have it installed, you can click on the 'Packages' tab in the lower right pane. If it's installed, you'll see it listed next to a checkbox. Once you load the package with the library() function, you will see a checkmark in the box.
+00:28:20	Freya Watkins (she/her):	displ 's class is dbl (double) which is a floating point number for decimal precision. int (integer) is for full rounded values (I think)
+00:28:49	Zaynaib Giwa, @zaynaib:	cute cat
+00:28:49	Vrinda Kalia:	Yes, I was just typing that up @Freya I think you are right
+00:30:26	Aalekhya Reddam:	In Line 88 is it a - or = between data and mpg?
+00:30:57	Matthew Efoli:	I think it is an equal to sign
+00:30:58	Aalekhya Reddam:	Sorry that was my screen lagging!
+00:38:43	Shannon:	Another option for finding number of rows and number of columns, that I used, is nrow(mpg) and ncol(mpg). Not as much info as glimpse(), but more concise.
+00:41:42	Freya Watkins (she/her):	@Shannon, dim(mpg) also gives both dimensions in one command (number of rows, followed by number of columns) :)
+00:42:35	Shannon:	@Freya, perfect! thanks!
+00:49:45	Zaynaib Giwa, @zaynaib:	I have to leave a bit early. But it was nice meeting everyone. See you next week.
+00:50:02	Shannon:	See you next week!
+00:50:30	Matthew Efoli:	See you next week Zaynaib
+00:50:34	Aalekhya Reddam:	I have to head out too, see you all next week! :)
+00:50:57	Shannon:	👋
+00:51:06	Matthew Efoli:	Have a nice weekend Aalekhya!
+00:51:20	Freya Watkins (she/her):	missing the closing bracket I think
+00:53:58	Daniel Adereti:	See you next week Aalekhya and Zaynaib!
+00:54:27	Daniel Adereti:	We have 10 more minutes, so we may have to carry over the chapter to next week, I think
+00:55:10	Matthew Efoli:	@Daniel okay
+00:56:31	Shannon:	That works for me. I'd have more time to look over the second half of the chapter. :)
+00:56:52	Marielena Soilemezidi:	Yes, same for me! :)
+00:56:52	Vrinda Kalia:	Yes, this sounds good to me as well!
+00:59:17	Shannon:	Nice work presenting, Adeyemi! Thank you!
+00:59:20	Marielena Soilemezidi:	Daniel, could you share the link of the spreadsheet here?
+00:59:40	Daniel Adereti:	https://docs.google.com/spreadsheets/d/1zy2nXNkvcdqWuF8rQ5ApWRkVQG_UJt0azu3h_mEnY2E/edit#gid=0
+00:59:43	Marielena Soilemezidi:	Because I couldn't find it in Slack for some reason
+00:59:47	Marielena Soilemezidi:	thank you!!
+01:00:35	Daniel Adereti:	👍
+01:08:40	Vrinda Kalia:	Maybe try “stroke = class” ?
+01:10:01	Freya Watkins (she/her):	try stroke = 5. it should modify the width of the border so I think needs a numeric argument
+01:10:08	Daniel Adereti:	maybe this? ggplot(data = mpg)+
+  geom_point(mapping = aes(x = displ, y = hwy),
+             shape = 17,
+             stroke = 3)
+01:10:32	Vrinda Kalia:	I see, it needs a numeric argument
+01:11:37	Vrinda Kalia:	Thank you so much for leading the discussion, Adeyemi!
+01:11:55	Matthew Efoli:	Thank you so much Adeyemi!
+01:11:56	Freya Watkins (she/her):	Thank you, Adeyemi! Great job :)
+01:11:57	anacuric:	thank you!
+01:11:58	Marielena Soilemezidi:	Thank you guys! And thanks Adeyemi for presenting!! :)
+01:12:00	Shannon:	Thank you everyone!
+01:12:01	Adeyemi Olusola:	thank you
+01:12:02	Marielena Soilemezidi:	See you next week!
+01:12:16	Matthew Efoli:	see you next week!
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/sEYMNIEvG5Q")`
+
+<details>
+  <summary> Meeting chat log </summary>
+  
+```
+00:06:29	Adeyemi Olusola:	Good day Daniel
+00:06:58	Daniel Adereti:	Hello Olusola!
+00:07:06	Daniel Adereti:	Looking forward to today!
+00:07:21	Adeyemi Olusola:	Yeah yeah.
+00:12:52	Amélie Gourdon-Kanhukamwe:	Hi everyone, I am in my shared office at work, so cannot really speak (have been meaning to join from the start, but shared office = loads of distraction). (I am based in London UK).
+00:14:12	Shannon:	Hi Amelie, nice to 'meet' you :)
+00:20:49	Aalekhya Reddam:	I may have missed it but what is the difference between adding a period and not adding one for facet_grid?
+00:22:41	Shannon:	I think I missed that too, I second that question.
+00:26:04	Freya Watkins (she/her):	The point should have removed one of the dimensions - either vertical or horizontal
+00:29:57	Shannon:	So, having a point or no point would have the same result? Ex: ( ~ drv) is the same as( . ~drv)? Or (drv ~) is the same as (drv ~ .) ?
+00:32:11	Aalekhya Reddam:	That’s what I understood too Shannon! The location of the ~ determines orientation and I guess the “.” is a placeholder
+00:32:48	Shannon:	I think that's how I'm understanding it, too
+00:39:09	Freya Watkins (she/her):	Yes I believe that's right @Shannon, @Aalekhya - I think in the previous plot there was an extra dimension (drv ~ cyl) which had rows and columns, then replacing drv with a point (. ~ cyl) just returns a plot faceted with columns for cyl. Then (~ cyl) returns the same plot as (. ~ cyl)
+00:39:44	Aalekhya Reddam:	Ah okay, thank you Freya!
+00:39:52	Shannon:	Okay, thanks Freya!
+00:58:00	Shannon:	That last one drove me crazy, I couldn't figure it out! I tried position = jitter and tied to adjust stroke. Looks like the solution is two geom_point layers. Thanks for solving that one!
+01:10:45	Aalekhya Reddam:	I have another meeting and have to head out, thank you for a great lesson Adeyemi! See you all next week
+01:10:57	Vrinda Kalia:	Thank you so much, Adeyemi! I appreciate your thoroughness. I need to leave for a 1pm call. See you all next week!
+01:11:06	Shannon:	See you next week!
+01:11:13	Daniel Adereti:	Hello guys, will we like to conclude the chapter ourselves next time so we move to the next chapter with Matthew?
+01:11:20	Shannon:	Thank you Adeyemi!
+01:11:30	Marielena Soilemezidi:	See you guys! Thank you Adeyemi!!
+01:11:32	Matthew Efoli:	Thank you Adeyemi
+01:11:35	Freya Watkins (she/her):	Thanks Adeyemi! Really helpful, thanks for all the extra time and effort on the exercises
+01:11:42	Amélie Gourdon-Kanhukamwe:	Thank you!
+01:11:58	Freya Watkins (she/her):	I'm happy to finish the rest myself and move on to next chapter next time :)
+01:12:43	Matthew Efoli:	I have to go. I will be taking the next chapter
+01:12:47	Freya Watkins (she/her):	Bye! Thanks Daniel
+01:12:52	Matthew Efoli:	bye
+```
+</details>
+
+
+### Cohort 7
+
+`r knitr::include_url("https://www.youtube.com/embed/eqQJ5tmEGco")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:08:24	Oluwafemi Oyedele:	Let wait for about 5 minute for others to join
+01:02:00	Aditi S:	Thank you! I have to leave now but hope to join again next week.
+01:05:04	Oluwafemi Oyedele:	geom_jitter is very useful if you want to avoid over-plotting
+```
+</details>
+
+
+### Cohort 8
+
+`r knitr::include_url("https://www.youtube.com/embed/RRxtbv5QCA4")`
+
+<details>
+<summary> Meeting chat log </summary>
+
+```
+00:11:18	shamsuddeen:	https://www.youtube.com/playlist?list=PL3x6DOfs2NGhS_PhklqT6PwK1Fh7blgP2
+00:12:09	Mary Emeraghi:	Hello everyone
+00:13:16	Mary Emeraghi:	Hello Shamsuddeen. Please kindly share the link to the GitHub note page
+00:13:41	shamsuddeen:	https://happygitwithr.com/
+00:13:48	shamsuddeen:	https://www.youtube.com/playlist?list=PL3x6DOfs2NGhS_PhklqT6PwK1Fh7blgP2
+00:14:22	shamsuddeen:	https://r4ds.github.io/bookclub-r4ds/
+01:24:50	Bidemi Agbozuadu:	Thank you very much! Nice presentation
+01:25:32	shamsuddeen:	https://docs.google.com/spreadsheets/d/1reByMPb5Og3OHbRgplzV5Jkz_o6CkEYz_adBGfHTFwg/edit#gid=0
+```
+</details>
