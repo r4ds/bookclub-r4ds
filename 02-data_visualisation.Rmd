@@ -2,22 +2,36 @@
 
 **Learning objectives:**
 
+:::: {style="display: flex;"}
+
+::: {}
+
 -   Produce a simple plot with `ggplot2`
 -   Use different **`aes`thetic mappings** and **`geom_*()` functions** to produce more complex plots
 -   Visualize **distributions and relationships** in data
 -   Produce **small multiples** with `facet()`
--   [Make this](https://r4ds.hadley.nz/data-visualize_files/figure-html/unnamed-chunk-7-1.png): ![](https://r4ds.hadley.nz/data-visualize_files/figure-html/unnamed-chunk-7-1.png)
+-   [Make the plot to the right](https://r4ds.hadley.nz/data-visualize_files/figure-html/unnamed-chunk-7-1.png)
 
-------------------------------------------------------------------------
+:::
 
-## Loading Packages in R
+::: {}
 
--   Use `install.packages("Package_name")` to **install** a package in R.
-    -   You need to do this before you can use a package, but you only need to do it once.
-    -   Depending where you're learning R, the packages you need may already be installed.
--   Use `library(Package_name)` to **load** a package in R.
-    -   In general, you want to do this at the start of any session where you use a package.
-    -   Alternatively, you can refer to a package every time you use it, such as `ggplot2::ggplot()`. "ggplot2" is the package, "ggplot()" is the function call, "::" tells R "look up this function in this package."
+![](https://r4ds.hadley.nz/data-visualize_files/figure-html/unnamed-chunk-7-1.png)
+
+:::
+
+::::
+
+
+## Loading Packages in R {-}
+
+-   `install.packages("Package_name")` to **install** a package.
+    -   Before 1st use, but only once
+    -   Packages you need may already be installed
+-   `library(Package_name)` to **load** a package.
+    -   In general, do this at start of session
+-   Alternatively: `ggplot2::ggplot()`. 
+    -   "ggplot2" = package, "ggplot()" = function
 
 ```{r 02-library}
 library(tidyverse)
@@ -30,17 +44,18 @@ library(palmerpenguins)
 library(ggthemes)
 ```
 
-## First Steps
-
-### Peeking at the `palmerpenguins`
+## Peeking at the `palmerpenguins` {-}
 
 ```{r 02-dataset}
 palmerpenguins::penguins
 ```
 
-### Creating a ggplot
+## Creating a ggplot: ggplot() {-}
 
-The first part of creating a plot in `ggplot2` is calling the `ggplot()` function. It can take arguments that tell it what **data** to use and how to **map** them to certain **aesthetics**.
+-   Call `ggplot()` function. 
+-   Arguments: 
+    -   **data** to use
+    -   how to **map** them to **aesthetics**
 
 ```{r 02-plot01, message=FALSE, warning=FALSE}
 ggplot(
@@ -49,7 +64,7 @@ ggplot(
 )
 ```
 
-But we'll need to add a `geom_*()` argument to make figures show up.
+## Creating a ggplot: geom_*() {-}
 
 ```{r 02-plot02}
 ggplot(
@@ -59,9 +74,9 @@ ggplot(
   geom_point()
 ```
 
-(the warning is telling us there are two penguins in our dataset with missing body mass and/or flipper length values and ggplot2 has no way of representing them on the plot)
+(warning = 2 penguins in dataset w/ missing body mass / flipper length)
 
-## Adding Aesthetics and Layers
+## Adding Aesthetics and Layers {-}
 
 **Aesthetics** are visual properties of objects in the plot.
 
