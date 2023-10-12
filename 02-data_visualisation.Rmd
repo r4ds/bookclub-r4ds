@@ -2,22 +2,36 @@
 
 **Learning objectives:**
 
+:::: {style="display: flex;"}
+
+::: {}
+
 -   Produce a simple plot with `ggplot2`
 -   Use different **`aes`thetic mappings** and **`geom_*()` functions** to produce more complex plots
 -   Visualize **distributions and relationships** in data
 -   Produce **small multiples** with `facet()`
--   [Make this](https://r4ds.hadley.nz/data-visualize_files/figure-html/unnamed-chunk-7-1.png): ![](https://r4ds.hadley.nz/data-visualize_files/figure-html/unnamed-chunk-7-1.png)
+-   [Make the plot to the right](https://r4ds.hadley.nz/data-visualize_files/figure-html/unnamed-chunk-7-1.png)
 
-------------------------------------------------------------------------
+:::
 
-## Loading Packages in R
+::: {}
 
--   Use `install.packages("Package_name")` to **install** a package in R.
-    -   You need to do this before you can use a package, but you only need to do it once.
-    -   Depending where you're learning R, the packages you need may already be installed.
--   Use `library(Package_name)` to **load** a package in R.
-    -   In general, you want to do this at the start of any session where you use a package.
-    -   Alternatively, you can refer to a package every time you use it, such as `ggplot2::ggplot()`. "ggplot2" is the package, "ggplot()" is the function call, "::" tells R "look up this function in this package."
+![](https://r4ds.hadley.nz/data-visualize_files/figure-html/unnamed-chunk-7-1.png)
+
+:::
+
+::::
+
+
+## Loading Packages in R {-}
+
+-   `install.packages("Package_name")` to **install** a package.
+    -   Before 1st use, but only once
+    -   Packages you need may already be installed
+-   `library(Package_name)` to **load** a package.
+    -   In general, do this at start of session
+-   Alternatively: `ggplot2::ggplot()`. 
+    -   "ggplot2" = package, "ggplot()" = function
 
 ```{r 02-library}
 library(tidyverse)
@@ -30,17 +44,18 @@ library(palmerpenguins)
 library(ggthemes)
 ```
 
-## First Steps
-
-### Peeking at the `palmerpenguins`
+## Peeking at the `palmerpenguins` {-}
 
 ```{r 02-dataset}
 palmerpenguins::penguins
 ```
 
-### Creating a ggplot
+## Creating a ggplot: ggplot() {-}
 
-The first part of creating a plot in `ggplot2` is calling the `ggplot()` function. It can take arguments that tell it what **data** to use and how to **map** them to certain **aesthetics**.
+-   Call `ggplot()` function. 
+-   Arguments: 
+    -   **data** to use
+    -   how to **map** them to **aesthetics**
 
 ```{r 02-plot01, message=FALSE, warning=FALSE}
 ggplot(
@@ -49,7 +64,7 @@ ggplot(
 )
 ```
 
-But we'll need to add a `geom_*()` argument to make figures show up.
+## Creating a ggplot: geom_\*() {-}
 
 ```{r 02-plot02}
 ggplot(
@@ -59,27 +74,25 @@ ggplot(
   geom_point()
 ```
 
-(the warning is telling us there are two penguins in our dataset with missing body mass and/or flipper length values and ggplot2 has no way of representing them on the plot)
+(warning = 2 penguins in dataset w/ missing body mass / flipper length)
 
-## Adding Aesthetics and Layers
+## Adding Aesthetics {-}
 
-**Aesthetics** are visual properties of objects in the plot.
+- **Aesthetics** = visual properties of the plot.
+- More aesthetics may tell the data's story better.
+- Types of **aesthetic mapping**:
+    -   coordinates: x and y
+    -   linewidth
+    -   shape
+    -   color
+    -   fill
+    -   alpha (transparency)
+    -   stroke
+    -   linetype
+    -   group
+    -   show.legend
+    - others, sometimes specific to geom
 
-There are several different types of **aesthetic mapping**:
-
--   coordinates: x and y
--   linewidth
--   shape
--   color
--   fill
--   alpha (transparency)
--   stroke
--   linetype
--   group
--   show.legend
--   others, sometimes specific to a geom
-
-Adding more aesthetics to the plot may help tell the data's story better.
 
 ```{r 02-plot03, message=FALSE, warning=FALSE}
 ggplot(
@@ -89,7 +102,9 @@ ggplot(
   geom_point()
 ```
 
-Additional `geom_*()` layers may help as well
+## Adding Layers {-}
+
+- Additional `geom_*()` layers may help as well
 
 ```{r 02-plot04, message=FALSE, warning=FALSE}
 ggplot(
@@ -100,18 +115,17 @@ ggplot(
   geom_smooth(method = "lm")
 ```
 
-There are several different types of `geom_*()` functions available:
+- `geom_*()` functions available:
+    -   point (scatterplot)
+    -   line
+    -   smooth
+    -   histogram / bar or (stat_count) / col
+    -   boxplot
+    -   map
+    -   text
+    -   ...
 
--   point (scatterplot)
--   line
--   smooth
--   histogram / bar or (stat_count) / col
--   boxplot
--   map
--   text
--   ...
-
-## Global vs. Local Aesthetics
+## Global vs. Local Aesthetics {-}
 
 ```{r 02-plot05, message=FALSE, warning=FALSE}
 ggplot(
@@ -122,9 +136,8 @@ ggplot(
   geom_smooth(method = "lm")
 ```
 
-What if we want just one overall trend line?
-
-Turn color into a "local" aesthetic by moving it within the `geom_point()` call.
+- **Global options:** written in `ggplot()` and apply to all layers
+- **Local options:** written in `geom_*()` and apply only to that layer.
 
 ```{r 02-plot06, message=FALSE, warning=FALSE}
 ggplot(
@@ -135,13 +148,10 @@ ggplot(
   geom_smooth(method = "lm")
 ```
 
-**Global options** are spelled out in the `ggplot()` function and will apply to all layers unless specifically overwritten in a layer.
+## Improving Accessibility {-}
 
-**Local options** are spelled out in individual `geom_*()` functions and only apply to that layer.
-
-### Improving Accessibility
-
-Mapping shape as well as color may help colorblind readers better suss out the differences we're highlighting. A colorblind-friendly palette would help, too
+- Mapping shape and color may help colorblind readers
+- Colorblind-friendly palette would help, too
 
 ```{r 02-plot07, message=FALSE, warning=FALSE}
 ggplot(
@@ -154,7 +164,9 @@ ggplot(
 
 ```
 
-And why stop there? Let's use the `labs()` function to add human-readable titles and axes.
+## Why Stop There? {-}
+
+Use `labs()` add understandable titles and axes.
 
 ```{r 02-plot08, message=FALSE, warning=FALSE}
 ggplot(
@@ -172,7 +184,7 @@ ggplot(
   scale_color_colorblind()
 ```
 
-## Exercises
+## Exercises {-}
 
 **1. How many rows are in `penguins`? How many columns?**
 
@@ -180,11 +192,11 @@ ggplot(
 penguins
 ```
 
-The very first line gives us dimensions for `penguins`, telling us it's 344 rows long by 8 columns wide.
+See first line. 344 rows x 8 columns.
 
 **2. What does the `bill_depth_mm` variable in the `penguins` data frame describe? Read the help for `?penguins` to find out.**
 
-Calling `?penguins` pulls up the package documentation, describing `bill_depth_mm` as: "a number denoting bill length (millimeters)"
+Call `?penguins` for definition from package documentation
 
 **3. Make a scatterplot of `bill_depth_mm` vs. `bill_length_mm`. That is, make a scatterplot with `bill_depth_mm` on the y-axis and `bill_length_mm` on the x-axis. Describe the relationship between these two variables.**
 
@@ -193,7 +205,7 @@ ggplot(penguins) +
   geom_point(aes(x = bill_depth_mm, y = bill_length_mm))
 ```
 
-Looks to be a positive, linear relationship.
+Positive, linear relationship.
 
 **4. What happens if you make a scatterplot of species vs. bill_depth_mm? What might be a better choice of geom?**
 
@@ -202,14 +214,14 @@ ggplot(penguins) +
   geom_point(aes(x = species, y = bill_depth_mm))
 ```
 
-We've essentially got a dotplot for every species. A boxplot would be able to tell us more.
+Dotplot for every species. Boxplot would tell us more.
 
 ```{r 02-ex04-02}
 ggplot(penguins) +
   geom_boxplot(aes(x = species, y = bill_depth_mm))
 ```
 
-This is better for comparing typical bill depths across species.
+This better compares bill depths across species.
 
 **5. Why does the following give an error and how would you fix it?**
 
@@ -218,11 +230,11 @@ ggplot(data = penguins) +
   geom_point()
 ```
 
-The error reads `! geom_point() requires the following missing aesthetics: x and y`, which makes sense. The call needs an x variable and a y variable to know where to plot points.
+The error reads `! geom_point() requires the following missing aesthetics: x and y`. Call needs x variable and y variable.
 
 **6. What does the `na.rm` argument do in `geom_point()`? What is the default value of the argument? Create a scatterplot where you successfully use this argument set to `TRUE`.**
 
-Looking up `?ggplot2::geom_point` tells us this about `na.rm`: "If `FALSE`, the default, missing values are removed with a warning. If `TRUE`, missing values are silently removed."
+From function documentation, "If `FALSE`, the default, missing values are removed with a warning. If `TRUE`, missing values are silently removed."
 
 ```{r 02-ex06-01}
 ggplot(penguins) +
@@ -232,7 +244,7 @@ ggplot(penguins) +
 
 **7. Add the following caption to the plot you made in the previous exercise: "Data come from the `palmerpenguins` package." Hint: Take a look at the documentation for `labs()`.**
 
-Looking up `?ggplot2::labs` tells us that we can use the `caption` argument to add a caption. While we're at it, let's use the `alt` argument to add alt text since we want our plots to be as accessible as possible. Since the "previous exercise" didn't include a plot, we'll use the boxplot from Exercise 4.
+`caption` argument adds a caption.
 
 ```{r 02-ex07-01, message=FALSE, warning=FALSE}
 ggplot(penguins) +
@@ -242,16 +254,13 @@ ggplot(penguins) +
     subtitle = "For penguins at Palmer Station Antarctica",
     x = "Species",
     y = "Bill depth (in millimeters)",
-    caption = "Data come from the `palmerpenguins` package.",
-    alt = "A comparison of the bill depths of Adelie, Chinstrap and Gentoo penguin species. Adelie and Chinstrap have similar medians near 18.5 mm while the Gentoo median is about 15 mm. The Adelie and Chinstrap interquartile ranges are nearly similar, with the Chinstrap upper range being slightly higher. Adelie, however is the only species with a visible outline on the graph, this one on the higher end."
+    caption = "Data come from the `palmerpenguins` package."
   )
 ```
 
 **8.Recreate the following visualization. What aesthetic should `bill_depth_mm` be mapped to? And should it be mapped at the global level or at the geom level?**
 
 ![](https://r4ds.hadley.nz/data-visualize_files/figure-html/unnamed-chunk-17-1.png)
-
-The axes and legends tell us what to map to x, y, and color. And as it's only the points that color vary for, that's our hint that color needs to be mapped locally in the `geom_point()` call. I had to look up `?ggplot2::geom_smooth` to remember what arguments it takes. It needs an x and y as well as a method for smoothing. What the picture shows looks more like a loess curve than a linear model, so we'll substitute "loess" in for "lm" in that variable.
 
 ```{r 02-ex08-01, message=FALSE, warning=FALSE}
 ggplot(data = penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
@@ -261,19 +270,6 @@ ggplot(data = penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
 
 **9. Run this code in your head and predict what the output will look like. Then, run the code in R and check your predictions.**
 
-```{r 02-ex09-01, eval=FALSE}
-ggplot(
-  data = penguins,
-  mapping = aes(x = flipper_length_mm, y = body_mass_g, color = island)
-) +
-  geom_point() +
-  geom_smooth(se = FALSE)
-```
-
-Looks like we can expect a scatterplot comparing flipper length along the x-axis with body mass along the y-axis as well as the island the penguin belongs to color-coded. There also appears to be a smooth line that will trace the relationship between flipper length and body mass. However, the `se = FALSE` bit suggests there won't be a gray standard error band around the line.
-
-What do we actually get?
-
 ```{r 02-ex09-02, message=FALSE, warning=FALSE}
 ggplot(
   data = penguins,
@@ -282,8 +278,6 @@ ggplot(
   geom_point() +
   geom_smooth(se = FALSE)
 ```
-
-So close! Because the color aesthetic is mapped within the `ggplot()` call it becomes a "global" variable, and we get one line per species rather than the single overall one I was expecting.
 
 **10. Will these two graphs look different? Why/why not?**
 
@@ -306,9 +300,7 @@ ggplot() +
   )
 ```
 
-It looks like the only difference between the two calls is maping once globally vs. mapping twice locally, so they should look the same.
-
-Let's find out...
+Only difference mapping globally vs. locally, so they should look the same.
 
 ```{r 02-ex10-02, message=FALSE, warning=FALSE}
 ggplot(
@@ -329,65 +321,42 @@ ggplot() +
   )
 ```
 
-Samesies!
+## `ggplot2` calls {-}
 
-## `ggplot2` calls
+- For brevity, "data =" and "mapping =" often dropped 
+- But things still work...
 
-For the sake of brevity, "data =" and "mapping =" are often dropped from `ggplot2` function calls. But things still work just fine without them.
-
-```{r 02-twin01, eval=FALSE}
-ggplot(
-  data = penguins,
-  mapping = aes(x = flipper_length_mm, y = body_mass_g)
-) +
-  geom_point()
-```
-
-and
-
-```{r 02-twin02, eval=FALSE}
+```{r 02-twin02, message=FALSE, warning=FALSE}
 ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) + 
   geom_point()
 ```
 
-produce the same plot.
+## Visualizing Distributions {-}
 
-Interestingly, with R 4.1's introduction of the `|>` pipe, the following also produces that plot:
+Quickly check out variable distributions.
 
-```{r 02-twin03, eval=FALSE}
-penguins |> 
-  ggplot(aes(x = flipper_length_mm, y = body_mass_g)) + 
-  geom_point()
-```
-
-## Visualizing Distributions
-
-One of `ggplot2`'s lesser-cited superpowers is its ability to help you quickly check out the distribution of a variable.
-
-Barplots can help you visualize categorical variables.
+Barplots help with categorical variables.
 
 ```{r 02-categorical, message=FALSE, warning=FALSE}
 ggplot(penguins, aes(x = species)) +
   geom_bar()
 ```
 
-Histograms can aid with numerical variables
+Histograms aid with numerical variables
 
 ```{r 02-numerical, message=FALSE, warning=FALSE}
 ggplot(penguins, aes(x = body_mass_g)) +
   geom_histogram(binwidth = 200)
 ```
 
-(some work adjusting the proper bin width or number of bins may be required)
-
-Density plots may also help visualize numerical variables.
+Density plots also help
 
 ```{r 02-numerical2, message=FALSE, warning=FALSE}
 ggplot(penguins, aes(x = body_mass_g)) +
   geom_density()
 ```
 
-## (more) Exercises
+## (more) Exercises {-}
 
 **1. Make a bar plot of species of penguins, where you assign species to the y aesthetic. How is this plot different?**
 
@@ -396,7 +365,7 @@ ggplot(penguins, aes(y = species)) +
   geom_bar()
 ```
 
-The bars are horizontal instead of vertical.
+Bars horizontal instead of vertical.
 
 **2. How are the following two plots different? Which `aesthetic`, `color` or `fill`, is more useful for changing the color of bars?**
 
@@ -408,7 +377,7 @@ ggplot(penguins, aes(x = species)) +
   geom_bar(fill = "red")
 ```
 
-When it comes to `geom_bar()`, "color" refers to the color of the bars' borders. "Fill" refers to the color of the bar itself.
+For `geom_bar()`, "color" affects borders. "Fill" affects inside.
 
 **3. What does the `bins` argument in geom_histogram() do?**
 
@@ -435,61 +404,54 @@ ggplot(diamonds) +
 
 Here, a `binwidth` of 0.1 seems to be a good compromise between showing granularity in the data and not overwhelming ourselves with too many bars.
 
-## Visualizing relationships
+## Visualizing relationships {-}
 
-Just as with distributions in individual variables, `ggplot2` is also incredible at displaying relationships between variables.
+`ggplot2` is also incredible at displaying relationships between variables.
 
-### Numerical Variable and Categorical Variable
+#### Numerical Variable and Categorical Variable {-}
 
-Boxplots are a great tool here.
+Boxplots help here (or color-coded density plots).
 
 ```{r 02-relationship-boxplot, message=FALSE, warning=FALSE}
 ggplot(penguins, aes(x = species, y = body_mass_g)) +
   geom_boxplot()
 ```
 
-Alternatively, a color-coded density plot can help
+#### Two Categorical Variables {-}
 
-```{r 02-relationship-density, message=FALSE, warning=FALSE}
-ggplot(penguins, aes(x = body_mass_g, color = species, fill = species)) +
-  geom_density(alpha = 0.5)
-```
-
-### Two Categorical Variables
-
-This is where bar plots shine.
+Try a bar plot.
 
 ```{r 02-relationship-bar, message=FALSE, warning=FALSE}
 ggplot(penguins, aes(x = island, fill = species)) +
   geom_bar()
 ```
 
-If proportion is more usable than frequencies, set the `position` argument in the `geom_bar()` call to "fill"
+To get proportions, set `position` argument to "fill"
 
 ```{r 02-relationship-barprop, message=FALSE, warning=FALSE}
 ggplot(penguins, aes(x = island, fill = species)) +
   geom_bar(position = "fill")
 ```
 
-### Two Numerical Variables
+#### Two Numerical Variables {-}
 
-This is where scatterplots shine.
+Scatterplots shine here.
 
 ```{r 02-relationship-scatter, message=FALSE, warning=FALSE}
 ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
   geom_point()
 ```
 
-### Three or More Variables
+#### Three or More Variables {-}
 
-Here's where all those other aesthetics really start to become helpful. Map each to a different variable.
+Map each to different variable
 
 ```{r 02-relationship-scatter-multi, message=FALSE, warning=FALSE}
 ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
   geom_point(aes(color = species, shape = island))
 ```
 
-Or, if that gets too busy, we can create small multiples with the `facet` argument.
+Or use `facet_wrap()` to create small multiples
 
 ```{r 02-relationship-facet, message=FALSE, warning=FALSE}
 ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
@@ -497,7 +459,7 @@ ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
   facet_wrap(~island)
 ```
 
-## (Even More) Exercises
+## (Even More) Exercises {-}
 
 **1. The `mpg` data frame that is bundled with the `ggplot2` package contains 234 observations collected by the US Environmental Protection Agency on 38 car models. Which variables in `mpg` are categorical? Which variables are numerical? (Hint: Type `?mpg` to read the documentation for the dataset.) How can you see this information when you run `mpg?`**
 
@@ -603,11 +565,9 @@ ggplot(penguins, aes(x = species, fill = island)) +
 
 The first tells us which species make up certain proportions of an island's overall population. The second tells us how a species' overall population is split among the islands.
 
-## Saving Your Plots
+## Saving Your Plots {-}
 
-Plots are at their most useful when shared. Which likely means getting them out of R.
-
-That's where `ggsave()` comes in handy.
+`ggsave()` lets you get your plots out of R for sharing.
 
 ```{r 02-ggsave, eval=FALSE}
 ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
@@ -618,9 +578,9 @@ ggsave(filename = "penguin-plot.png", width = 800, units = "px")
 # Removed 2 rows containing missing values (`geom_point()`). 
 ```
 
-Setting a `width` and/or `height` helps with reproducibility. Even better, publish the plot in Quarto!
+Setting `width` and/or `height` helps with reproducibility.
 
-## (Yet More) Exercises
+## (Yet More) Exercises {-}
 
 **1. Run the following lines of code. Which of the two plots is saved as `mpg-plot.png`? Why?**
 
@@ -638,7 +598,7 @@ It will run the second. In looking at `?ggplot2::ggsave`, we see that the it def
 
 Changing filename in `ggsave()` to end in `.pdf` instead of `.png` will change the type. Looking at the function documentation, we see there are options for: "eps", "ps", "tex" (pictex), "pdf", "jpeg", "tiff", "png", "bmp", "svg" and "wmf" (windows only).
 
-## Common Problems
+## Common Problems {-}
 
 Mistakes happen. To everyone.
 
@@ -646,42 +606,59 @@ Even this guy! ![https://en.wikipedia.org/wiki/Hadley_Wickham](images/hadley.jpg
 
 Maybe it's a mismatched `()` or `""`.
 
-Or perhaps your `+` you left off or accidentally put on the start of the next line instead of the end of the previous.
+Or a `+` in the wrong spot.
 
 But more than likely, you misspelled something.
 
 [![](images/horst-spelling.png)](https://allisonhorst.com/everything-else)
 [Art by Allison Horst](https://allisonhorst.com/everything-else/)
 
--   Read the error message for hints of where the issue is
--   Google the error message
--   Look up package or function documentation if needed
--   Ask R friends in person or online
+-   Read the error message for hints
+-   Google error message
+-   Look up documentation
+-   Ask R friends
 -   **Don't give up ... setbacks are temporary**
 
-## Summary
+## Summary {-}
 
 <h3> TADA! </h3>
 
 <h3> Things you now know how to do: </h3>
 
+:::: {style="display: flex;"}
+
+::: {}
+
 -   Produce a simple plot with `ggplot2`
 -   Use different **`aes`thetic mappings** and **`geom_*()` functions** to produce more complex plots
 -   Visualize **distributions and relationships** in data
 -   Produce **small multiples** with `facet()`
--   [Make this](https://r4ds.hadley.nz/data-visualize_files/figure-html/unnamed-chunk-7-1.png): ![](https://r4ds.hadley.nz/data-visualize_files/figure-html/unnamed-chunk-7-1.png)
+-   [Make the plot to the right](https://r4ds.hadley.nz/data-visualize_files/figure-html/unnamed-chunk-7-1.png)
+
+:::
+
+::: {}
+
+![](https://r4ds.hadley.nz/data-visualize_files/figure-html/unnamed-chunk-7-1.png)
+
+:::
+
+::::
+
+
+### The Book {-}
 
 [R4DS book](https://r4ds.had.co.nz/data-visualisation.html)
 
 
 
-### Exercises:
+### Exercises: {-}
 
 [R for Data Science: Exercise Solutions](https://jrnold.github.io/r4ds-exercise-solutions/)
 
 
 
-### Resources:
+### Resources: {-}
 
 
 - [A Layered Grammar of Graphics](http://vita.had.co.nz/papers/layered-grammar.pdf)
@@ -691,9 +668,9 @@ But more than likely, you misspelled something.
 - [Gina Reynolds' ggplot flipbook](https://evamaerey.github.io/ggplot_flipbook/ggplot_flipbook_xaringan.html)
 
 
-## Meeting Videos
+## Meeting Videos {-}
 
-### Cohort 5
+### Cohort 5 {-}
 
 `r knitr::include_url("https://www.youtube.com/embed/0NdiQuuM0vw")`
 
@@ -751,7 +728,7 @@ But more than likely, you misspelled something.
 ```
 </details>
 
-### Cohort 6
+### Cohort 6 {-}
 
 `r knitr::include_url("https://www.youtube.com/embed/5IMg8AC-1IA")`
 
@@ -848,7 +825,7 @@ But more than likely, you misspelled something.
 </details>
 
 
-### Cohort 7
+### Cohort 7 {-}
 
 `r knitr::include_url("https://www.youtube.com/embed/eqQJ5tmEGco")`
 
@@ -863,7 +840,7 @@ But more than likely, you misspelled something.
 </details>
 
 
-### Cohort 8
+### Cohort 8 {-}
 
 `r knitr::include_url("https://www.youtube.com/embed/RRxtbv5QCA4")`
 
