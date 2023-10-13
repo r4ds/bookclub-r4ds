@@ -28,6 +28,7 @@ Imports:
     maps,
     microbenchmark,
     nycflights13,
+    palmerpenguins,
     patchwork,
     readxl,
     styler,
