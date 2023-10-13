@@ -91,16 +91,20 @@ ggplot(
     -   linetype
     -   group
     -   show.legend
-    - others, sometimes specific to geom
-
+    -   others, sometimes specific to geom
 
 ```{r 02-plot03, message=FALSE, warning=FALSE}
 ggplot(
   data = penguins,
-  mapping = aes(x = flipper_length_mm, y = body_mass_g, color = species)
+  mapping = aes(
+    x = flipper_length_mm, 
+    y = body_mass_g, 
+    color = species
+  )
 ) +
   geom_point()
 ```
+
 
 ## Adding Layers {-}
 
@@ -118,35 +122,56 @@ ggplot(
 - `geom_*()` functions available:
     -   point (scatterplot)
     -   line
-    -   smooth
+    -   smooth (curve)
     -   histogram / bar or (stat_count) / col
     -   boxplot
     -   map
-    -   text
+    -   text / label
     -   ...
 
 ## Global vs. Local Aesthetics {-}
 
+:::: {style="display: flex;"}
+::: {style="margin-right: 0.5em; width: 50%;"}
+**Global aesthetics:** 
+
+-   in `ggplot()` 
+-   apply to all layers
+
 ```{r 02-plot05, message=FALSE, warning=FALSE}
 ggplot(
   data = penguins,
-  mapping = aes(x = flipper_length_mm, y = body_mass_g, color = species)
+  mapping = aes(
+    x = flipper_length_mm, 
+    y = body_mass_g, 
+    color = species
+  )
 ) +
   geom_point() +
   geom_smooth(method = "lm")
 ```
+:::
 
-- **Global options:** written in `ggplot()` and apply to all layers
-- **Local options:** written in `geom_*()` and apply only to that layer.
+::: {style="margin-left: 0.5em; width: 50%;"}
+**Local aesthetics:** 
+
+-   in `geom_*()` 
+-   apply only to that layer.
 
 ```{r 02-plot06, message=FALSE, warning=FALSE}
 ggplot(
   data = penguins,
-  mapping = aes(x = flipper_length_mm, y = body_mass_g)
+  mapping = aes(
+    x = flipper_length_mm, 
+    y = body_mass_g
+  )
 ) +
-  geom_point(aes(color = species)) +
+  geom_point(
+    aes(color = species)) +
   geom_smooth(method = "lm")
 ```
+:::
+::::
 
 ## Improving Accessibility {-}
 
@@ -166,7 +191,7 @@ ggplot(
 
 ## Why Stop There? {-}
 
-Use `labs()` add understandable titles and axes.
+Use `labs()` to add understandable titles and axes.
 
 ```{r 02-plot08, message=FALSE, warning=FALSE}
 ggplot(
@@ -205,7 +230,7 @@ ggplot(penguins) +
   geom_point(aes(x = bill_depth_mm, y = bill_length_mm))
 ```
 
-Positive, linear relationship.
+Positive, linear relationship? We'll see more about this in later exercises.
 
 **4. What happens if you make a scatterplot of species vs. bill_depth_mm? What might be a better choice of geom?**
 
@@ -239,7 +264,6 @@ From function documentation, "If `FALSE`, the default, missing values are remove
 ```{r 02-ex06-01}
 ggplot(penguins) +
   geom_point(aes(x = species, y = bill_depth_mm), na.rm = TRUE)
-
 ```
 
 **7. Add the following caption to the plot you made in the previous exercise: "Data come from the `palmerpenguins` package." Hint: Take a look at the documentation for `labs()`.**
@@ -250,7 +274,7 @@ ggplot(penguins) +
 ggplot(penguins) +
   geom_boxplot(aes(x = species, y = bill_depth_mm)) +
   labs(
-    title = "Distribution of Penguin Bill Lengths by Species",
+    title = "Distribution of Penguin Bill Depths by Species",
     subtitle = "For penguins at Palmer Station Antarctica",
     x = "Species",
     y = "Bill depth (in millimeters)",
@@ -277,6 +301,15 @@ ggplot(
 ) +
   geom_point() +
   geom_smooth(se = FALSE)
+
+# THINK BEFORE SCROLLING DOWN
+# 
+# 
+# 
+# 
+# 
+# 
+# 
 ```
 
 **10. Will these two graphs look different? Why/why not?**
@@ -300,9 +333,9 @@ ggplot() +
   )
 ```
 
-Only difference mapping globally vs. locally, so they should look the same.
+Only difference is mapping globally vs. locally, and mapped same in both geoms, so they should look the same.
 
-```{r 02-ex10-02, message=FALSE, warning=FALSE}
+```{r 02-ex10-02, echo=FALSE, message=FALSE, warning=FALSE}
 ggplot(
   data = penguins,
   mapping = aes(x = flipper_length_mm, y = body_mass_g)
@@ -331,7 +364,7 @@ ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
   geom_point()
 ```
 
-## Visualizing Distributions {-}
+## Visualizing Distributions: Barplots {-}
 
 Quickly check out variable distributions.
 
@@ -342,12 +375,16 @@ ggplot(penguins, aes(x = species)) +
   geom_bar()
 ```
 
+## Visualizing Distributions: Histograms {-}
+
 Histograms aid with numerical variables
 
 ```{r 02-numerical, message=FALSE, warning=FALSE}
 ggplot(penguins, aes(x = body_mass_g)) +
   geom_histogram(binwidth = 200)
 ```
+
+## Visualizing Distributions: Density plots {-}
 
 Density plots also help
 
@@ -408,7 +445,7 @@ Here, a `binwidth` of 0.1 seems to be a good compromise between showing granular
 
 `ggplot2` is also incredible at displaying relationships between variables.
 
-#### Numerical Variable and Categorical Variable {-}
+## Numerical Variable and Categorical Variable {-}
 
 Boxplots help here (or color-coded density plots).
 
@@ -417,7 +454,7 @@ ggplot(penguins, aes(x = species, y = body_mass_g)) +
   geom_boxplot()
 ```
 
-#### Two Categorical Variables {-}
+## Two Categorical Variables {-}
 
 Try a bar plot.
 
@@ -433,7 +470,7 @@ ggplot(penguins, aes(x = island, fill = species)) +
   geom_bar(position = "fill")
 ```
 
-#### Two Numerical Variables {-}
+## Two Numerical Variables {-}
 
 Scatterplots shine here.
 
@@ -442,7 +479,7 @@ ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
   geom_point()
 ```
 
-#### Three or More Variables {-}
+## Three or More Variables {-}
 
 Map each to different variable
 
@@ -451,7 +488,7 @@ ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
   geom_point(aes(color = species, shape = island))
 ```
 
-Or use `facet_wrap()` to create small multiples
+Or use `facet_wrap()` to create "small multiples"
 
 ```{r 02-relationship-facet, message=FALSE, warning=FALSE}
 ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
@@ -463,7 +500,7 @@ ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
 
 **1. The `mpg` data frame that is bundled with the `ggplot2` package contains 234 observations collected by the US Environmental Protection Agency on 38 car models. Which variables in `mpg` are categorical? Which variables are numerical? (Hint: Type `?mpg` to read the documentation for the dataset.) How can you see this information when you run `mpg?`**
 
-Running `glimpse(mpg)` gets us most of the way there. We can assume all of the character-based variables ("\<chr\>") are categorical. Since we know we're dealing with cars, we can also recognize that year and cyl (number of cylinders), while technically numerical, are effectively categorical as there is a limited number of possible results. That leaves displ(engine displacement), cty (mpg in city), and hwy(mpg on a highway) as purely numerical.
+Running `glimpse(mpg)` gets us most of the way there. We can assume all of the character-based variables ("\<chr\>") are categorical. Since we know we're dealing with cars, we can also recognize that year and cyl (number of cylinders), while technically numerical, are effectively categorical as there is a limited number of possible results. That leaves displ (engine displacement), cty (mpg in city), and hwy (mpg on a highway) as purely numerical.
 
 **2. Make a scatterplot of `hwy` vs. `displ` using the `mpg` data frame. Next, map a third, numerical variable to color, then size, then both color and size, then shape. How do these aesthetics behave differently for categorical vs. numerical variables?**
 
@@ -492,7 +529,7 @@ ggplot(mpg) +
   geom_point(aes(x = hwy, y = displ, color = cty, size = year, shape = manufacturer))
 ```
 
-First off, shape doesn't accept numerical variables. When a categorical variable is mapped to size, a warning suggests this is ill-advised. With color, numerical variables are given a gradient palette while categoricals get varying colors (We've see this behavior before [think penguin species], so it's not plotted here).
+First off, shape doesn't accept numerical variables. When a categorical variable is mapped to size, a warning suggests this is ill-advised. With color, numerical variables are given a gradient palette while categoricals get varying colors (We've seen this behavior before [think penguin species], so it's not plotted here).
 
 **3. In the scatterplot of `hwy` vs. `displ`, what happens if you map a third variable to `linewidth`?**
 
@@ -510,7 +547,7 @@ ggplot(mpg) +
   geom_point(aes(x = hwy, y = displ, color = cty, size = cty))
 ```
 
-Both work, but it can be kind of redundant.
+Both work, but it can be kind of redundant. It can be useful for colorblind users, though (as we saw before with color + shape).
 
 **5. Make a scatterplot of `bill_depth_mm` vs. `bill_length_mm` and color the points by `species`. What does adding coloring by species reveal about the relationship between these two variables? What about faceting by species?**
 
@@ -525,7 +562,7 @@ ggplot(penguins) +
   facet_wrap(~species)
 ```
 
-Color-coding helps spot the difference in bill sizes by species. Faceting helps the eye notice those differences a little better by taking the "noise" of the other species out of the picture.
+Color-coding helps spot the relationship of bill sizes by species (compare to Exercise 3 in the first block of exercises). Faceting helps the eye notice those relationships a little better by taking the "noise" of the other species out of the picture.
 
 **6. Why does the following yield two separate legends? How would you fix it to combine the two legends?**
 
@@ -573,9 +610,9 @@ The first tells us which species make up certain proportions of an island's over
 ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
   geom_point()
 ggsave(filename = "penguin-plot.png", width = 800, units = "px")
-# Saving 800 x 1983 px image
-# Warning message:
-# Removed 2 rows containing missing values (`geom_point()`). 
+#> Saving 800 x 1983 px image
+#> Warning message:
+#> Removed 2 rows containing missing values (`geom_point()`). 
 ```
 
 Setting `width` and/or `height` helps with reproducibility.
@@ -592,7 +629,7 @@ ggplot(mpg, aes(x = cty, y = hwy)) +
 ggsave("mpg-plot.png")
 ```
 
-It will run the second. In looking at `?ggplot2::ggsave`, we see that the it defaults to the most recent plot run.
+It will run the second. In looking at `?ggplot2::ggsave`, we see that it defaults to the most recent plot run.
 
 **2. What do you need to change in the code above to save the plot as a PDF instead of a PNG? How could you find out what types of image files would work in `ggsave()`?**
 
@@ -645,27 +682,15 @@ But more than likely, you misspelled something.
 
 ::::
 
-
-### The Book {-}
-
-[R4DS book](https://r4ds.had.co.nz/data-visualisation.html)
-
-
-
-### Exercises: {-}
-
-[R for Data Science: Exercise Solutions](https://jrnold.github.io/r4ds-exercise-solutions/)
-
-
-
 ### Resources: {-}
 
-
-- [A Layered Grammar of Graphics](http://vita.had.co.nz/papers/layered-grammar.pdf)
-- [{ggplot2}](https://cran.r-project.org/web/packages/ggplot2/index.html)
-- [ggplot2 extensions - gallery](https://exts.ggplot2.tidyverse.org/gallery/)
-- [R Graphics Cookbook](https://r-graphics.org/)
-- [Gina Reynolds' ggplot flipbook](https://evamaerey.github.io/ggplot_flipbook/ggplot_flipbook_xaringan.html)
+-   [R4DS book (1e)](https://r4ds.had.co.nz/data-visualisation.html)
+-   [R for Data Science: Exercise Solutions (1e)](https://jrnold.github.io/r4ds-exercise-solutions/)
+-   [A Layered Grammar of Graphics](http://vita.had.co.nz/papers/layered-grammar.pdf)
+-   [{ggplot2}](https://cran.r-project.org/web/packages/ggplot2/index.html)
+-   [ggplot2 extensions - gallery](https://exts.ggplot2.tidyverse.org/gallery/)
+-   [R Graphics Cookbook](https://r-graphics.org/)
+-   [Gina Reynolds' ggplot flipbook](https://evamaerey.github.io/ggplot_flipbook/ggplot_flipbook_xaringan.html)
 
 
 ## Meeting Videos {-}
