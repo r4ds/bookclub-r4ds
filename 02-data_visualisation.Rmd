@@ -64,11 +64,7 @@ ggplot(
 )
 ```
 
-<<<<<<< HEAD
 ## Creating a ggplot: geom_\*() {-}
-=======
-## Creating a ggplot: geom_*() {-}
->>>>>>> ec1eed4000bc217db4bf220eceda971d5563361c
 
 ```{r 02-plot02}
 ggplot(
@@ -80,11 +76,7 @@ ggplot(
 
 (warning = 2 penguins in dataset w/ missing body mass / flipper length)
 
-<<<<<<< HEAD
-## Adding Aesthetics {-}
-=======
 ## Adding Aesthetics and Layers {-}
->>>>>>> ec1eed4000bc217db4bf220eceda971d5563361c
 
 - **Aesthetics** = visual properties of the plot.
 - More aesthetics may tell the data's story better.
