@@ -2,226 +2,214 @@
 
 **Learning objectives:**
 
-- Understand the **RStudio** interface
-- Use the R **command line** boldly
-- Follow good **style conventions** when writing code
-- Confidently call **functions** in R
+-   Review some basic R coding.
+-   Follow good **style conventions** when writing code.
+-   Discuss the importance of commenting your code.
+-   Review good practices when naming objects.
+-   Confidently call **functions** in R.
 
-## The Console Pane 
+## Coding basics {.unlisted .unnumbered}
 
-![](images/console_pane.png)
+1. Basic math calculations 
 
+```{r}
+1 / 200 * 30
+(59 + 73 + 2) / 3
+sin(pi / 2)
+```
+2. Create new objects using the 'assignment operator' `<-`
 
-## The Script Pane {.unlisted .unnumbered}
+  - In windows the shortcut is 'ALT -'. 
+  - In Mac the shortcut is 'Option -'.
+  - I read it as "assign", so the following is "To object x assign  three by four" OR "three by four is assigned to object x" BUT the book recommends: "object name gets value/s".
 
-
-![](images/script_pane.png)
-
-## The Environment Pane {.unlisted .unnumbered}
-
-
-![](images/environment_pane.png)
-
-## The Other Pane {.unlisted .unnumbered}
-
-
-![](images/files_pane.png)
-
-## Using the Console {.unlisted .unnumbered}
-
-Conceptually, everything we do in R is a series of commands. The console is where we can enter these commands.
-
-By default, entering `<thing>` means "print out `<thing>`."
-
-```{r 03-01}
-4
+```{r}
+x <- 3*4
 ```
 
-## Using the Console {.unlisted .unnumbered}
+  - Although some times you can go the other way `->`. I've seen this with graphs mostly.
 
-R has some pre-defined named objects:
+```{r}
+library(ggplot2)
+ggplot(mtcars, aes(wt, hp))+
+  geom_point() -> plot01
 
-```{r 03-02}
-pi
+plot01
 ```
 
-This one is surprisingly useful:
+  - *Double assign or scoping assing `<<-`?!*
 
-```{r 03-03}
-letters
+3. Combine elements into a vector with `c()`
+
+- Basic arithmetic operations applied to every element of a vector. 
+
+```{r}
+primes <- c(2, 3, 5, 7, 11, 13)
+primes * 2
 ```
 
-## Using the Console {.unlisted .unnumbered}
 
-What it means to "print out" a thing depends on what kind of thing it is.
+## Comments {.unlisted .unnumbered}
 
-```{r 03-05}
-ggplot2::diamonds
+  - Use `#` to insert any comments in R. 
+  
+```{r}
+# Create vector of primes 
+primes <- c(2, 3)
+
+# Multiply primes by 2
+primes * 2
 ```
 
-## Using the Console {.unlisted .unnumbered}
-
-Actually, entering `<thing>` really means "**evaluate** and print `<thing>`."
-
-```{r 03-06}
-cos(pi)
-```
-
-I use R as a desktop calculator a lot.
-
-```{r 03-07}
-60*60*24
-```
+  - Commenting your own code can save you, your future you, and collaborators a lot of time.
+  - *Why* of your code, not the how or what. 
+    - For example `geom_smooth()` has an argument called `span`. Write a comment if you decide to change the default value of 0.75 to 0.9. 
 
 
 ## Assigning Names {.unlisted .unnumbered}
 
-Sometimes you don't just want to print out a thing, especially if it's a complex evaluation. You want to save it to a named object so that you can do more stuff with it. 
-Use the assignment arrow (`<-`) for this.
+  - Different ways to assign names. 
+  - Object names must start with a letter, contain letters, numbers, `_`, `.`. 
+  - Descriptive names. 
+  - The book recommends snake case. 
+  - R is case-sensitive! And it can't read your mind.
+  - Sticking with a good style convention will make your code more readable.
+  - Use descriptive names. Long names are ok!
+  - Typos matter! 
 
-```{r 03-08}
-tau <- 2*pi
+![](images/cases.png)
+
+## Calling Functions {.unlisted .unnumbered}
+
+Functions overall look like this: 
+
+```{r, eval=FALSE}
+function_name(argument1 = value 1, 
+              argument2 = value 2, 
+              ...)
 ```
 
-Most programming languages use the equals sign (`=`) for assignment, and this also works in R. But assignment is really a conceptually distinct thing from mathematical equality, so it makes sense to use a different symbol. It's a bit more annoying to type, though, so get used to the keyboard shortcut Alt+minus.
+  - Use TAB to show a popup of possible completions of a function and its arguments. Use ESC to abort the suggestions. 
+  - Usually, we can skip the names of the arguments but it can make code more readable. 
+  - The order of the arguments is not important but if you skip names remember the order of the defined function. 
+  - Functions and objects are always displayed in the Environment tab in RStudio. 
 
-Objects that you have named will show up in the "Environment" panel.
-
-## Assigning and Printing {.unlisted .unnumbered}
-
-By default, when you make an assignment, the result of the evaluation **is not** printed in the console. To assign **and** print in one command, surround the assignment with parentheses:
-
-```{r 03-09}
-(tau <- 2*pi)
+```{r}
+seq (from = 1,  to = 10)
+seq(1, 10)
 ```
-
-
-## Pronouncing Code {.unlisted .unnumbered}
-
-It's easier to remember and understand a thing if you can say it (either out loud or in your head). 
-
-A common pronunciation of `<-` is "gets," so `tau <- 2*pi` would be read as
-"tau gets two times pi."
-
-
-
-## Naming Things
-
-<font size="4"> *There are only two hard things in computer science: cache invalidation and naming things. And off-by-one errors.* </font>
-
-- Picking good names for things is both harder and more important than you might guess.
-- Having good guidelines for naming things can save you a lot of mental effort down the road.
-- Names in R can only contain letters, numbers, `_`, and `.`.
-- R is case-sensitive! And it can't read your mind.
-- Sticking with a good style convention will make your code more readable, both for others, and for yourself in the future.
- 
- Some suggestions:
- 
-- Use descriptive names. Long names are ok!
-- Use all lowercase by default, with `_` as a separator.
-  - `student_item_data`
-  - `num_students`
-  - `fall2020_math_courses_with_multiple_sections`
-
-
-
-## Functions
-
-A function in R is like a function in math: it's a box that takes in input and returns output.^[Functions may also have *side effects*, which is something we can talk about later.]
-
-Functions can take zero, one, or more than one object as input. When you *call* a function, you specify values (*arguments*) for the inputs. Evaluating the function call gives the output of the function.
-
-```{r 03-10}
-length(letters)
-```
-
-Or:
-
-```{r 03-12}
-nrow(ggplot2::diamonds)
-```
-
-## Functions {.unlisted .unnumbered}
-
-The inputs (the function *parameters*) have names. When you pass in the function arguments, you can do so by name:
-
-```{r 03-13}
-seq(from = 1, to = 10)
-```
-
-Specifying names is (usually) optional, but it can make your code more readable, so it's a good habit to get into. If you name the arguments, it doesn't matter what order you put them in:
-
-```{r 03-14}
-seq(to = 10, from = 1)
-```
-
-If you don't specify names, the function matches the arguments to the parameters in the order they appear in the function definition.
-
-```{r 03-15}
-seq(10, 1)
-```
-
+  
 ## Other RStudio Features {.unlisted .unnumbered}
 
 Explore on your own:
 
-- tab autocomplete
-- up-arrow to see console history
-- type, then command- (control-) up-arrow to search history
-- alt-shift-k to see lots of shortcuts
-- one of my recent favorites: alt-command-down-arrow (inside a script)
+  -   Console: up-arrow to see console history
+  -   Console: type, then command- (control-) up-arrow to search history
+  -   alt-shift-k to see lots of shortcuts
+  -   Script: one of my recent favorites: alt-command-down-arrow. 
 
-## Meeting Videos
+## Exercises
+
+1. Why does this code not work? 
+
+```{r, eval=FALSE}
+my_variable <- 10
+my_varıable 
+#> Error in eval(expr, envir, enclos): object 'my_varıable' not found
+```
+> Because the name on the second line doesn't include and `i`. Remember, typos matter. 
+
+2. Tweak each of the following R commands so that they run correctly:
+
+```{r, eval = FALSE}
+libary(todyverse)
+
+ggplot(dTA = mpg) + 
+  geom_point(maping = aes(x = displ y = hwy)) +
+  geom_smooth(method = "lm)
+```
+
+Here is the correct code with no typos: 
+
+```{r, eval=FALSE}
+library(tidyverse)
+
+ggplot(data = mpg)+
+  geom_point(mapping = aes(x = display, y = hwy)) +
+  geom_smooth(method = "lm")
+```
+
+3. Press Option + Shift + K / Alt + Shift + K. What happens? How can you get to the same place using the menus?
+
+> This takes you to the list of shortcuts. Another way of getting here is: Tools > Keyboard shortcuts help. 
+
+4. Let’s revisit an exercise from the Section 2.6. Run the following lines of code. Which of the two plots is saved as mpg-plot.png? Why?
+
+```{r, eval=FALSE}
+my_bar_plot <- ggplot(mpg, aes(x = class)) +
+  geom_bar()
+my_scatter_plot <- ggplot(mpg, aes(x = cty, y = hwy)) +
+  geom_point()
+ggsave(filename = "mpg-plot.png", plot = my_bar_plot)
+```
+
+> The arguments for ggsave are (`?ggsave` in the console): filename, plot, device, path, ...). Plot refers to the plot to be saved, so in this case the first plot named `my_bar_plot` will be saved as mpg-plot.png. 
+
+## Meeting Videos {.unlisted .unnumbered}
 
 ### Cohort 5
 
 `r knitr::include_url("https://www.youtube.com/embed/nQnMm6kyJbE")`
 
 <details>
-  <summary> Meeting chat log </summary>
-  
-```
-00:14:44	Jon Harmon (jonthegeek):	Ignore the URL on these, I should have made my coworker crop those out since it isn't relevant outside of our work environment 🙃
-00:47:00	Jon Harmon (jonthegeek):	?variable.names
-00:58:53	Becki R. (she/her):	jon_doe is an object?
-00:59:05	Wai-Yin:	Yes.
-01:10:33	Becki R. (she/her):	Is there a list of verbal substitutions like "<- = get"?
-01:16:05	Jon Harmon (jonthegeek):	Not yet! Some more will come up as we go through the book... and I plan on putting something together with them before too long!
-01:16:56	Becki R. (she/her):	Nice!
-01:20:44	docksbox@pm.me:	Thanks
-01:22:41	Becki R. (she/her):	Thanks everyone! I will not be here next week.
-```
-</details>
 
+<summary>Meeting chat log</summary>
+
+```         
+00:14:44    Jon Harmon (jonthegeek):    Ignore the URL on these, I should have made my coworker crop those out since it isn't relevant outside of our work environment 🙃
+00:47:00    Jon Harmon (jonthegeek):    ?variable.names
+00:58:53    Becki R. (she/her): jon_doe is an object?
+00:59:05    Wai-Yin:    Yes.
+01:10:33    Becki R. (she/her): Is there a list of verbal substitutions like "<- = get"?
+01:16:05    Jon Harmon (jonthegeek):    Not yet! Some more will come up as we go through the book... and I plan on putting something together with them before too long!
+01:16:56    Becki R. (she/her): Nice!
+01:20:44    docksbox@pm.me: Thanks
+01:22:41    Becki R. (she/her): Thanks everyone! I will not be here next week.
+```
+
+</details>
 
 ### Cohort 7
 
 `r knitr::include_url("https://www.youtube.com/embed/JDOQDfpYBmY")`
 
 <details>
-<summary> Meeting chat log </summary>
 
+<summary>Meeting chat log</summary>
+
+```         
+00:29:38    Dolleen Osundwa:    is a tibble similar to the table () function?
 ```
-00:29:38	Dolleen Osundwa:	is a tibble similar to the table () function?
-```
+
 </details>
-
 
 ### Cohort 8
 
 `r knitr::include_url("https://www.youtube.com/embed/FeSYfRx2esU")`
 
 <details>
-<summary> Meeting chat log </summary>
 
+<summary>Meeting chat log</summary>
+
+```         
+00:06:13    Shamsuddeen Muhammad:   book_club-py4da
+00:06:16    Shamsuddeen Muhammad:   #book_club-py4da
+00:08:47    Shamsuddeen Muhammad:   https://www.youtube.com/watch?v=8tq1C8spV_g
+00:09:03    Abdou Daffeh:   Hey everyone
+00:34:25    Abdou Daffeh:   sorry do you mean vscode?
+00:34:45    Hamza:  Yes he is using VSCode
+00:35:13    Abdou Daffeh:   thanks, I have to check it out
+00:41:22    Shamsuddeen Muhammad:   https://www.rscreencasts.com/content_pages/hbcu-enrollment.html
 ```
-00:06:13	Shamsuddeen Muhammad:	book_club-py4da
-00:06:16	Shamsuddeen Muhammad:	#book_club-py4da
-00:08:47	Shamsuddeen Muhammad:	https://www.youtube.com/watch?v=8tq1C8spV_g
-00:09:03	Abdou Daffeh:	Hey everyone
-00:34:25	Abdou Daffeh:	sorry do you mean vscode?
-00:34:45	Hamza:	Yes he is using VSCode
-00:35:13	Abdou Daffeh:	thanks, I have to check it out
-00:41:22	Shamsuddeen Muhammad:	https://www.rscreencasts.com/content_pages/hbcu-enrollment.html
-```
+
 </details>

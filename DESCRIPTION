@@ -17,6 +17,7 @@ Imports:
     duckdb,
     emo,
     gapminder,
+    ggplot2,
     ggthemes,
     googlesheets4,
     hexbin,
