@@ -4,56 +4,60 @@
 
 -   Review some basic R coding.
 -   Follow good **style conventions** when writing code.
--   Discuss the importance of commenting your code.
--   Review good practices when naming objects.
+-   Explain the importance of commenting your code.
+-   Recognize good practices when naming objects.
 -   Confidently call **functions** in R.
 
-## Coding basics {.unlisted .unnumbered}
+## Basic math calculations {-}
 
-1. Basic math calculations 
-
-```{r}
+```{r 03-basic-math}
 1 / 200 * 30
 (59 + 73 + 2) / 3
 sin(pi / 2)
 ```
-2. Create new objects using the 'assignment operator' `<-`
 
-  - In windows the shortcut is 'ALT -'. 
-  - In Mac the shortcut is 'Option -'.
-  - I read it as "assign", so the following is "To object x assign  three by four" OR "three by four is assigned to object x" BUT the book recommends: "object name gets value/s".
+## Create new objects {-}
 
-```{r}
-x <- 3*4
-```
+Use the 'assignment operator' `<-`
 
-  - Although some times you can go the other way `->`. I've seen this with graphs mostly.
+-   Windows: 'ALT -'. 
+-   Mac: 'Option -'.
+-   Pronunciation: `x <- 3*4`
+    -   "to ... assign" or "is assigned to": "To object x ***assign*** three by four" OR "three by four ***is assigned to*** object x" 
+    -   "gets": "x ***gets*** 3 times 4".
 
-```{r}
+## Create new objects: Reverse assign {-}
+
+Can go the other way `->`, eg graphs:
+
+```{r 03-reverse-assign}
 library(ggplot2)
-ggplot(mtcars, aes(wt, hp))+
+ggplot(mtcars, aes(wt, hp)) +
   geom_point() -> plot01
 
 plot01
 ```
 
-  - *Double assign or scoping assing `<<-`?!*
+## Create new objects: Double assign {-}
 
-3. Combine elements into a vector with `c()`
+-   *Double assign or scoping assign `<<-`?!*
 
-- Basic arithmetic operations applied to every element of a vector. 
+## Combining elements {-}
 
-```{r}
+-   Combine elements into a vector with `c()`
+-   Basic arithmetic operations applied to every element of a vector. 
+
+```{r 03-vector-arithmetic}
 primes <- c(2, 3, 5, 7, 11, 13)
 primes * 2
 ```
 
 
-## Comments {.unlisted .unnumbered}
+## Comments {-}
 
-  - Use `#` to insert any comments in R. 
+Use `#` to insert comments in R. 
   
-```{r}
+```{r 03-comments, eval = FALSE}
 # Create vector of primes 
 primes <- c(2, 3)
 
@@ -61,67 +65,79 @@ primes <- c(2, 3)
 primes * 2
 ```
 
-  - Commenting your own code can save you, your future you, and collaborators a lot of time.
-  - *Why* of your code, not the how or what. 
-    - For example `geom_smooth()` has an argument called `span`. Write a comment if you decide to change the default value of 0.75 to 0.9. 
+## Comments: Why? {-}
+
+-   Commenting your own code can save (future) you & and collaborators time.
+- *Why* of your code, not the *how* or *what.* 
+    -   Bad: `# Changed default value to 0.9`
+    -   Good: `# Increased smoothing parameter to better capture the trend in the data.`
 
 
-## Assigning Names {.unlisted .unnumbered}
+## Assigning names {-}
 
-  - Different ways to assign names. 
-  - Object names must start with a letter, contain letters, numbers, `_`, `.`. 
-  - Descriptive names. 
-  - The book recommends snake case. 
-  - R is case-sensitive! And it can't read your mind.
-  - Sticking with a good style convention will make your code more readable.
-  - Use descriptive names. Long names are ok!
-  - Typos matter! 
+-   Names must start with a letter, contain letters, numbers, `_`, `.`. 
+-   Good style convention ➡️ more readable code.
+-   Use descriptive names. Long names are ok!
+-   Book recommends `snake_case` (see next slide). 
+-   R is case-sensitive! And it can't read your mind.
+-   Typos matter! 
+
+## Assigning names: Cases {-}
 
 ![](images/cases.png)
 
-## Calling Functions {.unlisted .unnumbered}
+## Calling Functions {-}
 
 Functions overall look like this: 
 
-```{r, eval=FALSE}
+```{r 03-function-signature, eval=FALSE}
 function_name(argument1 = value 1, 
               argument2 = value 2, 
               ...)
 ```
 
-  - Use TAB to show a popup of possible completions of a function and its arguments. Use ESC to abort the suggestions. 
-  - Usually, we can skip the names of the arguments but it can make code more readable. 
-  - The order of the arguments is not important but if you skip names remember the order of the defined function. 
-  - Functions and objects are always displayed in the Environment tab in RStudio. 
+-   Functions and objects are always displayed in the Environment tab in RStudio. 
 
-```{r}
-seq (from = 1,  to = 10)
+## Calling Functions: Arguments {-}
+
+-   TAB to show possible completions of function & arguments.
+    -   Use ESC to abort the suggestions. 
+-   Can usually skip arg names, but can make code more readable. 
+-   Order of named args isn't important
+-   If you skip names remember the order of the defined function. 
+
+```{r 03-arg-order, eval = FALSE}
+# All of these are equivalent
+seq(from = 1,  to = 10)
+seq(to = 10,  from = 1)
 seq(1, 10)
+#> [1]  1  2  3  4  5  6  7  8  9 10
 ```
   
-## Other RStudio Features {.unlisted .unnumbered}
+## Other RStudio Features {-}
 
 Explore on your own:
 
-  -   Console: up-arrow to see console history
-  -   Console: type, then command- (control-) up-arrow to search history
-  -   alt-shift-k to see lots of shortcuts
-  -   Script: one of my recent favorites: alt-command-down-arrow. 
+-   Console: ⬆️ to see console history
+-   Console: type, then (ctrl/cmd)- ⬆️ to search history
+-   (alt/opt)-shift-k to see lots of shortcuts
+-   *One of my recent favorites: alt-command-⬇️.*
 
 ## Exercises
 
 1. Why does this code not work? 
 
-```{r, eval=FALSE}
+```{r 03-ex-01, eval=FALSE}
 my_variable <- 10
 my_varıable 
 #> Error in eval(expr, envir, enclos): object 'my_varıable' not found
 ```
+
 > Because the name on the second line doesn't include and `i`. Remember, typos matter. 
 
 2. Tweak each of the following R commands so that they run correctly:
 
-```{r, eval = FALSE}
+```{r 03-ex-02, eval = FALSE}
 libary(todyverse)
 
 ggplot(dTA = mpg) + 
@@ -129,9 +145,9 @@ ggplot(dTA = mpg) +
   geom_smooth(method = "lm)
 ```
 
-Here is the correct code with no typos: 
+> Here is the correct code with no typos: 
 
-```{r, eval=FALSE}
+```{r 03-ex-02b, eval=FALSE}
 library(tidyverse)
 
 ggplot(data = mpg)+
@@ -145,7 +161,7 @@ ggplot(data = mpg)+
 
 4. Let’s revisit an exercise from the Section 2.6. Run the following lines of code. Which of the two plots is saved as mpg-plot.png? Why?
 
-```{r, eval=FALSE}
+```{r 03-ex-04, eval=FALSE}
 my_bar_plot <- ggplot(mpg, aes(x = class)) +
   geom_bar()
 my_scatter_plot <- ggplot(mpg, aes(x = cty, y = hwy)) +
@@ -155,7 +171,7 @@ ggsave(filename = "mpg-plot.png", plot = my_bar_plot)
 
 > The arguments for ggsave are (`?ggsave` in the console): filename, plot, device, path, ...). Plot refers to the plot to be saved, so in this case the first plot named `my_bar_plot` will be saved as mpg-plot.png. 
 
-## Meeting Videos {.unlisted .unnumbered}
+## Meeting Videos {-}
 
 ### Cohort 5
 
