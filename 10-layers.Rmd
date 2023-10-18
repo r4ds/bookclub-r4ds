@@ -3,9 +3,19 @@
 
 **Learning objectives**
 
-- We are going to learn about the layered grammar of graphics
+- We are going to learn about the layered grammar of graphics, including:
 
-```{r}
+  - using aesthetics and geometries to build plots; 
+
+  - using facets for splitting the plot into subsets;
+
+  - using statistics for understanding how geoms are calculated;
+
+  - making position adjustments when geoms might otherwise overlap; and
+
+  - how coordinate systems allow us to fundamentally change what x and y mean. 
+
+```{r include=FALSE}
 library(tidyverse)
 ```
 
@@ -16,12 +26,23 @@ library(tidyverse)
 
 ## Aesthetic mappings
 
-- We will be working with the **mpg** data frame that is bundled with the ggplot2 package which contains 234 observations collected by the US Environmental Protection Agency on 38 car models.
+- We will be working with the `mpg` data frame that is bundled with the ggplot2 package which contains 234 observations collected by the US Environmental Protection Agency on 38 car models. Among the variables in `mpg` are:
 
-```{r}
+  -`displ`: A car’s engine size, in liters. A numerical variable.
+
+  -`hwy`: A car’s fuel efficiency on the highway, in miles per gallon (mpg). A car with a low fuel efficiency consumes more fuel than a car with a high fuel efficiency when they travel the same distance. A numerical variable.
+
+  -`class`: Type of car. A categorical variable.
+
+```{r include=FALSE}
 mpg
 ```
 
+## Mapping categorical variables to aesthetics 
+
+- Let’s start by visualizing the relationship between `displ` and `hwy` for various `class`es of cars. 
+
+- By default ggplot2 will only use six shapes at a time so additional groups will go unplotted when you use the shape aesthetic. There are 62 SUVs in the dataset and they’re not plotted.
 
 ```{r, figures-side1, fig.show="hold", out.width="50%"}
 
@@ -36,7 +57,13 @@ ggplot(mpg, aes(x = displ, y = hwy, shape = class))+
 geom_point()
 ```
 
-**Similarly, we can map class to size or alpha (transparency) aesthetics as well.**
+
+## Mapping categorical variables to aesthetics cont.
+
+- Similarly, we can map `class` to `size` or `alpha` (transparency) aesthetics as well.
+
+
+- We get warnings because mapping a non-ordinal discrete variable (`class`) to an ordered aesthetic (`size` or `alpha`) is generally not a good idea because it implies a ranking that does not in fact exist.
 
 ```{r, figures-side, fig.show="hold", out.width="50%"}
 par(mar = c(4, 4, .1, .1))
@@ -50,15 +77,20 @@ ggplot(mpg, aes(x = displ, y = hwy, alpha = class))+
 geom_point()
 ```
 
-**Both of these produce warnings as well:**
+##
 
-- Mapping a non-ordinal discrete (categorical) variable (class) to an ordered aesthetic (size or alpha) is generally not a good idea because it implies a ranking that does not in fact exist.
+- Once you map an aesthetic, ggplot2 takes care of the rest by
+  - selecting a reasonable scale to use with the aesthetic, 
+  - and it constructing a legend that explains the mapping between levels and values. 
+  
+- For x and y aesthetics, ggplot2 does not create a legend, but it creates an axis line with tick marks and a label. 
+  - The axis line acts as a legend; it explains the mapping between locations and values.
 
-- Similarly, we could have mapped class to the alpha aesthetic, which controls the transparency of the points, or to the shape aesthetic, which controls the shape of the points.
 
-- Once you map an aesthetic, ggplot2 takes care of the rest. It selects a reasonable scale to use with the aesthetic, and it constructs a legend that explains the mapping between levels and values. For x and y aesthetics, ggplot2 does not create a legend, but it creates an axis line with tick marks and a label. The axis line acts as a legend; it explains the mapping between locations and values.
+## Manually setting aesthetic propoerties
 
-- We can also set the aesthetic properties of your geom manually. For example, we can make all of the points in our plot blue:
+- We can also set the aesthetic properties of your geom manually. For example, we can make all of the points in our plot blue.
+- The color doesn't convey information about a variable, but only changes the appearance of the plot. 
 
 ```{r}
 ggplot(mpg, aes(x = displ, y = hwy)) + 
@@ -66,14 +98,41 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
 ```
 
 
+## 
+
+- When manually setting aesthetic propoerties, we need to pick a value that makes sense for that aesthetic:
+  - The name of a color as a character string, e.g., color = "blue"
+  - The size of a point in mm, e.g., size = 1
+  - The shape of a point as a number, e.g, shape = 1, as shown below.
+
+-  We can learn more about aesthetics mapping by looking at this vignettes [**aesthetic specifications vignette**](https://ggplot2.tidyverse.org/articles/ggplot2-specs.html)
+
 ![](images/shape.png)
 
- We can learn more about aesthetics mapping by looking at this vignettes [**aesthetic specifications vignette**](https://ggplot2.tidyverse.org/articles/ggplot2-specs.html)
  
- 
- **11.2.1 Exercises**
+## 10.2 Exercises
+
+### 10.2.1.1
+
+Create a scatterplot of hwy vs. displ where the points are pink filled in triangles.
+
+```{r}
+ggplot(mpg, aes(x = displ, y = hwy)) + 
+  geom_point(color = "pink", shape= 17)
+```
+
+
+### 10.2.1.4
+
+```{r}
+ggplot(mpg, aes(x = displ, y = hwy, color = displ < 5)) +
+geom_point()
+```
+
 
 ## Geometric objects
+
+- The plots below contain the same x variable, the same y variable, and both describe the same data, but are not identical because each plot uses a different geometric object, geom, to represent the data. 
 
 ```{r, figures-side3, fig.show="hold", out.width="50%"}
 
@@ -88,6 +147,14 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
   geom_smooth()
 ```
 
+## Geometric objects cont.
+
+- Not every aesthetic works with every geom. 
+
+- For example, you could set the shape of a point, but you couldn’t set the “shape” of a line. If you try, ggplot2 will silently ignore that aesthetic mapping. 
+
+- On the other hand, you could set the linetype of a line. Here we see, `geom_smooth()` will draw a different line, with a different linetype, for each unique value of the variable that you map to linetype.
+
 ```{r, figures-side4, fig.show="hold", out.width="50%"}
 
 par(mar = c(4, 4, .1, .1))
@@ -101,9 +168,11 @@ ggplot(mpg, aes(x = displ, y = hwy, linetype = drv))+
 geom_smooth()
 ```
 
+## 
+
 ```{r, figures-side5, fig.show="hold", out.width="50%"}
 
-par(mar = c(4, 4, .1, .1))
+#par(mar = c(4, 4, .1, .1))
 
 ggplot(mpg, aes(x = displ, y = hwy)) +
   geom_smooth()
@@ -115,7 +184,9 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
   geom_smooth(aes(color = drv), show.legend = FALSE)+geom_smooth()
 ```
 
-- We can also specify different data for different layer. Here, we use red points as well as open circles to highlight two-seater cars. The local data argument in geom_smooth() overrides the global data argument in ggplot() for that layer only.
+##
+
+- We can also specify different data for different layer. Here, we use red points as well as open circles to highlight two-seater cars. The local data argument in `geom_smooth()` overrides the global data argument in `ggplot()` for that layer only.
 
 
 ```{r}
@@ -156,11 +227,13 @@ ggplot2 provides more than 40 geoms but these don’t cover all possible plots o
 The best place to get a comprehensive overview of all of the geoms ggplot2 offers, as well as all functions in the package, is the reference page:[**ggplot2-reference page**](https://ggplot2.tidyverse.org/reference)
 
 
-**Exercises 11.3.1**
+## 10.3 Exercises
 
 ## Facets
 
-Facet is used to splits a plot into subplots that each display one subset of the data based on a categorical variable.
+- Facets are used to splits a plot into subplots that each display one subset of the data based on a categorical variable.
+
+- To facet your plot with the combination of two variables, switch from `facet_wrap()`, which we learned about in chapter 2,  to `facet_grid()`, which uses a double sided formula, `rows~cols`.
 
 ```{r, figures-side7, fig.show="hold", out.width="50%"}
 
@@ -177,6 +250,8 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
   geom_point() + 
   facet_grid(drv ~ cyl)
 ```
+
+## 10.4 Exercises
 
 ## Statistical transformations
 
@@ -209,6 +284,8 @@ ggplot(diamonds) +
 ```
 
 - **ggplot2 provides more than 20 stats for you to use. Each stat is a function, so you can get help in the usual way, e.g. ?stat_bin.**
+
+## 10.5 Exercises
 
 ## Position adjustments
 
@@ -250,6 +327,8 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
   geom_point(position = "jitter")
 ```
 
+## 10.6 Exercises
+
 ## Coordinate systems
 
 Coordinate systems are probably the most complicated part of ggplot2. The default coordinate system is the Cartesian coordinate system where the x and y positions act independently to determine the location of each point. There are two other coordinate systems that are occasionally helpful.
@@ -289,27 +368,15 @@ bar + coord_flip()
 bar + coord_polar()
 ```
 
-## Summary
+## 10.7 Exercises
 
-- In this chapter we learned about the layered grammar of graphics starting with aesthetics and geometries to build a simple plot. 
+## Resources
 
-- We used facets for splitting the plot into subsets.
-
-- Statistics for understanding how geoms are calculated.
-
-- Position adjustments for controlling the fine details of position when geoms might otherwise overlap.
-
-- Coordinate systems allow us to fundamentally change what x and y mean. 
-
-- One layer we have not yet touched on is theme, which we will introduce in **Section 13.5**.
-
-- Two very useful resources for getting an overview of the complete ggplot2 functionality are the ggplot2 cheatsheet [which you can find at](https://posit.co/resources/cheatsheets) [and the ggplot2 package website](https://ggplot2.tidyverse.org).
-
-## Learning More
-
-- [r4ds.io/join](r4ds.io/join) for more book clubs!
+- Two very useful resources for getting an overview of the complete ggplot2 functionality are the [ggplot2 cheatsheet](https://posit.co/resources/cheatsheets) and the [ggplot2 package website](https://ggplot2.tidyverse.org).
+- [ggplot2 Extension Gallery](https://exts.ggplot2.tidyverse.org/gallery/)
 - [R Graph Gallery](https://www.r-graph-gallery.com/ggplot2-package.html)
 - The [Graphs section](http://www.cookbook-r.com/Graphs/) of the R Cookbook
+- [r4ds.io/join](r4ds.io/join) for more book clubs!
 
 ## Meeting Videos
 
