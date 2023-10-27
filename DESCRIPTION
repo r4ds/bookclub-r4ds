@@ -24,6 +24,7 @@ Imports:
     hrbrthemes,
     htmlwidgets,
     janitor,
+    Lahman,
     lubridate,
     manipulate,
     maps,
