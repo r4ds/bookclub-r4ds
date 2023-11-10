@@ -4,34 +4,31 @@
 
 **Learning objectives:**
   
-- Introduce the most important point's of the **tidyverse style** guide.
+-   Use the styler package to apply style rules.
+-   Select good variable names.
+-   Appropriately utilize spaces ` ` between mathematical operators.
+-   Apply the `|>` operator to make our code more readable.
 
-* Good coding style is synonymous to correct punctuation in writing.
-    + In this chapter well learn how to:
-        - Select good variable names.
-        - Appropriately utilize spaces ` ` between mathematical operators.
-        - Apply the `|>` operator to make our code more readable.
-    + **Lorenz Walthert's** styler package is a good place to start from
-        - Install it with install.packages("styler"), an easy way to use it, is via RStudio’s command palette.
-        - Open the palette by pressing **Cmd/Ctrl + Shift + P**, then type **“styler”** to see all the shortcuts provided by styler.
+## Use styler {-}
 
+{styler} 📦 by Lorenz Walthert helps quickly apply styles
 
-```{r eval=FALSE}
-library(tidyverse)
-library(nycflights13)
-```
+-   Install with `install.packages("styler")`
+-   Use via RStudio’s command palette
+    -   **Cmd/Ctrl + Shift + P** to open pallette
+    -   Type **“styler”** to see all styler shortcuts
 
+## Names {-}
 
-
-## Names
-
-Remember that variable names (those created by `<-` and those created by `mutate()`) should use only:
+Names should use only:
 
 1. lowercase letters
 2. numbers 
 3. underscore
 
-Use underscore to separate words within a name (also known as `snake_case`):
+## Use snake_case for names {-}
+
+`snake_case` = preferred style
 
 ```{r eval=FALSE}
 # Strive for:
@@ -41,14 +38,22 @@ short_flights <- flights |> filter(air_time < 60)
 SHORTFLIGHTS <- flights |> filter(air_time < 60)
 ```
 
-Prefer long, descriptive names that are easy to understand, rather than concise names that are fast to type.\
+## Names should be descriptive {-}
 
-If you have a bunch of names for related things, do your best to be consistent.\
+-   Good: Long, descriptive names
+    -   Easy to understand
+-   Bad: Concise names
+    -   Fast to type, but RStudio autocompletes long names anyway
+
+Be consistent with related names!
 
 
-## Spaces
+## Spaces {-}
 
-*Put spaces on either side of mathematical operators apart from `^` (i.e., `+`, `-`, `==`, `<`, …), and around the assignment operator (`<-`).\
+Spaces around:
+
+-   Math operators (except `^`)
+-   Assignment operator (`<-`)
 
 ```{r eval=FALSE}
 # Strive for
@@ -58,23 +63,20 @@ z <- (a + b)^2 / d
 z<-( a + b ) ^ 2/d
 ```
 
-Don’t put spaces inside or outside parentheses for regular function calls.\
+## Spaces in function calls {-}
 
-**Always put a space after a comma, just like in regular English.**\
+-   No spaces inside/outside parentheses
+-   Spaces after commas (like regular English)
 
 ```{r eval=FALSE}
 # Strive for
 mean(x, na.rm = TRUE)
 
 # Avoid
-mean (x ,na.rm=TRUE)
+mean (x ,na.rm=TRUE )
 ```
 
-It’s OK to add extra spaces if it improves alignment.\
-
-For example, if you’re creating multiple variables in `mutate()`, you might want to add spaces so that all the `=` line up.\
-
-This makes it easier to skim the code.\
+## Use extra spaces for alignment {-}
 
 ```{r eval=FALSE}
 flights |> 
@@ -86,20 +88,11 @@ flights |>
 ```
 
 
-## Pipes
-
-`|>` should always have a space before it and should typically be the last thing on a line.
-
-This makes it easier to:
-
-1. add new steps
-2. rearrange existing steps
-3. modify elements within a step
-4. to get a 50,000 ft view by skimming the verbs on the left-hand side
+## Pipes: Spacing {-}
 
 ```{r eval=FALSE}
-# Strive for 
-flights |>  
+# Strive for space before |>, end line with |>
+flights |> 
   filter(!is.na(arr_delay), !is.na(tailnum)) |> 
   count(dest)
 
@@ -107,9 +100,17 @@ flights |>
 flights|>filter(!is.na(arr_delay), !is.na(tailnum))|>count(dest)
 ```
 
-If the function you’re piping into has named arguments (like `mutate()` or `summarize()`), put each argument on a new line.
+Easier to:
 
-If the function doesn’t have named arguments (like `select()` or `filter()`) keep everything on one line unless it doesn’t fit, in which case you should put each argument on its own line.
+1. add new steps
+2. rearrange existing steps
+3. modify elements within a step
+4. to get a 50,000 ft view by skimming the verbs on the left-hand side
+
+## Pipes: Newlines {-}
+
+-   Put named arguments on newline
+-   Put unnamed arguments on one line if they fit
 
 ```{r eval=FALSE}
 # Strive for
@@ -128,7 +129,7 @@ flights |>
   summarize(delay = mean(arr_delay, na.rm = TRUE), n = n())
 ```
 
-After the first step of the pipeline, indent each line by two spaces.\
+## Pipes: Indentation {-}
 
 ```{r eval=FALSE}
 # Strive for 
@@ -155,7 +156,9 @@ flights|>
   )
 ```
 
-It’s OK to shirk some of these rules if your pipeline fits easily on one line.\ 
+## Pipes: Breaking the rules {-}
+
+OK to shirk some rules to fit on one line 
 
 ```{r eval = FALSE}
 # This fits compactly on one line
@@ -169,13 +172,15 @@ df |>
   )
 ```
 
-Try to Limit your pipes around 10-15 lines.\
+## Pipe length {-}
 
-Try to break them up into smaller sub-tasks, giving each task an informative name.\
+-   Limit to 10-15 lines
+-   Break up into smaller sub-tasks
+    -   Give each task an informative name
 
-## ggplot2
+## ggplot2 spacing {-}
 
-The same basic rules that apply to the pipe also apply to `ggplot2`; just treat `+` the same way as `|>`.
+Same rules for `+` as for `|>`
 
 ```{r eval=FALSE}
 flights |> 
@@ -188,7 +193,7 @@ flights |>
   geom_line()
 ```
 
-Again, if you can fit all of the arguments to a function on to a single line, put each argument on its own line:\
+## ggplot2 spacing 2 {-}
 
 ```{r eval=FALSE}
 flights |> 
@@ -208,19 +213,18 @@ flights |>
   geom_point()
 ```
 
-## Selectioning comments
+## Sectioning comments {-}
 
-As your scripts get longer, you can use sectioning comments to break up your file into manageable pieces:\
+Use sectioning comments (**Cmd/Ctrl + Shift + R**) to break up long files
 
-```{r load data comment}
+```{r load-data-comment}
  # Load data --------------------------------------
 
  # Plot data --------------------------------------
 ```
 
-A keyboard shortcut to create these headers is (**Cmd/Ctrl + Shift + R**)\
 
-## Exercises
+## Exercises {-}
 
 1. Restyle the following pipelines following the guidelines above.
 
@@ -263,9 +267,9 @@ flights |>
 ```
 
 
-## Meeting Videos
+## Meeting Videos {-}
 
-### Cohort 5 
+### Cohort 5 {-}
 
 `r knitr::include_url("https://www.youtube.com/embed/JW1DilkJ3-0")`
 
@@ -304,7 +308,7 @@ a %<>%
 ```
 </details>
 
-### Cohort 6
+### Cohort 6 {-}
 
 `r knitr::include_url("https://www.youtube.com/embed/jwnQkHtUiOY")`
 
@@ -320,7 +324,7 @@ a %<>%
 ```
 </details>
 
-### Cohort 7
+### Cohort 7 {-}
 
 `r knitr::include_url("https://www.youtube.com/embed/wlYh2KewQcI")`
 
@@ -340,7 +344,7 @@ a %<>%
 `r knitr::include_url("https://www.youtube.com/embed/LHYUEAXaYoM")`
 
 
-### Cohort 8
+### Cohort 8 {-}
 
 `r knitr::include_url("https://www.youtube.com/embed/uEYKR3xs4Y0")`
 
