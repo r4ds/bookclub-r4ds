@@ -1,6 +1,6 @@
 # Workflow: code style
 
-*"Good coding style is like correct punctuation: you can   manage without it, butitsuremakesthingseasiertoread." ~ Tidyverse Style Guide*
+> "Good coding style is like correct punctuation: you can \ \  manage without it, butitsuremakesthingseasiertoread." — Tidyverse Style Guide
 
 **Learning objectives:**
   
