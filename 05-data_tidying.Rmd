@@ -11,6 +11,8 @@ library(tidyverse)
 - **Pivot** data to make it tidy.
 - Recognize reasons for **non-tidy data**.
 
+Apart from the book content, these slides also borrow from [`vignette("pivot", "tidyr")`](https://tidyr.tidyverse.org/articles/pivot.html) and contain some new diagrams.
+
 ## Tidy data: what? {-}
 
 ![](images/6-tidy-1.png)
