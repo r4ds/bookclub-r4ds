@@ -113,8 +113,8 @@ We'll focus on the relationship between both functions in different situations.
 
 Most function arguments contain the strings `names` or `values`:
 
-- **`names`**: refers to **variable** that generates **column names** in **wide** table
-- **`values`**: refers to **variable** that generates **cells** in **wide** table
+- **`names`**: refers to **variable** whose _values_ generate **column names** in **wide** table
+- **`values`**: refers to **variable** whose _values_ generate **cells** in **wide** table
 
 These arguments always get the **name** of the corresponding variable in the **long** table!
 
