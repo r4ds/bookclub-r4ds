@@ -2,171 +2,233 @@
 
 **Learning objectives:**
 
-- Use **keyboard shortcuts** to use the RStudio script pane efficiently.
-- Understand the **script diagnostics** that the RStudio script editor provides.
-- Understand how to use Rstudio and the `getwd()` function to find your **working directory.**
-- Recognize the similarities and differences between **Windows paths and Mac/Linux paths.**
-- Create an **Rstudio project.**
+-   Create scripts and Understand **script diagnostics** in RStudio.
+-   Create an **Rstudio project.**  
+-   Understand working directories in Rstudio and the `getwd()` function.
+-   Differentiate between relative paths and absolute paths.
 
-## Scripts
+## Scripts {-}
 
-- The keyboard shortcut: `Cmd/Ctrl+Shift+N`
-  - a place for experimenting your R code
-- Edit the script and re-run the code
-- Save it as a R code file: `yourfilename.R`
+-   Use the script editor instead of the console -> complex pipelines and graphics. 
+-   File -> New file -> R script, or `Cmd/Ctrl + Shift + N`
+    -   a place for experimenting your R code
+-   Edit the script and re-run the code
+-   Save it as a R code file: `yourfilename.R`
 
-:::{style="text-align:center;"}  
-![Figure 7.1: Opening the script editor adds a new pane at the top-left of the IDE](https://r4ds.hadley.nz/diagrams/rstudio/script.png)
+::: {style="text-align:center;"}
+![Figure 6.1: Opening the script editor adds a new pane at the top-left of the IDE](https://r4ds.hadley.nz/diagrams/rstudio/script.png)
 :::
-<br/>
 
-### Running Code
-- The keyboard shortcuts
-  - `Cmd/Ctrl+Enter` to run the complete command
-  - `Alt/Alt+Enter` to run the complete command and move the cursor to the next complete command code block
-  - `Cmd/Ctrl+Shift+S` to run the script
-- Tip: **Always start your script with the packages you need**
+## Scripts: panes layout {-}
+
+-   You can move panes around too. 
+  -   Move focus to script `CTRL/Cmd + 1`
+  -   Move focus to console `CTRL/Cmd + 2`
+  -   Move focus to Terminal `ALT + Shift + M`
+
+::: {style="text-align:center;"}
+![Figure 6.2: Panes layout organization](images/6-panes_layout.png)
+:::
 
 
-### RStudio Dianostics
+## Running Code {-}
 
-:::{style="text-align:left;"}
+-   The keyboard shortcuts
+    -   `Ctrl/Cmd + Enter` to run the current R expression in the console. The cursor will move to the next code block.
+    -   `Ctrl/Cmd + Shift + S` to run the entire script.
+-   **Tip:** Always start your script with the packages you need, but do not include `install.packages()` in a script you plan on sharing. 
+
+## RStudio Dianostics {-}
+
+- Squiggly line highlights errors.  
+- Hover over cross to see problem.
+
+::: {style="text-align:left;"}
 ![](https://r4ds.hadley.nz/screenshots/rstudio-diagnostic-tip.png)
 :::
+
 <br/>
 
-:::{style="text-align:left;"}
+::: {style="text-align:left;"}
 ![](https://r4ds.hadley.nz/screenshots/rstudio-diagnostic-warn.png)
 :::
 
+## Saving and Naming Files {-}
 
-### Saving and Naming
-1. File names should be **machine readable**
-    - avoid spaces, symbols, and special characters. Don’t rely on case sensitivity to distinguish files.
-2. File names should be **human readable**
-    - use file names to describe what’s in the file.
-3. File names should **play well with default ordering**
-    - start file names with numbers so that alphabetical sorting puts them in the order they get used.
+1.  File names should be **machine readable**
+    -   avoid spaces, symbols, and special characters. Don't rely on case sensitivity to distinguish files.
+2.  File names should be **human readable**
+    -   use file names to describe what's in the file.
+3.  File names should **play well with default ordering**
+    -   start file names with numbers so that alphabetical sorting puts them in the order they get used.
+    
+Examples of good names: 
+
+```         
+01-load-data.R
+02-exploratory-analysis.R
+03-model-approach-1.R
+04-model-approach-2.R
+fig-01.png
+fig-02.png
+report-2022-03-20.qmd
+report-2022-04-02.qmd
+report-draft-notes.txt
+```
+
+[Jenny Bryan's talk on 'How to name files like a Normie'](https://github.com/jennybc/how-to-name-files)
 
 [More File Naming Conventions](https://huridocs.org/resource-library/organising-a-collection-of-human-rights-information/file-naming-conventions/#:~:text=To%20ensure%20that%20files%20are,%2C%20then%20month%2C%20then%20date.)
 
+## Projects {-}
 
-## Projects   
+### What Is the Source of Truth? {-}
 
-### What Is the Source of Truth?
-- Instruct RStudio not to preserve your workspace between sessions. 
-  - `usethis::use_blank_slate()`
-- `Cmd/Ctrl+Shift+0/F10` to start R
-- `Cmd/Ctrl+Shift+S` to rerun the R script
+-   Instruct RStudio not to preserve your workspace between sessions.
+    -   `usethis::use_blank_slate()`
+    - or go to Tools -> Global Options -> General
 
-### Where Does Your Analysis Live?
-- `getwd()` to identify the current working directory
-- `setwd()` to change the working directory (an absolute path) : **not recommended**
+::: {style="text-align:left;"}
+![Figure 6.3:  Copy these options in your RStudio options to always start your RStudio session with a clean slate.](https://r4ds.hadley.nz/diagrams/rstudio/clean-slate.png)
+:::
 
-### RStudio Projects
-![Figure 7.3: To create new project: (top) first click New Directory, then (middle) click New Project, then (bottom) fill in the directory (project) name, choose a good subdirectory for its home and click Create Project.](https://r4ds.hadley.nz/diagrams/new-project.png)
 
-### Relative and Absolute Paths
-- A relative path is relative to the working directory, i.e. the project’s home. 
-- Absolute paths point to the same place regardless of your working directory.
-  - Mac/Linux: a slash `/`
-    - `/Users/hadley/Documents/r4ds/data/diamonds.csv`
-  - Windows: two backlashes `\\`
-    - `\\Users\\hadley\\Documents\\r4ds\\data\\diamonds.csv`
-- You should **never use absolute paths in your scripts, because they hinder sharing.**
+-   `Cmd/Ctrl + Shift + 0/F10` to start R
+-   `Cmd/Ctrl + Shift + S` to rerun the R script
 
-```{r}
-library(tidyverse)
+## Where Does Your Analysis Live? {-}
 
-ggplot(diamonds, aes(x = carat, y = price)) + 
-  geom_hex()
+-  You can always find the working directory by looking at top of console: 
+
+![](https://r4ds.hadley.nz/screenshots/rstudio-wd.png)
+
+-   `getwd()` to identify the current working directory
+-   `setwd()` to change the working directory (an absolute path) : **not recommended**
+
+## RStudio Projects {-}
+
+- Self contained projects are the way to go! [Read more about project-oriented workflow by Jenny Brian here](https://www.tidyverse.org/blog/2017/12/workflow-vs-script/)
+- First create a new project
+  - File -> New Project, or
+  - Go to the top right of RStudio and click on New Project.
+
+![6.4: Create a new project by clicking on New Project at the top right corner of RStudio](images/6-Projects.png)
+
+- And then follow these steps to create a new project. 
+- This will create a file called `something.Rproj` in the directory you chose which you can double click to open the project. 
+
+![Figure 6.5: To create new project: (top) first click New Directory, then (middle) click New Project, then (bottom) fill in the directory (project) name, choose a good subdirectory for its home and click Create Project.](https://r4ds.hadley.nz/diagrams/new-project.png)
+
+## Relative and Absolute Paths {-}
+
+-   A relative path is relative to the working directory, i.e. the project's home.
+-   Absolute paths point to the same place regardless of your working directory.
+    -   Mac/Linux: a slash `/`
+        -   `/Users/hadley/Documents/r4ds/data/diamonds.csv`
+    -   Windows: backlashes `\`
+        -   `\Users\hadley\Documents\r4ds\data\diamonds.csv`
+- R can work with either type, but is recommended to always use Mac/Lynux style `/`.  
+-   You should **never use absolute paths in your scripts, because they hinder sharing.**
+
+## Package here {-}
+
+- [Package here website](https://here.r-lib.org/index.html)
+- The package here helps with easy file referencing and building file paths. 
+- After installing the package and loading the library you can: 
+  - See the top level directory with `here::here()`
+  - Use `here::here('dir', 'file.txt')` to build a path relative to the top-level directory in order to build the full path to a file. 
+    - For example, if you want to import a csv file you can use the function `here` to indicate the relative path of the file you want to read: 
+    
+```{r, eval=FALSE}
+readr::read_csv(
+  here("directory", "your_file.csv")
+)
 ```
+    
 
-```{r eval=FALSE}
-ggsave("diamonds.png")
+## Exercises {-}
 
-write_csv(diamonds, "data/diamonds.csv")
-```
+1.  Go to the RStudio Tips Twitter account, <https://twitter.com/rstudiotips> and find one tip that looks interesting. Practice using it!
 
-### Exercise
-1. Go to the RStudio Tips Twitter account, https://twitter.com/rstudiotips and find one tip that looks interesting. Practice using it!
+2.  What other common mistakes will RStudio diagnostics report? Read <https://support.posit.co/hc/en-us/articles/205753617-Code-Diagnostics> to find out.
 
-2. What other common mistakes will RStudio diagnostics report? Read https://support.posit.co/hc/en-us/articles/205753617-Code-Diagnostics to find out.
-
-
-## Meeting Videos
+## Meeting Videos {-}
 
 ### Cohort 5
 
 `r knitr::include_url("https://www.youtube.com/embed/2LFWCGNiuoE")`
 
 <details>
-  <summary> Meeting chat log </summary>
-  
+
+<summary>Meeting chat log</summary>
+
+```         
+00:40:51    Becki R. (she/her): It works both ways, I think. It's just convention to use <-.
+00:45:11    Wai-Yin:    You can use <- or = for assignment. <-  is the convention in R.  -> results in ab error.
+00:58:59    lucus w:    https://www.rocker-project.org/
+01:01:43    Bruno A. Machado:   tks Lucus for the link 👍
+01:13:48    Susie N.:   I have to head out! Thank you Ryan for the great breakdown
+01:14:07    Federica Gazzelloni:    Thanks!
+01:14:19    Becki R. (she/her): Thanks everyone, see you next week!
+01:17:04    Bruno A. Machado:   tks team
+01:17:21    Eileen Murphy:  Thank you Ryan
 ```
-00:40:51	Becki R. (she/her):	It works both ways, I think. It's just convention to use <-.
-00:45:11	Wai-Yin:	You can use <- or = for assignment. <-  is the convention in R.  -> results in ab error.
-00:58:59	lucus w:	https://www.rocker-project.org/
-01:01:43	Bruno A. Machado:	tks Lucus for the link 👍
-01:13:48	Susie N.:	I have to head out! Thank you Ryan for the great breakdown
-01:14:07	Federica Gazzelloni:	Thanks!
-01:14:19	Becki R. (she/her):	Thanks everyone, see you next week!
-01:17:04	Bruno A. Machado:	tks team
-01:17:21	Eileen Murphy:	Thank you Ryan
-```
+
 </details>
 
 `r knitr::include_url("https://www.youtube.com/embed/VYYxhIBuDys")`
 
 <details>
-  <summary> Meeting chat log </summary>
-  
+
+<summary>Meeting chat log</summary>
+
+```         
+00:05:55    docksbox@pm.me: Hello!
+00:07:40    Becki R. (she/her): Hello!
+00:07:52    Sandra Muroy:   Hi!
+00:07:57    Federica Gazzelloni:    Hi!
+00:09:49    Eileen: Hello!
+00:15:44    Becki R. (she/her): Very cool!
+00:29:31    Jon Harmon (jonthegeek):    https://CRAN.R-project.org/package=renv
+00:31:35    lucus w:    Or just here::here() package, it’s my favorite
+00:32:48    Ryan Metcalf:   Ah, Thank you Lucas! I think you may have solved an error I was trying to overcome!
+00:32:57    Jon Harmon (jonthegeek):    here::here("my_dir", "myfile.R")
+00:33:06    lucus w:    There you go, yup
+00:34:37    Jon Harmon (jonthegeek):    usethis
+00:34:38    lucus w:    You can use usethis
+00:37:56    Jon Harmon (jonthegeek):    .Last.value
+00:38:58    lucus w:    It’s a life saver especially working in databases
+00:44:32    Federica Gazzelloni:    reticulate
+00:45:11    Federica Gazzelloni:    https://rstudio.github.io/reticulate/articles/r_markdown.html
+00:48:18    Ryan Metcalf:   @Shamsuddeen, what was that command again? Cmd + Shift + P?
+00:48:40    Susan Neilson:  That’s right
+00:49:43    Ryan Metcalf:   Awesome! Ive never used that before. These bookclub meetups are so helpful! Thank you everyone!
+00:50:04    Federica Gazzelloni:    yep! very useful
+00:50:09    Shamsuddeen Muhammad:   https://speakerdeck.com/jennybc/how-to-name-files
+00:50:28    Shamsuddeen Muhammad:   Naming things
+00:51:10    Jon Harmon (jonthegeek):    20210904
+00:51:55    Shamsuddeen Muhammad:   Chapter 2 Project-oriented workflow : https://rstats.wtf/project-oriented-workflow.html
+00:52:13    Jon Harmon (jonthegeek):    Had to google that tab: https://bookdown.org/ndphillips/YaRrr/
+00:52:15    Shamsuddeen Muhammad:   What They Forgot to Teach You About R
+00:55:05    Jon Harmon (jonthegeek):    https://github.com/MonkmanMH/EIKIFJB
+00:55:38    Ryan Metcalf:   Transmute I think…..
+00:56:27    Jon Harmon (jonthegeek):    tidyr::replace_na()
+00:56:54    lucus w:    Check out janitor
+01:02:32    Shamsuddeen Muhammad:   https://tidyr.tidyverse.org/reference/replace_na.html
+01:02:42    Shamsuddeen Muhammad:   df %>% dplyr::mutate(x = replace_na(x, 0))
+01:03:30    Jon Harmon (jonthegeek):    ""
+01:04:16    Ryan Metcalf:   You’ve discovered the beauty of a programmer!!!
+01:04:28    Shamsuddeen Muhammad:   Yes Yes !!!
+01:05:22    Susan Neilson:  “95% of being a programmer is knowing how to Google” - my programmer friend
+01:06:27    Ryan Metcalf:   I find googling the package and then reading the PDF Manual. CRAN is your friend.
+01:10:38    Sandra Muroy:   thanks everyone for your input!
+01:10:57    Ryan Metcalf:   Thank you Susie! Great presentation and conversation!
+01:11:04    Susan Neilson:  Thanks everyone !
+01:11:08    Federica Gazzelloni:    thanks
+01:11:12    Becki R. (she/her): Thank you!
+01:11:22    Susan Neilson:  https://bookdown.org/ndphillips/YaRrr/rdata-files.html
 ```
-00:05:55	docksbox@pm.me:	Hello!
-00:07:40	Becki R. (she/her):	Hello!
-00:07:52	Sandra Muroy:	Hi!
-00:07:57	Federica Gazzelloni:	Hi!
-00:09:49	Eileen:	Hello!
-00:15:44	Becki R. (she/her):	Very cool!
-00:29:31	Jon Harmon (jonthegeek):	https://CRAN.R-project.org/package=renv
-00:31:35	lucus w:	Or just here::here() package, it’s my favorite
-00:32:48	Ryan Metcalf:	Ah, Thank you Lucas! I think you may have solved an error I was trying to overcome!
-00:32:57	Jon Harmon (jonthegeek):	here::here("my_dir", "myfile.R")
-00:33:06	lucus w:	There you go, yup
-00:34:37	Jon Harmon (jonthegeek):	usethis
-00:34:38	lucus w:	You can use usethis
-00:37:56	Jon Harmon (jonthegeek):	.Last.value
-00:38:58	lucus w:	It’s a life saver especially working in databases
-00:44:32	Federica Gazzelloni:	reticulate
-00:45:11	Federica Gazzelloni:	https://rstudio.github.io/reticulate/articles/r_markdown.html
-00:48:18	Ryan Metcalf:	@Shamsuddeen, what was that command again? Cmd + Shift + P?
-00:48:40	Susan Neilson:	That’s right
-00:49:43	Ryan Metcalf:	Awesome! Ive never used that before. These bookclub meetups are so helpful! Thank you everyone!
-00:50:04	Federica Gazzelloni:	yep! very useful
-00:50:09	Shamsuddeen Muhammad:	https://speakerdeck.com/jennybc/how-to-name-files
-00:50:28	Shamsuddeen Muhammad:	Naming things
-00:51:10	Jon Harmon (jonthegeek):	20210904
-00:51:55	Shamsuddeen Muhammad:	Chapter 2 Project-oriented workflow : https://rstats.wtf/project-oriented-workflow.html
-00:52:13	Jon Harmon (jonthegeek):	Had to google that tab: https://bookdown.org/ndphillips/YaRrr/
-00:52:15	Shamsuddeen Muhammad:	What They Forgot to Teach You About R
-00:55:05	Jon Harmon (jonthegeek):	https://github.com/MonkmanMH/EIKIFJB
-00:55:38	Ryan Metcalf:	Transmute I think…..
-00:56:27	Jon Harmon (jonthegeek):	tidyr::replace_na()
-00:56:54	lucus w:	Check out janitor
-01:02:32	Shamsuddeen Muhammad:	https://tidyr.tidyverse.org/reference/replace_na.html
-01:02:42	Shamsuddeen Muhammad:	df %>% dplyr::mutate(x = replace_na(x, 0))
-01:03:30	Jon Harmon (jonthegeek):	""
-01:04:16	Ryan Metcalf:	You’ve discovered the beauty of a programmer!!!
-01:04:28	Shamsuddeen Muhammad:	Yes Yes !!!
-01:05:22	Susan Neilson:	“95% of being a programmer is knowing how to Google” - my programmer friend
-01:06:27	Ryan Metcalf:	I find googling the package and then reading the PDF Manual. CRAN is your friend.
-01:10:38	Sandra Muroy:	thanks everyone for your input!
-01:10:57	Ryan Metcalf:	Thank you Susie! Great presentation and conversation!
-01:11:04	Susan Neilson:	Thanks everyone !
-01:11:08	Federica Gazzelloni:	thanks
-01:11:12	Becki R. (she/her):	Thank you!
-01:11:22	Susan Neilson:	https://bookdown.org/ndphillips/YaRrr/rdata-files.html
-```
+
 </details>
 
 ### Cohort 6
@@ -174,84 +236,88 @@ write_csv(diamonds, "data/diamonds.csv")
 `r knitr::include_url("https://www.youtube.com/embed/3SLN7bQQkDY")`
 
 <details>
-  <summary> Meeting chat log </summary>
-  
+
+<summary>Meeting chat log</summary>
+
+```         
+00:09:22    Matthew Efoli:  good evening
+00:09:29    Matthew Efoli:  good day
+00:09:35    Vrinda Kalia:   Hello!
+00:09:55    Daniel Adereti: Hello!
+00:10:04    Shannon:    Hello!
+00:10:06    Daniel Adereti: ready when you are, Matthew
+00:11:40    Adeyemi Olusola:    Good evening everyone
+00:28:31    Daniel Adereti: will it be possible to sort in ascending order as well?
+00:30:39    Adeyemi Olusola:    sort() should do trick
+00:31:13    Adeyemi Olusola:    I have issues with my audio
+00:31:39    Adeyemi Olusola:    lets try sort = ()
+00:32:07    Vrinda Kalia:   I am not sure about using sort within the count function. I am only aware of using the desc argument in the sort() function
+00:33:06    Daniel Adereti: it seems the sort() has its own arguments
+00:33:41    Aalekhya Reddam:    Sorry everyone, I have to head out but will watch the recording. See you all next week!
+00:34:33    Shannon:    not_cancelled %>%
+00:34:45    Shannon:    oops sorry, didn't finish that...
+00:36:00    Adeyemi Olusola:    not_cancelled%>%
+00:36:05    Adeyemi Olusola:    desc()
+00:37:46    Daniel Adereti: maybe we continue and figure it out next time?
+00:37:53    Daniel Adereti: sorry for chopping your flow!
+00:38:27    Esmeralda Cruz: maybe arrange function?
+00:38:58    Esmeralda Cruz: ok
+00:44:31    Daniel Adereti: thanks for that shortcut
+00:50:23    Daniel Adereti: Please explain "filter(rank(desc(arr_delay)) <= 10"
+00:55:38    Daniel Adereti: Thanks! noticed the same too, the descending argument does not seem to have any effect
+00:56:31    Daniel Adereti: sure!
+00:56:35    Daniel Adereti: thanks
+00:58:00    Shannon:    oh, because we didn't have a rank column in the first example?
+00:59:24    Daniel Adereti: like a rank column as part of the dataset?
+01:02:11    Daniel Adereti: Thanks!
+01:04:01    Shannon:    yes
+01:10:42    Vrinda Kalia:   I need to leave for a meeting. Thank you so much for leading a great discussion, Matthew!
+01:11:00    Shannon:    Thanks, Matthew! I liked the way you presented with both the bookdown file as well as RStudio.
+01:11:09    Daniel Adereti: Thanks Matthew!
+01:11:14    Maria Eleni Soilemezidi:    Thank you for the presentation! That was very helpful! :)
+01:11:15    Matthew Efoli:  Thanks
+01:11:37    Maria Eleni Soilemezidi:    See you next week!
+01:11:50    Esmeralda Cruz: Thank you :) for your time Matthew
+01:12:05    Esmeralda Cruz: yes, both are correct
 ```
-00:09:22	Matthew Efoli:	good evening
-00:09:29	Matthew Efoli:	good day
-00:09:35	Vrinda Kalia:	Hello!
-00:09:55	Daniel Adereti:	Hello!
-00:10:04	Shannon:	Hello!
-00:10:06	Daniel Adereti:	ready when you are, Matthew
-00:11:40	Adeyemi Olusola:	Good evening everyone
-00:28:31	Daniel Adereti:	will it be possible to sort in ascending order as well?
-00:30:39	Adeyemi Olusola:	sort() should do trick
-00:31:13	Adeyemi Olusola:	I have issues with my audio
-00:31:39	Adeyemi Olusola:	lets try sort = ()
-00:32:07	Vrinda Kalia:	I am not sure about using sort within the count function. I am only aware of using the desc argument in the sort() function
-00:33:06	Daniel Adereti:	it seems the sort() has its own arguments
-00:33:41	Aalekhya Reddam:	Sorry everyone, I have to head out but will watch the recording. See you all next week!
-00:34:33	Shannon:	not_cancelled %>%
-00:34:45	Shannon:	oops sorry, didn't finish that...
-00:36:00	Adeyemi Olusola:	not_cancelled%>%
-00:36:05	Adeyemi Olusola:	desc()
-00:37:46	Daniel Adereti:	maybe we continue and figure it out next time?
-00:37:53	Daniel Adereti:	sorry for chopping your flow!
-00:38:27	Esmeralda Cruz:	maybe arrange function?
-00:38:58	Esmeralda Cruz:	ok
-00:44:31	Daniel Adereti:	thanks for that shortcut
-00:50:23	Daniel Adereti:	Please explain "filter(rank(desc(arr_delay)) <= 10"
-00:55:38	Daniel Adereti:	Thanks! noticed the same too, the descending argument does not seem to have any effect
-00:56:31	Daniel Adereti:	sure!
-00:56:35	Daniel Adereti:	thanks
-00:58:00	Shannon:	oh, because we didn't have a rank column in the first example?
-00:59:24	Daniel Adereti:	like a rank column as part of the dataset?
-01:02:11	Daniel Adereti:	Thanks!
-01:04:01	Shannon:	yes
-01:10:42	Vrinda Kalia:	I need to leave for a meeting. Thank you so much for leading a great discussion, Matthew!
-01:11:00	Shannon:	Thanks, Matthew! I liked the way you presented with both the bookdown file as well as RStudio.
-01:11:09	Daniel Adereti:	Thanks Matthew!
-01:11:14	Maria Eleni Soilemezidi:	Thank you for the presentation! That was very helpful! :)
-01:11:15	Matthew Efoli:	Thanks
-01:11:37	Maria Eleni Soilemezidi:	See you next week!
-01:11:50	Esmeralda Cruz:	Thank you :) for your time Matthew
-01:12:05	Esmeralda Cruz:	yes, both are correct
-```
+
 </details>
 
 `r knitr::include_url("https://www.youtube.com/embed/dNtF8-lZ_pA")`
 
 <details>
-  <summary> Meeting chat log </summary>
-  
-```
-00:01:19	Adeyemi Olusola:	Good day everyone
-00:01:32	Daniel:	Hello!
-00:17:42	Esmeralda Cruz:	nop
-00:33:45	Daniel:	https://jrnold.github.io/r4ds-exercise-solutions/tibbles.html
-00:44:48	Esmeralda Cruz:	interesting
-00:46:11	Esmeralda Cruz:	ok, make sense
-00:49:45	Esmeralda Cruz:	ok
-```
-</details>
 
+<summary>Meeting chat log</summary>
+
+```         
+00:01:19    Adeyemi Olusola:    Good day everyone
+00:01:32    Daniel: Hello!
+00:17:42    Esmeralda Cruz: nop
+00:33:45    Daniel: https://jrnold.github.io/r4ds-exercise-solutions/tibbles.html
+00:44:48    Esmeralda Cruz: interesting
+00:46:11    Esmeralda Cruz: ok, make sense
+00:49:45    Esmeralda Cruz: ok
+```
+
+</details>
 
 ### Cohort 7
 
 `r knitr::include_url("https://www.youtube.com/embed/xrZdzkOC_Ts")`
 
 <details>
-<summary> Meeting chat log </summary>
 
+<summary>Meeting chat log</summary>
+
+```         
+00:36:35    Oluwafemi Oyedele:  It is CMD + Enter on Mac
+00:37:22    Oluwafemi Oyedele:  CMD + Enter will run the code on Mac
+00:53:06    Oluwafemi Oyedele:  https://rstats.wtf/project-oriented-workflow.html#dilemma-and-a-solution
+00:53:11    Oluwafemi Oyedele:  http://127.0.0.1:12193/library/here/doc/here.html
+00:53:58    Oluwafemi Oyedele:  https://www.tidyverse.org/blog/2017/12/workflow-vs-script/
 ```
-00:36:35	Oluwafemi Oyedele:	It is CMD + Enter on Mac
-00:37:22	Oluwafemi Oyedele:	CMD + Enter will run the code on Mac
-00:53:06	Oluwafemi Oyedele:	https://rstats.wtf/project-oriented-workflow.html#dilemma-and-a-solution
-00:53:11	Oluwafemi Oyedele:	http://127.0.0.1:12193/library/here/doc/here.html
-00:53:58	Oluwafemi Oyedele:	https://www.tidyverse.org/blog/2017/12/workflow-vs-script/
-```
+
 </details>
-
 
 ### Cohort 8
 
