@@ -146,7 +146,7 @@ readr::read_csv(
 ```
     
 
-## Exercise {-}
+## Exercises {-}
 
 1.  Go to the RStudio Tips Twitter account, <https://twitter.com/rstudiotips> and find one tip that looks interesting. Practice using it!
 
