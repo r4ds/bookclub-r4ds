@@ -16,7 +16,9 @@ library(tidyverse)
 - **Diagnose problems** that may arise when using the `read_*()` functions.
 - **Write data** to disk using the `readr::write_*()` family of functions.
 
-## Reading data from a file
+## Reading data from a file {-}
+
+- We use the `readr` package which is part of the `tidyverse`. 
 
 - The most common rectangular data file type is **CSV**, which is short for **c**omma-**s**eparated **v**alues.
 
@@ -24,23 +26,27 @@ library(tidyverse)
 
 - The columns are separated, aka delimited, by commas.
 
-- We can read CSV files into R using `read_csv()`. 
 
-## `read_csv`
+## `readr::read_csv` {-}
 
-- The first argument is the most important: the path/address to the file `students.csv` that it lives in the `data` folder.
+- We can read CSV files into R using `readr::read_csv()`. 
+  - The first argument is the path of the file:
 
-- The code below will work if you have the `students.csv` file in a `data` folder in your project. 
+#### Pulling the file from the data folder and using the `here` package {-}
 
-- When you run `read_csv()`, it prints out a message telling you the number of rows and columns of data, the delimiter that was used, and the column specifications (names of columns organized by the type of data the column contains). 
 ```{r}
-students <- read_csv("data/students.csv")
+students <- readr::read_csv(here::here('data', 'students.csv'))
+```
+#### Directly using the URL {-}
+
+```{r}
+## directly using the url
+students <- readr::read_csv("https://pos.it/r4ds-students-csv")
 ```
 
-## Transforming data from a file
+## Transforming data from a file {-}
 
-- Once you read data in, the first step usually involves transforming it in some way to make it easier to work with in the rest of your analysis. This can includes addressing issues such as:
-
+- You can transform the data once you read it in. This can includes addressing issues such as:
   - mislabeled NA values
   - non-syntactic column names
   - mislabeled variable types
@@ -50,24 +56,30 @@ students
 ```
 
 
-## Mislabeled NA values
+## Mislabeled NA values {-}
 
-- In the `favourite.food` column, there are a bunch of food items, and then the character string `N/A`, which should have been a real `NA` that R will recognize as “not available”. 
-
-- By default, `read_csv()` only recognizes empty strings (`""`) in this dataset as `NA`s, but we want it to also recognize the character string `"N/A"`. We can address using the `na` argument. 
+- In the `favourite.food` column, let's include `N/A` to be recognized as a real `NA`.
+  - By default, `read_csv()` only recognizes empty strings (`""`) in this dataset as `NA`s. 
 
 ```{r}
-students <- read_csv("data/students.csv", na = c("N/A", ""))
 students
 ```
 
+```{r, echo=TRUE, eval=FALSE}
+students <- read_csv("data/students.csv", na = c("N/A", ""))
+```
 
+```{r, include=FALSE}
+students <- read_csv("data/students.csv", na = c("N/A", ""))
+```
 
-## Non-syntactic column names
+```{r}
+students
+```
 
-- The `Student ID` and `Full Name` columns are surrounded by backticks because they contain spaces (i.e. are **non-syntactic**), breaking R’s usual rules for variable names.
+## Non-syntactic column names {-}
 
-- To refer to these variables, you need to surround them with backticks, ```:
+- The `Student ID` and `Full Name` columns are surrounded by backticks because they contain spaces (i.e. are **non-syntactic**:
 
 ```{r}
 students |> 
@@ -78,7 +90,7 @@ students |>
 ```
 
 
-## `Janitor` package for non-syntactic column names
+## `Janitor` package for non-syntactic column names {-}
 
 - An alternative approach is to use `janitor::clean_names()` to use some heuristics to turn them all into snake case at once.
 
@@ -88,11 +100,11 @@ students |> janitor::clean_names()
 
 - NOTE: The [janitor](https://sfirke.github.io/janitor/) package is not part of the tidyverse, but it offers handy functions for data cleaning and works well within data pipelines that use `|>`.
 
-## Mislabeled variable types
+## Mislabeled variable types {-}
 
-- The column `meal_plan` is a categorical variable with a known set of possible values, which in R should be represented as a factor.
+- The column `meal_plan` is a categorical variable but should be a factor.
 
-- Using `factor()`, the values in the `meal_plan` variable have stayed the same, but the type of variable denoted underneath the variable name has changed from character (`<chr>`) to factor (`<fct>`).
+- Using `factor()`, the values in the `meal_plan` stayed the same, but the type changed from character (`<chr>`) to factor (`<fct>`).
 
 ```{r}
 students |>
@@ -100,9 +112,9 @@ students |>
   mutate(meal_plan = factor(meal_plan))
 ```
 
-## Mislabeled variable types cont.
+## Mislabeled variable types cont. {-}
 
-- `age` is a character variable because one of the observations is typed out as `five` instead of a numeric `5`.
+- `age` is a character variable because there's a `five` instead of `5`.
 
 - As seen below, we can use `if_else(test, yes, no)` to say if `age` is the character string `"five"`, make it `"5"`, and if not leave it as `age`.
 
@@ -117,9 +129,12 @@ students <- students |>
 students
 ```
 
-## Other arguments
+## Other arguments {-}
 
-- We can demonstrate a couple of other important arguments by using `read_csv()` to read text strings formatted like a CSV file
+- Other arguments in `read_csv()`: 
+  - `comment = "#"`
+  - `skip = n`
+  - `col_names = FALSE`
 
 ```{r}
 read_csv(
@@ -129,14 +144,11 @@ read_csv(
 )
 ```
 
-- These arguments are:
-  - `comment = "#"`
-  - `skip = n`
-  - `col_names = FALSE`
-  
-## `skip = n`
 
-- You can use `skip = n` to skip the first n lines of metadata to be included at the top of the file.
+  
+## `skip = n` {-}
+
+- Skip the first n lines of metadata to be included at the top of the file.
 
 ```{r}
 read_csv(
@@ -149,9 +161,9 @@ read_csv(
 ```
 
 
-## `comment = "#"`
+## `comment = "#"` {-}
 
-- You can use `comment = "#"` to drop all lines that start with (e.g.) `#`:
+- Drop all lines that start with (e.g.) `#`:
 
 ```{r}
 read_csv(
@@ -163,9 +175,9 @@ read_csv(
 ```
 
 
-## `col_names = FALSE`
+## `col_names = FALSE` {-}
 
-- In cases where the data does not have column names, you can use `col_names = FALSE` to tell `read_csv()` not to treat the first row as headings and instead label them sequentially from `X1` to `Xn`:
+- Use `col_names = FALSE` to not treat the first row as headings and instead label them sequentially from `X1` to `Xn`:
 
 ```{r}
 read_csv(
@@ -175,9 +187,9 @@ read_csv(
 )
 ```
 
-## `col_names` as a character vector
+## `col_names` as a character vector {-}
 
-- Alternatively, you can pass `col_names` a character vector which will be used as the column names.
+- Pass `col_names` a character vector for column names.
 
 ```{r}
 read_csv(
@@ -188,29 +200,29 @@ read_csv(
 ```
 
 
-## Other types of files
+## Other types of files {-}
 
 The [`readr`](https://readr.tidyverse.org/) package has other functions beside [`read_csv()`](https://readr.tidyverse.org/reference/read_delim.html) to read files into R, such as:
 
-- [`read_csv2()`](https://readr.tidyverse.org/reference/read_delim.html) for semicolon-separated files. 
-  - These use `;` instead of `,` to separate fields and are common in countries that use `,` as the decimal marker.
+- [`read_csv2()`](https://readr.tidyverse.org/reference/read_delim.html) for semicolon-separated (`;`) files. 
+  - Common in countries that use `,` as the decimal marker.
 
 - [`read_tsv()`](https://readr.tidyverse.org/reference/read_delim.html) for tab-delimited files.
 
-- [`read_delim()`](https://readr.tidyverse.org/reference/read_delim.html) reads in files with any delimiter, attempting to automatically guess the delimiter if you don’t specify it.
+- [`read_delim()`](https://readr.tidyverse.org/reference/read_delim.html) reads in files with any delimiter, it tries to guess the delimiter if not specified.
 
 - [`read_fwf()`](https://readr.tidyverse.org/reference/read_fwf.html) for fixed-width files. 
   - You can specify fields by their widths with `fwf_widths()` or by their positions with `fwf_positions()`.
 
-- [`read_table()`](https://readr.tidyverse.org/reference/read_table.html) for a common variation of fixed-width files where columns are separated by white space.
+- [`read_table()`](https://readr.tidyverse.org/reference/read_table.html). Columns are separated by white space.
 
 - [`read_log()`](https://readr.tidyverse.org/reference/read_log.html) for Apache-style log files.
 
-## Controlling column types
+## Controlling column types {-}
 
-- A CSV file doesn’t contain any information about the type of each variable (i.e. whether it’s a logical, number, string, etc.), so `readr` will try to guess the type. 
+- `readr` will try to guess the type of each column (i.e. whether it’s a logical, number, string, etc.) 
 
-- readr uses a heuristic to figure out the column types. For each column, it pulls the values of 1,0002 rows spaced evenly from the first row to the last, ignoring missing values. It then works through the following questions:
+- `readr` uses a heuristic to figure out the column types. For each column, it pulls the values of 1,0002 rows and works through the following questions:
 
   - Does it contain only `F`, `T`, `FALSE`, `TRUE`, `false`, `true`, `f`, or `t` etc.? If so, it’s a logical.
   - Does it contain only numbers (e.g., `1`, `-4.5`, `5e6`, `Inf`)? If so, it’s a number.
@@ -229,13 +241,10 @@ read_csv("
 
 ```
 
-## Unexpected values
+## Unexpected values {-}
 
-The most common way column detection fails is that a column contains unexpected values, and you get a character column instead of a more specific type.
-
-- One of the most common causes for this is a missing value, recorded using something other than the `NA` that `readr` expects.
-
-- In this very small case below, you can easily see the missing value `.`. But what happens if you have thousands of rows with only a few missing values represented by `.`s sprinkled among them? 
+- Most common way column detection fails is a column contains unexpected values so you get a character column.
+  - The most common cause is a missing value, recorded using something other than `NA`.
 
 ```{r}
 simple_csv <- "
@@ -249,9 +258,9 @@ read_csv(simple_csv)
 ```
 
 
-## `col_types`
+## `col_types` {-}
 
-- One approach is to tell `readr` that `x` is a numeric column, and then see where it fails. You can do that with the `col_types` argument, which takes a named list where the names match the column names in the CSV file:
+- One approach is to tell `readr` that `x` is a numeric column using `col_types` argument:
 
 ```{r}
 df <- read_csv(
@@ -266,31 +275,32 @@ df <- read_csv(
 problems(df)
 ```
 
-## `problems()`
+## `problems()` {-}
 
-- `problems()`tells us that there was a problem in row 3, col 1 where readr expected a double but got a `.`. That suggests this dataset uses `.` for missing values. So then we set `na = "."`, the automatic guessing succeeds, giving us the numeric column that we want.
+- `problems()`tells us that there was a problem in row 3, col 1 where readr expected a double but got a `.`. 
+- So set `na = "."`.
 
 ```{r}
 read_csv(simple_csv, na = ".")
 ```
 
-## Column types
+## Column types {-}
 
 `readr` provides a total of nine column types for you to use:
 
-- `col_logical()` and `col_double()` read logicals and real numbers, but readr will usually guess them for you.
+- `col_logical()` and `col_double()`.
 
-- `col_integer()` reads integers. Reading integers explicitly can occasionally be useful because they occupy half the memory of doubles.
+- `col_integer()` Reading integers explicitly can be useful, they occupy half the memory of doubles.
 
-- `col_character()` reads strings, which can be useful to specify explicitly when you have a column that is a numeric identifier, i.e., long series of digits that identifies an object but doesn’t make sense to apply mathematical operations to, i.e. phone numbers, social security numbers, credit card numbers, etc.
+- `col_character()` reads strings, i.e., long series of digits but doesn’t make sense to apply mathematical operations to, i.e. phone numbers, social security numbers, credit card numbers, etc.
 
-- `col_factor()`, `col_date()`, and `col_datetime()` create factors, dates, and date-times respectively; you’ll learn more about those when we get to those data types in [Chapter 17](https://r4ds.hadley.nz/factors) and [Chapter 18](https://r4ds.hadley.nz/datetimes).
+- `col_factor()`, `col_date()`, and `col_datetime()` create factors, dates, and date-times respectively.
 
-- `col_number()` is a permissive numeric parser that will ignore non-numeric components, and is particularly useful for currencies. You’ll learn more about it in [Chapter 14](https://r4ds.hadley.nz/numbers).
+- `col_number()` is a permissive numeric parser particularly useful for currencies. 
 
-- `col_skip()` skips a column so it’s not included in the result, which can be useful for speeding up reading the data if you have a large CSV file and you only want to use some of the columns.
+- `col_skip()` skips a column so it’s not included in the result.
 
-##  Overriding the default column
+##  Overriding the default column {-}
 
 It’s also possible to override the default column by switching from `list()` to `cols()` and specifying `.default`, or to read in only the columns you specify using `cols_only()`.
 
@@ -312,36 +322,39 @@ read_csv(
 )
 ```
 
-## Reading data from multiple files
+## Reading data from multiple files {-}
 
-- In the case where your data is split across multiple files instead of being contained in a single file, `read_csv()`  can read these data in at once and stack them on top of each other in a single data frame.
+- `read_csv()`  can read data **stored in the same directory** split across multiple files instead of being contained in a single file -> stack them on top of each other in a single data frame.
 
-- As seen below, the `id` argument adds a new column called `file` to the resulting data frame that identifies the file the data come from, which is especially helpful in circumstances where the files you’re reading in do not have an identifying column that can help you trace the observations back to their original sources.
+- `id` argument adds a new column called `file` -> identifies the file the data come from:
 
 
 ```{r}
 sales_files <- c("data/01-sales.csv", "data/02-sales.csv", "data/03-sales.csv")
-read_csv(sales_files, id = "file")
+head(stacked_csv <- read_csv(sales_files, id = "file"), 5)
+class(stacked_csv)
 
 ```
 
-## Reading data from multiple files cont.
+## Reading data from multiple files cont. {-}
 
-- If you have many files you want to read in, you can use the base R `list.files()` function to find the files for you by matching a pattern in the file names. 
+- If you have many files you want to read in **stored in the same directory**, you can use the base R `list.files()` function to find the files for you by matching a pattern in the file names. 
 
 ```{r}
 sales_files <- list.files("data", pattern = "sales\\.csv$", full.names = TRUE)
 sales_files
 ```
 
+## Writing to a file {-}
 
-## Writing to a file
+- `readr` also has functions for writing data back to disk: `write_csv()` and `write_tsv()`. 
 
-- `readr` also comes with two useful functions for writing data back to disk: `write_csv()` and `write_tsv()`. 
+- Most important arguments are:
+  - `x` (the data frame to save), and 
+  - `file` (the location to save it). 
+  - Also you may specify missing values with `na` or other, and if you want to append to an existing file.
 
-- The most important arguments to these functions are `x` (the data frame to save) and `file` (the location to save it). You can also specify how missing values are written with `na`, and if you want to append to an existing file.
-
-- Note that the variable type information that you just set up is lost when you save to CSV because you’re starting over with reading from a plain text file again.
+<p style="color: #104E8B">**IMPORTANT** Note that the variable type information that you just set up is lost when you save to CSV because you’re starting over with reading from a plain text file again.</p>
 
 ```{r eval=FALSE}
 students
@@ -349,7 +362,7 @@ write_csv(students, "students-2.csv")
 read_csv("students-2.csv")
 ```
 
-## RDS
+## RDS {-}
 
 - `write_rds()` and `read_rds()` are uniform wrappers around the base functions `readRDS()` and `saveRDS()`. 
 
@@ -362,13 +375,13 @@ read_rds("students.rds")
 ```
 
 
-## Arrow
+## Arrow {-}
 
 - The [`arrow`](https://arrow.apache.org/docs/r/) package allows you to read and write parquet files, a fast binary file format that can be shared across programming languages.
 
 - Parquet tends to be much faster than RDS and is usable outside of R, but does require the `arrow` package.
 
-```{r message=FALSE}
+```{r message=FALSE, eval=FALSE}
 library(arrow)
 ```
 
@@ -378,13 +391,12 @@ read_parquet("students.parquet")
 ```
 
 
-## Data Entry
+## Data Entry {-}
 
-- There are two useful functions to help you assemble a tibble “by hand” doing a little data entry in your R script:
+- There are two useful functions to help you assemble a tibble “by hand”:
   - [`tibble()`](https://tibble.tidyverse.org/reference/tibble.html), and
   - [`tribble()`](https://tibble.tidyverse.org/reference/tribble.html), short for **tr**ansposed t**ibble**.
 
-- They which differ in whether you layout the tibble by columns or by rows. 
 - `tibble() ` works by column, and `tribble() ` lets you lay out your data row by row. 
 
 ```{r}
@@ -404,7 +416,7 @@ tribble(
 )
 ```
 
-## Summary
+## Summary {-}
 
 - In this chapter, we’ve learned how csv files work, some of the problems you might encounter, and how to overcome them. 
 
@@ -414,6 +426,67 @@ tribble(
   - [Chapter 23](https://r4ds.hadley.nz/arrow) from parquet files, 
   - [Chapter 24](https://r4ds.hadley.nz/rectangling) from JSON, and 
   - [Chapter 25](https://r4ds.hadley.nz/webscraping) from websites.
+  
+## Exercises {-}
+
+1. What function would you use to read a file where fields were separated with “|”?
+
+> I would use `read_delim()` and include the argument `delim = '|''`. 
+
+2. Apart from file, skip, and comment, what other arguments do read_csv() and read_tsv() have in common?
+
+> `col_names`, `col_types`, `col_select`, `id`, `locale`, `na`, `quoted_na`, `quote`, `comment`, `trim_ws`, `n_max`, `guess_max`, `progress`, `name_repair`, `num_threads`, `show_col_types`, `skip_empty_rows`, `lazy`. 
+
+3. What are the most important arguments to read_fwf()?
+
+> `file`, `fwf_cols`, `fwf_positions`, `fwf_widths`, `fwf_empty`
+
+4. Sometimes strings in a CSV file contain commas. To prevent them from causing problems, they need to be surrounded by a quoting character, like " or '. By default, read_csv() assumes that the quoting character will be ". To read the following text into a data frame, what argument to read_csv() do you need to specify?
+
+> `quote = "''"` to specify that we are using `''` as quotes in a string. 
+
+5. Identify what is wrong with each of the following inline CSV files. What happens when you run the code?
+
+```{r}
+read_csv("a,b\n1,2,3\n4,5,6") # Need to include a third column c
+read_csv("a,b,c\n1,2\n1,2,3,4") # Seems like they are missing a value in first row c, and there's an extra value in second row c. 
+read_csv("a,b\n\"1") # 1 is in quotes, should there be two values? One for each column? 
+read_csv("a,b\n1,2\na,b") # second row has the same names as the column names, should they be numbers? 
+read_csv("a;b\n1;3") # using ';' to delimit data. Either change it to read_csv2 or use commas ','
+```
+
+
+6. Practice referring to non-syntactic names in the following data frame by:
+
+    a. Extracting the variable called 1.
+    b. Plotting a scatterplot of 1 vs. 2.
+    c. Creating a new column called 3, which is 2 divided by 1.
+    d. Renaming the columns to one, two, and three.
+
+```{r}
+annoying <- tibble(
+  `1` = 1:10,
+  `2` = `1` * 2 + rnorm(length(`1`))
+)
+```
+
+> Here is my answer 
+
+```{r}
+clean <- annoying %>% 
+  janitor::clean_names() %>% 
+  rename(one = x1, two = x2) %>% # Rename columns
+  mutate(three = one/two) # Create a third column 
+
+clean_one <- clean %>% select(one) #Extract column one
+
+# Scatterplot of columns one and two
+ggplot(clean, 
+       aes(x=one, y=two))+
+  geom_point()+
+  theme_classic()
+```
+
 
 ## Meeting Videos
 
