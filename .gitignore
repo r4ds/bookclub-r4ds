@@ -1,6 +1,8 @@
 .Rproj.user
 .Rhistory
 .Rdata
+.Renviron
+.Rprofile
 .httr-oauth
 .DS_Store
 _book
@@ -9,4 +11,5 @@ bookclub-r4ds.Rmd
 bookclub-r4ds_files
 *.html
 libs
+renv
 bookclub-r4ds.knit.md
