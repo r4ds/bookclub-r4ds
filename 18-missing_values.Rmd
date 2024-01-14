@@ -1,6 +1,12 @@
 # Missing values
 
-**Introduction**
+**Learning objectives:**
+
+*  Filling and indicating explicit missing values
+*  Making implicit missing values more explicit
+*  Displaying empty groups if needed
+
+## Introduction
 
 We encountered missing values in previous chapters.
 
@@ -83,8 +89,6 @@ NA == NA
 is.na(NA)
 
 ```
-
-**Learning objectives:**
 
 We learn more of the details in this chapter, covering additional tools (besides `is.na` and `na.rm` argument) for working with missing values
 
