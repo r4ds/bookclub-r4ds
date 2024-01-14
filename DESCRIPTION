@@ -33,6 +33,8 @@ Imports:
     nycflights13,
     palmerpenguins,
     patchwork,
+    reactable,
+    reactablefmtr,
     readxl,
     styler,
     tidyverse,
