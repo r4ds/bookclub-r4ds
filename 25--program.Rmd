@@ -1,5 +1,0 @@
-# (PART) Program {-}
-
-**Learning objectives:**
-
-- Recognize that code is a vehicle for communication.
