@@ -38,8 +38,7 @@ now() # just the date
 today() # date with timestamp
 ```
 
-
-**From strings:**
+## Create date and date-time objects from strings
 
 -   Date: use 'y' 'm' 'd' in whatever order eg. ymd()
 -   Date-time: add 'h' 'm' 's' after an underscore eg. ymd_hms()
@@ -60,7 +59,7 @@ ymd_hms(now())
 ```
 
 
-**From individual components:**
+## Create date and date-time objects from individual components
 
 -   make_date()
 -   Ex:
@@ -75,6 +74,7 @@ make_datetime(year = 1955, month = 12, day = 20,
               hour = 15, min = 55, sec = 43)
 ```
 
+## Using data columns to create date and date-time objects
 -   You can make date or datetime objects out from different columns
 -   Here, we make datetime objects out of the columsn for the minute, year, day, and timestamp for each flight in the `flights` data set from the `nycflights13` package
 
@@ -95,7 +95,7 @@ flights %>%
   mutate(dep_timestamp = make_datetime(year, month, day, dep_time))
 ```
 
-**From an existing object:**
+## Create date and date-time objects from an existing object
 Here are other functions to make date or datetime objects out of dates.
 -   as_datetime()
 -   Ex: 
@@ -108,10 +108,13 @@ as_datetime(now())
 ```{r}
 as_date(now())
 ```
+
+## Parse custom date formats into date and date-time objects
 - You can also parse strings into dates if they're in formats not recognized by premade functions for date parsing (i.e., `ymd_hms()`, `mdy()`. etc).
 - See the table of codes below to figure out how to type out datetime formats
 ![](images/17_datetime_codes.png)
 
+## Example: parsing custom date format
 - Ex: Here, we parse a date not in a format `lubridate` recognizes and use the argument `format` to specify the format of the date so R knows where to find different components in the given date (i.e., month, day, year, etc).
 ```{r}
 as_datetime(x = "1975/01/02", 
@@ -120,8 +123,6 @@ as_datetime(x = "1975/01/02",
             
             # default format is %Y-%m-%d (i.e., 1970-01-05)
             format = "%Y/%m/%d")
-
-
 ```
 
 - You can get a variety of time zone names by running the function `OlsonNames()` (which contains more than 600 time zone names)
@@ -130,9 +131,7 @@ as_datetime(x = "1975/01/02",
 OlsonNames() |> head()
 ```
 
-## Work with date-time components
-
-**Extract components from datetimes**
+## Extract components from datetimes
 Note that using any of the below methods on a date or datetime object missing the component you're trying to get data for will give an error.
 
 Example: using `year()` on a date-time object without a year component will return the value `0`.
@@ -141,13 +140,14 @@ Example: using `year()` on a date-time object without a year component will retu
 year("1975/01/02")
 ```
 
+## Extracting the year from datetimes
 -   year()
 ```{r}
 # get year component of date
 year(mdy("December 12, 2014"))
 ```
 
-
+## Extracting the month from datetimes
 -   month()
 ```{r}
 month(mdy("December 12, 2014"))
@@ -174,6 +174,7 @@ month(x = mdy("December 12, 2014"),
       )
 ```
 
+## Extracting the day of the year from datetimes
 -   yday()
 ```{r}
 # returns how many days transpired since
@@ -181,12 +182,14 @@ month(x = mdy("December 12, 2014"),
 yday(mdy("December 12, 2014")) 
 ```
 
+## Extracting the day of the month from datetimes
 -   mday()
 ```{r}
 # returns day of month in date
 mday(mdy("December 12, 2014"))
 ```
 
+## Extracting the weekday from datetimes
 -   wday()
 ```{r}
 # get day of the week
@@ -211,6 +214,7 @@ wday(x = mdy("December 12, 2014"),
 )
 ```
 
+## Extracting time components from datetimes
 -   hour()
 ```{r}
 # return hour component of date
@@ -229,7 +233,7 @@ minute(mdy_hms("December 12, 2014 19:20:00"))
 second(mdy_hms("December 12, 2014 19:20:00"))
 ```
 
-**Round datetime components**
+## Round datetime components
 You can round up dates using the functions below
 
 Arguments shown below in `round_date()` apply to `round_date`, `floor_date`, `ceiling_date`
@@ -248,7 +252,9 @@ round_date(now(),
 # why seconds barely change is due to how seconds stored
 second(now()) 
 ```
--   floor_date() rounds down
+
+## Get the floor of datetime components
+-   `floor_date()` rounds down
 ```{r}
 # current date
 now()
@@ -257,6 +263,7 @@ now()
 floor_date(now(), unit = "seconds")
 ```
 
+## Get the ceiling of datetime components
 -   ceiling_date() rounds up
 ```{r}
 # current date
@@ -267,7 +274,7 @@ ceiling_date(now(), unit = "seconds")
 second(now())
 ```
 
-**Set individual datetime components**
+## Set individual datetime components
 
 Use create functions (ymd_hms) or update()
 - Ex: `ymd_hms()` where we can change time zone
@@ -291,6 +298,7 @@ update(object = ymd_hms("2023, December 23 10:19:23",
 )
 ```
 
+## Avoid negative numbers when setting individual datetime components
 - DO NOT insert negative numbers or numbers out of range (say, having `month=35` when they're only 12 months in a year)
 - It'll cause `update()` to not function as intended as shown here where `month=-1` gives us a date at November 23, 2021 since `1=Janaury`
 - Thus, numbers less than `1` (aka `January`) will cause it to count backwards in the month cycle (as `0` gets us the previous month before in the previous year so `0=December` of the previous year of the date)
@@ -304,8 +312,11 @@ update(object =
 )
 ```
 
+## Avoid exceeding numeric limits of individual time components
 - Here's an example with the number of days exceeding what's the max number of days in a month (i.e., 28, 29, 30, or 31)
-- With `day=35` in the `update()` function below, it'll increment in next cycle so typing 35 means it'll iterate to next month so if December, it'll go to next year in January on the 4th as December has 31 days, January too so 35 - 31 = 4 so we land on 4th day of January of 2024
+- With `day=35` in the `update()` function below, it'll increment in next cycle so typing 35 means it'll iterate to next month
+- Ex: For December, `day=35` will go to next year in January on the 4th as December has 31 days and January too so 35 - 31 = 4
+- Thus, we land on the 4th day of January of 2024
 ```{r}
 update(object = 
          ymd_hms("2023, December 23 10:19:23", 
@@ -328,7 +339,7 @@ The above can be difficult to work with but `lubridate` package has other ways t
 as.duration(today() - ymd("1973-01-12"))
 ```
 
-**Use durations to measure timespans**
+## Use durations to measure timespans
 
 Durations measure seconds, be aware conversions happen at a standard rate
 
@@ -383,7 +394,7 @@ dminutes(10) / 60
 dminutes(10) + 12 
 ```
 
-**Use periods to measure human units like weeks or months**
+## Use periods to measure human units like weeks or months
 
 These work like durations, but take into account things like DST
 
@@ -433,13 +444,11 @@ These can be added, subtracted and divided in some cases, also multiplied by num
 
 ![](https://d33wubrfki0l68.cloudfront.net/0020136325ea844476bc61eb7e95d2ac5aeebf00/893e9/diagrams/datetimes-arithmetic.png)
 
-**Use intervals to represent timespans with exact start and end datetimes**
+## Use intervals to represent timespans with exact start and end datetimes
 
 Intervals are way to do arithmetic with durations and periods? syntax???
 
-## Time zones
-
-**Names**
+## Getting time zone names
 
 -   R uses IANA (Internet Assigned Numbers Authority) for time zone names.
 -   Get a complete list of time zone names with OlsonNames(), which has about 600 time zone names
@@ -452,7 +461,7 @@ Snapshot of first 10 time zone names
 OlsonNames() |>  head()
 ```
 
-**Change the displayed time zone**
+## Change the displayed time zone
 
 -   The time zone attribute of a datetime is only displayed.
 -   UTC is the default (and doesn't have DST, which makes computing easier)
@@ -470,7 +479,7 @@ with_tz(
 ```
 
 
-**Change the underlying time zone**
+## Change the underlying time zone
 
 -   force_tz()
 -   i.e., if you want to only change the name of the time zone in a date and not convert the time to fit the new time zone
