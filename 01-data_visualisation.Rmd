@@ -1,3 +1,5 @@
+# (PART\*) Whole game {-}
+
 # Data visualisation
 
 **Learning objectives:**

@@ -1,5 +1,0 @@
-# (PART) Transform {-}
-
-**Learning objectives:**
-
-- Understand how **data transformation** fits into the typical data science project.

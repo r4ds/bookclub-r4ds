@@ -1,9 +1,8 @@
-```{r, include=F}
+# Data tidying
+
+```{r, include=FALSE}
 library(tidyverse)
 ```
-
-
-# Data tidying
 
 **Learning objectives:**
 
