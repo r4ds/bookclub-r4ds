@@ -45,6 +45,13 @@ nycflights13::planes
 nycflights13::weather
 ```
 
+**Type of data relations**
+  
+-   **1-to-many**: flight has one plane, but each plane has many flights
+-   **Many-to-many**: between airlines and airports, each airline flies to many airports; each airport hosts many airlines
+
+Special cases are: **1-to-1** and **Many-to-1** 
+
 Relations:
 
 - **flights** connects to **planes** via a single variable, **tailnum**.
@@ -60,56 +67,48 @@ Relations:
 knitr::include_graphics('images/nycfilghts13.png')
 ```
 
+
+
 [Exercises and solutions](https://jrnold.github.io/r4ds-exercise-solutions/relational-data.html)
 
 ## Keys
 
-> What is a **key**?   
->A key is a variable (or set of variables) that uniquely identifies an observation.
+A key is a variable (or set of variables) that uniquely identifies an observation.
 
+Types of keys:
 
-> What is a **relation**? 
-> It is when a **primary key** and the corresponding **foreign key** in another table form a relation.
+- **Primary key**
+
+- **Compound key**
+
+- **Foreign key** 
+
+- **Surrogate key** 
   
+## Primary keys
 
-**What are the types of keys:**  
-  
 - A **primary key** uniquely identifies an observation in its own table.
 
-> primary key: each row is an observation
+primary key: each row is an observation
 
 For example, `planes$tailnum` is a primary key because it uniquely identifies each plane in the planes table.
+
+
+## Compound key
+
+## Foreign keys
 
 - A **foreign key** uniquely identifies an observation in another table.
 
 For example, `flights$tailnum` is a foreign key for the `planes table` because it appears in the `flights table` where it matches each flight to a unique plane.
 
-- A **surrogate key** is a custom made key where it is possible to identify unique information, such as the number of rows in a table, and it is made if a table lacks a primary key.
+## Surrogate keys
+
+ A **surrogate key** is a custom made key where it is possible to identify unique information, such as the number of rows in a table, and it is made if a table lacks a primary key.
 
 For example, `flights$filghts_id` is a surrogate key because it is custom made and uniquely identifies each observation in the flights table.
 
-
-**Type of data relations**
-  
--   **1-to-many**: flight has one plane, but each plane has many flights
--   **Many-to-many**: between airlines and airports, each airline flies to many airports; each airport hosts many airlines
-
-Special cases are: **1-to-1** and **Many-to-1** 
-
------------
-
-## Mutating joins
-
-To combine variables from two tables
-
-We have seen the **inner_join()** function operating now we see the other three **outer joins**:
-
-- **left_join()** keeps all observations in x
-- **right_join()** keeps all observations in y
-- **full_join()** keeps all observations in x and y
-
-
-### Understanding joins
+## Basic joins
 
 
 ```{r 21-venndiagram, echo=FALSE, fig.align='center', fig.cap='Venn diagram', out.width='100%'} 
@@ -121,7 +120,72 @@ Suppose we have two tables with two variables: id and the observations
 knitr::include_graphics("images/twotables.png")
 ```
 
-### Inner join
+
+## Mutating joins 
+
+To combine variables from two tables
+
+We have seen the **inner_join()** function operating now we see the other three **outer joins**:
+
+- **left_join()** keeps all observations in x
+- **right_join()** keeps all observations in y
+- **full_join()** keeps all observations in x and y
+
+## Left joins 
+## Natural joint
+
+## Equi join
+
+## Filtering joins 
+
+## Semi join
+
+    semi_join()
+
+
+```{r 21-semijoin, echo=FALSE, fig.align='center', fig.cap='Semi-join', out.width='60%'} 
+knitr::include_graphics("images/semijoin.png")
+```
+
+```{r 21-09, message=FALSE, warning=FALSE, paged.print=FALSE}
+top_dest <- flights %>%
+  count(dest, sort = TRUE) %>%
+  head(10)
+
+flights %>% 
+  semi_join(top_dest) #  keeps all observations in x that have a match in y
+```
+
+
+
+Filtering joins never duplicate rows like mutating joins do:
+
+```{r 21-semijoin2, echo=FALSE, fig.align='center', fig.cap='Semi-join', out.width='60%'} 
+knitr::include_graphics("images/semijoin2.png")
+```
+
+
+## Anti-joins 
+
+
+The inverse of a semi-join is an **anti-join**:
+
+    anti_join()
+
+```{r 21-10}
+flights %>%
+  anti_join(planes, by = "tailnum") %>%
+  count(tailnum, sort = TRUE) # keeps the rows that don’t have a match
+```
+
+```{r 21-antijoin, echo=FALSE, fig.align='center', fig.cap='Anti-join', out.width='60%'} 
+knitr::include_graphics("images/antijoin.png")
+```
+
+
+implicit
+
+## Inner Join
 
 
 ```{r 21-04}
@@ -135,7 +199,21 @@ flights %>%
 knitr::include_graphics("images/innerjoin.png")
 ```
 
-### Outer joins
+
+## How joins work
+
+
+```{r 21, echo=FALSE, fig.align='center', fig.cap='Venn diagram', out.width='100%'} 
+knitr::include_graphics("images/venn_diagram.png")
+```
+
+Suppose we have two tables with two variables: id and the observations
+```{r 200, echo=FALSE, fig.align='center', fig.cap='Two tables', out.width='30%'} 
+knitr::include_graphics("images/twotables.png")
+```
+
+
+## Outer join
 
 - A left join keeps all observations in x
 - A right join keeps all observations in y
@@ -164,6 +242,9 @@ flights %>%
   mutate(name = airlines$name[match(carrier, airlines$carrier)])
 ```
 
+
+## Right join
+
 - right_join 
 
 ```{r 21-07}
@@ -171,6 +252,10 @@ weather %>%
   select(origin,temp, humid, wind_dir, precip) %>%
   right_join(airports, by = c("origin" = "faa"))
 ```
+
+
+## Full join 
+
 
 - full_join
 
@@ -181,7 +266,26 @@ airports %>%
 ```
 
 
-### Duplicate keys
+## Row matching
+
+## Filtering joins
+
+
+- `semi_join(x, y)` **keeps** all observations in x that have a match in y.
+- `anti_join(x, y)` **drops** all observations in x that have a match in y.
+
+## Non-equi joins
+
+## Cross joins
+
+## Inequality joins
+
+## Rolling joins
+
+## Overlap joins
+
+
+## Duplicate keys
 
 What happens when the keys are not unique?
 
@@ -197,7 +301,7 @@ knitr::include_graphics("images/duplicates.png")
 knitr::include_graphics("images/duplicates2.png")
 ```
 
-#### Defining the key columns
+### Defining the key columns
 
 `by = "key"` can be customized:
 
@@ -205,9 +309,9 @@ knitr::include_graphics("images/duplicates2.png")
 - `by = "x"`, uses only one specific variable
 - `by = c("a" = "b")`, uses a named character vector
 
-[Exercises and solutions](https://jrnold.github.io/r4ds-exercise-solutions/relational-data.html)
 
-#### Other implementations
+
+### Other implementations
 
 The `base::merge()` function can perform all four types of mutating join. 
 
@@ -231,59 +335,13 @@ It uses a slightly different syntax in SQL:
     SELECT * FROM x INNER JOIN y ON x.a = y.b
 
 
-## Filtering joins
-
-- `semi_join(x, y)` **keeps** all observations in x that have a match in y.
-- `anti_join(x, y)` **drops** all observations in x that have a match in y.
-
-**Semi-join**:
-
-    semi_join()
-
-
-```{r 21-semijoin, echo=FALSE, fig.align='center', fig.cap='Semi-join', out.width='60%'} 
-knitr::include_graphics("images/semijoin.png")
-```
-
-```{r 21-09, message=FALSE, warning=FALSE, paged.print=FALSE}
-top_dest <- flights %>%
-  count(dest, sort = TRUE) %>%
-  head(10)
-
-flights %>% 
-  semi_join(top_dest) #  keeps all observations in x that have a match in y
-```
-
-
-
-Filtering joins never duplicate rows like mutating joins do:
-
-```{r 21-semijoin2, echo=FALSE, fig.align='center', fig.cap='Semi-join', out.width='60%'} 
-knitr::include_graphics("images/semijoin2.png")
-```
-
-The inverse of a semi-join is an **anti-join**:
-
-    anti_join()
-
-```{r 21-10}
-flights %>%
-  anti_join(planes, by = "tailnum") %>%
-  count(tailnum, sort = TRUE) # keeps the rows that don’t have a match
-```
-
-```{r 21-antijoin, echo=FALSE, fig.align='center', fig.cap='Anti-join', out.width='60%'} 
-knitr::include_graphics("images/antijoin.png")
-```
+## Some more things to consider
 
 [Exercises](https://jrnold.github.io/r4ds-exercise-solutions/relational-data.html)
 
-
-## Some more things to consider
-
 ### Join problems
 
->Be aware that simply checking the number of rows before and after the join is not sufficient to ensure that your join has gone smoothly. 
+Be aware that simply checking the number of rows before and after the join is not sufficient to ensure that your join has gone smoothly. 
 
 1. Identifying the variables that form the primary key in each table
 2. Check for missing values
