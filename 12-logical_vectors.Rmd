@@ -2,6 +2,137 @@
 
 # Logical Vectors
 
+## What and why
+
+- This is all about conditions on data values that return TRUE or FALSE.
+- Useful in filtering, mutating and summarizing.
+
+## Definition
+
+Logical vector: vector of `TRUE`, `FALSE` and/or `NA` values.
+
+## Challenging: `NA`s
+
+The most tricky part of **operations** with logical vectors is the effect of missing values.
+
+## Operations overview
+
+- Operations that don't change vector lengths
+  - comparisons: generate a logical vector from a non-logical vector
+  - boolean algebra: generate a logical vector from other logical vectors
+  - conditional transformations: generate a vector from hierarchical conditions (logical vectors ~ comparisons)
+- Subsetting vectors
+- Summarizing logical vectors
+
+## Generating a logical vector
+
+- either by doing (vectorized) comparisons
+
+  operators:
+
+  - one-to-one: `==`, `!=`, `<`, `<=`, `>`, `>=`
+  - one-to-many: `%in%`
+
+## Generating a logical vector
+
+- or by combining logical vectors or comparisons = boolean algebra
+
+  - operators: `&`, `|`, `!`, `xor()`
+  - `{magrittr}` (through `{dplyr}`) provides the aliases `and()`, `or()`, `not()`
+  
+  In numerical operations, `FALSE` is 0 and `TRUE` is 1.
+  Therefore:
+
+  - `&` can be mimicked by `pmin()`
+  - `|` can be mimicked by `pmax()`
+
+![](images/14_venn_diagrams.png)
+  
+## Missing values
+
+In most cases an `NA` value (vector element) is seen as 'missing so we can't (always) know the outcome':
+
+- `NA`in comparisons will always return `NA`.
+  - so `x == NA` will just return `NA` for all elements.
+  - check for missing values with **`is.na()`**: `TRUE` for missing values and `FALSE` for everything else
+  
+- `NA` in boolean algebra: sometime the outcome is known, sometimes not (hence `NA`):
+  - `TRUE & NA` is `NA` but `FALSE & NA` is `FALSE`
+  - `TRUE | NA` is `TRUE` but `FALSE | NA` is `NA`
+
+But `%in%` works differently:
+
+- `NA` %in% `NA` returns `TRUE`: here `NA` is just regarded as a special value
+
+## Conditional transformations
+
+Hierarchy of logical vectors (~ comparisons, conditions) leads to a vector where each element is determined by the value of one or multiple conditions.
+
+- one condition: use `if_else()`
+  - `if_else(condition, true, false, missing = NULL)`
+  
+- multiple (hierarchical) conditions: use `case_when(..., .default = NULL)`.
+  - the _first_ condition that is `TRUE` for an element determines the value that element.
+  - the different outcomes must be compatible types
+
+
+
+The different outcomes must be **compatible types**!
+E.g. numerical and logical; strings and factors.
+
+- `NA` is compatible with everything.
+
+
+## Subsetting vectors
+
+I.e. keep only a subset of a vector, drop the rest, based on some condition.
+
+- This uses just base R!
+- Provide a logical vector in the brackets (obtained by one of the previous techniques; often comparison)
+
+E.g.:
+
+```r
+condition <- flights$arr_delay > 0
+flights$arr_delay[condition]
+flights$dep_time[condition]
+# or just:
+flights$dep_time[flights$arr_delay > 0]
+```
+
+
+## Summarizing logical vectors (~ summarizing comparisons)
+
+- summarizing the whole vector:
+  - `any()`, `all()`: return a logical
+  - `sum()`, `mean()`, ...: return a numeric
+
+- summarizing a subset:
+  - apply a summary function to a subsetted vector
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 **Learning objectives:**
 
 -   What are Vectors and Why are we talking about Logical Vectors
