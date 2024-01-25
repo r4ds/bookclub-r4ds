@@ -1,72 +1,166 @@
 # (PART\*) Transform {-}
 
+```{r, include=F}
+library(dplyr)
+library(nycflights13)
+```
+
 # Logical Vectors
 
-## What and why
+## What and why {-}
 
-- This is all about conditions on data values that return TRUE or FALSE.
-- Useful in filtering, mutating and summarizing.
+- This is all about conditions on data values: they return `TRUE` or `FALSE`.
+This vector of `TRUE`/`FALSE` values is a logical vector.
+- These conditions -- hence the resulting logical vectors -- play an important role in filtering, mutating and summarizing dataframe columns.
 
-## Definition
+## Definition {-}
 
 Logical vector: vector of `TRUE`, `FALSE` and/or `NA` values.
 
-## Challenging: `NA`s
+## Challenging: `NA` values {-}
 
 The most tricky part of **operations** with logical vectors is the effect of missing values.
 
-## Operations overview
+## Operations overview {-}
 
 - Operations that don't change vector lengths
-  - comparisons: generate a logical vector from a non-logical vector
-  - boolean algebra: generate a logical vector from other logical vectors
-  - conditional transformations: generate a vector from hierarchical conditions (logical vectors ~ comparisons)
-- Subsetting vectors
-- Summarizing logical vectors
+  - comparisons: **generate a logical vector** from a non-logical vector
+  - boolean algebra: **generate a logical vector** from other logical vectors
+  - conditional transformations: generate a new vector **from (hierarchical) conditions** (~ logical vectors ~ comparisons)
+- **Subsetting** vectors with a logical vector
+- **Summarizing** logical vectors
 
-## Generating a logical vector
+## Generating a logical vector (1) {-}
 
-- either by doing (vectorized) comparisons
+- either by doing (vectorized) **comparisons**
 
   operators:
 
   - one-to-one: `==`, `!=`, `<`, `<=`, `>`, `>=`
   - one-to-many: `%in%`
+  
+  \
+  Comparisons are often the way that logical vectors arise, i.e. during exploration, cleaning and analysis
+    - ... unless the logical vector is already provided, e.g. the observed variable is boolean.
 
-## Generating a logical vector
+## Generating a logical vector (2) {-}
 
-- or by combining logical vectors or comparisons = boolean algebra
+```{r}
+flights |> 
+  mutate(daytime = dep_time > 600, .keep = "used")
+```
+
+## Generating a logical vector (3) {-}
+
+```{r}
+flights |> 
+  mutate(daytime = dep_time > 600, .keep = "used") |> 
+  filter(daytime)
+```
+
+## Generating a logical vector (4) {-}
+
+```{r}
+1:12 %in% c(1, 5, 11)
+```
+
+## Generating a logical vector (5) {-}
+
+A comparison _**is**_ a logical vector...
+
+```{r}
+class(flights$dep_time > 600)
+length(flights$dep_time > 600)
+head(flights$dep_time > 600)
+```
+
+## Generating a logical vector (6) {-}
+
+... so the logical vector does not have to be stored in order to filter data -- it is created on the fly:
+
+```{r}
+flights |> 
+  filter(dep_time > 600)
+```
+
+
+## Generating a logical vector (7) {-}
+
+- either by doing (vectorized) comparisons (see before)
+- or by **combining** logical vectors or comparisons = **boolean algebra**
 
   - operators: `&`, `|`, `!`, `xor()`
   - `{magrittr}` (through `{dplyr}`) provides the aliases `and()`, `or()`, `not()`
   
+  \
   In numerical operations, `FALSE` is 0 and `TRUE` is 1.
   Therefore:
 
   - `&` can be mimicked by `pmin()`
   - `|` can be mimicked by `pmax()`
 
+## Generating a logical vector (8) {-}
+
+Boolean operators:
+
 ![](images/14_venn_diagrams.png)
+
+## Generating a logical vector (9) {-}
+
+```{r}
+flights |> 
+  mutate(
+    daytime = dep_time > 600 & dep_time < 2000,
+    .keep = "used"
+  )
+```
   
-## Missing values
+## Missing values (1) {-}
 
-In most cases an `NA` value (vector element) is seen as 'missing so we can't (always) know the outcome':
+In most cases an `NA` value (vector element) is regarded '_missing so we can't (always) know the outcome_':
 
-- `NA`in comparisons will always return `NA`.
-  - so `x == NA` will just return `NA` for all elements.
+- hence `NA`in **comparisons** will always return `NA`.
+  - so `x == NA` will just return `NA` for _all_ elements.
   - check for missing values with **`is.na()`**: `TRUE` for missing values and `FALSE` for everything else
   
-- `NA` in boolean algebra: sometime the outcome is known, sometimes not (hence `NA`):
+## Missing values (2) {-}
+
+```{r}
+c(TRUE, NA, FALSE) == NA # NOT useful!!
+is.na(c(TRUE, NA, FALSE))
+is.na(c(1, NA, 3))
+```
+
+## Missing values (3) {-}
+
+In most cases an `NA` value (vector element) is regarded '_missing so we can't (always) know the outcome_':
+
+- `NA`in comparisons will always return `NA` (see before).
+- `NA` in **boolean algebra**: sometimes the outcome is known, sometimes not (hence `NA`):
   - `TRUE & NA` is `NA` but `FALSE & NA` is `FALSE`
   - `TRUE | NA` is `TRUE` but `FALSE | NA` is `NA`
 
+## Missing values (4) {-}
+
+```{r}
+c(TRUE, FALSE) & NA
+c(TRUE, FALSE) | NA
+```
+
+## Missing values (5) {-}
+
 But `%in%` works differently:
 
-- `NA` %in% `NA` returns `TRUE`: here `NA` is just regarded as a special value
+- `NA %in% NA` returns `TRUE`: here `NA` is just regarded as a special value
 
-## Conditional transformations
+```{r}
+flights |>
+  filter(dep_time %in% c(NA, 0800))
+```
 
-Hierarchy of logical vectors (~ comparisons, conditions) leads to a vector where each element is determined by the value of one or multiple conditions.
+## Conditional transformations (1) {-}
+
+To generate a vector where each element is determined by the value of one or multiple conditions (~ comparisons).
 
 - one condition: use `if_else()`
   - `if_else(condition, true, false, missing = NULL)`
@@ -75,7 +169,26 @@ Hierarchy of logical vectors (~ comparisons, conditions) leads to a vector where
   - the _first_ condition that is `TRUE` for an element determines the value that element.
   - the different outcomes must be compatible types
 
+## Conditional transformations (2) {-}
 
+```{r}
+x <- c(-3:3, NA)
+if_else(x > 0, "+ve", "-ve", "???")
+```
+
+## Conditional transformations (3) {-}
+
+```{r}
+x <- c(-3:3, NA)
+case_when(
+  x == 0   ~ "0",
+  x < 0    ~ "-ve", 
+  x > 0    ~ "+ve",
+  is.na(x) ~ "???"
+)
+```
+
+## Conditional transformations (4) {-}
 
 The different outcomes must be **compatible types**!
 E.g. numerical and logical; strings and factors.
@@ -83,12 +196,12 @@ E.g. numerical and logical; strings and factors.
 - `NA` is compatible with everything.
 
 
-## Subsetting vectors
+## Subsetting vectors {-}
 
 I.e. keep only a subset of a vector, drop the rest, based on some condition.
 
-- This uses just base R!
-- Provide a logical vector in the brackets (obtained by one of the previous techniques; often comparison)
+- This is base R!
+- Put a logical vector in the brackets (obtained by one of the previous techniques; often comparison)
 
 E.g.:
 
@@ -101,184 +214,55 @@ flights$dep_time[flights$arr_delay > 0]
 ```
 
 
-## Summarizing logical vectors (~ summarizing comparisons)
+## Summarizing logical vectors (1) {-}
 
-- summarizing the whole vector:
+- Summarizing the whole vector:
   - `any()`, `all()`: return a logical
-  - `sum()`, `mean()`, ...: return a numeric
+  - `sum()`, `mean()`: return a numeric
 
-- summarizing a subset:
+- Summarizing a subset:
   - apply a summary function to a subsetted vector
 
+- If `NA` values are present, the summary result will be `NA`, BUT the `NA` values can also be ignored with: **`na.rm = TRUE`**.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-**Learning objectives:**
-
--   What are Vectors and Why are we talking about Logical Vectors
-
--   How to use logical vectors & Boolean Algebra in
-
-    -   Comparison
-
-    -   Identifying missing values
-
--   What are the logical summary functions we could leverage in R?
-
--   Conditional Transformations using `if_else()` and `case_when()` functions
-
-## What are Logical Vectors
-
--   Vectors in R are the same as the arrays in C language, which are used to hold multiple data values of the same type
-
--   The mental model for using Logical Vectors
-
-    -   Defining constraints on your data to answer Binary Questions
-
-## How to use logical vectors & Boolean Algebra
-
-![](images/14_venn_diagrams.png)
-
--   Combining logical vectors using Boolean algebra
-
-    -   Venn diagram here shows the logical relations between logical vectors
-
-### Comparison
-
--   numeric comparison creates logical vectors, and you can see that in the following example
+## Summarizing logical vectors (2) {-}
 
 ```{r}
-library(tidyverse)
-library(nycflights13)
-```
-
--   There is an intermediate execution step that forma the logical vector behind the scenes when you use `filter()`
-
-```{r}
-flights |> filter(dep_time > 600 & dep_time < 2000 & abs(arr_delay) < 20)
-```
-
--   To separate this intermediate step in it's own variable we use `mutate`
-
-```{r}
-flights |> mutate( daytime = dep_time > 600 & dep_time < 2000, approx_ontime = abs(arr_delay) < 20, .keep = "used" )
-```
-
--   R doesn't round the float numeric value by default, but R console is rounding close number to integers
-
-    -   To round numbers we could use `dplyr::near` function
-
-```{r}
-x <- c(1 / 49 * 49, sqrt(2) ^ 2)
-typeof(x) # double
-```
-
-```{r}
-print(x)
-print(x,digits = 16)
-
-```
-
-### Identifying Missing Values
-
--   There is no indication what's so ever about the `NA` value if it's a logical vector, although the author says that a missing value in a logical vector means that the value could either be `TRUE` or `FALSE`
--   `TRUE | TRUE` and `FALSE | TRUE` are both `TRUE`, so `NA | TRUE` must also be `TRUE`. Similar reasoning applies with `NA & FALSE`
-
-```{r}
-df <- tibble(x = c(TRUE, FALSE, NA))
-
-df |> 
-  mutate(
-    and = x & (NA),
-    or = x | NA
+flights |> 
+  group_by(year, month, day) |> 
+  summarize(
+    all_delayed = all(dep_delay <= 60, na.rm = TRUE),
+    any_long_delay = any(arr_delay >= 300, na.rm = TRUE),
+    .groups = "drop"
   )
 ```
 
--   For identifying missing values we use `is.na(x)` function which works with any type of vector and returns TRUE for missing values and FALSE for everything else.
+
+## Summarizing logical vectors (3) {-}
 
 ```{r}
-is.na(c(TRUE, NA, FALSE))
-#> [1] FALSE  TRUE FALSE
-is.na(c(1, NA, 3))
-#> [1] FALSE  TRUE FALSE
-is.na(c("a", NA, "b"))
-#> [1] FALSE  TRUE FALSE
+flights |> 
+  group_by(year, month, day) |> 
+  summarize(
+    proportion_delayed = mean(dep_delay <= 60, na.rm = TRUE),
+    count_long_delay = sum(arr_delay >= 300, na.rm = TRUE),
+    .groups = "drop"
+  )
 ```
 
--   `%in%` is like asking does a set A of values is included in a set B of values
+## Summarizing logical vectors (4) {-}
 
 ```{r}
-1:12 %in% c(1, 5, 11)
+flights |>
+  group_by(year, month, day) |>
+  summarize(
+    behind = mean(arr_delay[arr_delay > 0], na.rm = TRUE),
+    ahead = mean(arr_delay[arr_delay < 0], na.rm = TRUE),
+    n = n(),
+    .groups = "drop"
+  )
 ```
 
-## What are the logical summery functions we could leverage in R?
-
--   Main logical summaries: `any()` and `all()`
-
--   Numeric logical summaries: `mean()` and `sum()` specially when you want to calculate the percentages of applied constraint or condition
-
-## Conditional Transformations using `if_else()` and `case_when()` functions
-
--   We see these type of transformations everywhere when we clean data
-
--   Its inspired by the SQL way of doing conditional transformations
-
--   We use [dplyr::if_else()](https://dplyr.tidyverse.org/reference/if_else.html) when we have just one condition and we want to map it to only two outcomes
-
-```{r}
-x <- c(-3:3, NA)
-if_else(x > 0, "+ve", "-ve", "???")
-```
-
--   We use dplyr's `case_when()` when we want to map multiple conditions to multiple different outcomes.
-
-```{r}
-x <- c(-3:3, NA)
-case_when(
-  x == 0   ~ "0",
-  x < 0    ~ "-ve", 
-  x > 0    ~ "+ve",
-  is.na(x) ~ "???"
-)
-```
-
--   Note that both [`if_else()`](https://dplyr.tidyverse.org/reference/if_else.html) and [`case_when()`](https://dplyr.tidyverse.org/reference/case_when.html) require **compatible** types in the output
-
-## Summary
-
--   Logical Vectors is just a list of Boolean elements
-
--   R designed to evaluate logical vectors based on Boolean Algebra rules
-
--   Logical summaries is a powerful tool for summarizing data based on logic or condition
-
--   Conditional Transformation is tool for powering data analysis transformation process and also help you answer a Yes Or No questions about the data
-
-## Learning More
-
--   [r4ds.io/join](r4ds.io/join) for more book clubs!
--   [R Graph Gallery](https://www.r-graph-gallery.com/ggplot2-package.html)
--   The [Graphs section](http://www.cookbook-r.com/Graphs/) of the R Cookbook
 
 ## Meeting Videos
 
