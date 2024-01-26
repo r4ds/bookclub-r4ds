@@ -178,7 +178,6 @@ Aim: generate a vector where each element is determined by the value of one or m
   
 - multiple (hierarchical) conditions: use `case_when(..., .default = NULL)`.
   - the _first_ condition that is `TRUE` for an element determines the outcome for that element.
-  - the different outcomes must be compatible types
 
 ## Conditional transformations (2) {-}
 
@@ -202,8 +201,11 @@ case_when(
 ## Conditional transformations (4) {-}
 
 The different outcomes must be **compatible types**!
-E.g. numerical and logical; strings and factors.
 
+Some examples:
+
+- numerical and logical
+- strings and factors.
 - `NA` is compatible with everything.
 
 
