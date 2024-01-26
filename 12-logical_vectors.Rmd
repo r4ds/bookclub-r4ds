@@ -177,7 +177,7 @@ Aim: generate a vector where each element is determined by the value of one or m
   - `if_else(condition, true, false, missing = NULL)`
   
 - multiple (hierarchical) conditions: use `case_when(..., .default = NULL)`.
-  - the _first_ condition that is `TRUE` for an element determines the value that element.
+  - the _first_ condition that is `TRUE` for an element determines the outcome for that element.
   - the different outcomes must be compatible types
 
 ## Conditional transformations (2) {-}
