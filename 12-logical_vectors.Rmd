@@ -7,6 +7,17 @@ library(nycflights13)
 
 # Logical Vectors
 
+**Learning objectives:**
+
+- Logical vectors: understanding what they are and why we use them
+- Knowing how to generate logical vectors (variables)
+- Knowing how to make use of logical vectors (variables):
+  - to filter data
+  - to create new variables
+  - to create summaries 
+- Understanding the effect of missing values in these operations
+
+
 ## What and why {-}
 
 - This is all about conditions on data values: they return `TRUE` or `FALSE`.
