@@ -171,7 +171,7 @@ flights |>
 
 ## Conditional transformations (1) {-}
 
-To generate a vector where each element is determined by the value of one or multiple conditions (~ comparisons).
+Aim: generate a vector where each element is determined by the value of one or multiple conditions (~ comparisons).
 
 - one condition: use `if_else()`
   - `if_else(condition, true, false, missing = NULL)`
