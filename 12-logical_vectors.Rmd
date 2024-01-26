@@ -242,11 +242,10 @@ flights$dep_time[flights$arr_delay > 0]
 
 ```{r}
 flights |> 
-  group_by(year, month, day) |> 
   summarize(
     all_delayed = all(dep_delay <= 60, na.rm = TRUE),
     any_long_delay = any(arr_delay >= 300, na.rm = TRUE),
-    .groups = "drop"
+    .by = c(year, month, day)
   )
 ```
 
@@ -255,11 +254,10 @@ flights |>
 
 ```{r}
 flights |> 
-  group_by(year, month, day) |> 
   summarize(
     proportion_delayed = mean(dep_delay <= 60, na.rm = TRUE),
     count_long_delay = sum(arr_delay >= 300, na.rm = TRUE),
-    .groups = "drop"
+    .by = c(year, month, day)
   )
 ```
 
@@ -267,12 +265,11 @@ flights |>
 
 ```{r}
 flights |>
-  group_by(year, month, day) |>
   summarize(
     behind = mean(arr_delay[arr_delay > 0], na.rm = TRUE),
     ahead = mean(arr_delay[arr_delay < 0], na.rm = TRUE),
     n = n(),
-    .groups = "drop"
+    .by = c(year, month, day)
   )
 ```
 
