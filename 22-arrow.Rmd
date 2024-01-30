@@ -14,7 +14,7 @@
 ## Setting up
 - Download the package `arrow` by running this command once in your R console: `install.packages("arrow")`
 - Then, run the code chunk below to get the packages needed for rest of this chapter
-```{r}
+```{r, warning=F, message=F}
 library(arrow)
 library(dbplyr)
 library(duckdb)
