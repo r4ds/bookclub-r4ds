@@ -2,7 +2,274 @@
 
 **Learning objectives:**
 
-- ADD ABOUT ONE THING PER SECTION DESCRIBING WHAT YOU LEARN IN THIS CHAPTER.
+- Using the `arrow` package to load in large data files efficiently
+- Partitioning large data files into parquet files for quicker access, less memory usage, and quicker wrangling 
+- Wrangling with data in the `arrow` data format or parquet format using existing `dplyr()` operations
+
+## Why learn arrow?
+- Most data is commonly stored in CSV files for ease of access and use
+- However, CSVs can be too big or messy to read and work with quickly
+- Hence, the need for a package like `arrow` to read large data sets quickly using `dplyr` syntax
+
+## Setting up
+- Download the package `arrow` by running this command once in your R console: `install.packages("arrow")`
+- Then, run the code chunk below to get the packages needed for rest of this chapter
+```{r}
+library(arrow)
+library(dbplyr)
+library(duckdb)
+library(tidyverse)
+```
+
+## Grabbing data
+- As a case study, grab the item checkouts dataset from Seattle libraries here: [ data.seattle.gov/Community/Checkouts-by-Title/tmmm-ytt6]( data.seattle.gov/Community/Checkouts-by-Title/tmmm-ytt6)
+- **DON"T DOWNLOAD DATA BY HAND!!!** (it has 41,389,465 rows of data)
+- You can download it instead with the code here (which can handle giant data sets and gives progress bar in console for download status):
+```{r, eval=F}
+dir.create("data", showWarnings = FALSE)
+
+curl::multi_download(
+  "https://r4ds.s3.us-west-2.amazonaws.com/seattle-library-checkouts.csv",
+  "data/seattle-library-checkouts.csv",
+  resume = TRUE
+)
+#> # A tibble: 1 × 10
+#>   success status_code resumefrom url                    destfile        error
+#>   <lgl>         <int>      <dbl> <chr>                  <chr>           <chr>
+#> 1 TRUE            200          0 https://r4ds.s3.us-we… data/seattle-l… <NA> 
+#> # ℹ 4 more variables: type <chr>, modified <dttm>, time <dbl>,
+#> #   headers <list>
+```
+
+## Opening the data (1)
+- Usually, need twice the file size to load it in memory successfully (i.e., a 9GB file requires 9GB x 2 = 18GB in memory)
+- Instead of `read_csv()`, can use `arrow::open_dataset()` to open file
+
+## Opening the data (2)
+- Data scans a few rows to understand its structure and columns
+```{r, eval=F}
+seattle_csv <- open_dataset(
+  sources = "data/seattle-library-checkouts.csv", 
+  col_types = schema(ISBN = string()),
+  format = "csv"
+)
+#> FileSystemDataset with 1 csv file
+#> 41,389,465 rows x 12 columns
+#> $ UsageClass      <string> "Physical", "Physical", "Digital", "Physical", "Ph…
+#> $ CheckoutType    <string> "Horizon", "Horizon", "OverDrive", "Horizon", "Hor…
+#> $ MaterialType    <string> "BOOK", "BOOK", "EBOOK", "BOOK", "SOUNDDISC", "BOO…
+#> $ CheckoutYear     <int64> 2016, 2016, 2016, 2016, 2016, 2016, 2016, 2016, 20…
+#> $ CheckoutMonth    <int64> 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6,…
+#> $ Checkouts        <int64> 1, 1, 1, 1, 1, 1, 1, 1, 4, 1, 1, 2, 3, 2, 1, 3, 2,…
+#> $ Title           <string> "Super rich : a guide to having it all / Russell S…
+#> $ ISBN            <string> "", "", "", "", "", "", "", "", "", "", "", "", ""…
+#> $ Creator         <string> "Simmons, Russell", "Barclay, James, 1965-", "Tim …
+#> $ Subjects        <string> "Self realization, Conduct of life, Attitude Psych…
+#> $ Publisher       <string> "Gotham Books,", "Pyr,", "Random House, Inc.", "Di…
+#> $ PublicationYear <string> "c2011.", "2010.", "2015", "2005.", "c2004.", "c20…
+```
+
+## Opening the data (3)
+- We can use `glimpse()` on the data set to get details on it (i.e, dimensions, column types, number of rows, etc)
+```{r, eval=F}
+seattle_csv |> glimpse()
+```
+
+## Opening the data (4)
+- Can do calculations with data using `dplyr()` functions
+- Ex: grabbing summary of data (i.e., number of total checkouts per year)
+```{r, eval=F}
+seattle_csv |> 
+  group_by(CheckoutYear) |> 
+  summarise(Checkouts = sum(Checkouts)) |> 
+  arrange(CheckoutYear) |> 
+  collect()
+#> # A tibble: 18 × 2
+#>   CheckoutYear Checkouts
+#>          <int>     <int>
+#> 1         2005   3798685
+#> 2         2006   6599318
+#> 3         2007   7126627
+#> 4         2008   8438486
+#> 5         2009   9135167
+#> 6         2010   8608966
+#> # ℹ 12 more rows
+```
+
+## The parquet format (1)
+- Reading data with the package `arrow` is fast, but the parquet format is faster
+- With parquet, we separate the data into many files 
+
+## The parquet format (2)
+### Benefits of Parquet
+- Smaller than original CSV file due to compression
+- Has way to track column's data type vs CSV reader making guesses
+- Follows R's style of sorting data column by column vs row by row in CSV readers
+- Splits data into different pieces (easy to skip chunks of it)
+
+## The parque format (3)
+### Flaws of Parquet
+- So efficiently organized that humans can't read it
+- If you try reading parquet files, you only get file metadata only the computer understands
+
+## Partitioning
+- Splitting data into many files makes it easier to work with increasingly larger and larger files
+- May take trial and error to find what you think is best way to partition
+- Ideally, have a decent number of partitions (i.e., < 10,000 partitions) with each partitions neither too small (i.e., < 20MB) or large (i.e., > 2GB) 
+
+## Rewriting the Seattle library data (1)
+- Here, we partition by `checkoutYear`
+- Use `dplyr::group_by()` to define partitions and save them to directory with `arrow::write_dataset()`
+```{r, eval=F}
+pq_path <- "data/seattle-library-checkouts"
+```
+
+```{r, eval=F}
+# may take long, but makes future work faster
+seattle_csv |>
+  group_by(CheckoutYear) |>
+  write_dataset(path = pq_path, format = "parquet")
+```
+
+## Rewriting the Seattle library data (2)
+- Output of what's made
+- Uses [Apache Hive](https://hive.apache.org/) framework to partition files (in this case, based on year of checkout)
+```{r, eval=F}
+tibble(
+  files = list.files(pq_path, recursive = TRUE),
+  size_MB = file.size(file.path(pq_path, files)) / 1024^2
+)tibble(
+  files = list.files(pq_path, recursive = TRUE),
+  size_MB = file.size(file.path(pq_path, files)) / 1024^2
+)
+#> # A tibble: 18 × 2
+#>   files                            size_MB
+#>   <chr>                              <dbl>
+#> 1 CheckoutYear=2005/part-0.parquet    109.
+#> 2 CheckoutYear=2006/part-0.parquet    164.
+#> 3 CheckoutYear=2007/part-0.parquet    178.
+#> 4 CheckoutYear=2008/part-0.parquet    195.
+#> 5 CheckoutYear=2009/part-0.parquet    214.
+#> 6 CheckoutYear=2010/part-0.parquet    222.
+#> # ℹ 12 more rows
+```
+
+## dplyr and arrow (1)
+- Let's read in parquet files using `open_dataset()`
+- Recall `pq_path="data/seattle-library-checkouts"` 
+```{r, eval=F}
+seattle_pq <- open_dataset(pq_path)
+```
+
+## dplyr and arrow (2)
+- Let's use the `dplyr` pipeline 
+- Ex: Counting how many books checked out per month in last five years
+```{r, eval=F}
+query <- seattle_pq |> 
+  filter(CheckoutYear >= 2018, MaterialType == "BOOK") |>
+  group_by(CheckoutYear, CheckoutMonth) |>
+  summarize(TotalCheckouts = sum(Checkouts)) |>
+  arrange(CheckoutYear, CheckoutMonth)
+```
+
+## dplyr and arrow (3)
+- Results of query, which can be collected with `collect()` 
+```{r, eval=F}
+query
+#> FileSystemDataset (query)
+#> CheckoutYear: int32
+#> CheckoutMonth: int64
+#> TotalCheckouts: int64
+#> 
+#> * Grouped by CheckoutYear
+#> * Sorted by CheckoutYear [asc], CheckoutMonth [asc]
+#> See $.data for the source Arrow object
+```
+
+```{r, eval=F}
+query |> collect()
+#> # A tibble: 58 × 3
+#> # Groups:   CheckoutYear [5]
+#>   CheckoutYear CheckoutMonth TotalCheckouts
+#>          <int>         <int>          <int>
+#> 1         2018             1         355101
+#> 2         2018             2         309813
+#> 3         2018             3         344487
+#> 4         2018             4         330988
+#> 5         2018             5         318049
+#> 6         2018             6         341825
+#> # ℹ 52 more rows
+```
+
+## dplyr and arrow (4)
+- Before applying R expressions to query, use `?acero` to see which R expressions `arrow` supports
+```{r, eval=F}
+?acero
+```
+
+## dplyr and arrow (4)
+### Performance (1)
+- Let's see how long it takes getting number of books checked out per month in 2021 via reading in whole CSV
+```{r, eval=F}
+seattle_csv |> 
+  filter(CheckoutYear == 2021, MaterialType == "BOOK") |>
+  group_by(CheckoutMonth) |>
+  summarize(TotalCheckouts = sum(Checkouts)) |>
+  arrange(desc(CheckoutMonth)) |>
+  collect() |> 
+  system.time()
+#>    user  system elapsed 
+#>  11.951   1.297  11.387
+```
+
+## dplyr and arrow (4)
+### Performance (2)
+- Let's see time to getting number of books checked out per month in 2021  using the parquet files instead
+```{r, eval=F}
+seattle_pq |> 
+  filter(CheckoutYear == 2021, MaterialType == "BOOK") |>
+  group_by(CheckoutMonth) |>
+  summarize(TotalCheckouts = sum(Checkouts)) |>
+  arrange(desc(CheckoutMonth)) |>
+  collect() |> 
+  system.time()
+#>    user  system elapsed 
+#>   0.263   0.058   0.063
+```
+
+## dplyr and arrow (4)
+### Performance (3)
+- As shown earlier, data manipulation with parquet files take less than a second versus more than 10 seconds with reading in the entire CSV
+- The speed is due to partitioning and storing data in binary (language computer directly understands)
+- i.e., Arrow only needs the parquet file with 2021 data since it's partitioned by year and only gets columns used in query
+
+## dplyr and arrow (4)
+### duckdb and arrow(1)
+- Use `arrow::to_duckdb()` to make Arrow data be DuckDB database (as seen in Ch 21)
+- No memory copying neded so transition between formats made easy
+```{r, eval=F}
+seattle_pq |> 
+  to_duckdb() |>
+  filter(CheckoutYear >= 2018, MaterialType == "BOOK") |>
+  group_by(CheckoutYear) |>
+  summarize(TotalCheckouts = sum(Checkouts)) |>
+  arrange(desc(CheckoutYear)) |>
+  collect()
+#> Warning: Missing values are always removed in SQL aggregation functions.
+#> Use `na.rm = TRUE` to silence this warning
+#> This warning is displayed once every 8 hours.
+#> # A tibble: 5 × 2
+#>   CheckoutYear TotalCheckouts
+#>          <int>          <dbl>
+#> 1         2022        2431502
+#> 2         2021        2266438
+#> 3         2020        1241999
+#> 4         2019        3931688
+#> 5         2018        3987569
+```
+
+
+
 
 ## SLIDE TITLE
 
