@@ -23,7 +23,7 @@ library(tidyverse)
 
 ## Grabbing data
 - As a case study, grab the item checkouts dataset from Seattle libraries here: [ data.seattle.gov/Community/Checkouts-by-Title/tmmm-ytt6]( data.seattle.gov/Community/Checkouts-by-Title/tmmm-ytt6)
-- **DON"T DOWNLOAD DATA BY HAND!!!** (it has 41,389,465 rows of data)
+- **DONT DOWNLOAD DATA BY HAND!!!** (it has 41,389,465 rows of data)
 - You can download it instead with the code here (which can handle giant data sets and gives progress bar in console for download status):
 ```{r, eval=F}
 dir.create("data", showWarnings = FALSE)
@@ -44,8 +44,6 @@ curl::multi_download(
 ## Opening the data (1)
 - Usually, need twice the file size to load it in memory successfully (i.e., a 9GB file requires 9GB x 2 = 18GB in memory)
 - Instead of `read_csv()`, can use `arrow::open_dataset()` to open file
-
-## Opening the data (2)
 - Data scans a few rows to understand its structure and columns
 ```{r, eval=F}
 seattle_csv <- open_dataset(
@@ -69,13 +67,27 @@ seattle_csv <- open_dataset(
 #> $ PublicationYear <string> "c2011.", "2010.", "2015", "2005.", "c2004.", "c20…
 ```
 
-## Opening the data (3)
+## Opening the data (2)
 - We can use `glimpse()` on the data set to get details on it (i.e, dimensions, column types, number of rows, etc)
 ```{r, eval=F}
 seattle_csv |> glimpse()
+#> FileSystemDataset with 1 csv file
+#> 41,389,465 rows x 12 columns
+#> $ UsageClass      <string> "Physical", "Physical", "Digital", "Physical", "Ph…
+#> $ CheckoutType    <string> "Horizon", "Horizon", "OverDrive", "Horizon", "Hor…
+#> $ MaterialType    <string> "BOOK", "BOOK", "EBOOK", "BOOK", "SOUNDDISC", "BOO…
+#> $ CheckoutYear     <int64> 2016, 2016, 2016, 2016, 2016, 2016, 2016, 2016, 20…
+#> $ CheckoutMonth    <int64> 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6,…
+#> $ Checkouts        <int64> 1, 1, 1, 1, 1, 1, 1, 1, 4, 1, 1, 2, 3, 2, 1, 3, 2,…
+#> $ Title           <string> "Super rich : a guide to having it all / Russell S…
+#> $ ISBN            <string> "", "", "", "", "", "", "", "", "", "", "", "", ""…
+#> $ Creator         <string> "Simmons, Russell", "Barclay, James, 1965-", "Tim …
+#> $ Subjects        <string> "Self realization, Conduct of life, Attitude Psych…
+#> $ Publisher       <string> "Gotham Books,", "Pyr,", "Random House, Inc.", "Di…
+#> $ PublicationYear <string> "c2011.", "2010.", "2015", "2005.", "c2004.", "c20…
 ```
 
-## Opening the data (4)
+## Opening the data (3)
 - Can do calculations with data using `dplyr()` functions
 - Ex: grabbing summary of data (i.e., number of total checkouts per year)
 ```{r, eval=F}
@@ -97,18 +109,21 @@ seattle_csv |>
 ```
 
 ## The parquet format (1)
-- Reading data with the package `arrow` is fast, but the parquet format is faster
-- With parquet, we separate the data into many files 
+- Reading data with the package `arrow` is fast
+- Much faster with the parquet format
+- With parquet, we separate the data into many different files 
 
 ## The parquet format (2)
-### Benefits of Parquet
-- Smaller than original CSV file due to compression
-- Has way to track column's data type vs CSV reader making guesses
-- Follows R's style of sorting data column by column vs row by row in CSV readers
-- Splits data into different pieces (easy to skip chunks of it)
 
-## The parque format (3)
-### Flaws of Parquet
+**Benefits of Parquet**
+
+- Smaller than original CSV file due to compression
+- Can track column data types vs CSV reader making guesses
+- Follows R's style of sorting data column by column vs row by row in CSV readers
+- Splits data into different pieces you can skip over
+
+**Flaws of Parquet**
+
 - So efficiently organized that humans can't read it
 - If you try reading parquet files, you only get file metadata only the computer understands
 
@@ -207,8 +222,10 @@ query |> collect()
 ?acero
 ```
 
-## dplyr and arrow (4)
-### Performance (1)
+## dplyr and arrow (5)
+
+**Performance (1)**
+
 - Let's see how long it takes getting number of books checked out per month in 2021 via reading in whole CSV
 ```{r, eval=F}
 seattle_csv |> 
@@ -222,8 +239,10 @@ seattle_csv |>
 #>  11.951   1.297  11.387
 ```
 
-## dplyr and arrow (4)
-### Performance (2)
+## dplyr and arrow (6)
+
+**Performance (2)**
+
 - Let's see time to getting number of books checked out per month in 2021  using the parquet files instead
 ```{r, eval=F}
 seattle_pq |> 
@@ -237,14 +256,18 @@ seattle_pq |>
 #>   0.263   0.058   0.063
 ```
 
-## dplyr and arrow (4)
-### Performance (3)
+## dplyr and arrow (7)
+
+**Performance (3)**
+
 - As shown earlier, data manipulation with parquet files take less than a second versus more than 10 seconds with reading in the entire CSV
 - The speed is due to partitioning and storing data in binary (language computer directly understands)
 - i.e., Arrow only needs the parquet file with 2021 data since it's partitioned by year and only gets columns used in query
 
-## dplyr and arrow (4)
-### duckdb and arrow(1)
+## dplyr and arrow (8)
+
+**duckdb and arrow (1)**
+
 - Use `arrow::to_duckdb()` to make Arrow data be DuckDB database (as seen in Ch 21)
 - No memory copying neded so transition between formats made easy
 ```{r, eval=F}
@@ -269,13 +292,6 @@ seattle_pq |>
 ```
 
 
-
-
-## SLIDE TITLE
-
-- ADD NEW SLIDES USING ##. 
-- TRY TO KEEP THE FEEL SLIDE-LIKE
-  - BULLETED LISTS, NOT PARAGRAPHS
 
 ## Meeting Videos
 
