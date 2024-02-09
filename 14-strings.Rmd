@@ -274,7 +274,7 @@ str_sub("a", 1, 5)
     -   Byte `b1` in "Latin1" = "±"
     -   Byte `b1` in "Latin2" = "ą"
 -   Modern = UTF-8 (all human characters)
-    -   Seriously, ALL: `"\uA66E"` = `r "\uA66E"` (["multiocular O"](https://en.wiktionary.org/wiki/%EA%99%AE))
+    -   Seriously, ALL: `"\uA66E"` = `r "\uA66E"` (["multiocular O"](https://en.wikipedia.org/wiki/Cyrillic_o_variants#Multiocular_O))
         -   From a single 15th-century manuscript
         -   As "o" in a word meaning "many-eyed"
 
