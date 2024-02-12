@@ -153,9 +153,6 @@ seattle_csv |>
 tibble(
   files = list.files(pq_path, recursive = TRUE),
   size_MB = file.size(file.path(pq_path, files)) / 1024^2
-)tibble(
-  files = list.files(pq_path, recursive = TRUE),
-  size_MB = file.size(file.path(pq_path, files)) / 1024^2
 )
 #> # A tibble: 18 × 2
 #>   files                            size_MB
@@ -290,8 +287,6 @@ seattle_pq |>
 #> 4         2019        3931688
 #> 5         2018        3987569
 ```
-
-
 
 ## Meeting Videos
 
