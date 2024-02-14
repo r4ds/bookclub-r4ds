@@ -60,7 +60,7 @@ tricky <- "double_quote <- \"\\\"\" # or '\"' single_quote <- '\\'' # or \"'\""
 str_view(tricky)
 ```
 
-## Raw strings
+## Raw strings {-}
 
 -   Raw strings in R 4.0+ = `r"()"`
     -   Or `r"[]"`, `r"{}"`, `r"--()--"`, etc)
@@ -81,7 +81,7 @@ identical(tricky, tricky2)
 str_view(c("one\ntwo", "one\ttwo", "\u00b5", "\U0001f604"))
 ```
 
-## str_c()
+## str_c() {-}
 
 -   `str_c()` = combine strings
 -   Similar to `base::paste0()` but safer recycling rules
@@ -140,7 +140,7 @@ tribble(
   summarize(fruits = str_flatten(fruit, ", ", last = ", and "))
 ```
 
-## Separating strings
+## Separating strings {-}
 
 {tidyr} has multiple `separate_*()` functions:
 
