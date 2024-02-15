@@ -63,7 +63,7 @@ str_view(tricky)
 ## Raw strings {-}
 
 -   Raw strings in R 4.0+ = `r"()"`
-    -   Or `r"[]"`, `r"{}"`, `r"--()--"`, etc)
+    -   Or `r"[]"`, `r"{}"`, `r"--()--"`, etc.
 
 ```{r strings-raw}
 tricky2 <- r"(double_quote <- "\"" # or '"' single_quote <- '\'' # or "'")"
