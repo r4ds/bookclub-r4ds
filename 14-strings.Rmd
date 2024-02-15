@@ -276,7 +276,8 @@ str_sub("a", 1, 5)
 
 ##  Encoding {-}
 
--   Encoding = how characters are represented as bytes
+-   Encoding = how each character is represented by one or more bytes
+    -   1 byte is 8 bits (base-2 octet) = 2 hex digits (base-16)
 -   Old way = multiple standards
     -   Byte `b1` in "Latin1" = "±"
     -   Byte `b1` in "Latin2" = "ą"
@@ -295,9 +296,16 @@ x <- "text\nEl Ni\xf1o was particularly bad this year"
 read_csv(charToRaw(x), locale = locale(encoding = "Latin1"))$text
 ```
 
-## Locales {-}
+## Locales (1) {-}
 
--   Rules based on language, location, etc = `locale`
+-   `locale` = specifier of language and optionally the region
+    -   e.g. `en`, `en_US`, `en_UK`, `be_NL`, etc.
+    -   wrt strings, it affects **changing case** and **sorting**
+-   base R defaults to your personal system's locale = different behaviour between machines!
+-   `{stringr}` defaults to `en`; can take explicit locale = consistent behaviour!
+    -   many locales supported: [`stringi::stri_locale_list()`](https://stringi.gagolewski.com/rapi/stri_locale_list.html#examples)
+
+## Locales (2) {-}
 
 ```{r strings-locale-upper}
 str_to_upper(c("i", "ı"))
