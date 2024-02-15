@@ -45,6 +45,8 @@ single_quote <- '\'' # or "'"
 backslash <- "\\"
 ```
 
+-   [`?Quotes`](https://rdrr.io/r/base/Quotes.html)
+
 ## Printing strings {-}
 
 ```{r strings-print-view}
@@ -52,6 +54,8 @@ x <- c(single_quote, double_quote, backslash)
 x
 str_view(x)
 ```
+
+-   `print()` output = the format needed to define the string!
 
 ## Multiple escapes = confusion {-}
 
@@ -83,8 +87,8 @@ str_view(c("one\ntwo", "one\ttwo", "\u00b5", "\U0001f604"))
 
 ## str_c() {-}
 
--   `str_c()` = combine strings
--   Similar to `base::paste0()` but safer recycling rules
+-   `str_c()` = combine multiple strings or multiple character vectors
+-   Vectorized just like `base::paste0()` but safer recycling rules
 
 ```{r strings-str_c}
 str_c("x", "y")
@@ -107,6 +111,7 @@ df |>
 ## str_glue() {-}
 
 -   `str_glue()` = combine strings with `{glue}` syntax
+-   vectorized
 
 ```{r strings-str_glue}
 df |> mutate(greeting = str_glue("Hi {name}!"))
@@ -122,7 +127,7 @@ df |> mutate(greeting = str_glue("{{Hi {name}!}}"))
 
 ## str_flatten() {-}
 
--   `str_flatten()` = collapse strings into a single string
+-   `str_flatten()` = collapse a single character vector into a single string
 -   Similar to `base::paste(collapse = X)`
 -   Useful with `summarize()`
 
@@ -144,11 +149,13 @@ tribble(
 
 {tidyr} has multiple `separate_*()` functions:
 
--   `separate_longer_delim()`
--   `separate_longer_position()`
--   `separate_wider_delim()`
--   `separate_wider_position()`
--   (`separate_wider_regex()` in next chapter)
+- in case the combined strings refer to the same variable:
+  -   `separate_longer_delim()`
+  -   `separate_longer_position()`
+- in case the combined strings refer to different variables:
+  -   `separate_wider_delim()`
+  -   `separate_wider_position()`
+  -   (`separate_wider_regex()` in next chapter)
 
 ## separate_longer_delim() {-}
 
