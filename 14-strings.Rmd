@@ -45,6 +45,8 @@ single_quote <- '\'' # or "'"
 backslash <- "\\"
 ```
 
+-   [`?Quotes`](https://rdrr.io/r/base/Quotes.html)
+
 ## Printing strings {-}
 
 ```{r strings-print-view}
@@ -53,6 +55,8 @@ x
 str_view(x)
 ```
 
+-   `print()` output = the format needed to define the string!
+
 ## Multiple escapes = confusion {-}
 
 ```{r strings-escapes-confusion}
@@ -60,10 +64,10 @@ tricky <- "double_quote <- \"\\\"\" # or '\"' single_quote <- '\\'' # or \"'\""
 str_view(tricky)
 ```
 
-## Raw strings
+## Raw strings {-}
 
 -   Raw strings in R 4.0+ = `r"()"`
-    -   Or `r"[]"`, `r"{}"`, `r"--()--"`, etc)
+    -   Or `r"[]"`, `r"{}"`, `r"--()--"`, etc.
 
 ```{r strings-raw}
 tricky2 <- r"(double_quote <- "\"" # or '"' single_quote <- '\'' # or "'")"
@@ -81,10 +85,10 @@ identical(tricky, tricky2)
 str_view(c("one\ntwo", "one\ttwo", "\u00b5", "\U0001f604"))
 ```
 
-## str_c()
+## str_c() {-}
 
--   `str_c()` = combine strings
--   Similar to `base::paste0()` but safer recycling rules
+-   `str_c()` = combine multiple strings or multiple character vectors
+-   Vectorized just like `base::paste0()` but safer recycling rules
 
 ```{r strings-str_c}
 str_c("x", "y")
@@ -107,6 +111,7 @@ df |>
 ## str_glue() {-}
 
 -   `str_glue()` = combine strings with `{glue}` syntax
+-   vectorized
 
 ```{r strings-str_glue}
 df |> mutate(greeting = str_glue("Hi {name}!"))
@@ -122,7 +127,7 @@ df |> mutate(greeting = str_glue("{{Hi {name}!}}"))
 
 ## str_flatten() {-}
 
--   `str_flatten()` = collapse strings into a single string
+-   `str_flatten()` = collapse a single character vector into a single string
 -   Similar to `base::paste(collapse = X)`
 -   Useful with `summarize()`
 
@@ -140,15 +145,17 @@ tribble(
   summarize(fruits = str_flatten(fruit, ", ", last = ", and "))
 ```
 
-## Separating strings
+## Separating strings {-}
 
 {tidyr} has multiple `separate_*()` functions:
 
--   `separate_longer_delim()`
--   `separate_longer_position()`
--   `separate_wider_delim()`
--   `separate_wider_position()`
--   (`separate_wider_regex()` in next chapter)
+- in case the combined strings refer to the same variable:
+  -   `separate_longer_delim()`
+  -   `separate_longer_position()`
+- in case the combined strings refer to different variables:
+  -   `separate_wider_delim()`
+  -   `separate_wider_position()`
+  -   (`separate_wider_regex()` in next chapter)
 
 ## separate_longer_delim() {-}
 
@@ -269,7 +276,8 @@ str_sub("a", 1, 5)
 
 ##  Encoding {-}
 
--   Encoding = how characters are represented as bytes
+-   Encoding = how each character is represented by one or more bytes
+    -   1 byte is 8 bits (base-2 octet) = 2 hex digits (base-16)
 -   Old way = multiple standards
     -   Byte `b1` in "Latin1" = "±"
     -   Byte `b1` in "Latin2" = "ą"
@@ -288,9 +296,16 @@ x <- "text\nEl Ni\xf1o was particularly bad this year"
 read_csv(charToRaw(x), locale = locale(encoding = "Latin1"))$text
 ```
 
-## Locales {-}
+## Locales (1) {-}
 
--   Rules based on language, location, etc = `locale`
+-   `locale` = specifier of language and optionally the region
+    -   e.g. `en`, `en_US`, `en_UK`, `be_NL`, etc.
+    -   wrt strings, it affects **changing case** and **sorting**
+-   base R defaults to your personal system's locale = different behaviour between machines!
+-   `{stringr}` defaults to `en`; can take explicit locale = consistent behaviour!
+    -   many locales supported: [`stringi::stri_locale_list()`](https://stringi.gagolewski.com/rapi/stri_locale_list.html#examples)
+
+## Locales (2) {-}
 
 ```{r strings-locale-upper}
 str_to_upper(c("i", "ı"))
