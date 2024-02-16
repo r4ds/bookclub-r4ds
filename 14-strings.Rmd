@@ -299,7 +299,7 @@ read_csv(charToRaw(x), locale = locale(encoding = "Latin1"))$text
 ## Locales (1) {-}
 
 -   `locale` = specifier of language and optionally the region
-    -   e.g. `en`, `en_US`, `en_UK`, `be_NL`, etc.
+    -   e.g. `en`, `en_US`, `en_UK`, `nl_BE`, etc.
     -   wrt strings, it affects **changing case** and **sorting**
 -   base R defaults to your personal system's locale = different behaviour between machines!
 -   `{stringr}` defaults to `en`; can take explicit locale = consistent behaviour!
