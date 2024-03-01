@@ -15,37 +15,41 @@
     -   `forcats::fct_collapse()`
     -   `forcats::fct_lump()`
 
-## Introduction
+## Introduction {-}
 
--   Factors are used for categorical variables, variables that have a fixed and known set of possible values. They are also useful when you want to display character vectors in a non-alphabetical order.
+- Factors -> categorical variables: variables that have a fixed and known set of possible values. 
+- Also useful when you want to display character vectors in a non-alphabetical order.
 
-```{r}
+```{r, warning=FALSE, message=FALSE}
 library(tidyverse)
 ```
 
-## Factor basics
+## Factor basics {-}
 
-- Imagine that we have a variable that records month:
+- A variable that records month:
 
 ```{r}
 x1 <- c("Dec", "Apr", "Jan", "Mar")
 ```
 
-Using a string to record this variable has two problems:
-
-- There are only twelve possible months, and there's nothing saving you from typos:
+Problems with using a string: 
+  - Only 12 possible values 
+  - No way of accounting for typos
 
 ```{r}
 x2 <- c("Dec", "Apr", "Jam", "Mar")
 ```
 
-- It doesn't sort in a useful way:
+  - Doesn't sort in a useful way but alphabetically
 
 ```{r}
 sort(x1)
 ```
 
-- We can fix both of these problems with a factor. To create a factor you must start by creating a list of the valid levels:
+## Fix issues with strings using factors {-}
+
+- Fix those problems with a factor. 
+- Start by creating a list of the valid levels:
 
 ```{r}
 month_levels <- c(
@@ -56,19 +60,23 @@ month_levels <- c(
 month_levels
 ```
 
-- Now we can create a factor:
+- Now create a factor:
 
 ```{r}
 y1 <- factor(x1, levels = month_levels)
 
-y1
-```
-
-```{r}
 sort(y1)
 ```
 
-- Any values not in the level will be silently converted to NA:
+- If you omit the levels, they'll be taken from the data alphabetically:
+
+```{r}
+factor(x1)
+```
+
+## Values not included in levels {-}
+
+- <b style="color:red;">WARNING:</b> Any values not in the level will be silently converted to NA:
 
 ```{r}
 y2 <- factor(x2, levels = month_levels)
@@ -76,7 +84,25 @@ y2 <- factor(x2, levels = month_levels)
 y2
 ```
 
-- Sometimes we'd prefer that the order of the levels matches the order of the first appearance in the data. We can do that when creating the factor by setting levels to unique(x), or after the fact, with [fct_inorder():]('https://forcats.tidyverse.org/reference/fct_inorder.html')
+- But if you use `forcats::fct()` insted: 
+
+```{r, eval=FALSE}
+y2 <- fct(x2, levels = month_levels)
+```
+
+#> Error in `fct()`:
+#> ! All values of `x` must appear in `levels` or `na`
+#> ℹ Missing level: "Jam"
+
+
+- If you need to access the valid levels use `levels()`:
+```{r}
+levels(y2)
+```
+
+## Other ways of dealing with factors {-}
+
+- If we want the order of the levels match the order of the first appearance in the data then use `unique()`, or after the fact, with [fct_inorder():]('https://forcats.tidyverse.org/reference/fct_inorder.html')
 
 ```{r}
 f1 <- factor(x1, levels = unique(x1))
@@ -108,20 +134,24 @@ df <- read_csv(csv, col_types = cols(month = col_factor(month_levels)))
 df$month
 ```
 
-## General Social Survey
+## General Social Survey {-}
+
+It's a long-running US survey conducted by the independent research organization NORC at the University of Chicago. The survey has thousands of questions, so in `gss_cat` Hadley selected a handful that will illustrate some common challenges you’ll encounter when working with factors.
 
 ```{r}
 gss_cat
 ```
 
-- When factors are stored in a tibble, we can't see their levels so easily. One way to view them is with count():
+- In a tibble we can use `count()` to see the levels of a factor:
 
 ```{r}
 gss_cat |>
   count(race)
 ```
 
-## Modifying factor order
+## Modifying factor order {-}
+
+- Let's look at an example in a plot for which we will modify the order of factors on the y-axis: 
 
 ```{r}
 relig_summary <- gss_cat |>
@@ -132,18 +162,19 @@ relig_summary <- gss_cat |>
     n = n()
   )
 
-
 ggplot(relig_summary, aes(x = tvhours, y = relig)) + 
   geom_point()
 ```
 
-It is hard to read this plot because there's no overall pattern. We can improve it by reordering the levels of relig using [fct_reorder()]('https://forcats.tidyverse.org/reference/fct_reorder.html'). [fct_reorder()]('https://forcats.tidyverse.org/reference/fct_reorder.html') takes three arguments:
+## Let's re order the factos with `fct_reorder()` {-}
 
-- f, the factor whose levels you want to modify.
+- It is hard to read this plot because there's no overall pattern. We can improve it by reordering the levels of relig using [fct_reorder()]('https://forcats.tidyverse.org/reference/fct_reorder.html'). [fct_reorder()]('https://forcats.tidyverse.org/reference/fct_reorder.html') takes three arguments:
 
-- x, a numeric vector that you want to use to reorder the levels.
+  - f, the factor whose levels you want to modify.
 
-- Optionally, fun, a function that's used if there are multiple values of x for each value of f. The default value is median.
+  - x, a numeric vector that you want to use to reorder the levels.
+
+  - Optionally, fun, a function that's used if there are multiple values of x for each value of f. The default value is median.
 
 
 ```{r}
@@ -154,6 +185,8 @@ relig_summary |>
   ggplot(aes(x = tvhours, y = relig)) +
   geom_point()
 ```
+
+## Change levels of a factor {-}
 
 - Changing the levels of a factor
 
@@ -167,7 +200,10 @@ rincome_summary <- gss_cat |>
   )
 
 
-ggplot(rincome_summary, aes(x = age, y = fct_relevel(rincome, "Not applicable"))) +
+ggplot(rincome_summary, 
+       aes(x = age, 
+           y = fct_relevel(rincome, 
+                           "Not applicable"))) +
   geom_point()
 ```
 
@@ -180,10 +216,14 @@ by_age <- gss_cat |>
     prop = n / sum(n)
   )
 
-ggplot(by_age, aes(x = age, y = prop, color = marital)) +
+ggplot(by_age, aes(x = age, 
+                   y = prop, color = marital)) +
   geom_line(na.rm = TRUE)
 
-ggplot(by_age, aes(x = age, y = prop, color = fct_reorder2(marital, age, prop))) +
+ggplot(by_age, aes(x = age, 
+                   y = prop, 
+                   color = fct_reorder2(marital, 
+                                        age, prop))) +
   geom_line() +
   labs(color = "marital")
 ```
@@ -192,12 +232,19 @@ ggplot(by_age, aes(x = age, y = prop, color = fct_reorder2(marital, age, prop)))
 
 ```{r}
 gss_cat |>
-  mutate(marital = marital |> fct_infreq() |> fct_rev()) |>
+  mutate(marital = marital |> 
+           fct_infreq() |> 
+           fct_rev()) |>
   ggplot(aes(x = marital)) +
   geom_bar()
 ```
 
-## Modifying factor levels
+## Modifying factor levels {-}
+
+- We can change the values of the levels.
+  - Now we can clarify levels for publication
+  - Collapse levels for high-level displays
+  - `fct_recode()` allows you to recode or change the value of each level. It will leave levels not mentioned as is and will warn if you refer to a level that doesn't exist. 
 
 ```{r}
 gss_cat |>
@@ -214,7 +261,9 @@ gss_cat |>
   count(partyid)
 ```
 
-- To combine groups, we can assign multiple old levels to the same new level:
+## Combine groups {-}
+
+  - To combine groups, we can assign multiple old levels to the same new level ('Other'):
 
 ```{r}
 gss_cat |>
@@ -234,7 +283,10 @@ gss_cat |>
   count(partyid)
 ```
 
-- If we want to collapse a lot of levels, [fct_collapse()]('https://forcats.tidyverse.org/reference/fct_collapse.html') is a useful variant of [fct_recode().]('https://forcats.tidyverse.org/reference/fct_recode.html') For each new variable, you can provide a vector of old levels:
+## Collapse levels into one {-}
+
+  - If we want to collapse a lot of levels, [fct_collapse()]('https://forcats.tidyverse.org/reference/fct_collapse.html') is a useful variant of [fct_recode().]('https://forcats.tidyverse.org/reference/fct_recode.html'). 
+    - For each new variable, you can provide a vector of old levels:
 
 ```{r}
 gss_cat |>
@@ -249,6 +301,10 @@ gss_cat |>
   count(partyid)
 ```
 
+## Lump together several small groups {-}
+
+  - If you want to lump together small groups to make a simpler table or plot then use `fct_lump*()`. For example: `fct_lump_lofreq()` lumps progressively smallest groups categories into 'Other':
+
 ```{r}
 gss_cat |>
   mutate(relig = fct_lump_lowfreq(relig)) |>
@@ -257,11 +313,18 @@ gss_cat |>
 
 -   Read the documentation to learn about [fct_lump_min()]('https://forcats.tidyverse.org/reference/fct_lump.html') and [fct_lump_prop()]('https://forcats.tidyverse.org/reference/fct_lump.html') which are useful in other cases.
 
-## Summary
+## Ordered factors {-}
 
-- This chapter introduced us to the handy forcats package for working with factors, introducing you to the most commonly used functions that we may need in our data analysis process.
+- Ordered factors, created with ordered(), imply a strict ordering and equal distance between levels:
 
-## Meeting Videos
+```{r}
+ordered(c('a', 'b', 'c'))
+```
+- If you map an ordered factor to color or fill in ggplot2, it will default to `scale_color_viridis()` or `scale_fill_viridis()`.
+- If you use an ordered function in a linear model, it will use 'polygonal contrasts'. These are mildly useful and you can learn more here: `vignette("contrasts", package = "faux")` by [Lisa DeBruine](https://debruine.github.io/faux/articles/contrasts.html).
+
+
+## Meeting Videos {-}
 
 ### Cohort 5
 
