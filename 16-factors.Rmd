@@ -151,6 +151,8 @@ gss_cat |>
 
 ## Modifying factor order {-}
 
+- Let's look at an example in a plot for which we will modify the order of factors on the y-axis: 
+
 ```{r}
 relig_summary <- gss_cat |>
   group_by(relig) |>
@@ -163,6 +165,8 @@ relig_summary <- gss_cat |>
 ggplot(relig_summary, aes(x = tvhours, y = relig)) + 
   geom_point()
 ```
+
+## Let's re order the factos with `fct_reorder()` {-}
 
 - It is hard to read this plot because there's no overall pattern. We can improve it by reordering the levels of relig using [fct_reorder()]('https://forcats.tidyverse.org/reference/fct_reorder.html'). [fct_reorder()]('https://forcats.tidyverse.org/reference/fct_reorder.html') takes three arguments:
 
@@ -181,6 +185,8 @@ relig_summary |>
   ggplot(aes(x = tvhours, y = relig)) +
   geom_point()
 ```
+
+## Change levels of a factor {-}
 
 - Changing the levels of a factor
 
@@ -255,7 +261,9 @@ gss_cat |>
   count(partyid)
 ```
 
-    - To combine groups, we can assign multiple old levels to the same new level ('Other'):
+## Combine groups {-}
+
+  - To combine groups, we can assign multiple old levels to the same new level ('Other'):
 
 ```{r}
 gss_cat |>
@@ -275,7 +283,9 @@ gss_cat |>
   count(partyid)
 ```
 
-    - If we want to collapse a lot of levels, [fct_collapse()]('https://forcats.tidyverse.org/reference/fct_collapse.html') is a useful variant of [fct_recode().]('https://forcats.tidyverse.org/reference/fct_recode.html'). 
+## Collapse levels into one {-}
+
+  - If we want to collapse a lot of levels, [fct_collapse()]('https://forcats.tidyverse.org/reference/fct_collapse.html') is a useful variant of [fct_recode().]('https://forcats.tidyverse.org/reference/fct_recode.html'). 
     - For each new variable, you can provide a vector of old levels:
 
 ```{r}
@@ -290,6 +300,8 @@ gss_cat |>
   ) |>
   count(partyid)
 ```
+
+## Lump together several small groups {-}
 
   - If you want to lump together small groups to make a simpler table or plot then use `fct_lump*()`. For example: `fct_lump_lofreq()` lumps progressively smallest groups categories into 'Other':
 
