@@ -204,14 +204,6 @@ club_starts |>  with_tz("Australia/Lord_Howe") |> minute()
 
 `r knitr::include_url("https://www.youtube.com/embed/URL")`
 
-<details>
-  <summary> Meeting chat log </summary>
-  
-```
-LOG
-```
-</details>
-
 
 ### Cohort 7
 
