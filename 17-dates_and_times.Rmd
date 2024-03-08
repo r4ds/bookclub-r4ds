@@ -118,12 +118,14 @@ jon_age
 as.duration(jon_age)
 ddays(0:3) + dhours(2)
 ymd_hms("2024-03-10 01:00:00", tz = "America/Chicago") + ddays(1)
+dyears(1) / ddays(1)
 ```
 
 ## Periods {-}
 
 ```{r dates-and-times-periods}
 class(days(1))
+ymd_hms("2024-03-10 01:00:00", tz = "America/Chicago") + ddays(1)
 ymd_hms("2024-03-10 01:00:00", tz = "America/Chicago") + days(1)
 ```
 
@@ -132,7 +134,9 @@ ymd_hms("2024-03-10 01:00:00", tz = "America/Chicago") + days(1)
 ```{r dates-and-times-intervals}
 y2023 <- ymd("2023-01-01") %--% ymd("2024-01-01")
 y2024 <- ymd("2024-01-01") %--% ymd("2025-01-01")
+y2023 / dyears(1)
 y2023 / days(1)
+y2024 / dyears(1)
 y2024 / days(1)
 ```
 
@@ -166,9 +170,9 @@ Lord Howe Island changes by 30 minutes for daylight saving time
 
 ```{r dates-and-times-timezones-howe}
 club_starts |> with_tz("Australia/Sydney") |> hour()
-club_starts |>  with_tz("Australia/Lord_Howe") |> hour()
+club_starts |> with_tz("Australia/Lord_Howe") |> hour()
 club_starts |> with_tz("Australia/Sydney") |> minute()
-club_starts |>  with_tz("Australia/Lord_Howe") |> minute()
+club_starts |> with_tz("Australia/Lord_Howe") |> minute()
 ```
 
 ## Meeting Videos
