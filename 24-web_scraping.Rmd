@@ -34,3 +34,191 @@
 ### Cohort 8
 
 `r knitr::include_url("https://www.youtube.com/embed/dOVWSSqUvt0")`
+
+### Cohort 9
+
+`r knitr::include_url("https://www.youtube.com/embed/Hs928CH-_E4")`
+
+
+## Learning objectives
+
+1.    Learn a bit of HTML 
+2.    Use that bit of HTML to learn web scraping. 
+
+## Curious features of the chapter
+
+-   No exercises!
+-   Ethical implications of web scraping
+-   Using an external tool like SelectorGadget
+-   Limitations of scraping for dynamic websites
+
+## Typical HTML structure
+
+-   HTML has hierarchical structure.
+-   Structure is composed of elements. 
+-   Each element has
+    -   Start tag
+    -   Attributes
+    -   Content
+    -   End tag
+-   Each element can have children which are themselves elements.
+-   Consistency of structure enables one to do web scraping. 
+
+## Key commands to extract data from HTML
+
+-   Key package: `rvest`
+-   Load html to scrape: `read_html()`
+-   Extract data through selectors
+    -   `html_elements()`, `html_element()`
+    -   `html_attr()`
+    -   `html_text2()`
+-   Extract data from HTML tables: `html_table()`
+
+## Example: Loading IMDB data
+
+-   Load packages
+
+```{r}
+library(tidyverse)
+library(rvest)
+```
+
+-   This code chunk may be a bottleneck for people with slower internet connections and for websites which may guard against scraping.
+
+```{r}
+#| eval: FALSE
+# Problem directly using code from book
+url <- "https://web.archive.org/web/20220201012049/https://www.imdb.com/chart/top/"
+html <- read_html(url)
+```
+
+-   Download HTML file locally instead. Then use `read_html()` directly on the downloaded file.
+
+```{r}
+#| eval: FALSE
+# Suggestion from https://stackoverflow.com/questions/33295686/rvest-error-in-open-connectionx-rb-timeout-was-reached
+download.file(url, destfile = "scrapedpage.html", quiet=TRUE)
+html.book <- read_html("scrapedpage.html")
+```
+
+-   Specific to the Internet Archive is that some of the website snapshots may be available as a link but not necessarily accessible.
+
+-   May encounter 403 Forbidden error. 
+
+```{r}
+#| eval: FALSE
+# Not just any URL will work
+url <- "https://web.archive.org/web/20240223185506/https://www.imdb.com/chart/top/"
+download.file(url, destfile = "scrapedpage.html", quiet=TRUE)
+``` 
+
+-   But even if that were the case, the scraped file may part of a dynamic website. 
+-   A very old snapshot is available for comparison.
+
+```{r}
+#| eval: FALSE
+url <- "https://web.archive.org/web/20040704034814/https://www.imdb.com/chart/top/"
+download.file(url, destfile = "scrapedpage-old.html", quiet=TRUE)
+```
+
+-   But the structure of the website and the associated HTML have changed. 
+-   This means the code you see in the book will not work out of the box. 
+
+```{r}
+html.old <- read_html("/home/apua/Documents/r4ds/scrapedpage-old.html")
+temp <- html.old |> 
+  html_elements("table") |> html_attr("border") 
+which(temp == "1")
+temp <- html.old |> 
+  html_elements("table") 
+table.old <- html_table(temp[21], header=TRUE)
+ratings <- table.old[[1]] |>
+  select(
+    rank = "Rank",
+    title_year = "Title",
+    rating = "Rating",
+    votes = "Votes"
+  ) |> 
+  mutate(votes = parse_number(votes)) |>
+  separate_wider_regex(
+    title_year,
+    patterns = c(
+      title = ".+", " +\\(",
+      year = "\\d+", "\\)"
+    )
+  )
+ratings
+```
+
+-   Let us compare to the book. 
+
+```{r}
+html.book <- read_html("scrapedpage.html")
+table.book <- html.book |> 
+  html_element("table") |> 
+  html_table()
+ratings.book <- table.book |>
+  select(
+    rank_title_year = `Rank & Title`,
+    rating = `IMDb Rating`
+  ) |> 
+  mutate(
+    rank_title_year = str_replace_all(rank_title_year, "\n +", " "), 
+    rating_n = html.book |> html_elements("td strong") |> html_attr("title")
+  ) |> 
+  separate_wider_regex(
+    rank_title_year,
+    patterns = c(
+      rank = "\\d+", "\\. ",
+      title = ".+", " +\\(",
+      year = "\\d+", "\\)"
+    )
+  ) |>
+  separate_wider_regex(
+    rating_n,
+    patterns = c(
+      "[0-9.]+ based on ",
+      number = "[0-9,]+",
+      " user ratings"
+    )
+  ) |>
+    mutate(
+    number = parse_number(number)
+  )
+ratings.book$title
+```
+
+-   Let point out things about the two datasets which make post-processing challenging.  
+-   I don't resolve them here, but they require one to think about what questions you want answered first. 
+
+```{r}
+ratings$title
+left_join(ratings, ratings.book, by="title")
+```
+
+## Example: Quarantine Zine Club
+
+-   Task is to create a spreadsheet where we have the titles of the zines, their authors, the links to download the zines, and the first social media link of the authors. 
+-   Used `xpath` here, but was not discussed in book. 
+
+```{r}
+url <- "https://quarantinezineclub.neocities.org/zinelibrary"
+html <- read_html(url) 
+zinelib <- tibble(authors = html |> html_elements("#zname") |> html_text2(), 
+       titles = html |> html_elements("#libraryheader") |> html_text2(),
+       pdflink = html |> 
+  html_elements(xpath = "//div[@class='column right']") |> html_element("a") |> html_attr("href"),
+       mark = 2:156
+       )
+get.first.social <- function(num)
+{
+  return(html |> html_elements(xpath = paste("/html/body/div[2]/div[", num, "]/div[2]/a[1]", sep = ""))|> html_attr("href"))
+}
+zinelib <- zinelib |> mutate(
+  pdflink = paste("https://quarantinezineclub.neocities.org/", pdflink, sep = ""),
+  social1 = get.first.social(mark)) |> select(-mark)
+zinelib
+```
+
+
+
