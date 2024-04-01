@@ -12,7 +12,7 @@ We are going to learn about three useful type of function:
 
 - *Plot functions* that take a data frame as input and return a plot as output.
 
-```{r echo=FALSE}
+```{r echo=FALSE, warning = FALSE}
 library(tidyverse) |> suppressPackageStartupMessages()
 library(nycflights13)
 ```
