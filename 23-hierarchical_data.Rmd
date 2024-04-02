@@ -2,45 +2,6 @@
 
 **Learning objectives:**
 
-- ADD ABOUT ONE THING PER SECTION DESCRIBING WHAT YOU LEARN IN THIS CHAPTER.
-
-## SLIDE TITLE
-
-- ADD NEW SLIDES USING ##. 
-- TRY TO KEEP THE FEEL SLIDE-LIKE
-  - BULLETED LISTS, NOT PARAGRAPHS
-
-## Meeting Videos
-
-### Cohort 7
-
-`r knitr::include_url("https://www.youtube.com/embed/5t0xD2XsKYM")`
-
-<details>
-  <summary> Meeting chat log </summary>
-```
-00:04:06	Oluwafemi Oyedele:	Hi Tim, Good Evening!!!
-00:04:46	Tim Newby:	Good evening - I’m struggling with a new webcam so not sure if sound/video will be working for me tonight!
-00:04:49	Oluwafemi Oyedele:	Let us wait a few minute for others to join!!!
-00:05:08	Oluwafemi Oyedele:	No problem!!!
-00:05:22	Oluwafemi Oyedele:	You can use the chat!!!
-00:11:49	Oluwafemi Oyedele:	start
-00:21:08	Oluwafemi Oyedele:	https://tidyr.tidyverse.org/reference/unnest_wider.html
-00:21:21	Oluwafemi Oyedele:	https://tidyr.tidyverse.org/reference/unnest_longer.html
-00:52:48	Oluwafemi Oyedele:	stop
-```
-</details>
-
-### Cohort 8
-
-`r knitr::include_url("https://www.youtube.com/embed/jY5Mb82v77c")`
-
-### Cohort 9
-
-`r knitr::include_url("https://www.youtube.com/embed/F53PlR1rEqs")`
-
-## Learning objectives
-
 1. Introduce a new data structure called lists
 2. Learn how to unpack lists systematically using only two new functions: `unnest_longer()` and `unnest_wider()`
 3. Get acquainted with JSON
@@ -55,12 +16,14 @@ library(repurrrsive)
 is.list(gh_repos)
 repos <- tibble(json = gh_repos)
 repos
-str(repos)
+#str(repos)
 ```
 
 - Now that was overwhelming! 
 
 - A tibble with a column of lists
+
+##
 
 - Lists could be named or unnamed. 
 
@@ -68,11 +31,15 @@ str(repos)
   - Named lists tend to have the same names in every row. 
   - The number of elements of an unnamed list tend to vary from row-to-row.
 
+## 
+
 - To unpack an unnamed list, use `unnest_longer()` and point to the column which is a list-column.
 
 ```{r}
 repos |> unnest_longer(json) 
 ```
+
+##
 
 - Notice another column of lists: but this time, we have named lists. 
 
@@ -83,6 +50,8 @@ repos |> unnest_longer(json) |>
   unnest_wider(json)
 ```
 
+##
+
 - Give a sense of the columns.
 
 ```{r}
@@ -90,6 +59,8 @@ repos |> unnest_longer(json) |>
   unnest_wider(json) |>
   names()
 ```
+
+##
 
 - We can further unpack. 
 
@@ -102,6 +73,8 @@ repos |> unnest_longer(json) |>
   select(where(is.list)) |>
   unnest_wider(owner)
 ```
+
+##
 
 - We can also answer Exercise 23.4.4, Item 1. Roughly estimate when `gh_repos` was created. Why can you only roughly estimate the date?
 
@@ -129,6 +102,8 @@ chars |>
   select(id, where(is.list))
 ```
 
+##
+
 - Create table of titles. 
 
 ```{r}
@@ -140,6 +115,7 @@ titles <- chars |>
 titles
 ```
 
+##
 
 - Follow the steps used for titles to create similar tables for the aliases, allegiances, books, and TV series for the Game of Thrones characters.
 
@@ -166,6 +142,8 @@ tvSeries <- chars |>
   filter(tvSeries != "") 
 ```
 
+##
+
 - Joining together: "You might expect to see this data in its own table because it would be easy to join to the characters data as needed."
 
 ```{r}
@@ -181,7 +159,7 @@ characters |>
   left_join(tvSeries, join_by(id))
 ```
 
-
+##
 -   Exercise 23.4.4 Item 4: "Explain the following code line-by-line. Why is it interesting? Why does it work for `got_chars` but might not work in general?"
 
 ```{r}
@@ -225,9 +203,41 @@ df_col |>
 df_row |> unnest_wider(json)
 ``` 
 
+##
+
 - "Wilder" JSON: Try opening in a text editor and browser the Game of Thrones JSON. Below you will see a path to it. 
 
 ```{r}
 got_chars_json()
 ```
+
+
+## Meeting Videos
+
+### Cohort 7
+
+`r knitr::include_url("https://www.youtube.com/embed/5t0xD2XsKYM")`
+
+<details>
+  <summary> Meeting chat log </summary>
+```
+00:04:06	Oluwafemi Oyedele:	Hi Tim, Good Evening!!!
+00:04:46	Tim Newby:	Good evening - I’m struggling with a new webcam so not sure if sound/video will be working for me tonight!
+00:04:49	Oluwafemi Oyedele:	Let us wait a few minute for others to join!!!
+00:05:08	Oluwafemi Oyedele:	No problem!!!
+00:05:22	Oluwafemi Oyedele:	You can use the chat!!!
+00:11:49	Oluwafemi Oyedele:	start
+00:21:08	Oluwafemi Oyedele:	https://tidyr.tidyverse.org/reference/unnest_wider.html
+00:21:21	Oluwafemi Oyedele:	https://tidyr.tidyverse.org/reference/unnest_longer.html
+00:52:48	Oluwafemi Oyedele:	stop
+```
+</details>
+
+### Cohort 8
+
+`r knitr::include_url("https://www.youtube.com/embed/jY5Mb82v77c")`
+
+### Cohort 9
+
+`r knitr::include_url("https://www.youtube.com/embed/F53PlR1rEqs")`
 
