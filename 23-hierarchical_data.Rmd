@@ -11,8 +11,9 @@
 - Consider `gh_repos`. 
 
 ```{r}
-library(tidyverse)
+library(tidyverse) |> suppressPackageStartupMessages()
 library(repurrrsive)
+library(jsonlite) |> suppressPackageStartupMessages()
 is.list(gh_repos)
 repos <- tibble(json = gh_repos)
 repos
@@ -179,7 +180,6 @@ tibble(json = got_chars) |>
 - Examples of toy JSONs from Exercise 23.5.4 Item 1: "Rectangle the `df_col` and `df_row` below. They represent the two ways of encoding a data frame in JSON."
 
 ```{r}
-library(jsonlite)
 json_col <- parse_json('
   {
     "x": ["a", "x", "z"],
