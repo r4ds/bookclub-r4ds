@@ -2,13 +2,215 @@
 
 **Learning objectives:**
 
-- ADD ABOUT ONE THING PER SECTION DESCRIBING WHAT YOU LEARN IN THIS CHAPTER.
+1. Introduce a new data structure called lists
+2. Learn how to unpack lists systematically using only two new functions: `unnest_longer()` and `unnest_wider()`
+3. Get acquainted with JSON
 
-## SLIDE TITLE
+## Motivating example: Github repos
 
-- ADD NEW SLIDES USING ##. 
-- TRY TO KEEP THE FEEL SLIDE-LIKE
-  - BULLETED LISTS, NOT PARAGRAPHS
+- Consider `gh_repos`. 
+
+```{r}
+library(tidyverse) |> suppressPackageStartupMessages()
+library(repurrrsive)
+library(jsonlite) |> suppressPackageStartupMessages()
+is.list(gh_repos)
+repos <- tibble(json = gh_repos)
+repos
+#str(repos)
+```
+
+- Now that was overwhelming! 
+
+- A tibble with a column of lists
+
+##
+
+- Lists could be named or unnamed. 
+
+  - The number of elements of a named list tend to be the same in every row.  
+  - Named lists tend to have the same names in every row. 
+  - The number of elements of an unnamed list tend to vary from row-to-row.
+
+## 
+
+- To unpack an unnamed list, use `unnest_longer()` and point to the column which is a list-column.
+
+```{r}
+repos |> unnest_longer(json) 
+```
+
+##
+
+- Notice another column of lists: but this time, we have named lists. 
+
+- Use `unnest_wider()`.
+
+```{r}
+repos |> unnest_longer(json) |>
+  unnest_wider(json)
+```
+
+##
+
+- Give a sense of the columns.
+
+```{r}
+repos |> unnest_longer(json) |>
+  unnest_wider(json) |>
+  names()
+```
+
+##
+
+- We can further unpack. 
+
+```{r}
+repos |> unnest_longer(json) |>
+  unnest_wider(json) |>
+  select(where(is.list))
+repos |> unnest_longer(json) |>
+  unnest_wider(json) |>
+  select(where(is.list)) |>
+  unnest_wider(owner)
+```
+
+##
+
+- We can also answer Exercise 23.4.4, Item 1. Roughly estimate when `gh_repos` was created. Why can you only roughly estimate the date?
+
+```{r}
+repos |> unnest_longer(json) |>
+  unnest_wider(json) |>
+  select(created_at)
+repos |> unnest_longer(json) |>
+  unnest_wider(json) |>
+  select(created_at) |>
+  separate_wider_position(created_at, 
+                          widths = c(ymd = 10, 10)) |>
+  slice_max(order_by = ymd)
+```
+
+## Motivating example: Game of Thrones
+
+```{r}
+chars <- tibble(json = got_chars)
+chars
+chars |> 
+  unnest_wider(json)
+chars |> 
+  unnest_wider(json) |> 
+  select(id, where(is.list))
+```
+
+##
+
+- Create table of titles. 
+
+```{r}
+titles <- chars |> 
+  unnest_wider(json) |> 
+  select(id, titles) |> 
+  unnest_longer(titles) |> 
+  filter(titles != "")
+titles
+```
+
+##
+
+- Follow the steps used for titles to create similar tables for the aliases, allegiances, books, and TV series for the Game of Thrones characters.
+
+```{r}
+aliases <- chars |> 
+  unnest_wider(json) |> 
+  select(id, aliases) |> 
+  unnest_longer(aliases) |> 
+  filter(aliases != "") 
+allegiances <- chars |> 
+  unnest_wider(json) |> 
+  select(id, allegiances) |> 
+  unnest_longer(allegiances) |> 
+  filter(allegiances != "") 
+books <- chars |> 
+  unnest_wider(json) |> 
+  select(id, books) |> 
+  unnest_longer(books) |> 
+  filter(books != "") 
+tvSeries <- chars |> 
+  unnest_wider(json) |> 
+  select(id, tvSeries) |> 
+  unnest_longer(tvSeries) |> 
+  filter(tvSeries != "") 
+```
+
+##
+
+- Joining together: "You might expect to see this data in its own table because it would be easy to join to the characters data as needed."
+
+```{r}
+characters <- chars |> 
+  unnest_wider(json) |> 
+  select(id, name, gender, culture, born, died, alive)
+characters
+characters |> 
+  left_join(titles, join_by(id)) |>
+  left_join(aliases, join_by(id)) |>
+  left_join(allegiances, join_by(id)) |>
+  left_join(books, join_by(id)) |>
+  left_join(tvSeries, join_by(id))
+```
+
+##
+-   Exercise 23.4.4 Item 4: "Explain the following code line-by-line. Why is it interesting? Why does it work for `got_chars` but might not work in general?"
+
+```{r}
+tibble(json = got_chars) |> 
+  unnest_wider(json) |> 
+  select(id, where(is.list)) |> 
+  pivot_longer(
+    where(is.list), 
+    names_to = "name", 
+    values_to = "value"
+  ) |>  
+  unnest_longer(value)
+```
+
+## JSON
+
+- Examples of toy JSONs from Exercise 23.5.4 Item 1: "Rectangle the `df_col` and `df_row` below. They represent the two ways of encoding a data frame in JSON."
+
+```{r}
+json_col <- parse_json('
+  {
+    "x": ["a", "x", "z"],
+    "y": [10, null, 3]
+  }
+')
+json_row <- parse_json('
+  [
+    {"x": "a", "y": 10},
+    {"x": "x", "y": null},
+    {"x": "z", "y": 3}
+  ]
+')
+
+df_col <- tibble(json = list(json_col)) 
+df_row <- tibble(json = json_row)
+df_col |> 
+  unnest_wider(json) |> 
+  unnest_longer(x) |> 
+  unnest_longer(y)
+df_row |> unnest_wider(json)
+``` 
+
+##
+
+- "Wilder" JSON: Try opening in a text editor and browser the Game of Thrones JSON. Below you will see a path to it. 
+
+```{r}
+got_chars_json()
+```
+
 
 ## Meeting Videos
 
@@ -34,3 +236,8 @@
 ### Cohort 8
 
 `r knitr::include_url("https://www.youtube.com/embed/jY5Mb82v77c")`
+
+### Cohort 9
+
+`r knitr::include_url("https://www.youtube.com/embed/F53PlR1rEqs")`
+
