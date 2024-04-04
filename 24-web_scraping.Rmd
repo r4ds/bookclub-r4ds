@@ -125,6 +125,7 @@ download.file(url, destfile = "scrapedpage-old.html", quiet=TRUE)
 -   This means the code you see in the book will not work out of the box. 
 
 ```{r}
+#| eval: FALSE
 html.old <- read_html("/home/apua/Documents/r4ds/scrapedpage-old.html")
 temp <- html.old |> 
   html_elements("table") |> html_attr("border") 
@@ -153,6 +154,7 @@ ratings
 -   Let us compare to the book. 
 
 ```{r}
+#| eval: FALSE
 html.book <- read_html("scrapedpage.html")
 table.book <- html.book |> 
   html_element("table") |> 
@@ -192,6 +194,7 @@ ratings.book$title
 -   I don't resolve them here, but they require one to think about what questions you want answered first. 
 
 ```{r}
+#| eval: FALSE
 ratings$title
 left_join(ratings, ratings.book, by="title")
 ```
