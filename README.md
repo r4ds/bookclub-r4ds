@@ -1,15 +1,14 @@
-# R4DS R for Data Science Book Club
+# DSLC R for Data Science Book Club
 
-Welcome to the R4DS R for Data Science Book Club!
-This is a new experimental repository, separate from the [main R4DS R4DS repository](https://github.com/r4ds/bookclub-R_for_Data_Science).
+Welcome to the DSLC R for Data Science Book Club!
 
 We are working together to read [R for Data Science](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund.
-Join the #book_club-r_for_data_science channel on the [R4DS Slack](https://r4ds.io/join) to participate.
+Join the #book_club-r_for_data_science channel on the [DSLC Slack](https://dslc.io/join) to participate.
 As we read, we are producing [notes about the book](https://r4ds.github.io/bookclub-r4ds/).
 
 ## Meeting Schedule
 
-If you would like to present, please see the sign-up sheet for your cohort (linked below, and pinned in the [#book_club-r4ds](https://rfordatascience.slack.com/archives/C012VLJ0KRB) channel on Slack)!
+If you would like to present, please see the sign-up sheet for your cohort (linked below, and pinned in the [#book_club-r4ds](https://dslcio.slack.com/archives/C012VLJ0KRB) channel on Slack)!
 
 - Cohort 1 (started 2020-07-31, ended 2020-10-12): [meeting videos](https://youtube.com/playlist?list=PL3x6DOfs2NGgUOBkwtRJQW0hDWCwdzboM)
 - Cohort 2 (started 2020-08-03, ended 2021-03-29): [meeting videos](https://www.youtube.com/playlist?list=PL3x6DOfs2NGglHEO3WBEaxiEZ0_ZiwZJi)
@@ -47,4 +46,4 @@ Do these steps each time you present another chapter:
 10. When your PR has been accepted ("merged"), `usethis::pr_finish()` to close out your branch and prepare your local repository for future work.
 11. Now that your local copy is up-to-date with the main repo, you need to update your remote fork. Run `gert::git_push("origin")` or click the `Push` button on the `Git` tab of Rstudio.
 
-When your PR is checked into the main branch, the bookdown site will rebuild, adding your slides to [this site](https://r4ds.io/r4ds).
+When your PR is checked into the main branch, the bookdown site will rebuild, adding your slides to [this site](https://dslc.io/r4ds).
