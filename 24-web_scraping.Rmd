@@ -203,8 +203,10 @@ left_join(ratings, ratings.book, by="title")
 
 -   Task is to create a spreadsheet where we have the titles of the zines, their authors, the links to download the zines, and the first social media link of the authors. 
 -   Used `xpath` here, but was not discussed in book. 
+-   The code chunk below should work but gives an error when processed at Github repo of bookclub-r4ds, but it works on my machine. I have yet to figure out why. 
 
 ```{r}
+#| eval: FALSE
 url <- "https://quarantinezineclub.neocities.org/zinelibrary"
 html <- read_html(url) 
 zinelib <- tibble(authors = html |> html_elements("#zname") |> html_text2(), 
