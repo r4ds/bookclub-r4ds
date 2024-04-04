@@ -7,17 +7,17 @@ bibliography: book.bib
 biblio-style: apalike
 link-citations: yes
 github-repo: r4ds/bookclub-r4ds
-description: "This is the product of the R4DS Online Learning Community's Book Club."
+description: "This is the product of the Data Science Learning Community's Book Club."
 ---
 
 # Welcome {-}
 
 This is a companion for the book [R for Data Science](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund.
-This companion is available at [r4ds.io/r4ds](https://r4ds.io/r4ds).
+This companion is available at [dslc.io/r4ds](https://dslc.io/r4ds).
 
-This website is being developed by the [R4DS Online Learning Community](https://rfordatasci.com). Follow along, and [join the community](https://r4ds.io/join) to participate.
+This website is being developed by the [Data Science Learning Community](https://dslc.io). Follow along, and [join the community](https://dslc.io/join) to participate.
 
-This companion follows the [R4DS Online Learning Community Code of Conduct](https://r4ds.io/conduct).
+This companion follows the [Data Science Learning Community Code of Conduct](https://dslc.io/conduct).
 
 ## Book club meetings {-}
 
@@ -28,7 +28,7 @@ This companion follows the [R4DS Online Learning Community Code of Conduct](http
     -   Questions you have
     -   Maybe live demo
 -   More info about editing: [this github repo](https://github.com/r4ds/bookclub-r4ds).
--   Recorded, available on the [R4DS Online Learning Community YouTube Channel](https://r4ds.io/youtube).
+-   Recorded, available on the [Data Science Learning Community YouTube Channel](https://dslc.io/youtube).
 
 ## Pace {-}
 

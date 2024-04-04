@@ -377,7 +377,7 @@ bar + coord_polar()
 - [ggplot2 Extension Gallery](https://exts.ggplot2.tidyverse.org/gallery/)
 - [R Graph Gallery](https://www.r-graph-gallery.com/ggplot2-package.html)
 - The [Graphs section](http://www.cookbook-r.com/Graphs/) of the R Cookbook
-- [r4ds.io/join](r4ds.io/join) for more book clubs!
+- [dslc.io/join](dslc.io/join) for more book clubs!
 
 ## Meeting Videos
 
