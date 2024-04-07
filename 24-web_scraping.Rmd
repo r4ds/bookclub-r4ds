@@ -1,6 +1,6 @@
 # Web scraping
 
-## Learning objectives
+** Learning objectives **
 
 1.    Learn a bit of HTML 
 2.    Use that bit of HTML to learn web scraping. 
