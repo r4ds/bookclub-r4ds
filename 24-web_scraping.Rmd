@@ -1,45 +1,5 @@
 # Web scraping
 
-**Learning objectives:**
-
-- ADD ABOUT ONE THING PER SECTION DESCRIBING WHAT YOU LEARN IN THIS CHAPTER.
-
-## SLIDE TITLE
-
-- ADD NEW SLIDES USING ##. 
-- TRY TO KEEP THE FEEL SLIDE-LIKE
-  - BULLETED LISTS, NOT PARAGRAPHS
-
-## Meeting Videos
-
-### Cohort 7
-
-`r knitr::include_url("https://www.youtube.com/embed/G5_pr9HxbT4")`
-
-<details>
-  <summary> Meeting chat log </summary>
-```
-00:04:47	Oluwafemi Oyedele:	Hi Tim!!!
-00:05:27	Tim Newby:	Hi Oluwafemi - can you hear me?
-00:05:37	Oluwafemi Oyedele:	Yes
-00:11:53	Oluwafemi Oyedele:	start
-00:33:49	Oluwafemi Oyedele:	https://rvest.tidyverse.org/articles/selectorgadget.html
-00:40:24	Oluwafemi Oyedele:	stop
-```
-</details>
-
-`r knitr::include_url("https://www.youtube.com/embed/HnJ3ZY1seY4")`
-
-
-### Cohort 8
-
-`r knitr::include_url("https://www.youtube.com/embed/dOVWSSqUvt0")`
-
-### Cohort 9
-
-`r knitr::include_url("https://www.youtube.com/embed/Hs928CH-_E4")`
-
-
 ## Learning objectives
 
 1.    Learn a bit of HTML 
@@ -225,5 +185,33 @@ zinelib <- zinelib |> mutate(
 zinelib
 ```
 
+## Meeting Videos
+
+### Cohort 7
+
+`r knitr::include_url("https://www.youtube.com/embed/G5_pr9HxbT4")`
+
+<details>
+  <summary> Meeting chat log </summary>
+```
+00:04:47	Oluwafemi Oyedele:	Hi Tim!!!
+00:05:27	Tim Newby:	Hi Oluwafemi - can you hear me?
+00:05:37	Oluwafemi Oyedele:	Yes
+00:11:53	Oluwafemi Oyedele:	start
+00:33:49	Oluwafemi Oyedele:	https://rvest.tidyverse.org/articles/selectorgadget.html
+00:40:24	Oluwafemi Oyedele:	stop
+```
+</details>
+
+`r knitr::include_url("https://www.youtube.com/embed/HnJ3ZY1seY4")`
+
+
+### Cohort 8
+
+`r knitr::include_url("https://www.youtube.com/embed/dOVWSSqUvt0")`
+
+### Cohort 9
+
+`r knitr::include_url("https://www.youtube.com/embed/Hs928CH-_E4")`
 
 
