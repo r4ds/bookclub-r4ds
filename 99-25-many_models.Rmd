@@ -495,7 +495,7 @@ The broom package provides three general tools for turning models into tidy data
   <summary> Meeting chat log </summary>
   
 ```
-00:09:25	Jon Harmon (jonthegeek):	r4ds.io/bookclubber
+00:09:25	Jon Harmon (jonthegeek):	dslc.io/bookclubber
 01:07:14	Jon Harmon (jonthegeek):	ggrepel
 ```
 </details>
