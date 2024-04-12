@@ -256,6 +256,10 @@ flights2 |>
   left_join(planes, join_by(tailnum))
 ```
 
+## Specifying join keys and their matching conditions {-}
+
+When both keys have the same name(s): just provide the key name(s).
+
 ```{r}
 flights2 |>
   semi_join(weather, join_by(origin, time_hour))
