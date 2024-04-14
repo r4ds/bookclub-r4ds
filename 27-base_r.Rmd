@@ -2,38 +2,479 @@
 
 **Learning objectives:**
 
-- ADD IF POSSIBLE
+-   learn base R
+-   learn sub-setting with [], [[]], and \$
+-   learn `r apply` family of functions
+-   learn `r for loops`
 
-## Slide 1
+**Pre requisites**
 
-Slide contents. 
-Keep it short and slide-like!
+-   download the tidyverse package to explain the differences
 
-## Slide 2
+## 27.2 : Selecting multiple elements with Bracket
 
-Slide contents.
+### 27.2.1 : Subsetting vectors
+
+-   you can use brackets to extract sub-cmponents from vectors and data frames, and you cal call it with `r x[i]` or `r x[i, j]`.
+
+-   there are five main types of things you can subset a vector with:
+
+    1.  a vector of positive integers
+
+    ```{r a vector of positive integers}
+    x = c("one", "two", "three", "four", "five")
+
+    x[c(3,2,5)]
+
+    ```
+
+    2.  a vector of negative integers
+
+    ```{r a vector of neg integers}
+    x[c(1, 1, 5, 5, 5, 2)]
+
+
+    ```
+
+    3.  a logical vector
+
+    ```{r a logical vector}
+    x[c(-1, -3, -5)]
+
+
+    ```
+
+    4.  a character vector
+
+    ```{r a char vector}
+    x <- c(10, 3, NA, 5, 8, 1, NA)
+
+    # All non-missing values of x
+    x[!is.na(x)]
+
+
+    # All even (or missing!) values of x
+    x[x %% 2 == 0]
+
+
+    ```
+
+    5.  nothing
+
+    ```{r nothing}
+    x <- c(abc = 1, def = 2, xyz = 5)
+    x[c("xyz", "def")]
+
+    ```
+
+### 27.2.2 : Subsetting data frames
+
+-   there are a few different ways you use bracket with a data frame: `r df[rows, ]` ,`r df[ ,columns]` ,`r df[rows,columns]`.
+
+```{r subsetting dfs}
+
+df <- tibble(
+  x = 1:3, 
+  y = c("a", "e", "f"), 
+  z = runif(3)
+)
+
+# Select first row and second column
+df[1, 2]
+
+
+# Select all rows and columns x and y
+df[, c("x" , "y")]
+
+# Select rows where `x` is greater than 1 and all columns
+df[df$x > 1, ]
+
+```
+
+-   `r df$x` extracts the x variable from the data frame. we use it because the bracket doesn't use tidy evaluation
+
+### 27.2.3: dplyr equivalents
+
+-   several dplyr verbs are special cases of bracket `r [`:
+
+1.  `r filter()` vs `r which()`: equivalent to subsetting the rows with a logical vector.
+
+```{r filter}
+
+df <- tibble(
+  x = c(2, 3, 1, 1, NA), 
+  y = letters[1:5], 
+  z = runif(5)
+)
+df |> filter(x > 1)
+
+# same as
+df[!is.na(df$x) & df$x > 1, ]
+
+
+```
+
+2.  `r arrange()` vs `r order()`: equivalent to sub-setting the rows with an integer vector, usually created with:
+
+```{r arrange}
+
+df |> arrange(x, y)
+
+# same as
+df[order(df$x, df$y), ]
+
+```
+
+3.  `r select()` and `r relocate()` vs `r c()`: both select and relocate are similar to sub-setting the columns with a character vector:
+
+```{r select}
+
+df |> select(x, z)
+
+# same as
+df[, c("x", "z")]
+
+```
+
+4.  `r filter()` and`r select()` vs`r subset()`: Base R function also has a function that combines the features of `r filter()` and`r select()` in the function `r subset()`
+
+```{r}
+
+df |> 
+  filter(x > 1) |> 
+  select(y, z)
+
+# same as
+df |> subset(x > 1, c(y, z))
+
+```
+
+## 27.3: Selecting a single element with \$ and []
+
+### 27.3.1 Data frames
+
+`r [[` and `r $` can be used to extract columns from a data frame. double brackets can access by position or by name, and \$ is specialized for access by name:
+
+```{r data frames}
+tb <- tibble(
+  x = 1:4,
+  y = c(10, 4, 1, 21)
+)
+
+# by position
+tb[[1]]
+#> [1] 1 2 3 4
+
+# by name
+tb[["x"]]
+#> [1] 1 2 3 4
+tb$x
+#> [1] 1 2 3 4
+
+```
+
+they can also be used to create new columns, the Base R equivalent of `r mutate()`
+
+```{r}
+
+tb$z <- tb$x + tb$y
+tb
+
+#> # A tibble: 4 × 3
+#>       x     y     z
+#>   <int> <dbl> <dbl>
+#> 1     1    10    11
+#> 2     2     4     6
+#> 3     3     1     4
+#> 4     4    21    25
+
+```
+
+using the `r $` is convenient when perforing quick summaries. For example, if you want to find the size of the biggest diamond or the possible vlues of `r cut`,
+
+```{r}
+
+max(diamonds$carat)
+#> [1] 5.01
+
+levels(diamonds$cut)
+#> [1] "Fair"      "Good"      "Very Good" "Premium"   "Ideal"
+#> 
+```
+
+dplyr also gives us an equivalent to double brackets/`r $` called `r pull()`. `r pull()` takes either a variable name or variable position and returns just that column.
+
+```{r}
+
+diamonds |> pull(carat) |> max()
+#> [1] 5.01
+
+diamonds |> pull(cut) |> levels()
+#> [1] "Fair"      "Good"      "Very Good" "Premium"   "Ideal"
+
+```
+
+### 27.3.2 Tibbles
+
+there are a couple of important differences between tibbles and base `r data.frame`s where it concerns `r $`.
+
+1.  data frames match the prefix of any variable names and don't complain if a column doesn't exist
+```{r data frame example}
+
+df <- data.frame(x1 = 1)
+df$x
+#> [1] 1
+df$z
+#> NULL
+
+```
+2.   tibbles are more strict in that they only match variable names exactly and will generate a warning if the column you want doesn't exist
+```{r}
+tb <- tibble(x1 = 1)
+
+tb$x
+#> Warning: Unknown or uninitialised column: `x`.
+#> NULL
+tb$z
+#> Warning: Unknown or uninitialised column: `z`.
+#> NULL
+```
+
+### 26.3.3 Lists 
+
+`r [[` and `r $` are also important for working with lists, and dffer from `r [`. 
+
+```{r list example }
+
+l <- list(
+  a = 1:3, 
+  b = "a string", 
+  c = pi, 
+  d = list(-1, -5)
+)
+
+```
+
+  - we see that single bracket extracts a sub-list, irrespective of the number of elements you extract. the result will always be a list 
+
+```{r list example 2}
+
+str(l[1:2])
+#> List of 2
+#>  $ a: int [1:3] 1 2 3
+#>  $ b: chr "a string"
+
+str(l[1])
+#> List of 1
+#>  $ a: int [1:3] 1 2 3
+
+str(l[4])
+#> List of 1
+#>  $ d:List of 2
+#>   ..$ : num -1
+#>   ..$ : num -5
+
+```
+
+- `r [[ ` `r $` extract a single component from a list. they remove a level of hierarchy from the list. 
+
+```{r hierarchy list example }
+str(l[[1]])
+#>  int [1:3] 1 2 3
+
+str(l[[4]])
+#> List of 2
+#>  $ : num -1
+#>  $ : num -5
+
+str(l$a)
+#>  int [1:3] 1 2 3
+```
+
+
+## 27.4 Apply Family 
+
+- the apply family are functions allow you to apply a function over each element of a vector. 
+- the most important member is `r lapply() `, which is similar to `r purrr::map() `. 
+- there is no exact base R equivalent to `r across()` but you can get close by using `r [` with `r lapply()`
+
+```{r}
+df <- tibble(a = 1, b = 2, c = "a", d = "b", e = 4)
+
+# First find numeric columns
+num_cols <- sapply(df, is.numeric)
+num_cols
+#>     a     b     c     d     e 
+#>  TRUE  TRUE FALSE FALSE  TRUE
+
+# Then transform each column with lapply() then replace the original values
+df[, num_cols] <- lapply(df[, num_cols, drop = FALSE], \(x) x * 2)
+df
+#> # A tibble: 1 × 5
+#>       a     b c     d         e
+#>   <dbl> <dbl> <chr> <chr> <dbl>
+#> 1     2     4 a     b         8
+
+```
+
+- here we are using `r sapply()` which is similar to `r lapply()` except it tries to simplify the result to a logical vector instead of a list. it is not recommended to use this because of potential errors. 
+
+a stricter version of `r sapply() ` is called `r vapply()`, short for *v*ector apply. it ensures that simplification happens the same way regardless of the input.
+
+```{r}
+vapply(df, is.numeric, logical(1))
+#>     a     b     c     d     e 
+#>  TRUE  TRUE FALSE FALSE  TRUE
+```
+
+`r tapply()` computese a single grouped summary: 
+
+```{r}
+diamonds |> 
+  group_by(cut) |> 
+  summarize(price = mean(price))
+#> # A tibble: 5 × 2
+#>   cut       price
+#>   <ord>     <dbl>
+#> 1 Fair      4359.
+#> 2 Good      3929.
+#> 3 Very Good 3982.
+#> 4 Premium   4584.
+#> 5 Ideal     3458.
+
+tapply(diamonds$price, diamonds$cut, mean)
+#>      Fair      Good Very Good   Premium     Ideal 
+#>  4358.758  3928.864  3981.760  4584.258  3457.542
+
+```
+
+- the downisde of `r tapply()` is that it returns its results in a named vector which becomes an issue if you want to collect multiple summaries and grouping variables into a data frame. 
+
+
+## 27.5 for loops
+
+- `r for` loops are important for iteration
+
+```{r}
+#basic structure of a for loop
+
+for (element in vector) {
+  # do something with element
+}
+
+```
+
+the most straightforward use of `r for` loops is to achieve the same effect as `r walk()`
+
+```{r}
+paths |> walk(append_file)
+
+```
+
+here we could have used a `r for` loop: 
+
+```{r}
+for (path in paths) {
+  append_file(path)
+}
+
+
+```
+
+
+things get tricky when you want to save the output of the for loop. heres an example for an excel format output: 
+
+```{r}
+
+paths <- dir("data/gapminder", pattern = "\\.xlsx$", full.names = TRUE)
+files <- map(paths, readxl::read_excel)
+
+```
+
+
+```{r}
+files <- vector("list", length(paths))
+
+```
+
+
+
+```{r}
+
+seq_along(paths)
+#>  [1]  1  2  3  4  5  6  7  8  9 10 11 12
+
+```
+
+
+```{r}
+
+for (i in seq_along(paths)) {
+  files[[i]] <- readxl::read_excel(paths[[i]])
+}
+
+```
+
+
+```{r}
+
+do.call(rbind, files)
+#> # A tibble: 1,704 × 5
+#>   country     continent lifeExp      pop gdpPercap
+#>   <chr>       <chr>       <dbl>    <dbl>     <dbl>
+#> 1 Afghanistan Asia         28.8  8425333      779.
+#> 2 Albania     Europe       55.2  1282697     1601.
+#> 3 Algeria     Africa       43.1  9279525     2449.
+#> 4 Angola      Africa       30.0  4232095     3521.
+#> 5 Argentina   Americas     62.5 17876956     5911.
+#> 6 Australia   Oceania      69.1  8691212    10040.
+#> # ℹ 1,698 more rows
+
+
+```
+
+
+
+## 27.6 Plots 
+
+Many R users utilise ggplot2 from the tidiyverse package for plotting. Base R has functions like `r plot() ` and `r hist()` that are just as powerful for plotting data. 
+
+```{r}
+
+# Left
+hist(diamonds$carat)
+
+# Right
+plot(diamonds$carat, diamonds$price)
+
+
+```
+
+
+
+
+
 
 ## Meeting Videos
-
-
 
 ### Cohort 7
 
 `r knitr::include_url("https://www.youtube.com/embed/0v3qdKUc7n8")`
 
 <details>
-<summary> Meeting chat log </summary>
 
+<summary>Meeting chat log</summary>
+
+```         
+00:01:16    Oluwafemi Oyedele:  Sorry for joining late
+00:01:32    Oluwafemi Oyedele:  We will start in 7 minute time!!!
+00:01:42    Tim Newby:  Hi Oluwafemi - no problem :-)
+00:09:27    Oluwafemi Oyedele:  start
+00:12:54    Oluwafemi Oyedele:  this is nice!!!
+00:55:22    Oluwafemi Oyedele:  stop
 ```
-00:01:16	Oluwafemi Oyedele:	Sorry for joining late
-00:01:32	Oluwafemi Oyedele:	We will start in 7 minute time!!!
-00:01:42	Tim Newby:	Hi Oluwafemi - no problem :-)
-00:09:27	Oluwafemi Oyedele:	start
-00:12:54	Oluwafemi Oyedele:	this is nice!!!
-00:55:22	Oluwafemi Oyedele:	stop
-```
+
 </details>
-
 
 ### Cohort 8
 
