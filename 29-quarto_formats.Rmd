@@ -19,9 +19,11 @@ format: html
 2. Call quarto::quarto_render() by hand:
 
 ```{r eval=FALSE}
-#You can  produce multiple types of output since the `output_format` argument can take a list of values
+
 quarto::quarto_render("diamond-sizes.qmd", output_format = c("docx", "pdf"))
 ```
+
+Note: You can  produce multiple types of output since the `output_format` argument can take a list of values
 
 ## Output options
 
@@ -53,14 +55,15 @@ format:
     toc_float: true #make table of contents floating 
   pdf: default
   docx: default
-  #Note the special syntax (`pdf: default` and `docx: default`) if you don’t want to override any default options.
 ```
+
+Note: use special syntax (i.e. `pdf: default`) if you don’t want to override any default options.
 
 ## Presentations
 
 - When using Quarto to produce presentations, you get less visual control than with a tool like PowerPoint, but the upside is you can automatically insert the results of your R code into your presentation.
 - Presentations work by dividing your content into slides, with a new slide beginning at each second (`##`) level header.
-  - First (`#`) level headers indicate the beginning of a new section with a section title slide that is, by default, centered in the middle.
+  - First (`#`) level headers indicate the beginning of a new section with a section title slide.
 - Quarto supports a variety of presentation formats, including:
 
   - `revealjs` - HTML presentation with revealjs
@@ -74,16 +77,16 @@ format:
 ## Interactivity
 
 - HTML documents created with Quarto can contain interactive components as well. 
-for example, two options for including interactivity in your Quarto documents: htmlwidgets and Shiny.
-  - **htmlwidgets**, R functions that produce interactive HTML visualizations
-  - **shiny**, a package that allows you to create interactivity using R code
+- Two example options for including interactivity in your Quarto documents are htmlwidgets and Shiny.
+  - **htmlwidgets** are R functions that produce interactive HTML visualizations
+  - `Shiny` is a package that allows you to create interactivity using R code
 
 ## htmlwidgets
 
-- htmlwidgets provide client-side interactivity — all the interactivity happens in the browser, independently of R. 
-- The great thing about htmlwidgets is that you don’t need to know anything about HTML or JavaScript to use them. All the details are wrapped inside the package, so you don’t need to worry about it.
+- htmlwidgets provide client-side interactivity, meaning all the interactivity happens in the browser, independently of R. 
+- You don’t need to know anything about HTML or JavaScript to use them because all the details are wrapped inside the package.
 - There are many packages that provide htmlwidgets, including:
-  - `leaflet` for interactive map
+  - [`leaflet`](https://rstudio.github.io/leaflet/) for interactive map
   - [`dygraphs`](https://rstudio.github.io/dygraphs) for interactive time series visualizations.
   
   - [`DT`](https://rstudio.github.io/DT/) for interactive tables.
@@ -96,14 +99,16 @@ for example, two options for including interactivity in your Quarto documents: h
 
 ## Shiny
 
-To call Shiny code from a Quarto document, add `server: shiny` to the YAML header:
+- Shiny interactions occur on the server-side, meaning you can write interactive apps without knowing JavaScript, but you need a server to run them on. 
+
+- To call Shiny code from a Quarto document, add `server: shiny` to the YAML header:
 ```{r eval=FALSE}
 title: "Shiny Web App"
 format: html
 server: shiny
 ```
 
-Then you can use the “input” functions to add interactive components to the document:
+- Then you can use the “input” functions to add interactive components to the document:
 
 ```{r eval=FALSE}
 library(shiny)
@@ -129,21 +134,24 @@ project:
 
 - Read more at <https://quarto.org/docs/websites> about Quarto websites and <https://quarto.org/docs/books> about books.
 
+- Note: [R4DS 2E](r4ds.hadley.nz) is itself a quarto book. You can find the code to render it on your own here: <https://github.com/hadley/r4ds/>. The [Quarto website](https://quarto.org/) itself was made with Quarto. You can find the code here: <https://github.com/quarto-dev/quarto-web>.
+
 ## Other formats
 
 - Quarto offers even more output formats. For example:
 
   - You can write journal articles using Quarto Journal Templates: <https://quarto.org/docs/journals/templates.html>.
   
-  - You can output Quarto documents to Jupyter Notebooks with format: ipynb: <https://quarto.org/docs/reference/formats/ipynb.html>.
+  - You can output Quarto documents to Jupyter Notebooks with `format: ipynb`: <https://quarto.org/docs/reference/formats/ipynb.html>.
 
 - See <https://quarto.org/docs/output-formats/all-formats.html> for a list of even more formats.
 
 ## Resources
 
-- Quarto documentation: <https://quarto.org/>
+- [Quarto Pub](https://quartopub.com/): Create documents, websites, presentations, books, and blogs in Quarto, then securely publish them to the web with the Quarto CLI, the easiest way to publish and share on the web.
 - [Awesome Quarto](https://github.com/mcanouil/awesome-quarto): A curated list of Quarto talks, tools, examples & articles! 
-- - [Awesome Quarto Extensions](https://m.canouil.dev/quarto-extensions/): Quarto extensions listing from Awesome Quarto.
+- Quarto documentation: <https://quarto.org/>
+- Quarto GitHub repo: <https://github.com/quarto-dev>
 
 ## Meeting Videos
 
