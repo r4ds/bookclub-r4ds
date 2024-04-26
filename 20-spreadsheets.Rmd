@@ -282,7 +282,7 @@ A quick note about the name of the package: googlesheets4 uses v4 of the Sheets 
 
 ![](https://r4ds.hadley.nz/screenshots/import-googlesheets-students.png)
 - The first argument to read_sheet() is the URL of the file to read, and it returns a tibble:
-```{r,message=FALSE,warning=FALSE}
+```{r gsheets01,message=FALSE,warning=FALSE}
 gs4_deauth()
 students_url <- "https://docs.google.com/spreadsheets/d/1V1nPp1tzOuutXFLb3G9Eyxi3qxeEhnOXUzL5_BcCQ0w"
 
@@ -291,7 +291,7 @@ read_sheet(students_url)
 ```
 ## Define datatypes {-}
 
-```{r,message=FALSE,warning=FALSE}
+```{r gsheets02,message=FALSE,warning=FALSE}
 read_sheet(
   students_url,
   col_names = c("student_id", "full_name", "favourite_food", "meal_plan", "age"),
@@ -305,7 +305,7 @@ read_sheet(
 - Note that we defined column types a bit differently here, using short codes. For example, “dcccc” stands for “double, character, character, character, character”.
 
 ## Read specific sheet {-}
-```{r,message=FALSE,warning=FALSE}
+```{r gsheets03,message=FALSE,warning=FALSE}
 penguins_url <- "https://docs.google.com/spreadsheets/d/1aFu8lnD_g0yjF5O-K6SFgSEWiHPpgvFCF0NY9D6LXnY"
 
 read_sheet(penguins_url, sheet = "Torgersen Island")
@@ -314,13 +314,13 @@ read_sheet(penguins_url, sheet = "Torgersen Island")
 ## List of sheets {-}
 We can obtain a list of all sheets within a Google Sheet with sheet_names():
 
-```{r,warning=FALSE,message=FALSE}
+```{r gsheets04,warning=FALSE,message=FALSE}
 sheet_names(penguins_url)
 ```
 
 ## Read portion of the sheet {-}
 
-```{r,message=FALSE,warning=FALSE}
+```{r gsheets05,message=FALSE,warning=FALSE}
 deaths_url <- gs4_example("deaths")
 
 read_sheet(deaths_url, range = "A5:F15")
@@ -331,7 +331,7 @@ read_sheet(deaths_url, range = "A5:F15")
 
 We can write from R to Google Sheets with write_sheet(). The first argument is the data frame to write, and the second argument is the name (or other identifier) of the Google Sheet to write to:
 
-```{r,message=FALSE,warning=FALSE,eval=FALSE}
+```{r gsheets06,message=FALSE,warning=FALSE,eval=FALSE}
 write_sheet(deaths)
 ```
 
