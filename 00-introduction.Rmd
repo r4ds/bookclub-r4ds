@@ -122,8 +122,8 @@ Code in book slightly different from output you'll see
     -   Tidyverse error messages are often helpful
     -   If not enough, copy/paste into Google
 -   **Stackoverflow.com** *can* also be helpful, but beware.
--   The [**R4DS Online Learning Community**](r4ds.io/join) is a friendly Slack community with volunteer R tutors
-    - Navigate to [r4ds.io/join](r4ds.io/join) to request access to our Slack
+-   The [**Data Science Learning Community**](dslc.io/join) is a friendly Slack community with volunteer R tutors
+    - Navigate to [dslc.io/join](dslc.io/join) to request access to our Slack
     -   If expired, email [rfordatasci@gmail.com](mailto:rfordatasci@gmail.com)
 
 ## Bonus: Reproducible examples {-}
@@ -150,7 +150,7 @@ Code in book slightly different from output you'll see
 00:23:10	Wai-Yin:	Data journalism’s wikipedia article  https://en.wikipedia.org/wiki/Data_journalism
 00:49:59	Ryan Metcalf:	Great question Susie! I consider “Big Data” anything I can’t open in a conventional service. Using scripting languages helps with managing overhead (Cost [not monetary], time of process, processing capability, etc…).
 01:00:14	Njoki Njuki Lucy:	data.table has the similar syntax as the base R package.
-01:17:46	Jon Harmon (jonthegeek):	r4ds.io/r4ds
+01:17:46	Jon Harmon (jonthegeek):	dslc.io/r4ds
 ```
 </details>
 
@@ -180,7 +180,7 @@ Code in book slightly different from output you'll see
 00:14:40	Shannon:	haha, me too...
 00:16:41	Nico Schmidt:	Do we do this with Cameras on or off?
 00:18:14	Aalekhya Reddam:	Hello everyone, unfortunately my microphone / camera aren't working right now, hope to have it figured out by next week! I'm a postdoctoral researcher in the US. My research is in environmental epidemiology and data science is a huge part of my work
-00:20:39	Jon Harmon (jonthegeek):	Shared notes/slides: r4ds.io/r4ds
+00:20:39	Jon Harmon (jonthegeek):	Shared notes/slides: dslc.io/r4ds
 00:26:47	Aalekhya Reddam:	Do we usually volunteer the week ahead for the next week?
 00:28:53	Aalekhya Reddam:	Thank you!
 00:37:01	Matthew Efoli:	bye Jon

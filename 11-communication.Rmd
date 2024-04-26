@@ -232,7 +232,7 @@ https://exts.ggplot2.tidyverse.org/gallery/
 00:50:30	shamsuddeen:	Any book on Torch coming?
 00:54:25	shamsuddeen:	Data Science at Command Line 2e: https://datascienceatthecommandline.com/2e/
 00:54:38	shamsuddeen:	Wanna start this !
-01:01:01	Federica Gazzelloni:	https://r4ds.io/clubdeck
+01:01:01	Federica Gazzelloni:	https://dslc.io/clubdeck
 01:12:22	shamsuddeen:	Applied Predictive Modelling?
 ```
 </details>

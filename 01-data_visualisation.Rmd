@@ -705,7 +705,7 @@ But more than likely, you misspelled something.
   <summary> Meeting chat log </summary>
   
 ```
-00:11:14	Jon Harmon (jonthegeek):	r4ds.io/r4ds
+00:11:14	Jon Harmon (jonthegeek):	dslc.io/r4ds
 00:12:06	Saeed Shafiei Sabet:	Hi everyone!
 00:12:29	Sandra Muroy:	Hi Saeed!
 00:13:05	Becki R. (she/her):	Hello!

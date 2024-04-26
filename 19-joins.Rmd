@@ -1,260 +1,391 @@
 # Joins
 
-
-```{r 21-01, message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
+```{r 19-01, message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
+oldopt <- options(pillar.print_max = 4, pillar.print_min = 4)
 library(nycflights13)
 library(tidyverse)
 ```
 
 **Learning objectives:**
 
-- Use mutating and filtering joins to combine data. 
-- Identify **keys**, or varisbles, to connect a pair of data frames.
+- Identify keys to connect a pair of data frames
+- Use mutating and filtering joins to combine data
 - Understand how joins work and understand the output
-- Discuss a family of joins that provides more flexibiility in matching keys
+- Understand how various key matching conditions work
 
------------
+## What? {-}
 
-## Introduction
+- Joining two data frames `x` and `y`: combining the information from both data frames to create a new data frame, by **matching rows in `x` to rows in `y` based on one or more common variables** (keys)
 
-- It's rare for data analysis to use only a single data frame so we often use multiple, called **relational data**.
+## What? {-}
 
-- The idea behind joins is these data relationships are defined between a pair of tables through keys.
+- A join is the operation of joining.
+Joins can be classified by several criteria:
+    - is the information of data frame `y` included in the result? (mutating vs filtering joins)
+    - what happens with non-matching rows? (inner vs outer joins / semi-join vs anti-join)
+    - how are key matching conditions defined? (equality vs inequality vs no restrictions)
 
-- Every join involves a pair of keys: a primary key and a foreign key. 
+## Keys {-}
 
-- To explore these keys, we'll look at the data frames in the nycflight13 package.
+Keys = the variables used to connect a pair of data frames in a join.
 
+- `x$key` must match `y$key` for a row in `x` to be matched to a row in `y`
+- **compound key**: key that consists of > 1 variable
 
-## nycflights13
+## Keys {-}
 
-- The nycflights13 package contains airline on-time data for all flights departing NYC in 2013, as well as useful 'metadata' on airlines, airports, weather, and
-planes in various other data frames.
-  
-  - `airlines` contains data about each flight
-  
-  - `airlines` contains data about each airline
+Every join involves a **pair of keys**: one key in each data frame.
 
-  - `airports` records data about each airport
+They typically play a different role depending on the data frame they belong to:
 
-  - `weather` records data about the weather at the origin airports.
+- one is a data frame's **primary key**: the _variable_ or the _set of variables_ that **_uniquely identifies_** each observation
+- the other is called a **foreign key**:
+    - it _corresponds_ to the primary key (same meaning, same number of variables)
+    - its values can be repeated
 
-  - `planes` records data about each plane. 
-
-- The relationship between these data frames can be seen below. 
+![](images/19_equality_match.png)
 
 
-```{r 21-03, echo=FALSE, fig.align='center', fig.cap='nycfilghts13 package', out.width='100%'} 
-knitr::include_graphics('images/nycfilghts13.png')
-```
-  
-## Keys
+## Keys {-}
 
-- A **primary key** uniquely identifies an observation in its own table.
+Primary & foreign key relationships in the nycflights13 package:
 
-- A **foreign key** uniquely identifies an observation in another table.
+![](images/19_relational.png)
 
-- When more than one variable is needed, the key is called a **compound key**. 
+## Keys {-}
 
-- `flights$tailnum` is a foreign key that corresponds to the primary key `planes$tailnum`.
+Tips:
 
-- `flights$carrier` is a foreign key that corresponds to the primary key `airlines$carrier`.
+- joining is easiest if primary and foreign key have the same name
+- check the primary keys!
+    - each value must occur only once
+    - there must be no missing values
 
-- `flights$origin` is a foreign key that corresponds to the primary key `airports$faa`.
+## Keys {-}
 
-- `flights$dest` is a foreign key that corresponds to the primary key `airports$faa`.
-
-- `flights$origin-flights$time_hour` is a compound foreign key that corresponds to the compound primary key `weather$origin-weather$time_hour`.
-
-- The primary and foreign keys in the nycflights13 package almost always have the same names and almost every variable name used in multiple tables has the same meaning in each place, which makes joining them much easier, with the exception of `year`, year means year of departure in `flights` and year of manufacturer in `planes`. 
-
-## Validating keys
-
-- It’s good practice to verify that they do indeed uniquely identify each observation. One way to do that is to `count()` the primary keys and look for entries where `n` is greater than one. 
+**Surrogate key**: a single variable added to reflect a compound primary key; makes life easier
 
 ```{r}
-planes |> 
-  count(tailnum) |> 
+flights |> 
+  count(time_hour, carrier, flight) |> 
   filter(n > 1)
-
-
-weather |> 
-  count(time_hour, origin) |> 
-  filter(n > 1)
-
-```
-
-- You should also check for missing values in your primary keys — if a value is missing then it can’t identify an observation!
-
-```{r}
-planes |> 
-  filter(is.na(tailnum))
-
-weather |> 
-  filter(is.na(time_hour) | is.na(origin))
-```
-
-
-## Surrogate keys
-
-- A **surrogate key** is a custom made key where it is possible to identify unique information, such as the number of rows in a table, and it is made if a table lacks a primary key.
-
-- For flights, the combination of time_hour, carrier, and flight seems reasonable simple numeric surrogate key using the row number.
-
-- For example, `flights2$flights_id` is a surrogate key because it is custom made and uniquely identifies each observation in the flights table.
-
-```{r}
 flights2 <- flights |> 
   mutate(id = row_number(), .before = 1)
 flights2
 ```
 
 
-## Basic joins
+## Mutating joins {-}
 
-- Once you understand how data frames are connected via keys, we can start using joins to better understand the flights dataset. 
+**Mutating joins** add columns from data frame `y`.
 
-- dplyr provides six join functions: `left_join()`, `inner_join()`, `right_join()`, `full_join()`, `semi_join()`, and `anti_join()`. 
+- Inner join: only keep matching rows.
+- Outer join: also keep non-matching rows from `x` (left join), `y` (right join) or both (full join).
 
-- They all have the same interface: they take a pair of data frames (`x` and `y`) and return a data frame. The order of the rows and columns in the output is primarily determined by `x`.
+## Mutating joins {-}
 
+![](images/19_inner.png)
 
-```{r 21-twotables, echo=FALSE, fig.align='center', fig.cap='Two tables', out.width='30%'} 
-knitr::include_graphics("images/twotables.png")
-```
+## Mutating joins {-}
 
+![](images/19_left.png)
 
-## Mutating joins 
+## Mutating joins {-}
 
-- A mutating join allows you to combine variables from two data frames: it first matches observations by their keys, then copies across variables from one data frame to the other. 
+![](images/19_right.png)
 
-- Like `mutate()`, the join functions add variables to the right, so if your dataset has many variables, you won’t see the new ones.
+## Mutating joins {-}
 
-- There are four types of mutating joins, but there’s one that you’ll use almost all of the time: `left_join()`. 
+![](images/19_full.png)
+
+## Mutating joins: examples {-}
 
 ```{r}
 flights2 <- flights |> 
   select(year, time_hour, origin, dest, tailnum, carrier)
 flights2
-
 ```
+
+## Mutating joins: examples {-}
 
 ```{r}
 flights2 |>
   left_join(airlines)
 ```
 
-## Left Joins
-
-- The left join is special because the output will always have the same rows as `x`, the data frame you’re joining to. 
-
-- The primary use of `left_join()` is to add in additional metadata. For example, we can use `left_join()` to add the full airline name to the `flights2` data:
+## Mutating joins: examples {-}
 
 ```{r}
 flights2 |>
-  left_join(airlines)
+  inner_join(airlines)
 ```
 
-## Specifying join keys
+## Mutating joins: extras {-}
 
--By default, `left_join()` will use all variables that appear in both data frames as the join key, the so called natural join. 
+`left_join()`, `right_join()` and `inner_join()` have an argument `unmatched =`
 
-- This is a useful heuristic, but it doesn’t always work, like when joining `flights` and `planes` which each have a year column but they mean different things.
+- defaults to `"drop"`: drop non-matching records from (respectively) `y`, `x` or both `x` and `y`
+- can be set to `"error"` to verify that all records from `y`, `x` or both `x` and `y` are kept, if that is what you expect
+
+## Mutating joins: extras {-}
+
+All mutating join functions have an argument `keep =`
+
+- defaults to `NULL`: equi joins retain only the key from `x`, while non-equi joins retain both keys
+- can be set to `TRUE` to force both keys to be retained in the output
 
 ```{r}
-flights2 |> 
+flights2 |>
+  inner_join(airlines, keep = TRUE)
+```
+
+## Relationships in mutating joins {-}
+
+The _relationship_ describes how many rows in `x` each value of `y$key` is _expected_ to match (**one** or **many**), _and vice-versa_, giving rise to 4 possible combinations:
+
+- one-to-many
+- many-to-one
+- one-to-one
+- many-to-many
+
+Which relationship applies, follows from the keys being primary or foreign in `x` and `y`.
+
+## Relationships in mutating joins {-}
+
+**One-to-many**: primary key is in `x`.
+
+Example with left join:
+
+![](images/19_one-to-many.png)
+
+## Relationships in mutating joins {-}
+
+**Many-to-one**: primary key is in `y`.
+
+Example with left join or inner join:
+
+![](images/19_many-to-one.png)
+
+## Relationships in mutating joins {-}
+
+**One-to-one**: each row in `x` matches at most one row in `y`, and vice-versa.
+
+![](images/19_right.png)
+
+## Relationships in mutating joins {-}
+
+**Many-to-many**: no primary keys involved!
+
+![](images/19_many-to-many.png)
+
+This gives a warning by default, since it can be unintended.
+
+To avoid the warning (an intentional many-to-many), explicitly set `relationship = "many-to-many"`.
+
+## Relationships in mutating joins {-}
+
+The `relationship` argument in mutating joins allows you to take control over the expected relationship.
+
+From `help("mutate-joins")`:
+
+> In production code, it is best to preemptively set `relationship` to whatever relationship you expect to exist between the keys of `x` and `y`, as this forces an error to occur immediately if the data doesn't align with your expectations.
+
+## Filtering joins {-}
+
+**Filtering joins** filter `x` based on (non-)matching rows in `y`.
+
+They never duplicate rows!
+
+## Filtering joins {-}
+
+![](images/19_semi.png)
+
+## Filtering joins {-}
+
+![](images/19_anti.png)
+
+## Filtering joins: examples {-}
+
+```{r}
+flights2 |>
+  semi_join(weather)
+```
+
+## Filtering joins: examples {-}
+
+```{r}
+flights2 |>
+  anti_join(weather)
+```
+
+## Specifying join keys and their matching conditions {-}
+
+Without specifying a join key: the 'natural join' is applied (messages in previous slides).
+
+BUT:
+
+- this will miss key pairs with different names
+- this will assume any pair of identical variable names to be part of the key pair
+
+## Specifying join keys and their matching conditions {-}
+
+E.g. this is NOT wat we intend (`year` has a different meaning in `flights` vs `planes`):
+
+```{r}
+flights2 |>
   left_join(planes)
 ```
 
--  We get a lot of missing matches because our join is trying to use `tailnum` and `year` as a compound key. In this case, we only want to join on tailnum so we need to provide an explicit specification with `join_by()`, where `join_by(tailnum)` is short for `join_by(tailnum == tailnum)`.
+## Specifying join keys and their matching conditions {-}
 
+So it's much recommended to explicitly define the join key using `join_by()`:
+
+- `inner_join(x, y, by = join_by(...))`
+- `left_join(x, y, by = join_by(...))`
+- `right_join(x, y, by = join_by(...))`
+- `full_join(x, y, by = join_by(...))`
+- `semi_join(x, y, by = join_by(...))`
+- `anti_join(x, y, by = join_by(...))`
+
+## Specifying join keys and their matching conditions {-}
+
+When both keys have the same name(s): just provide the key name(s).
 
 ```{r}
-flights2 |> 
+flights2 |>
   left_join(planes, join_by(tailnum))
 ```
 
+## Specifying join keys and their matching conditions {-}
 
-- You can also specify different join keys in each table. For example, there are two ways to join the `flight2` and `airports` table: either by `dest` or `origin`:
-
+When both keys have the same name(s): just provide the key name(s).
 
 ```{r}
-flights2 |> 
-  left_join(airports, join_by(dest == faa))
+flights2 |>
+  semi_join(weather, join_by(origin, time_hour))
+```
 
+## Specifying join keys and their matching conditions {-}
 
-flights2 |> 
+`join_by(var1)` is shorthand for `join_by(var1 == var1)`.
+
+`join_by(var1, var2)` is shorthand for `join_by(var1 == var1, var2 == var2)`. 
+
+The expression form in `join_by()` defines:
+
+- _each_ key's name -- these can differ between the `x` and `y` data frame
+- the matching condition that defines the match between `x$key` and `y$key`: equality (`==`) or inequality (`<`, `<=` etc, and helpers)
+
+## Some `join_by()` examples {-}
+
+Join airport attributes without losing flights:
+
+```{r}
+flights2 |>
   left_join(airports, join_by(origin == faa))
-
 ```
 
-## Equi Joins
+## Some `join_by()` examples {-}
 
--  A left join is often called an equi join because it describes the relationship between the two tables where the keys are equal.
+Join airport attributes without losing flights:
 
-- `inner_join()`, `right_join()`, `full_join()` are similar to `left_join()` in that respect, but the difference is which rows they keep: 
-
-  - left join keeps all the rows in `x`, 
-  
-  - the right join keeps all rows in `y`, 
-  
-  - the full join keeps all rows in either `x` or `y`, and 
-  
-  - the inner join only keeps rows that occur in both `x` and `y`
-  
-- Equi joins are the most common type of join, so we’ll typically omit the equi prefix, and just say “inner join” rather than “equi inner join”.
-  
-
-```{r 21-outerjoins, echo=FALSE, fig.align='center', fig.cap='Outer joins', out.width='60%'} 
-knitr::include_graphics("images/outerjoins.png")
+```{r}
+flights2 |>
+  left_join(airports, join_by(dest == faa))
 ```
 
+## Some `join_by()` examples {-}
 
-```{r 21-innerjoin, echo=FALSE, fig.align='center', fig.cap='inner join', out.width='100%'} 
-knitr::include_graphics("images/innerjoin.png")
+```{r}
+df <- tibble(id = 1:4, name = c("John", "Simon", "Tracy", "Max"))
+df
 ```
 
-## Filtering joins
+Doing a self-join with an inequality matching condition to get all name combinations:
 
-- The primary action of a filtering join is to filter the rows, and unlike mutating joins, never duplicate rows. 
-
-- There are two types: semi-joins and anti-joins. 
-
-  - Semi-joins keep all rows in `x` that have a match in `y`
-  - anti-joins, it's inverse, return all rows in `x` that don’t have a match in `y`. 
-
-```{r 21-semijoin, echo=FALSE, fig.align='center', fig.cap='Semi-join', out.width='60%'} 
-knitr::include_graphics("images/semijoin.png")
+```{r}
+df |> inner_join(df, join_by(id < id)) |> print(n = Inf)
 ```
 
 
-```{r 21-antijoin, echo=FALSE, fig.align='center', fig.cap='Anti-join', out.width='60%'} 
-knitr::include_graphics("images/antijoin.png")
+## Key matching conditions {-}
+
+- Equality condition: so called '**equi joins**'.
+    - You will use this most of the time.
+    - All others are sometimes called 'non-equi joins'
+- Inequality conditions:
+    - **inequality joins**: `join_by(id < id)`
+    - **rolling joins** (only closest): `join_by(closest(id < id))`
+    - **overlap joins**: to set interval conditions
+        - `between(x, y_lower, y_upper)` is short for `x >= y_lower, x <= y_upper`
+        - `within(x_lower, x_upper, y_lower, y_upper)` is short for `x_lower >= y_lower, x_upper <= y_upper`
+        - `overlaps(x_lower, x_upper, y_lower, y_upper)` is short for `x_lower <= y_upper, x_upper >= y_lower`
+- No conditions: **cross joins**.
+Use separate function `cross_join()`.
+
+## Key matching conditions {-}
+
+![](images/19_lt.png)
+
+## Key matching conditions {-}
+
+**`cross_join(x, y)`**
+
+![](images/19_cross.png)
+
+## Key matching conditions: examples {-}
+
+```{r include=FALSE}
+set.seed(123)
+employees <- tibble(
+  name = sample(babynames::babynames$name, 100),
+  birthday = ymd("2022-01-01") + (sample(365, 100, replace = TRUE) - 1)
+)
+parties <- tibble(
+  q = 1:4,
+  party = ymd(c("2022-01-10", "2022-04-04", "2022-07-11", "2022-10-03")),
+  start = ymd(c("2022-01-01", "2022-04-04", "2022-07-11", "2022-10-03")),
+  end = ymd(c("2022-04-03", "2022-07-10", "2022-10-02", "2022-12-31"))
+)
 ```
 
-## Non-equi joins
-
-- In equi joins the x keys and y are always equal, so we only need to show one in the output, but that isn't always the case.
-
-- dplyr helps by identifying four particularly useful types of non-equi join:
-
-  - Cross joins match every pair of rows.
-  - Inequality joins use <, <=, >, and >= instead of ==.
-  - Rolling joins are similar to inequality joins but only find the closest match.
-  - Overlap joins are a special type of inequality join designed to work with ranges.
-
-
-```{r 19-cross, echo=FALSE, fig.align='center', fig.cap='Anti-join', out.width='60%'} 
-knitr::include_graphics("images/19_cross_join.png")
+```{r}
+employees
+parties
 ```
 
-```{r 19-inequality, echo=FALSE, fig.align='center', fig.cap='Anti-join', out.width='60%'} 
-knitr::include_graphics("images/19_inequality_join.png")
+## Key matching conditions: examples {-}
+
+When is the birthday party for each employee?
+
+```{r}
+employees |>
+  inner_join(
+    parties, 
+    join_by(between(birthday, start, end)), 
+    unmatched = "error"
+  )
 ```
 
-```{r 19-rolling, echo=FALSE, fig.align='center', fig.cap='Anti-join', out.width='60%'} 
-knitr::include_graphics("images/19_rolling_join.png")
+## Key matching conditions: examples {-}
+
+```{r}
+df <- tibble(name = c("John", "Simon", "Tracy", "Max"))
+df
 ```
+
+Generate permutations in a self-join with `cross_join()`:
+
+```{r}
+df |> cross_join(df)
+```
+
+
+
+```{r include=FALSE}
+options(oldopt)
+```
+
 
 ## Meeting Videos
 
