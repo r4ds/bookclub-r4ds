@@ -162,7 +162,7 @@ Not shown: `mutate()`, `summarize()` are also `SELECT`
 
 Sometimes {dbplyr} uses subqueries to translate {dplyr} code
 
--   **subquery* = query used in `FROM` in place of a table
+-   **subquery** = query used in `FROM` in place of a table
 
 ```{r}
 flights |> 
