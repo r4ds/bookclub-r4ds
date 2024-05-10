@@ -238,7 +238,7 @@ bake_sale <- tibble(
 bake_sale
 ```
 
-```{r}
+```{r, eval=FALSE}
 write_xlsx(bake_sale, path = "data/bake-sale.xlsx")
 ```
 

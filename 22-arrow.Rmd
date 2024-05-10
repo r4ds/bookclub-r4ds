@@ -194,12 +194,12 @@ query |> collect()
 #> # ℹ 52 more rows
 ```
 
-## Available verbs
+## Available verbs {-}
 
 -   [`?arrow-dplyr`](https://arrow.apache.org/docs/r/reference/acero.html) for supported functions
     -   (book uses `?acero` but that's way harder to remember)
 
-## Performance
+## Performance {-}
 
 ```{r, eval=F}
 x |> 
@@ -221,9 +221,9 @@ x |>
 -   Discussion: Why? 
     -   More tidyverse verbs?
 
-## Meeting Videos
+## Meeting Videos {-}
 
-### Cohort 7
+### Cohort 7 {-}
 
 `r knitr::include_url("https://www.youtube.com/embed/qsgZAgmmpt4")`
 
@@ -243,6 +243,6 @@ x |>
 ```
 </details>
 
-### Cohort 8
+### Cohort 8 {-}
 
 `r knitr::include_url("https://www.youtube.com/embed/dUQ3vCNejbI")`
