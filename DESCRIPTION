@@ -26,6 +26,7 @@ Imports:
     hrbrthemes,
     htmlwidgets,
     janitor,
+    jsonlite,
     Lahman,
     lubridate,
     manipulate,

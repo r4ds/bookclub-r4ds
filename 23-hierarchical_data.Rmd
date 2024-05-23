@@ -3,181 +3,477 @@
 **Learning objectives:**
 
 1. Introduce a new data structure called lists
-2. Learn how to unpack lists systematically using only two new functions: `unnest_longer()` and `unnest_wider()`
+2. Learn how to unnest nested lists
 3. Get acquainted with JSON
 
-## Motivating example: Github repos
+## Packages
 
-- Consider `gh_repos`. 
-
-```{r}
-library(tidyverse) |> suppressPackageStartupMessages()
+```{r message=FALSE}
+library(dplyr)
+library(tidyr)
+library(purrr)
 library(repurrrsive)
-library(jsonlite) |> suppressPackageStartupMessages()
-is.list(gh_repos)
-repos <- tibble(json = gh_repos)
-repos
-#str(repos)
+library(jsonlite)
 ```
 
-- Now that was overwhelming! 
+## Introduction to lists {-}
 
-- A tibble with a column of lists
+**Vectors**:
 
-##
-
-- Lists could be named or unnamed. 
-
-  - The number of elements of a named list tend to be the same in every row.  
-  - Named lists tend to have the same names in every row. 
-  - The number of elements of an unnamed list tend to vary from row-to-row.
-
-## 
-
-- To unpack an unnamed list, use `unnest_longer()` and point to the column which is a list-column.
+- all elements are of the same data type
+- flat structure
+- support naming
 
 ```{r}
-repos |> unnest_longer(json) 
+c("string 1", "string 2")
+70:79
+c(mango = 100, banana = 200)
 ```
 
-##
+## Introduction to lists {-}
 
-- Notice another column of lists: but this time, we have named lists. 
+**Lists**:
 
-- Use `unnest_wider()`.
+- elements can be of different data types
+- elements can be _any R object_ (model object, plot, ...)
+- support nesting
+- support naming
+
+## Introduction to lists {-}
 
 ```{r}
-repos |> unnest_longer(json) |>
-  unnest_wider(json)
+mylist <- list("a", TRUE, lubridate::today())
+mylist
+str(mylist)
+mylist[2:3] # list subsetting (shortens the list)
+mylist[[3]] # element extraction (one level deeper)
 ```
 
-##
+## Introduction to lists {-}
 
-- Give a sense of the columns.
+A named, nested list.
 
 ```{r}
-repos |> unnest_longer(json) |>
-  unnest_wider(json) |>
+otherlist <- list(
+  mango = 100, 
+  nice = list(sweet = TRUE, dirty = FALSE)
+)
+otherlist
+str(otherlist)
+# element extraction:
+otherlist$nice # one level deeper
+otherlist[[2]] # one level deeper
+otherlist$nice$sweet # two levels deeper
+otherlist[[2]][[1]] # two levels deeper
+```
+
+## Introduction to lists {-}
+
+Often unnamed.
+
+```{r}
+anotherlist <- list("a", list(TRUE, FALSE))
+anotherlist
+str(anotherlist)
+anotherlist[[2]]
+anotherlist[[2]][[1]]
+```
+
+## Introduction to lists {-}
+
+What is a data frame?
+
+```{r}
+mydf <- data.frame(a = c("x", "y", "z"), b = 1:3)
+mydf
+is.list(mydf)
+```
+
+## Introduction to lists {-}
+
+What is the code to regenerate dataframe `mydf` without using `data.frame()`?
+
+```{r}
+dput(mydf)
+```
+
+- A data frame is just a list of vectors (the 'columns') which has been attributed the 'data.frame' class!
+- It has methods defined in base R, e.g. defining how to print a data.frame using `print()`; see `methods(class = "data.frame")`.
+
+## Introduction to lists {-}
+
+Extracting elements using `{purrr}`.
+
+```{r}
+str(otherlist)
+purrr::pluck(otherlist, "nice", "dirty")
+str(anotherlist)
+purrr::pluck(anotherlist, 2, 1)
+```
+
+## Introduction to lists {-}
+
+If _multiple_ elements are provided to `c()`, it tries to flatten them to one level:
+
+- usually creates a vector
+- creates a flat list if one element is a list (can be hierarchical) and another isn't
+
+```{r}
+c(mango = 100, nice = list(sweet = TRUE, dirty = FALSE))
+c("a", list(TRUE, FALSE))
+```
+
+
+## Tibbles can have a list column {-}
+
+Tibbles: just like a data frame, but the columns can also be lists instead of vectors.
+
+This means that tibbles can have columns with different data types, nested lists, ...
+
+## Tibbles can have a list column {-}
+
+Example:
+
+```{r}
+df <- tibble(
+  x = 1:2, 
+  y = c("a", "b"),
+  z = list(list(1, 2), list(3, 4, 5))
+)
+df
+df |> 
+  filter(x == 1)
+```
+
+## Tibbles can have a list column {-}
+
+Extracting parts of a tibble with a list column:
+
+```{r}
+# whole list column:
+df |> pull(z) |> str()
+df |> pluck("z") |> str()
+# elements inside the list column:
+df |> pluck("z", 2, 3)
+```
+
+- `dplyr::pull()` just takes one variable as argument
+- `purrr::pluck()` is designed to also take subsequent nested elements.
+
+## Rectangling data by unnesting list columns {-}
+
+Two cases:
+
+- `tidyr::unnest_longer()`: typically for **unnamed lists**
+- `tidyr::unnest_wider()`: typically for **named lists**
+
+## Rectangling data by unnesting list columns {-}
+
+```{r}
+df_unnamed <- tribble(
+  ~x, ~y,
+  1, list(11, 12, 13),
+  2, list(21),
+  3, list(31, 32),
+)
+df_unnamed
+```
+
+Unnesting an unnamed list column? Make it longer!
+
+## Rectangling data by unnesting list columns {-}
+
+```{r}
+df_unnamed |> unnest_longer(y)
+```
+
+## Rectangling data by unnesting list columns {-}
+
+```{r}
+df_named <- tribble(
+  ~x, ~y,
+  1, list(a = 11, b = 12),
+  2, list(a = 21, b = 22),
+  3, list(a = 31, b = 32),
+)
+df_named
+```
+
+Unnesting a named list column?
+
+- Usually you want to make it wider.
+- The names become the column names.
+
+## Rectangling data by unnesting list columns {-}
+
+```{r}
+df_named |> unnest_wider(y)
+```
+
+## Rectangling data: special cases {-}
+
+```{r}
+df_unnamed_paired <- tribble(
+  ~x, ~y, ~z,
+  "a", list("a1", "a2"), list("A1", "A2"),
+  "b", list("b1", "b2", "b3"), list("B1", "B2", "B3")
+)
+df_unnamed_paired
+```
+
+## Rectangling data: special cases {-}
+
+```{r}
+df_unnamed_paired |> unnest_longer(c(y, z))
+```
+
+## Rectangling data: special cases {-}
+
+```{r}
+df_unnamed_heterogeneous <- tribble(
+  ~x, ~y,
+  "a", list(1),
+  "b", list("a", TRUE, 5)
+)
+df_unnamed_heterogeneous
+```
+
+## Rectangling data: special cases {-}
+
+```{r}
+df_unnamed_heterogeneous |> unnest_longer(y)
+```
+
+## Rectangling data: special cases {-}
+
+Want to recycle the original variable name with `dplyr::unnest_wider()`?
+
+```{r}
+df_named
+str(df_named)
+```
+
+## Rectangling data: special cases {-}
+
+```{r}
+df_named |> unnest_wider(y, names_sep = "_")
+```
+
+## Rectangling data: applications {-}
+
+Considering some real-life situations: data from the `{repurrrsive}` package.
+
+- `repos`: deeply nested list
+- `got_chars`: relational data
+- `gmaps_cities`: deeply nested tibble
+
+## Rectangling data: applications {-}
+
+```{r}
+class(gh_repos)
+str(gh_repos, 4, list.len = 2)
+```
+
+## Rectangling data: applications {-}
+
+```{r}
+gh_repos |> 
+  pluck(1, 1) |> 
   names()
 ```
 
-##
-
-- We can further unpack. 
+## Rectangling data: applications {-}
 
 ```{r}
-repos |> unnest_longer(json) |>
-  unnest_wider(json) |>
-  select(where(is.list))
-repos |> unnest_longer(json) |>
-  unnest_wider(json) |>
-  select(where(is.list)) |>
-  unnest_wider(owner)
+gh_repos |> 
+  pluck(1, 1, "owner") |> 
+  str()
 ```
 
-##
-
-- We can also answer Exercise 23.4.4, Item 1. Roughly estimate when `gh_repos` was created. Why can you only roughly estimate the date?
+## Rectangling data: applications {-}
 
 ```{r}
-repos |> unnest_longer(json) |>
-  unnest_wider(json) |>
-  select(created_at)
-repos |> unnest_longer(json) |>
-  unnest_wider(json) |>
-  select(created_at) |>
-  separate_wider_position(created_at, 
-                          widths = c(ymd = 10, 10)) |>
-  slice_max(order_by = ymd)
+repos <- tibble(x = gh_repos)
+repos |> 
+  unnest_longer(x) |> 
+  unnest_wider(x) |> 
+  select(id, full_name, owner, description) |> 
+  unnest_wider(owner, names_sep = "_") |> 
+  glimpse()
 ```
 
-## Motivating example: Game of Thrones
+
+## Rectangling data: applications {-}
+
+```{r}
+str(got_chars, 2, list.len = 3)
+```
+
+## Rectangling data: applications {-}
 
 ```{r}
 chars <- tibble(json = got_chars)
 chars
-chars |> 
+```
+ 
+## Rectangling data: applications {-}
+
+```{r}
+chars |>
   unnest_wider(json)
-chars |> 
-  unnest_wider(json) |> 
+```
+
+## Rectangling data: applications {-}
+
+```{r}
+chars |>
+  unnest_wider(json) |>
   select(id, where(is.list))
 ```
 
-##
-
-- Create table of titles. 
+## Rectangling data: applications {-}
 
 ```{r}
-titles <- chars |> 
+chars |> 
   unnest_wider(json) |> 
   select(id, titles) |> 
-  unnest_longer(titles) |> 
-  filter(titles != "")
-titles
+  unnest_longer(titles)
 ```
 
-##
+## Rectangling data: applications {-}
 
-- Follow the steps used for titles to create similar tables for the aliases, allegiances, books, and TV series for the Game of Thrones characters.
+```{r echo=FALSE}
+locations <- gmaps_cities |> 
+  unnest_wider(json) |> 
+  select(-status) |> 
+  unnest_longer(results) |> 
+  unnest_wider(results)
+```
+
+`locations`: result from several unnesting operations on `gmaps_cities`.
 
 ```{r}
-aliases <- chars |> 
-  unnest_wider(json) |> 
-  select(id, aliases) |> 
-  unnest_longer(aliases) |> 
-  filter(aliases != "") 
-allegiances <- chars |> 
-  unnest_wider(json) |> 
-  select(id, allegiances) |> 
-  unnest_longer(allegiances) |> 
-  filter(allegiances != "") 
-books <- chars |> 
-  unnest_wider(json) |> 
-  select(id, books) |> 
-  unnest_longer(books) |> 
-  filter(books != "") 
-tvSeries <- chars |> 
-  unnest_wider(json) |> 
-  select(id, tvSeries) |> 
-  unnest_longer(tvSeries) |> 
-  filter(tvSeries != "") 
+locations |> 
+  select(city, formatted_address, geometry)
 ```
 
-##
-
-- Joining together: "You might expect to see this data in its own table because it would be easy to join to the characters data as needed."
+## Rectangling data: applications {-}
 
 ```{r}
-characters <- chars |> 
-  unnest_wider(json) |> 
-  select(id, name, gender, culture, born, died, alive)
-characters
-characters |> 
-  left_join(titles, join_by(id)) |>
-  left_join(aliases, join_by(id)) |>
-  left_join(allegiances, join_by(id)) |>
-  left_join(books, join_by(id)) |>
-  left_join(tvSeries, join_by(id))
+locations$geometry[[1]] |> str()
 ```
 
-##
--   Exercise 23.4.4 Item 4: "Explain the following code line-by-line. Why is it interesting? Why does it work for `got_chars` but might not work in general?"
+## Rectangling data: applications {-}
+
+What we want wrt the geometry column:
+
+- for each element, only unnest all contents of `bounds` list
+- using custom column names
+- do it all in one step!!
+
+So we need something similar to `purrr::pluck()`, but for unnesting.
 
 ```{r}
-tibble(json = got_chars) |> 
-  unnest_wider(json) |> 
-  select(id, where(is.list)) |> 
-  pivot_longer(
-    where(is.list), 
-    names_to = "name", 
-    values_to = "value"
-  ) |>  
-  unnest_longer(value)
+locations$geometry[[1]] |> str()
 ```
 
-## JSON
+## Rectangling data: applications {-}
 
-- Examples of toy JSONs from Exercise 23.5.4 Item 1: "Rectangle the `df_col` and `df_row` below. They represent the two ways of encoding a data frame in JSON."
+Rectangling specific elements of a nested list: use `tidyr::hoist()`!
+
+```{r}
+locations |> 
+  select(city, formatted_address, geometry) |> 
+  hoist(
+    geometry,
+    ne_lat = c("bounds", "northeast", "lat"),
+    sw_lat = c("bounds", "southwest", "lat"),
+    ne_lng = c("bounds", "northeast", "lng"),
+    sw_lng = c("bounds", "southwest", "lng"),
+  ) |> 
+  select(!geometry)
+```
+
+## JSON {-}
+
+- JSON is a string format to store hierarchical data
+- **j**ava**s**cript **o**bject **n**otation
+- It is the format used by most web APIs to return data
+
+
+## JSON {-}
+
+Limited set of data types!
+
+- **`null`**: same as `NA`
+- data types that can only represent a single value:
+  - **string**: double qoutes!
+  - **number**:
+    - can be decimal, integer or scientific
+    - doesn’t support `Inf`, `-Inf`, or `NaN`
+  - **boolean**: lowercase `true` or `false`
+
+## JSON {-}
+
+- data types to represent multiple values:
+  - **arrays**:
+    - like an unnamed list in R
+    - written with `[]`
+    - e.g. `[null, 1, "string", false]`
+  - **objects**:
+    - like a named list in R
+    - written with `{}`
+    - the names (keys in JSON terminology) are strings, so must be surrounded by quotes
+    - e.g. `{"x": 1, "y": 2}`
+
+## Get JSON into R {-}
+
+Reading a JSON string or file as a list in R:
+
+- `jsonlite::read_json(<filepath>)`
+- `jsonlite::parse_json(<string>)`
+
+## Get JSON into R {-}
+
+Example.
+
+```{r}
+json <- '[
+  {"name": "John", "age": 34},
+  {"name": "Susan", "age": 27}
+]'
+df <- tibble(json = parse_json(json))
+df
+df |> 
+  unnest_wider(json)
+```
+
+## JSON and data frames {-}
+
+There are two ways to encode a data frame as JSON:
+
+- an _object_ of (named) columns
+
+```json
+{
+  "x": ["a", "x", "z"],
+  "y": [10, null, 3]
+}
+```
+
+- an _array_ of (unnamed) rows
+
+```json
+[
+  {"x": "a", "y": 10},
+  {"x": "x", "y": null},
+  {"x": "z", "y": 3}
+]
+```
+
+## JSON and data frames {-}
+
+An _object_ of (named) columns
 
 ```{r}
 json_col <- parse_json('
@@ -186,6 +482,42 @@ json_col <- parse_json('
     "y": [10, null, 3]
   }
 ')
+str(json_col)
+```
+
+## JSON and data frames {-}
+
+The elements are not rows, so putting them in a list column before doing `unnest_wider()` must happen **in a single-row tibble**, by using `list()`:
+
+```{r}
+df_col <- tibble(x = list(json_col))
+df_col
+```
+
+## JSON and data frames {-}
+
+Step 1: create the columns
+
+```{r}
+df_col |> 
+  unnest_wider(x)
+```
+
+## JSON and data frames {-}
+
+Step 2: unnest the rows
+
+```{r}
+df_col |> 
+  unnest_wider(x) |> 
+  unnest_longer(c(x, y))
+```
+
+## JSON and data frames {-}
+
+An _array_ of (unnamed) rows
+
+```{r}
 json_row <- parse_json('
   [
     {"x": "a", "y": 10},
@@ -193,23 +525,28 @@ json_row <- parse_json('
     {"x": "z", "y": 3}
   ]
 ')
+str(json_row)
+```
 
-df_col <- tibble(json = list(json_col)) 
-df_row <- tibble(json = json_row)
-df_col |> 
-  unnest_wider(json) |> 
-  unnest_longer(x) |> 
-  unnest_longer(y)
-df_row |> unnest_wider(json)
-``` 
+## JSON and data frames {-}
 
-##
-
-- "Wilder" JSON: Try opening in a text editor and browser the Game of Thrones JSON. Below you will see a path to it. 
+The elements are rows, so putting them in a list column before doing `unnest_wider()` can happen **directly**:
 
 ```{r}
-got_chars_json()
+df_row <- tibble(x = json_row)
+df_row
 ```
+
+## JSON and data frames {-}
+
+We only need to create the columns, since the rows were already there:
+
+```{r}
+df_row |> 
+  unnest_wider(x)
+```
+
+
 
 
 ## Meeting Videos
