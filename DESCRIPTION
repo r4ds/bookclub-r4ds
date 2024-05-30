@@ -39,6 +39,7 @@ Imports:
     reactablefmtr,
     readxl,
     repurrrsive,
+    rvest,
     styler,
     tidyverse,
     tufte,
