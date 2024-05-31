@@ -111,8 +111,8 @@ tibble(
   released = section |> 
     html_element("p") |> 
     html_text2() |> 
-    str_remove("Released: ") |> 
-    parse_date(),
+    stringr::str_remove("Released: ") |> 
+    readr::parse_date(),
   director = section |> 
     html_element(".director") |> 
     html_text2(),
@@ -149,7 +149,6 @@ tibble(
 
 `r knitr::include_url("https://www.youtube.com/embed/HnJ3ZY1seY4")`
 
-
 ### Cohort 8 {-}
 
 `r knitr::include_url("https://www.youtube.com/embed/dOVWSSqUvt0")`
@@ -157,5 +156,3 @@ tibble(
 ### Cohort 9 {-}
 
 `r knitr::include_url("https://www.youtube.com/embed/Hs928CH-_E4")`
-
-
