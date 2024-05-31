@@ -1,6 +1,6 @@
 Package: bookclub-r4ds
 Title: R for Data Science Book Club
-Version: 0.0.6.9000
+Version: 0.0.9.9000
 Authors@R: 
     person("Data Science Learning Community", role = c("aut", "cre", "cph"))
 URL: https://r4ds.github.io/bookclub-r4ds,
@@ -39,6 +39,7 @@ Imports:
     reactablefmtr,
     readxl,
     repurrrsive,
+    rvest,
     styler,
     tidyverse,
     tufte,

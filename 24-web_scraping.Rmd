@@ -1,193 +1,137 @@
 # Web scraping
 
-** Learning objectives **
+**Learning objectives**
 
-1.    Learn a bit of HTML 
-2.    Use that bit of HTML to learn web scraping. 
+-   Decide whether to scrape data from a web page.
+-   Recognize enough HTML to find your way around a web page.
+-   Extract tables from web pages.
+-   Extract other data from web pages.
 
-## Curious features of the chapter
-
--   No exercises!
--   Ethical implications of web scraping
--   Using an external tool like SelectorGadget
--   Limitations of scraping for dynamic websites
-
-## Typical HTML structure
-
--   HTML has hierarchical structure.
--   Structure is composed of elements. 
--   Each element has
-    -   Start tag
-    -   Attributes
-    -   Content
-    -   End tag
--   Each element can have children which are themselves elements.
--   Consistency of structure enables one to do web scraping. 
-
-## Key commands to extract data from HTML
-
--   Key package: `rvest`
--   Load html to scrape: `read_html()`
--   Extract data through selectors
-    -   `html_elements()`, `html_element()`
-    -   `html_attr()`
-    -   `html_text2()`
--   Extract data from HTML tables: `html_table()`
-
-## Example: Loading IMDB data
-
--   Load packages
-
-```{r}
-library(tidyverse)
+```{r web_scraping-packages, eval=TRUE, message=FALSE, warning=FALSE}
 library(rvest)
+library(tidyverse)
 ```
 
--   This code chunk may be a bottleneck for people with slower internet connections and for websites which may guard against scraping.
+## Ethics & Legalities {-}
 
-```{r}
-#| eval: FALSE
-# Problem directly using code from book
+> [If the data isn’t public, non-personal, or factual or you’re scraping the data specifically to make money with it, you’ll need to talk to a lawyer.](https://r4ds.hadley.nz/webscraping#scraping-ethics-and-legalities)
+
+-   Be polite (and {[polite](https://dmi3kno.github.io/polite/)})
+-   Check Terms of Service
+-   Beware PII
+-   Facts usually aren't copyrightable
+
+## Typical HTML structure {-}
+
+HTML = **H**yper**T**ext **M**arkup **L**anguage
+
+-   Hierarchical structure
+-   Element = `<tagname attribute="a" other="b">content</tagname>`
+    -   Start tag: `<tagname>`
+    -   Attributes: `attribute="a" other="b"`
+    -   Content: `content`
+    -   End tag: `</tagname>`
+-   Elements nest inside elements (as content) 
+    -   Nested elements = "children"
+
+## Use {rvest} to scrape web pages {-}
+
+[{rvest}](https://rvest.tidyverse.org/) ("harvest") = tidyverse web-scraping package
+
+-   Load html to scrape: `read_html()`
+-   Shortcut for tables: `html_table()`
+
+## Example: Table {-}
+
+[IMDB data from the Internet Archive](https://web.archive.org/web/20220201012049/https://www.imdb.com/chart/top/)
+
+```{r web_scraping-tables, eval=TRUE}
 url <- "https://web.archive.org/web/20220201012049/https://www.imdb.com/chart/top/"
 html <- read_html(url)
+html |> 
+  html_table()
 ```
 
--   Download HTML file locally instead. Then use `read_html()` directly on the downloaded file.
+## Select a specific element {-}
 
-```{r}
-#| eval: FALSE
-# Suggestion from https://stackoverflow.com/questions/33295686/rvest-error-in-open-connectionx-rb-timeout-was-reached
-download.file(url, destfile = "scrapedpage.html", quiet=TRUE)
-html.book <- read_html("scrapedpage.html")
-```
+`html_element()` returns same # outputs as inputs (1 thing in, 1 thing out)
 
--   Specific to the Internet Archive is that some of the website snapshots may be available as a link but not necessarily accessible.
+-   `"thing"` = `<thing>` tag
+-   `".thing"` = something with attribute `class="thing"`
+-   `"#thing"` = something with attribute `id="thing"`
 
--   May encounter 403 Forbidden error. 
+## Example: Specific table {-}
 
-```{r}
-#| eval: FALSE
-# Not just any URL will work
-url <- "https://web.archive.org/web/20240223185506/https://www.imdb.com/chart/top/"
-download.file(url, destfile = "scrapedpage.html", quiet=TRUE)
-``` 
-
--   But even if that were the case, the scraped file may part of a dynamic website. 
--   A very old snapshot is available for comparison.
-
-```{r}
-#| eval: FALSE
-url <- "https://web.archive.org/web/20040704034814/https://www.imdb.com/chart/top/"
-download.file(url, destfile = "scrapedpage-old.html", quiet=TRUE)
-```
-
--   But the structure of the website and the associated HTML have changed. 
--   This means the code you see in the book will not work out of the box. 
-
-```{r}
-#| eval: FALSE
-html.old <- read_html("/home/apua/Documents/r4ds/scrapedpage-old.html")
-temp <- html.old |> 
-  html_elements("table") |> html_attr("border") 
-which(temp == "1")
-temp <- html.old |> 
-  html_elements("table") 
-table.old <- html_table(temp[21], header=TRUE)
-ratings <- table.old[[1]] |>
-  select(
-    rank = "Rank",
-    title_year = "Title",
-    rating = "Rating",
-    votes = "Votes"
-  ) |> 
-  mutate(votes = parse_number(votes)) |>
-  separate_wider_regex(
-    title_year,
-    patterns = c(
-      title = ".+", " +\\(",
-      year = "\\d+", "\\)"
-    )
-  )
-ratings
-```
-
--   Let us compare to the book. 
-
-```{r}
-#| eval: FALSE
-html.book <- read_html("scrapedpage.html")
-table.book <- html.book |> 
+```{r web_scraping-html_element, eval=TRUE}
+html |> 
   html_element("table") |> 
   html_table()
-ratings.book <- table.book |>
-  select(
-    rank_title_year = `Rank & Title`,
-    rating = `IMDb Rating`
-  ) |> 
-  mutate(
-    rank_title_year = str_replace_all(rank_title_year, "\n +", " "), 
-    rating_n = html.book |> html_elements("td strong") |> html_attr("title")
-  ) |> 
-  separate_wider_regex(
-    rank_title_year,
-    patterns = c(
-      rank = "\\d+", "\\. ",
-      title = ".+", " +\\(",
-      year = "\\d+", "\\)"
-    )
-  ) |>
-  separate_wider_regex(
-    rating_n,
-    patterns = c(
-      "[0-9.]+ based on ",
-      number = "[0-9,]+",
-      " user ratings"
-    )
-  ) |>
-    mutate(
-    number = parse_number(number)
-  )
-ratings.book$title
 ```
 
--   Let point out things about the two datasets which make post-processing challenging.  
--   I don't resolve them here, but they require one to think about what questions you want answered first. 
+## Select finer-grained elements {-}
 
-```{r}
-#| eval: FALSE
-ratings$title
-left_join(ratings, ratings.book, by="title")
+`html_elements()` finds *all* matches
+
+👍 Rule of thumb:
+
+-   `html_elements()` to get observations (rows)
+-   `html_element()` to get variables for each observation (columns)
+
+## Extract data {-}
+
+-   `html_text()` for raw text (you probably don't want this)
+-   `html_text2()` for clean text
+-   `html_attr()` for attribute value (eg url `href`)
+
+## Example: Star Wars Rows {-}
+
+[Star Wars films (1-7)](https://rvest.tidyverse.org/articles/starwars.html)
+
+```{r web_scraping-star_wars-section}
+url <- "https://rvest.tidyverse.org/articles/starwars.html"
+html <- read_html(url)
+
+section <- html |> html_elements("section")
+section
 ```
 
-## Example: Quarantine Zine Club
+## Example: Star Wars Directors {-}
 
--   Task is to create a spreadsheet where we have the titles of the zines, their authors, the links to download the zines, and the first social media link of the authors. 
--   Used `xpath` here, but was not discussed in book. 
--   The code chunk below should work but gives an error when processed at Github repo of bookclub-r4ds, but it works on my machine. I have yet to figure out why. 
-
-```{r}
-#| eval: FALSE
-url <- "https://quarantinezineclub.neocities.org/zinelibrary"
-html <- read_html(url) 
-zinelib <- tibble(authors = html |> html_elements("#zname") |> html_text2(), 
-       titles = html |> html_elements("#libraryheader") |> html_text2(),
-       pdflink = html |> 
-  html_elements(xpath = "//div[@class='column right']") |> html_element("a") |> html_attr("href"),
-       mark = 2:156
-       )
-get.first.social <- function(num)
-{
-  return(html |> html_elements(xpath = paste("/html/body/div[2]/div[", num, "]/div[2]/a[1]", sep = ""))|> html_attr("href"))
-}
-zinelib <- zinelib |> mutate(
-  pdflink = paste("https://quarantinezineclub.neocities.org/", pdflink, sep = ""),
-  social1 = get.first.social(mark)) |> select(-mark)
-zinelib
+```{r web_scraping-star_wars-directors}
+section |> html_element(".director") |> html_text2()
 ```
 
-## Meeting Videos
+## Example: Star Wars Tibble {-}
 
-### Cohort 7
+```{r web_scraping-star_wars-tibble}
+tibble(
+  title = section |> 
+    html_element("h2") |> 
+    html_text2(),
+  released = section |> 
+    html_element("p") |> 
+    html_text2() |> 
+    str_remove("Released: ") |> 
+    parse_date(),
+  director = section |> 
+    html_element(".director") |> 
+    html_text2(),
+  intro = section |> 
+    html_element(".crawl") |> 
+    html_text2()
+)
+```
+
+## Learn more {-}
+
+-   [SelectorGadget](https://rvest.tidyverse.org/articles/selectorgadget.html)
+-   [CSS Diner](https://flukeout.github.io/)
+-   [MDN CSS selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors)
+-   [*Web APIs with R* book club](https://DSLC.io/wapir)
+
+## Meeting Videos {-}
+
+### Cohort 7 {-}
 
 `r knitr::include_url("https://www.youtube.com/embed/G5_pr9HxbT4")`
 
@@ -206,11 +150,11 @@ zinelib
 `r knitr::include_url("https://www.youtube.com/embed/HnJ3ZY1seY4")`
 
 
-### Cohort 8
+### Cohort 8 {-}
 
 `r knitr::include_url("https://www.youtube.com/embed/dOVWSSqUvt0")`
 
-### Cohort 9
+### Cohort 9 {-}
 
 `r knitr::include_url("https://www.youtube.com/embed/Hs928CH-_E4")`
 
