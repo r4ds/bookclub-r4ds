@@ -2,152 +2,178 @@
 
 **Learning objectives:**
 
-- **Reduce duplication** in code by **iterating** over a pattern using a **`for` loop.**
-- **Modify an object** using a **`for` loop.**
-- Recognize the **three basic ways** to **loop over a vector** using a **`for` loop.**
-- Handle **unknown output lengths** by using a **more complex result** and then **combining** the result after the **`for` loop.**
-- Handle **unknown sequence lengths** with a **`while` loop.**
-- **Reduce duplication** in code by passing a function as an argument to a function **(functional programming).**
-- Make iteration code **easier to read** with the **`map` family** of functions from **`{purrr}`.**
-- Make `map` code **faster to type** with **shortcuts.**
-- **Compare** the **`map` family** of functions to the base R **`apply` family.**
-- **Deal with errors** and other output using the **`{purrr}` adverbs: `safely`, `possibly`, and `quietly`.**
-- Map over **multiple arguments** with the **`map2` family** and the **`pmap` family** from `{purrr}`.
-- Map over **multiple functions** with the **`invoke_map` family** from `{purrr}` and its replacements (see `?purrr::invoke_map`, "Life cycle").
-- Call a function for its **side effects** using the **`walk`** family of functions from `{purrr}`.
-- Recognize the **other iteration functions** from `{purrr}`.
+-   Modify multiple columns using the same patterns.
+-   Filter based on the contents of multiple columns.
+-   Process multiple files.
+-   Write multiple files.
+
+```{r iteration-packages_used, message=FALSE, warning=FALSE}
+library(tidyverse)
+```
+
+## Intro to iteration {-}
+
+**Iteration** = repeatedly performing the same action on different objects
+
+R is full of *hidden* iteration!
+
+-   `ggplot2::facet_wrap()` / `ggplot::facet_grid()`
+-   `dplyr::group_by()` + `dplyr::summarize()`
+-   `tidyr::unnest_wider()` / `tidyr::unnest_longer()`
+-   Anything with a vector! 
+    -   `1:10 + 1` requires loops in other languages!
+
+## Summarize w/ `across()`: detup {-}
+
+```{r iteration-summarize-setup}
+df <- tibble(a = rnorm(10), b = rnorm(10), c = rnorm(10))
+glimpse(df)
+```
+
+## Summarize w/ `across()`: motivation {-}
+
+```{r iteration-summarize-motivation}
+messy <- df |> summarize(
+  n = n(), 
+  a = median(a), 
+  b = median(b), 
+  c = median(c)
+)
+```
+
+## Summarize w/ `across()`: cleaner {-}
+
+```{r iteration-summarize-across}
+clean <- df |> summarize(
+  n = n(), 
+  dplyr::across(a:c, median)
+)
+identical(clean, messy)
+```
+
+## Selecting columns {-}
+
+-   `everything()` for all non-grouping columns
+-   `where()` to select based on a condition
+    -   `where(is.numeric)` = all numeric columns
+    -   `where(is.character)` = all character columns
+    -   `starts_with("a") & !where(is_numeric)` = all columns that start with "a" and are not numeric
+    -   `where(\(x) any(stringr::str_detect("name")))` = all columns that contain the word "name" in at least one value
+
+## Passing functions {-}
+
+Pass actual function to `across()`, ***not*** a call to the function!
+
+-   ✅ `across(a:c, mean)`
+-   ❌ `across(a:c, mean())`
+
+## Multiple functions {-}
+
+```{r iteration-multiple_functions}
+df |> summarize(
+  across(a:c, list(mean, median))
+)
+```
+
+## Multiple functions with names {-}
+
+```{r iteration-multiple_functions-names}
+df |> summarize(across(a:c, 
+    list(mean = mean, median = median)
+))
+```
+
+## Multiple functions with names & args {-}
+
+```{r iteration-multiple_functions-args}
+df |> summarize(across(a:c, 
+    list(
+      mean = \(x) mean(x, na.rm = TRUE), 
+      median = \(x) median(x, na.rm = TRUE)
+    )
+))
+```
+
+## Fancier naming {-}
+
+```{r iteration-across-glue_names}
+df |> summarize(across(a:c,
+    list(
+      mean = \(x) mean(x, na.rm = TRUE), 
+      median = \(x) median(x, na.rm = TRUE)
+    ),
+    .names = "{.fn}_of_{.col}"
+))
+```
 
-## Intro
+## Filtering with if_any() and if_all() {-}
 
-**Good iteration - Pre-allocate the shape/structure and then fill in the data**.
+```{r iteration-if_any}
+df2 <- tibble(x = 1:3, y = c(1, 2, NA), z = c(NA, 2, 3))
+df2 |> filter(if_any(everything(), is.na))
+df2 |> filter(if_all(everything(), \(x) !is.na(x)))
+```
 
-**Imperative programming** - `for` loops and `while` loops make iteration very explicit.
+## across() in functions: setup {-}
 
-**Functional programming** - common `for` loop patterns get their own functions, so you can streamline your code even more.
+```{r iteration-across-in-functions}
+summarize_datatypes <- function(df) {
+  df |> summarize(
+    across(
+      where(is.numeric), 
+      list(mean = \(x) mean(x, na.rm = TRUE))
+    ),
+    across(
+      where(is.factor) | where(is.character), 
+      list(n_distinct = n_distinct)
+    )
+  ) |> 
+    glimpse()
+}
+```
 
-Packages: `library(tidyverse)`, `library(purrr)`
+## across() in functions: mpg {-}
 
-## For loops
+```{r iteration-across_in_functions-mpg}
+mpg |> summarize_datatypes()
+```
 
-Each loop has three components:
+## across() in functions: diamonds {-}
 
--   **output** - Allocate enough space for your `for` loop. A loop that grows at each iteration will be very "slow".
+```{r iteration-across_in_functions-diamonds}
+diamonds |> summarize_datatypes()
+```
 
--   **sequence** - What to loop over.
+## Iterate over files {-}
 
-    -   `seq_along()` is a safe version of the familiar `1:length(x)`: if you have a zero-length vector, it will tell you.
+```{r iteration-map_files, eval = FALSE}
+list.files("data/gapminder", pattern = "[.]xlsx$", full.names = TRUE) |>
+  set_names(basename) |> 
+  purrr::map(readxl::read_excel) |> 
+  map(\(df) "Fix something that might be weird in each df") |> 
+  map(\(df) "Fix a different thing") |> 
+  purrr::list_rbind(names_to = "filename")
+```
 
--   **body** - This is the code that does the work.
+## One vs everything {-}
 
-## For loop variations
+> We recommend this approach [perform each step on each file instead of in a function] because it stops you getting fixated on getting the first file right before moving on to the rest. By considering all of the data when doing tidying and cleaning, you’re more likely to think holistically and end up with a higher quality result.
 
-There are four variations on the basic theme of the `for` loop:
+Discuss!
 
-1.  Modifying an existing object, instead of creating a new object.
+-   Jon's preference: Do 1-2 files first, iterate on iteration
+-   Book: Do everything on everything
 
-2.  Looping over names or values, instead of indices.
+## Walk vs map {-}
 
-    -   There are three basic ways to loop over a vector.
+-   Use `purrr::walk()` to do things without keeping result
+    -   Book example: Saving things
+-   `purrr::map2()` & `purrr::walk2()`: 2 inputs
+-   `purrr::pmap()` & `purrr::pwalk()`: list of inputs (largely replaced by `across()`)
 
-        -   `for (i in seq_along(df))`
+## Meeting Videos {-}
 
-        -   `for (x in xs)` - good for **side-effects**
-
-        -   `for (nm in names(xs))` - creates name to access value with `x[[nm]]`
-
-3.  Handling outputs of unknown length.
-
-    -   `unlist()` flattens a list of vectors into a single vector,
-
-    -   `purrr::flatten_dbl()` is stricter --- it will throw an error if the input isn't a list of doubles.
-
-4.  Handling sequences of unknown length.
-
-    -   Use a `while` loop.
-
-## For loops vs. functionals
-
-`For` loops are not as important in R as they are in other languages because R is a functional programming language.
-
-This means that it's possible to put `for` loops in a function, and call that function instead of using the `for` loop directly.
-
-Base R and the `purrr` package have functions for many common loops.
-
-## The map functions
-
--   `map(.x, .f, ...)` makes a list.
-
--   `map_lgl(.x, .f, ...)` makes a logical vector.
-
--   `map_int(.x, .f, ...)` makes an integer vector.
-
--   `map_dbl(.x, .f, ...)` makes a double vector.
-
--   `map_chr(.x, .f, ...)` makes a character vector.
-
-**Shortcuts with `purrr`:**
-
--   a one-sided formula creates an anonymous function
-
--   use a string to extract named components
-
--   Use an integer to select elements by position
-
-**Base R:**
-
--   `lapply(X, FUN, ...)` makes a list (`map` is more consistent)
-
--   `sapply(X, FUN, ..., simplify = TRUE, USE.NAMES = TRUE)` wrapper around `lapply`
-
--   `vapply(X, FUN, FUN.VALUE, ..., USE.NAMES = TRUE)` safe alternative to `sapply`, can make a matix
-
-## Dealing with failure
-
-`safely()` - designed to work with `map`
-
--   `result` is the original result. If there was an error, this will be `NULL`.
-
--   `error` is an error object. If the operation was successful, this will be `NULL`.
-
-`possibly()` - you give it a default value to return when there is an error.
-
-`quietly()` - instead of capturing errors, it captures printed output, messages, and warnings.
-
-## Mapping over multiple arguments
-
-`map2()` and `pmap()` functions are for multiple related inputs that you need iterate along in parallel.
-
-**Invoking different functions**
-
-*Read the help in purrr on these functons. If you need to do this read Advanced R. `invoke_map` is retired.*
-
-## Walk
-
-`walk()` is an alternative to `map()` that you use when you want to call a function for its side effects, rather than for its return value.
-
-`walk2` and `pwalk` - more useful than `walk`.
-
-## Other patterns of for loops
-
-**Predicate functions -** return `TRUE` or `FALSE`
-
--   `keep` and `discard` - keep elements are `TRUE` and discard are `FALSE`.
-
--   `some` and `every` - determine if `TRUE` for any (some) or all (every)
-
--   `detect` and `detect_index` - detect finds first element where `TRUE`, and detect_index returns the position
-
--   `head_while()` and `tail_while()` - while `TRUE` take elements from start (head_while) or end (tail_while)
-
-**Reduce and accumulate**
-
--   `reduce()` takes a "binary" function, applies it repeatedly to a list until there is only a single element left.
-
--   `accumulate()` keeps all the interim results.
-
-## Meeting Videos
-
-### Cohort 5
+### Cohort 5 {-}
 
 `r knitr::include_url("https://www.youtube.com/embed/0rsV1jlxhws")`
 
@@ -201,7 +227,7 @@ mtcars %>%
 ```
 </details>
 
-### Cohort 6
+### Cohort 6 {-}
 
 `r knitr::include_url("https://www.youtube.com/embed/NVUHFpYUmA4")`
 
@@ -229,7 +255,7 @@ mtcars %>%
 </details>
 
 
-### Cohort 7
+### Cohort 7 {-}
 
 `r knitr::include_url("https://www.youtube.com/embed/vPEgWgs0q7s")`
 
@@ -247,6 +273,6 @@ mtcars %>%
 </details>
 
 
-### Cohort 8
+### Cohort 8 {-}
 
 `r knitr::include_url("https://www.youtube.com/embed/TQabUIBbJKs")`
