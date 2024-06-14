@@ -23,7 +23,7 @@ R is full of *hidden* iteration!
 -   Anything with a vector! 
     -   `1:10 + 1` requires loops in other languages!
 
-## Summarize w/ `across()`: detup {-}
+## Summarize w/ `across()`: setup {-}
 
 ```{r iteration-summarize-setup}
 df <- tibble(a = rnorm(10), b = rnorm(10), c = rnorm(10))
