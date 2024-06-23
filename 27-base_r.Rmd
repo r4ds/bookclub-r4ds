@@ -2,16 +2,337 @@
 
 **Learning objectives:**
 
-- ADD IF POSSIBLE
+- Get acquainted with some powerful basic tools in R
+- Learn subsetting and element extraction in base R
+- Learn iteration functions in base R
+- Learn a little about plotting in base R
 
-## Slide 1
+##  Intro {-}
 
-Slide contents. 
-Keep it short and slide-like!
+- There are multiple frameworks in R coding; the tidyverse is just one!
+- You encounter other frameworks once you start reading R code written by others.
+- It’s 100% okay to write code that uses a mix of approaches.
+- The framework provided out of the box is **base R**.
 
-## Slide 2
+We already know some base R functions, e.g. `library()`, `sum()`, `mean()`.
 
-Slide contents.
+## Selecting multiple elements with `[` {-}
+
+- For vectors, lists and data frames
+- Typically called 'subsetting'
+- Also useful to reorder elements, e.g.:
+  - rank elements
+  - repeat elements (hence grow the object)
+
+**You get the same class back.**
+
+## Selecting multiple elements with `[` {-}
+
+Selection can be done using:
+
+- vector of (integer) indices (including negative indices: `-i` is 'drop element `i`')
+- logical vector (often using comparisons)
+- vector of element names (for a named vector)
+
+## Selecting multiple elements with `[` {-}
+
+`x` can be a vector, a data frame (selecting columns!), a list!
+
+- using vector of (integer) indices
+
+```{r eval=FALSE}
+x[c(3, 2, 5)]
+x[c(-1, -2)]
+x[3:5]
+```
+
+## Selecting multiple elements with `[` {-}
+
+- using logical vector having same length as `x` (often using comparisons)
+
+```{r eval=FALSE}
+x[!is.na(x)]
+x[y > 0]
+```
+
+## Selecting multiple elements with `[` {-}
+
+- using vector of element names (1/3)
+
+Vector example:
+
+```{r}
+x <- c(apple = 10, banana = 20, melon = 30)
+x
+x[c("melon", "apple")]
+```
+
+
+## Selecting multiple elements with `[` {-}
+
+- using vector of element names (2/3)
+
+List example:
+
+```{r}
+x <- list(apple = c(10, 15), banana = c(20, 25), melon = c(30, 35))
+str(x)
+x[c("melon", "apple")] |> str()
+```
+
+## Selecting multiple elements with `[` {-}
+
+- using vector of element names (3/3)
+
+Data frame example:
+
+```{r}
+x <- data.frame(apple = c(10, 15), banana = c(20, 25), melon = c(30, 35))
+x
+x[c("melon", "apple")]
+```
+
+## Selecting multiple elements with `[` {-}
+
+`NA` values in the selection vector (indices, logical) are returned as `NA`
+
+This is different to:
+
+- `dplyr::filter(df, df$x > 0)` drops `NA` values
+- base R: `which(<logical vector>)` drops `NA` values
+  - it filters a logical vector for `TRUE`s and returns their index, e.g. in `which(x > 0)`
+
+## Selecting multiple elements with `[` {-}
+
+Sorting:
+
+```{r}
+x <- c(5, 2, 3)
+order(x)
+x[order(x)]
+sort(x)
+```
+
+These also take an argument `decreasing =`.
+
+## Selecting multiple elements with `[` {-}
+
+Special way of subsetting for data frames: `df[rows, cols]`.
+
+Here, `rows` and `cols` are vectors (indices, logical, names) to subset the data frame.
+
+Column selection: cf. `select()`, `relocate()`
+
+```{r}
+df <- data.frame(x = 1:2, y = c("k", "l"), z = c(FALSE, TRUE))
+df
+df[1, c("x", "y")]
+df[, c("z", "y")]
+```
+
+## Selecting multiple elements with `[` {-}
+
+`df[rows, cols]` selecting just one column:
+
+- with a `tibble` you still get a data frame (tibble)
+- but with a `data.frame` simplification to vector is applied:
+  - except `df[rows, cols, drop = FALSE]`: maintains the `data.frame` class
+  
+```{r}
+df
+df[, "z"]
+df[, "z", drop = FALSE]
+```
+
+## Selecting multiple elements with `[` {-}
+
+Compare:
+
+```{r}
+df[, "z"]
+df["z"]
+```
+
+This is just list subsetting, so still a data frame!
+
+## Selecting multiple elements with `[` {-}
+
+In base R, give me columns `y` and `z` for the rows where `x` > 1.
+
+```{r}
+df
+df[df$x > 1, c("y", "z")]
+```
+
+## Selecting multiple elements with `[` {-}
+
+Is this also base R ??? No `df$` prefix, no quotes for the names vector!
+
+```{r}
+df |> subset(x > 1, c(y, z))
+```
+
+So this function has ergonomics similar to `filter()` and `select()`.
+
+## Selecting multiple elements with `[` {-}
+
+Is this also base R ??? No `df$` prefix, no quotes for the names vector!
+
+```{r}
+df |> subset(x > 1, c(y, z))
+```
+
+So this function has ergonomics similar to `filter()` and `select()`.
+
+It is base R!
+
+And it was inspiration for **dplyr**'s syntax.
+
+## Selecting single elem. with `[[` and `$` {-}
+
+Extracting a **single element** with `[[` or `$` returns the element, not a subset of the input object.
+
+Hence the element is always the simplest representation.\
+For a vector, this is a scalar (vector of length 1).
+
+- `[[`: takes a position or a name (e.g. `x[[1]]` or `x[["apple"]]`)
+- `$`: only takes a name (e.g. `x$apple`)
+  - equivalent is `dplyr::pull()`
+
+## Selecting single elem. with `[[` and `$` {-}
+
+List example:
+
+```{r}
+x <- list(apple = c(10, 15), banana = c(20, 25), melon = c(30, 35))
+str(x)
+x$melon
+x[3]
+x[[3]]
+x["melon"]
+x[["melon"]]
+```
+
+## Selecting single elem. with `[[` and `$` {-}
+
+Data frame example:
+
+```{r}
+x <- data.frame(apple = c(10, 15), banana = c(20, 25), melon = c(30, 35))
+x
+x[["melon"]]
+x$melon
+```
+
+## Selecting single elem. with `[[` and `$` {-}
+
+- `pepper`: a pepper shaker with 8 pepper packets
+- `pepper[1:2]` would be a pepper shaker containing two pepper packets
+- what is `pepper[1]`?
+- what is `pepper[[1]]`?
+- what is `pepper[[1]][1]`?
+- what is `pepper[[1]][[1]]`?
+
+## `apply()` functions {-}
+
+Matrix: like a vector, but arranged as rows and columns.
+
+```{r}
+x <- matrix(1:24, ncol = 3)
+x
+```
+
+## `apply()` functions {-}
+
+`apply()` summarizes matrices over margins.
+
+```{r}
+apply(x, 1, sum) # margin = 1 are the rows
+apply(x, 2, sum) # margin = 2 are the columns
+```
+
+Often used in statistical methods (matrix algebra).
+
+## `apply()` functions {-}
+
+`lapply(<list>, <function>)`: similar to `purrr::map()`
+
+- applies a function to each element of a list
+- returns a list of same length
+
+Variations on this:
+
+- `sapply()` and `vapply()` (try to) simplify the result
+  - similar to `purrr::map_vec()`
+- `tapply()` is to generate summaries for groups (cf. `group_by()` & `summarize()`)
+
+## `apply()` functions {-}
+
+```{r}
+df <- data.frame(a = 1:2, b = 2:3, c = c("a", "z"), d = c("b", "k"))
+df
+sapply(df, is.numeric)
+vapply(df, is.numeric, logical(1))
+try(vapply(df, is.numeric, character(1)))
+```
+
+## `apply()` functions {-}
+
+```{r}
+library(ggplot2)
+tapply(diamonds$price, diamonds$cut, mean)
+```
+
+You get a named vector!
+
+## `for()` loops {-}
+
+Similar to `purrr::walk()`.
+
+```{r eval=FALSE}
+for (element in vector) {
+  # do something with element
+}
+```
+
+## `for()` loops {-}
+
+But what if you want to **save** the output of the loops in **one list or vector**?
+
+_Pre-allocate memory to your vector / data frame / list, then fill in the values!_
+
+Growing an object takes many times longer (e.g. doing `x <- c(x, new)` in the `for` loop).
+
+```{r eval=FALSE}
+paths <- dir("data/gapminder", pattern = "\\.xlsx$", full.names = TRUE)
+files <- vector("list", length(paths))
+seq_along(paths)
+#>  [1]  1  2  3  4  5  6  7  8  9 10 11 12
+for (i in seq_along(paths)) {
+  files[[i]] <- readxl::read_excel(paths[[i]])
+}
+do.call(rbind, files)
+#> # A tibble: 1,704 × 5
+#>   country     continent lifeExp      pop gdpPercap
+#>   <chr>       <chr>       <dbl>    <dbl>     <dbl>
+#> 1 Afghanistan Asia         28.8  8425333      779.
+#> 2 Albania     Europe       55.2  1282697     1601.
+#> 3 Algeria     Africa       43.1  9279525     2449.
+#> 4 Angola      Africa       30.0  4232095     3521.
+#> 5 Argentina   Americas     62.5 17876956     5911.
+#> 6 Australia   Oceania      69.1  8691212    10040.
+#> # ℹ 1,698 more rows
+```
+
+## Base R plotting function {-}
+
+```{r out.width="100%"}
+oldpar <- par(mfrow = c(1, 2))
+hist(diamonds$carat)
+plot(diamonds$carat, diamonds$price)
+par(oldpar)
+```
+
 
 ## Meeting Videos
 
