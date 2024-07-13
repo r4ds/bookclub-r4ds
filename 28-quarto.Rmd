@@ -1,32 +1,255 @@
 # (PART\*) Communicate {-}
 
-# Quarto
+# Quarto 
 
-Note: This chapter was about R Markdown when previous cohorts read it.
-When you update these slides to reflect the updated chapter, please remove this note.
+```{r fig, echo=FALSE, out.width="40%", fig.align="center"}
+knitr::include_graphics("./images/quarto-dark-bg.jpeg")
+```
+
 
 **Learning objectives:**
 
-- **Create R Markdown documents.**
-- **Format text** using Pandoc’s Markdown.
-- Include **R code chunks** in an R Markdown document.
-- Use **chunk options** to change what displays in an R Markdown document.
-- Use **`knitr::kable`** to display formatted tables in an R Markdown document.
-- **Cache data** in an R Markdown document.
-- Set **global chunk options** in an R Markdown document.
-- Embed **inline code** in an R Markdown document.
+- Understand the basic components of a Quarto document. 
+
+## Introduction {-}
+
+- Quarto is a command line interface tool, not an R package. 
+
+- Quarto unifies the functionality of many packages from the R Markdown ecosystem: rmarkdown, bookdown, distill, xaringan, etc. into a single consistent system.
+
+- Quarto -> native support for multiple programming languages like Python and Julia in addition to R
+
+- [Documentation](https://quarto.org/)
+
+- Quarto documents: 
+  - reproducible
+  - support dozens of output formats: PDFs, Word files, presentations, and more.
+
+- 3 main uses: 
+  1. Communication: focus on conclusions not code. 
+  2. Collaborating with other scientists (including future you!): conclusions and code. 
+  3. Environment in which to do data science. 
+  
+
+## Quarto basics {-}
+
+- Quarto files have `.qmd` extension. 
+
+- Contains 3 types of contents: 
+  - and optional YAML header surrounded by 3 dashes (---) at the beginning and end
+  - chunks of R code surrounded by 3 back ticks (```)
+  - text mixed with simple formatting like #heading or **italics**
+
+- To get started with your own .qmd file, select File > New File > Quarto Document… in the menu bar.
+
+```{r quarto, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("./images/28-fig28.png")
+```
+
+## Run code in quarto {-}
+
+- Run each code chunk by clicking the Run icon (each chunk will have this green arrow) or by pressing Cmd/Ctrl + Shift + Enter. 
+
+- You can choose to have the plots and output displayed in the document or on RStudio's console and plot panes. Go to the gear icon next to "Render" and switch to "Chunk Output Console".
+
+- To run the complete report, click "Render" or press Cmd/Ctrl + Shift + K. Or go to the console and type: `quarto::quarto_render("diamond-sizes.qmd")`. Your report will be displayed in the viewer pane as an HTML file (unless the YAML includes .pdf or other extension).
+
+## Visual editor {-}
+
+- Visual editor -> use the buttons on the menu bar to insert images, tables, cross-references, etc. or you can use the catch-all ⌘ + / or Ctrl + / shortcut to insert just about anything.
+- The visual editor displays your content with formatting, but under the hood, it saves your content in plain Markdown and you can switch back and forth between the visual and source editors.
+
+```{r vised, echo=FALSE, out.width="100%", fig.align="center"}
+knitr::include_graphics("./images/28-quarto-visual-editor.png")
+```
+
+## Source editor {-}
+
+- The Source editor will feel familiar to those with experience writing R scripts or R Markdown documents. 
+- Can also be useful for debugging any Quarto syntax errors since it’s often easier to catch these in plain text.
+- If you forget, you can get to a handy reference sheet with Help > Markdown Quick Reference.
 
 
-## Slide 1
+```{r}
+#| echo: false
+#| comment: ""
 
-Slide contents. 
-Keep it short and slide-like!
+cat(readr::read_file("quarto/markdown.qmd"))
+```
 
-## Slide 2
+## Code chunks {-}
 
-Slide contents.
+- To run code inside a Quarto document, you need to insert a chunk. 
+  1. The keyboard shortcut Cmd + Option + I / Ctrl + Alt + I.
+  2. The “Insert” button icon in the editor toolbar.
+  3. By manually typing the chunk delimiters ```{r} and ```.
 
-## Meeting Videos
+## Chunk label {-}
+
+Chunks can be given an optional label, e.g.
+
+```{r}
+#| echo: false
+#| out-width: "100%"
+
+knitr::include_graphics("images/28-chunk-label.png")
+```
+
+
+This has three advantages:
+
+1.  Navigate to specific chunks using the drop-down code navigator in the bottom-left of the script editor:
+
+```{r}
+#| echo: false
+#| out-width: "30%"
+#| fig-alt: |
+#|   Snippet of RStudio IDE showing only the drop-down code navigator 
+#|   which shows three chunks. Chunk 1 is setup. Chunk 2 is cars and 
+#|   it is in a section called Quarto. Chunk 3 is pressure and it is in 
+#|   a section called Including plots.
+
+knitr::include_graphics("images/quarto-chunk-nav.png")
+```
+
+2.  Graphics produced by the chunks will have useful names that make them easier to use elsewhere.
+    
+3.  You can set up networks of cached chunks to avoid re-performing expensive computations on every run.
+
+- Important! 
+  - Your chunk labels should be short but evocative and should not contain spaces.
+  - We recommend using dashes (`-`) to separate words (instead of underscores, `_`) and no other special characters in chunk labels.
+  - Use whatever name, except: `setup`, which is used for a specific reason. 
+  - Additionally, chunk labels cannot be duplicated.
+  - Each chunk label must be unique.
+
+
+## Chunk options {-}
+
+- Chunk output can be customized with **options**.
+- You can see the full list at https://yihui.org/knitr/options.
+
+- Each of these chunk options get added to the header of the chunk, following `#|`.
+
+```{r}
+#| echo: false
+#| comment: ""
+#| out-width: "100%"
+
+knitr::include_graphics("images/28-chunk-options.png")
+```
+
+- The main options are: 
+  -   `eval: false` prevents code from being evaluated. And obviously if the code is not run, no results will be generated.
+  
+  -   `include: false` runs the code, but doesn't show the code or results in the final document.
+
+  -   `echo: false` prevents code, but not the results from appearing in the finished file.
+  
+  -   `message: false` or `warning: false` prevents messages or warnings from appearing in the finished file.
+
+  -   `results: hide` hides printed output; `fig-show: hide` hides plots.
+
+  -   `error: true` causes the render to continue even if code returns an error.
+    This is rarely something you'll want to include in the final version of your report, but can be very useful if you need to debug exactly what is going on inside your `.qmd`.
+    It's also useful if you're teaching R and want to deliberately include an error.
+    The default, `error: false` causes rendering to fail if there is a single error in the document.
+
+## Global options {-}
+
+- You can set global options that control the entire document in the YAML under `execute`. 
+
+
+```{r}
+#| echo: false
+#| comment: ""
+#| out-width: "100%"
+
+knitr::include_graphics("images/28-execute-yaml.png")
+```
+
+- You can also set some global options under the `knitr` field. For example: 
+
+```{r}
+#| echo: false
+#| comment: ""
+#| out-width: "100%"
+
+knitr::include_graphics("images/28-knitr-options.png")
+```
+
+
+## Inline code {-}
+
+- There is one other way to embed R code into a Quarto document: directly into the text, with r inside back ticks. 
+  - For example, you can inline code include in between text and that will show a result.
+
+> The data frame iris has `r nrow(iris)` rows. 
+
+## Figures {-}
+
+- The figures in a Quarto document can be embedded (e.g., a PNG or JPEG file) or generated as a result of a code chunk.
+
+- Five main options that control figure sizing: fig-width, fig-height, fig-asp, out-width and out-height. Image sizing is challenging because there are two sizes (the size of the figure created by R and the size at which it is inserted in the output document), and multiple ways of specifying the size (i.e. height, width, and aspect ratio: pick two of three).
+
+
+  - It's best if plots have consistent width. To enforce this, set fig-width: 6 (6”) and fig-asp: 0.618 (the golden ratio) in the defaults. Then in individual chunks, only adjust fig-asp.
+
+  - Control the output size with out-width and set it to a percentage of the body width of the output document. We suggest to out-width: "70%" and fig-align: center.
+
+  - To put multiple plots in a single row, set the layout-ncol to 2 for two plots, 3 for three plots, etc. This effectively sets out-width to “50%” for each of your plots if layout-ncol is 2,
+
+- Great [blog post](https://www.tidyverse.org/blog/2020/08/taking-control-of-plot-scaling/) by Thomas Lin Pedersen about controling plot scaling. 
+
+## Tables {-}
+
+- You can include two types of tables in a Quarto document: 
+  - markdown tables that you create directly in your Quarto document, or 
+  - tables generated as a result of a code chunk. 
+
+- Read the documentation for ?knitr::kable to see the other ways in which you can customize the table. For even deeper customization, consider the gt, huxtable, reactable, kableExtra, xtable, stargazer, pander, tables, and ascii packages. Each provides a set of tools for returning formatted tables from R code.
+
+## Caching {-}
+
+- Normally, each render of a document starts from a completely clean slate. However, it can be painful if you have some computations that take a long time. The solution is `cache: true` in the YAML under `execute`. 
+
+- You can also enable caching at the chunk level for caching the results of computation in a specific chunk using `#| cache: true`  
+
+- The caching system must be used with care, because by default it is based on the code only, not its dependencies.  You can avoid that problem with the `dependson` chunk option. Here you include the object that it calls out to run the chunk. dependson should contain a character vector of every chunk that the cached chunk depends on.
+
+- As your caching strategies get progressively more complicated, it’s a good idea to regularly clear out all your caches with `knitr::clean_cache()`.
+
+## YAML header {-}
+
+- You can control many other “whole document” settings by tweaking the parameters of the YAML header. You might wonder what YAML stands for: it’s “YAML Ain’t Markup Language"
+
+### Self contained {-}
+
+- HTML documents usually have external dependencies (e.g., images, CSS style sheets, etc.) so if you set in the YAML under `format:`, `html:` and then `embed-resources: true` the resulting document will be self-contained. 
+
+### Parameters {-}
+
+## Bibliographies and citations {-}
+
+- To add a citation using the visual editor, go to Insert > Citation. Under the hood, the visual mode uses the standard Pandoc markdown representation for citations (e.g., [@citation]). If you add a citation using the visual editor, it will automatically create a bibliography.bib file
+
+- Your document bibliography (a .bib file in the directory of your document)
+
+- To create a citation within your .qmd file in the source editor, use a key composed of ‘@’ + the citation identifier from the bibliography file. Then place the citation in square brackets. Here are some examples:
+
+
+
+```{r}
+#| echo: false
+#| comment: ""
+#| out-width: "100%"
+
+knitr::include_graphics("images/28-bib.png")
+```
+
+
+
+## Meeting Videos {-}
 
 ### Cohort 5
 
