@@ -45,7 +45,9 @@ HTML = **H**yper**T**ext **M**arkup **L**anguage
 
 [IMDB data from the Internet Archive](https://web.archive.org/web/20220201012049/https://www.imdb.com/chart/top/)
 
-```{r web_scraping-tables, eval=TRUE}
+(currently times out, disabled for now; next cohort should revise!)
+
+```{r web_scraping-tables, eval=FALSE}
 url <- "https://web.archive.org/web/20220201012049/https://www.imdb.com/chart/top/"
 html <- read_html(url)
 html |> 
@@ -62,7 +64,9 @@ html |>
 
 ## Example: Specific table {-}
 
-```{r web_scraping-html_element, eval=TRUE}
+(See "Example: Table" slide above; fix that then this)
+
+```{r web_scraping-html_element, eval=FALSE}
 html |> 
   html_element("table") |> 
   html_table()
