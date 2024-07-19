@@ -2,113 +2,98 @@
 
 **Learning objectives:**
 
-- Give a brief overview of some options for communicating your results with Quarto, from static and interactive documents to presentations to websites and books.
+-   Render Quarto documents to different formats.
+-   Set output options for Quarto documents in different formats.
+-   Render documents in various formats from Quarto documents.
+-   Render presentations in various formats from Quarto documents.
+-   Create interactive web pages with Quarto.
+-   Group Quarto documents together into websites and books.
+-   Find information about other Quarto formats.
 
+## Setting output type {-}
 
-## Setting output type
+2 ways to set qmd output format:
 
-There are two ways to set the output of a document:
+1. YAML header:
 
-
-1. Modify the YAML header:
-```{r eval=FALSE}
+```{yaml}
 title: "Diamond sizes"
 format: html
 ```
 
-2. Call quarto::quarto_render() by hand:
+2. `quarto::quarto_render()`:
 
 ```{r eval=FALSE}
-
 quarto::quarto_render("diamond-sizes.qmd", output_format = c("docx", "pdf"))
 ```
 
-Note: You can  produce multiple types of output since the `output_format` argument can take a list of values
+Note: `output_format` can have multiple values
 
-## Output options
+## Output options {-}
 
-- You can find the complete list of Quarto output formats at <https://quarto.org/docs/output-formats/all-formats.html>
-- Many formats share some output options, but others have options that are format specific.
-  - Ex. including a table of content vs. code folding
-- To render to all formats specified in the YAML of a document, you can use `output_format = "all"`.
+-   [Quarto output formats](https://quarto.org/docs/output-formats/all-formats.html)
+-   Some options shared (`toc: true`)
+-   Some format-specific (`code-fold: true` for `format: html`)
+-   `default` to use defaults for format
 
-```{r eval=FALSE}
-quarto::quarto_render("diamond-sizes.qmd", output_format = "all")
-```
-
-## Documents
-
-- There are several basic variations off HTML for generating different types of documents. To name a few, examples are:
-  - `pdf` makes a PDF with LaTeX 
-
-  - `docx` for Microsoft Word (.docx) documents.
-
-  - `gfm` for a GitHub Flavored Markdown (.md) document.
-
-  - `ipynb` for Jupyter Notebooks (.ipynb).
-
-
-```{r eval=FALSE}
+```{yaml}
 format:
   html:
-    toc: true #include table of contents
-    toc_float: true #make table of contents floating 
+    toc: true
+    toc_float: true
   pdf: default
   docx: default
 ```
 
-Note: use special syntax (i.e. `pdf: default`) if you don’t want to override any default options.
+-   `output_format = "all"` for all specified formats
 
-## Presentations
+## Documents {-}
 
-- When using Quarto to produce presentations, you get less visual control than with a tool like PowerPoint, but the upside is you can automatically insert the results of your R code into your presentation.
-- Presentations work by dividing your content into slides, with a new slide beginning at each second (`##`) level header.
-  - First (`#`) level headers indicate the beginning of a new section with a section title slide.
-- Quarto supports a variety of presentation formats, including:
+Document formats:
 
-  - `revealjs` - HTML presentation with revealjs
-  
-  - `pptx` - PowerPoint presentation
-  
-  - `beamer` - PDF presentation with LaTeX Beamer.
+-   `pdf` = PDF with LaTeX 
+-   `docx` = Microsoft Word
+-   `gfm` = GitHub Flavored Markdown
+-   `ipynb` = Jupyter Notebooks
 
-- You can read more about creating presentations with Quarto at <https://quarto.org/docs/presentations>.
+## Presentations {-}
 
-## Interactivity
+-   `#` = new section, `##` = new slide
 
-- HTML documents created with Quarto can contain interactive components as well. 
-- Two example options for including interactivity in your Quarto documents are htmlwidgets and Shiny.
-  - **htmlwidgets** are R functions that produce interactive HTML visualizations
-  - `Shiny` is a package that allows you to create interactivity using R code
+Presentation formats:
 
-## htmlwidgets
+-   `revealjs` = HTML presentation with revealjs
+-   `pptx` = PowerPoint presentation
+-   `beamer` = PDF presentation with LaTeX Beamer
 
-- htmlwidgets provide client-side interactivity, meaning all the interactivity happens in the browser, independently of R. 
-- You don’t need to know anything about HTML or JavaScript to use them because all the details are wrapped inside the package.
-- There are many packages that provide htmlwidgets, including:
-  - [`leaflet`](https://rstudio.github.io/leaflet/) for interactive map
-  - [`dygraphs`](https://rstudio.github.io/dygraphs) for interactive time series visualizations.
-  
-  - [`DT`](https://rstudio.github.io/DT/) for interactive tables.
-  
-  - [`threejs`](https://bwlewis.github.io/rthreejs) for interactive 3d plots.
-  
-  - [`DiagrammeR`](https://rich-iannone.github.io/DiagrammeR) for diagrams (like flow charts and simple node-link diagrams).
+More at [quarto.org/docs/presentations](https://quarto.org/docs/presentations)
 
-- To learn more about htmlwidgets and see a complete list of packages that provide them visit <https://www.htmlwidgets.org>.
+## Interactivity {-}
 
-## Shiny
+`format: html` support interactivity
 
-- Shiny interactions occur on the server-side, meaning you can write interactive apps without knowing JavaScript, but you need a server to run them on. 
+-   {htmlwidgets} = pure client-side interactivity
+-   {shiny} = complex interactivity with server-side processing
+-   {shinylive} (not in book) = complex interactivity without server
 
-- To call Shiny code from a Quarto document, add `server: shiny` to the YAML header:
-```{r eval=FALSE}
+## htmlwidgets {-}
+
+-   Handles HTML & JavaScript for you
+-   Many packages provide {htmlwidgets}:
+    -   [{leaflet}](https://rstudio.github.io/leaflet/) = maps
+    -   [{dygraphs}](https://rstudio.github.io/dygraphs) = time series visualizations
+    -   [{DT}](https://rstudio.github.io/DT/) = tables
+    -   [{threejs}](https://bwlewis.github.io/rthreejs) = 3d plots
+    -   [{DiagrammeR}](https://rich-iannone.github.io/DiagrammeR) = flow charts, node-link diagrams, etc
+    -   More at [htmlwidgets.org](https://www.htmlwidgets.org)
+
+## Shiny {-}
+
+```{yaml}
 title: "Shiny Web App"
 format: html
 server: shiny
 ```
-
-- Then you can use the “input” functions to add interactive components to the document:
 
 ```{r eval=FALSE}
 library(shiny)
@@ -117,45 +102,49 @@ textInput("name", "What is your name?")
 numericInput("age", "How old are you?", NA, min = 0, max = 150)
 ```
 
-- And you also need a code chunk with chunk option `context: server` which contains the code that needs to run in a Shiny server.
+-   Code chunk with `#| context: server` for server-side code
 
-## Websites and books
+## ShinyLive {-}
 
-- With a bit of additional infrastructure, you can use Quarto to generate a complete website or book:
+-   Uses [WebR](https://docs.r-wasm.org/webr/latest/)
+-   No server side
+-   Can't (yet?) communicate with internet
+-   Can't hide secrets from user
 
-  - Put your `.qmd` files in a single directory. `index.qmd` will become the home page.
-  
-  - Add a YAML file named `_quarto.yml` that provides the navigation for the site. In this file, set the project type to either `book` or `website`, e.g.:
-  
-```{r eval=FALSE}
+[quarto-ext.github.io/shinylive](https://quarto-ext.github.io/shinylive/)
+
+## Websites and books {-}
+
+Quarto projects can group `.qmd`s into websites or books
+
+-   Put `.qmd` files in single directory (confirm)
+-   `index.qmd` = home page
+-   `_quarto.yml` specifies structure
+
+```{yaml}
 project:
   type: book
 ```
 
-- Read more at <https://quarto.org/docs/websites> about Quarto websites and <https://quarto.org/docs/books> about books.
+-   More at [quarto.org](https://quarto.org):
+    -   [/docs/websites](https://quarto.org/docs/websites)
+    -   [/docs/books](https://quarto.org/docs/books)
 
-- Note: [R4DS 2E](r4ds.hadley.nz) is itself a quarto book. You can find the code to render it on your own here: <https://github.com/hadley/r4ds/>. The [Quarto website](https://quarto.org/) itself was made with Quarto. You can find the code here: <https://github.com/quarto-dev/quarto-web>.
+## Other formats {-}
 
-## Other formats
+-   [Quarto Journal Templates](https://quarto.org/docs/journals/templates.html)
+-   [More at quarto.org](https://quarto.org/docs/output-formats/all-formats.html)
 
-- Quarto offers even more output formats. For example:
+## Resources {-}
 
-  - You can write journal articles using Quarto Journal Templates: <https://quarto.org/docs/journals/templates.html>.
-  
-  - You can output Quarto documents to Jupyter Notebooks with `format: ipynb`: <https://quarto.org/docs/reference/formats/ipynb.html>.
+-   [quarto.pub](https://quartopub.com/): Quarto publishing platform
+-   [github.com/mcanouil/awesome-quarto](https://github.com/mcanouil/awesome-quarto): Awesome Quarto (Quarto talks, tools, etc) 
+-   [quarto.org](https://quarto.org/): Quarto documentation
+-   [github.com/quarto-dev](https://github.com/quarto-dev)
 
-- See <https://quarto.org/docs/output-formats/all-formats.html> for a list of even more formats.
+## Meeting Videos {-}
 
-## Resources
-
-- [Quarto Pub](https://quartopub.com/): Create documents, websites, presentations, books, and blogs in Quarto, then securely publish them to the web with the Quarto CLI, the easiest way to publish and share on the web.
-- [Awesome Quarto](https://github.com/mcanouil/awesome-quarto): A curated list of Quarto talks, tools, examples & articles! 
-- Quarto documentation: <https://quarto.org/>
-- Quarto GitHub repo: <https://github.com/quarto-dev>
-
-## Meeting Videos
-
-### Cohort 5
+### Cohort 5 {-}
 
 `r knitr::include_url("https://www.youtube.com/embed/2MGp74nb2ig")`
 
@@ -187,7 +176,7 @@ project:
 ```
 </details>
 
-### Cohort 6
+### Cohort 6 {-}
 
 `r knitr::include_url("https://www.youtube.com/embed/qQrnNef9fkM")`
 
@@ -213,7 +202,7 @@ https://exts.ggplot2.tidyverse.org/gallery/
 </details>
 
 
-### Cohort 7
+### Cohort 7 {-}
 
 `r knitr::include_url("https://www.youtube.com/embed/vkjYlBK9-9c")`
 
@@ -230,7 +219,7 @@ https://exts.ggplot2.tidyverse.org/gallery/
 </details>
 
 
-### Cohort 8
+### Cohort 8 {-}
 
 `r knitr::include_url("https://www.youtube.com/embed/7kW7DEWPVZ8")`
 
