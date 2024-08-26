@@ -1,16 +1,4 @@
---- 
-title: "R for Data Science Book Club"
-date: "`r Sys.Date()`"
-site: bookdown::bookdown_site
-documentclass: book
-bibliography: book.bib
-biblio-style: apalike
-link-citations: yes
-github-repo: r4ds/bookclub-r4ds
-description: "This is the product of the Data Science Learning Community's Book Club."
----
-
-# Welcome {-}
+# Welcome {.unnumbered}
 
 This is a companion for the book [R for Data Science](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund.
 This companion is available at [dslc.io/r4ds](https://dslc.io/r4ds).

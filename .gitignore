@@ -13,3 +13,5 @@ bookclub-r4ds_files
 libs
 renv
 bookclub-r4ds.knit.md
+
+/.quarto/

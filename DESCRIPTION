@@ -32,6 +32,7 @@ Imports:
     manipulate,
     maps,
     microbenchmark,
+    modelr,
     nycflights13,
     palmerpenguins,
     patchwork,

@@ -20,7 +20,7 @@
 
 We will use both `tidyverse` and `modelr` from here.
 
-```{r 99-25-Load Packages, eval = FALSE}
+```{r 99-25-Load Packages}
 library(modelr)
 library(tidyverse)
 ```
