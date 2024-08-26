@@ -5,7 +5,7 @@ knitr::include_graphics("./images/quarto-dark-bg.jpeg")
 ```
 
 
-**Learning objectives:**
+## Learning objectives
 
 - Understand the basic components of a Quarto document. 
 

@@ -1,6 +1,6 @@
 # Workflow: getting help
 
-**Learning objectives:**
+## Learning objectives
 
 -   Describe a few tips beyond the book on how to get help and to help you keep learning.
 

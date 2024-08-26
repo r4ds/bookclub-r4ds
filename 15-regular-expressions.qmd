@@ -1,6 +1,6 @@
 # Regular expressions
 
-**Learning objectives:**
+## Learning objectives
 
 - Manipulate **character vectors** using simple `{stringr}` functions.
 - Use **regular expressions (regex)** to match **patterns** in strings.

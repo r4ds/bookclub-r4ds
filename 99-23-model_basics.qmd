@@ -8,7 +8,7 @@ All code blocks for these chapters have been disabled to avoid mystery bugs.
 knitr::opts_chunk$set(eval = FALSE)
 ```
 
-**Learning objectives:**
+## Learning objectives
 
 - Evaluate a set of **simple linear models.**
 - Evaluate **model fits** through **visualization.**

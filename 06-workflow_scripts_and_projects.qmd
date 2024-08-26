@@ -1,6 +1,6 @@
 # Workflow: scripts and projects
 
-**Learning objectives:**
+## Learning objectives
 
 -   Create scripts and Understand **script diagnostics** in RStudio.
 -   Create an **Rstudio project.**  

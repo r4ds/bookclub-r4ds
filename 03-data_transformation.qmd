@@ -1,6 +1,6 @@
 # Data transformation
 
-**Learning objectives:**
+## Learning objectives
 
 - **Pick out rows** of a data frame with the **`dplyr::filter()`** function.
 - **Sort rows** of a data frame with **`dplyr::arrange()`**.

@@ -1,6 +1,6 @@
 # Hierarchical data
 
-**Learning objectives:**
+## Learning objectives
 
 1. Introduce a new data structure called lists
 2. Learn how to unnest nested lists

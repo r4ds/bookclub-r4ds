@@ -1,6 +1,6 @@
 # Factors
 
-**Learning objectives:**
+## Learning objectives
 
 -   **Create `factor()`** variables.
 -   **Explore** the **General Social Survey** dataset via `forcats::gss_cat`.

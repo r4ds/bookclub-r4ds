@@ -1,6 +1,6 @@
 # Workflow: basics
 
-**Learning objectives:**
+## Learning objectives
 
 -   Review some basic R coding.
 -   Follow good **style conventions** when writing code.

@@ -1,6 +1,6 @@
 # Databases
 
-**Learning objectives:**
+## Learning objectives
 
 -   Use {DBI} to connect to a database and retrieve data.
 -   Use {dbplyr} to translate dplyr code to SQL.

@@ -1,6 +1,6 @@
 # Web scraping
 
-**Learning objectives**
+## Learning objectives
 
 -   Decide whether to scrape data from a web page.
 -   Recognize enough HTML to find your way around a web page.

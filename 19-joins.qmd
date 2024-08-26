@@ -6,7 +6,7 @@ library(nycflights13)
 library(tidyverse)
 ```
 
-**Learning objectives:**
+## Learning objectives
 
 - Identify keys to connect a pair of data frames
 - Use mutating and filtering joins to combine data

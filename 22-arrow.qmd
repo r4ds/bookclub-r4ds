@@ -1,6 +1,6 @@
 # Arrow
 
-**Learning objectives:**
+## Learning objectives
 
 -   Use {arrow} to load large data files into R efficiently
 -   Partition large data files into parquet files for quicker access, less memory usage, and quicker wrangling 

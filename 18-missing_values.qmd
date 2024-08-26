@@ -1,6 +1,6 @@
 # Missing values
 
-**Learning objectives:**
+## Learning objectives
 
 *  Filling and indicating explicit missing values
 *  Making implicit missing values more explicit

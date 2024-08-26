@@ -1,6 +1,6 @@
 # Strings
 
-**Learning objectives:**
+## Learning objectives
 
 After this chapter, we'll be able to:
 

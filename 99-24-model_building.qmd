@@ -1,6 +1,6 @@
 # Model building {-}
 
-**Learning objectives:**
+## Learning objectives
 
 -   Build a **linear model** to explain trends in data.
 -   Examine the **residuals** of a model to identify remaining trends in data.

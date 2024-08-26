@@ -1,6 +1,6 @@
 # Iteration
 
-**Learning objectives:**
+## Learning objectives
 
 -   Modify multiple columns using the same patterns.
 -   Filter based on the contents of multiple columns.

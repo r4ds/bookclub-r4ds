@@ -2,7 +2,7 @@
 
 ***Note: This was chapter 28 when these slides were last edited. They likely need to be updated to match the current chapter order.***
 
-**Learning objectives:**
+## Learning objectives
 
 - **Describe the contents** of a plot with **labels.**
 - Call out **specific features** of your data with **annotations.**

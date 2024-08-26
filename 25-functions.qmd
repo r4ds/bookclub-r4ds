@@ -1,6 +1,6 @@
 # Functions
 
-**Learning objectives:**
+## Learning objectives
 
 We are going to learn about three useful type of function:
 

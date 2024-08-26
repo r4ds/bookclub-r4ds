@@ -1,6 +1,6 @@
 # Quarto formats
 
-**Learning objectives:**
+## Learning objectives
 
 -   Render Quarto documents to different formats.
 -   Set output options for Quarto documents in different formats.

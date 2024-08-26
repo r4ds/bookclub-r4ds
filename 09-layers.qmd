@@ -1,6 +1,6 @@
 # Layers
 
-**Learning objectives**
+## Learning objectives
 
 - We are going to learn about the layered grammar of graphics, including:
 

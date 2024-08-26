@@ -1,6 +1,6 @@
 # Data visualisation
 
-**Learning objectives:**
+## Learning objectives
 
 :::: {style="display: flex;"}
 

@@ -2,7 +2,7 @@
 
 Note: Since these slides were made, this chapter has been split into multiple chapters. After you edit these slides, remove this note.
 
-**Learning objectives:**
+## Learning objectives
 
 - Compare and contrast **atomic vectors** and **lists**.
   - Recognize the **six types of atomic vectors**.

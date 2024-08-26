@@ -1,6 +1,6 @@
 # Introduction {-}
 
-**Learning objectives:**
+## Learning objectives
 
 After today's session, you will be able to...
 

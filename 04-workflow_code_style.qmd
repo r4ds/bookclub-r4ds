@@ -2,7 +2,7 @@
 
 > "Good coding style is like correct punctuation: you can \ \  manage without it, butitsuremakesthingseasiertoread." — Tidyverse Style Guide
 
-**Learning objectives:**
+## Learning objectives
   
 -   Use the styler package to apply style rules.
 -   Select good variable names.

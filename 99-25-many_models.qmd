@@ -1,6 +1,6 @@
 # Many models {-}
 
-**Learning objectives:**
+## Learning objectives
 
 -   Create nested data frames to organize data by groups.
 -   Create list-columns to generate new data in an organized structure.

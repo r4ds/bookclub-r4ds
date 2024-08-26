@@ -1,6 +1,6 @@
 # A field guide to base R
 
-**Learning objectives:**
+## Learning objectives
 
 - Get acquainted with some powerful basic tools in R
 - Learn subsetting and element extraction in base R

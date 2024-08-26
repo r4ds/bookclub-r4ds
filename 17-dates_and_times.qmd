@@ -1,6 +1,6 @@
 # Dates and times
 
-**Learning objectives:**
+## Learning objectives
 
 -   **Create date** and **datetime** objects.
 -   Work with **datetime components.**
