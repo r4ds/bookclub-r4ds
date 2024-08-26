@@ -10,37 +10,50 @@ book:
     This is the product of the Data Science Learning Community's Book Club.
   page-navigation: true
   chapters:
-   - index.qmd
-   - 00-introduction.qmd
-   - 01-data_visualisation.qmd
-   - 02-workflow_basics.qmd
-   - 03-data_transformation.qmd
-   - 04-workflow_code_style.qmd
-   - 05-data_tidying.qmd
-   - 06-workflow_scripts_and_projects.qmd
-   - 07-data_import.qmd
-   - 08-workflow_getting_help.qmd
-   - 09-layers.qmd
-   - 10-exploratory_data_analysis.qmd
-   - 11-communication.qmd
-   - 12-logical_vectors.qmd
-   - 13-numbers.qmd
-   - 14-strings.qmd
-   - 15-regular-expressions.qmd
-   - 16-factors.qmd
-   - 17-dates_and_times.qmd
-   - 18-missing_values.qmd
-   - 19-joins.qmd
-   - 20-spreadsheets.qmd
-   - 21-databases.qmd
-   - 22-arrow.qmd
-   - 23-hierarchical_data.qmd
-   - 24-web_scraping.qmd
-   - 25-functions.qmd
-   - 26-iteration.qmd
-   - 27-base_r.qmd
-   - 28-quarto.qmd
-   - 29-quarto_formats.qmd
+     - index.qmd
+     - 00-introduction.qmd
+     - part: Whole game
+       chapters:
+         - 01-data_visualisation.qmd
+         - 02-workflow_basics.qmd
+         - 03-data_transformation.qmd
+         - 04-workflow_code_style.qmd
+         - 05-data_tidying.qmd
+         - 06-workflow_scripts_and_projects.qmd
+         - 07-data_import.qmd
+         - 08-workflow_getting_help.qmd
+     - part: Visualize
+       chapters:
+         - 09-layers.qmd
+         - 10-exploratory_data_analysis.qmd
+         - 11-communication.qmd
+     - part: Transform
+       chapters:
+         - 12-logical_vectors.qmd
+         - 13-numbers.qmd
+         - 14-strings.qmd
+         - 15-regular-expressions.qmd
+         - 16-factors.qmd
+         - 17-dates_and_times.qmd
+         - 18-missing_values.qmd
+         - 19-joins.qmd
+     - part: Import
+       chapters:
+         - 20-spreadsheets.qmd
+         - 21-databases.qmd
+         - 22-arrow.qmd
+         - 23-hierarchical_data.qmd
+         - 24-web_scraping.qmd
+     - part: Program
+       chapters:
+         - 25-functions.qmd
+         - 26-iteration.qmd
+         - 27-base_r.qmd
+     - part: Communicate
+       chapters:
+         - 28-quarto.qmd
+         - 29-quarto_formats.qmd
+  appendices:
    - 99-23-model_basics.qmd
    - 99-24-model_building.qmd
    - 99-25-many_models.qmd

@@ -1,5 +1,3 @@
-# (PART\*) Visualize {-}
-
 # Layers
 
 **Learning objectives**

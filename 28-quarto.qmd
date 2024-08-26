@@ -1,5 +1,3 @@
-# (PART\*) Communicate {-}
-
 # Quarto 
 
 ```{r fig, echo=FALSE, out.width="40%", fig.align="center"}

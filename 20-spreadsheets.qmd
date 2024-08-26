@@ -1,5 +1,3 @@
-# (PART\*) Import {-}
-
 # Spreadsheets
 
 **Learning objectives:**

@@ -1,11 +1,9 @@
-# (PART\*) Transform {-}
+# Logical Vectors
 
 ```{r, include=F}
 library(dplyr)
 library(nycflights13)
 ```
-
-# Logical Vectors
 
 **Learning objectives:**
 
