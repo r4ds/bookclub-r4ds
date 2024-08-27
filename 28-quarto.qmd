@@ -14,7 +14,7 @@ knitr::include_graphics("./images/quarto-dark-bg.jpeg")
 
 - Understand the basic components of a Quarto document. 
 
-## Introduction {-}
+## Introduction
 
 - Quarto is a command line interface tool, not an R package. 
 
@@ -34,7 +34,7 @@ knitr::include_graphics("./images/quarto-dark-bg.jpeg")
   3. Environment in which to do data science. 
   
 
-## Quarto basics {-}
+## Quarto basics
 
 - Quarto files have `.qmd` extension. 
 
@@ -54,7 +54,7 @@ knitr::include_graphics("./images/quarto-dark-bg.jpeg")
 knitr::include_graphics("./images/28-fig28.png")
 ```
 
-## Run code in quarto {-}
+## Run code in quarto
 
 - Run each code chunk by clicking the Run icon (each chunk will have this green arrow) or by pressing Cmd/Ctrl + Shift + Enter. 
 
@@ -62,7 +62,7 @@ knitr::include_graphics("./images/28-fig28.png")
 
 - To run the complete report, click "Render" or press Cmd/Ctrl + Shift + K. Or go to the console and type: `quarto::quarto_render("diamond-sizes.qmd")`. Your report will be displayed in the viewer pane as an HTML file (unless the YAML includes .pdf or other extension).
 
-## Visual editor {-}
+## Visual editor
 
 - Visual editor -> use the buttons on the menu bar to insert images, tables, cross-references, etc. or you can use the catch-all ⌘ + / or Ctrl + / shortcut to insert just about anything.
 - The visual editor displays your content with formatting, but under the hood, it saves your content in plain Markdown and you can switch back and forth between the visual and source editors.
@@ -76,7 +76,7 @@ knitr::include_graphics("./images/28-fig28.png")
 knitr::include_graphics("./images/28-quarto-visual-editor.png")
 ```
 
-## Source editor {-}
+## Source editor
 
 - The Source editor will feel familiar to those with experience writing R scripts or R Markdown documents. 
 - Can also be useful for debugging any Quarto syntax errors since it’s often easier to catch these in plain text.
@@ -90,14 +90,14 @@ knitr::include_graphics("./images/28-quarto-visual-editor.png")
 cat(readr::read_file("quarto/markdown.qmd"))
 ```
 
-## Code chunks {-}
+## Code chunks
 
 - To run code inside a Quarto document, you need to insert a chunk. 
   1. The keyboard shortcut Cmd + Option + I / Ctrl + Alt + I.
   2. The “Insert” button icon in the editor toolbar.
   3. By manually typing the chunk delimiters ```{r} and ```.
 
-## Chunk label {-}
+## Chunk label
 
 Chunks can be given an optional label, e.g.
 
@@ -137,7 +137,7 @@ knitr::include_graphics("images/quarto-chunk-nav.png")
   - Each chunk label must be unique.
 
 
-## Chunk options {-}
+## Chunk options
 
 - Chunk output can be customized with **options**.
 - You can see the full list at https://yihui.org/knitr/options.
@@ -168,7 +168,7 @@ knitr::include_graphics("images/28-chunk-options.png")
     It's also useful if you're teaching R and want to deliberately include an error.
     The default, `error: false` causes rendering to fail if there is a single error in the document.
 
-## Global options {-}
+## Global options
 
 - You can set global options that control the entire document in the YAML under `execute`. 
 
@@ -192,14 +192,14 @@ knitr::include_graphics("images/28-knitr-options.png")
 ```
 
 
-## Inline code {-}
+## Inline code
 
 - There is one other way to embed R code into a Quarto document: directly into the text, with r inside back ticks. 
   - For example, you can inline code include in between text and that will show a result.
 
 > The data frame iris has `r nrow(iris)` rows. 
 
-## Figures {-}
+## Figures
 
 - The figures in a Quarto document can be embedded (e.g., a PNG or JPEG file) or generated as a result of a code chunk.
 
@@ -214,7 +214,7 @@ knitr::include_graphics("images/28-knitr-options.png")
 
 - Great [blog post](https://www.tidyverse.org/blog/2020/08/taking-control-of-plot-scaling/) by Thomas Lin Pedersen about controling plot scaling. 
 
-## Tables {-}
+## Tables
 
 - You can include two types of tables in a Quarto document: 
   - markdown tables that you create directly in your Quarto document, or 
@@ -222,7 +222,7 @@ knitr::include_graphics("images/28-knitr-options.png")
 
 - Read the documentation for ?knitr::kable to see the other ways in which you can customize the table. For even deeper customization, consider the gt, huxtable, reactable, kableExtra, xtable, stargazer, pander, tables, and ascii packages. Each provides a set of tools for returning formatted tables from R code.
 
-## Caching {-}
+## Caching
 
 - Normally, each render of a document starts from a completely clean slate. However, it can be painful if you have some computations that take a long time. The solution is `cache: true` in the YAML under `execute`. 
 
@@ -232,17 +232,17 @@ knitr::include_graphics("images/28-knitr-options.png")
 
 - As your caching strategies get progressively more complicated, it’s a good idea to regularly clear out all your caches with `knitr::clean_cache()`.
 
-## YAML header {-}
+## YAML header
 
 - You can control many other “whole document” settings by tweaking the parameters of the YAML header. You might wonder what YAML stands for: it’s “YAML Ain’t Markup Language"
 
-### Self contained {-}
+### Self contained
 
 - HTML documents usually have external dependencies (e.g., images, CSS style sheets, etc.) so if you set in the YAML under `format:`, `html:` and then `embed-resources: true` the resulting document will be self-contained. 
 
-### Parameters {-}
+### Parameters
 
-## Bibliographies and citations {-}
+## Bibliographies and citations
 
 - To add a citation using the visual editor, go to Insert > Citation. Under the hood, the visual mode uses the standard Pandoc markdown representation for citations (e.g., [@citation]). If you add a citation using the visual editor, it will automatically create a bibliography.bib file
 
@@ -262,7 +262,7 @@ knitr::include_graphics("images/28-bib.png")
 
 
 
-## Meeting Videos {-}
+## Meeting Videos
 
 ### Cohort 5
 

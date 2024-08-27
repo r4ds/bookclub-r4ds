@@ -7,7 +7,7 @@
 -   Understand working directories in Rstudio and the `getwd()` function.
 -   Differentiate between relative paths and absolute paths.
 
-## Scripts {-}
+## Scripts
 
 -   Use the script editor instead of the console -> complex pipelines and graphics. 
 -   File -> New file -> R script, or `Cmd/Ctrl + Shift + N`
@@ -19,7 +19,7 @@
 ![Figure 6.1: Opening the script editor adds a new pane at the top-left of the IDE](https://r4ds.hadley.nz/diagrams/rstudio/script.png)
 :::
 
-## Scripts: panes layout {-}
+## Scripts: panes layout
 
 -   You can move panes around too. 
   -   Move focus to script `CTRL/Cmd + 1`
@@ -31,14 +31,14 @@
 :::
 
 
-## Running Code {-}
+## Running Code
 
 -   The keyboard shortcuts
     -   `Ctrl/Cmd + Enter` to run the current R expression in the console. The cursor will move to the next code block.
     -   `Ctrl/Cmd + Shift + S` to run the entire script.
 -   **Tip:** Always start your script with the packages you need, but do not include `install.packages()` in a script you plan on sharing. 
 
-## RStudio Dianostics {-}
+## RStudio Dianostics
 
 - Squiggly line highlights errors.  
 - Hover over cross to see problem.
@@ -53,7 +53,7 @@
 ![](https://r4ds.hadley.nz/screenshots/rstudio-diagnostic-warn.png)
 :::
 
-## Saving and Naming Files {-}
+## Saving and Naming Files
 
 1.  File names should be **machine readable**
     -   avoid spaces, symbols, and special characters. Don't rely on case sensitivity to distinguish files.
@@ -80,9 +80,9 @@ report-draft-notes.txt
 
 [More File Naming Conventions](https://huridocs.org/resource-library/organising-a-collection-of-human-rights-information/file-naming-conventions/#:~:text=To%20ensure%20that%20files%20are,%2C%20then%20month%2C%20then%20date.)
 
-## Projects {-}
+## Projects
 
-### What Is the Source of Truth? {-}
+### What Is the Source of Truth?
 
 -   Instruct RStudio not to preserve your workspace between sessions.
     -   `usethis::use_blank_slate()`
@@ -96,7 +96,7 @@ report-draft-notes.txt
 -   `Cmd/Ctrl + Shift + 0/F10` to start R
 -   `Cmd/Ctrl + Shift + S` to rerun the R script
 
-## Where Does Your Analysis Live? {-}
+## Where Does Your Analysis Live?
 
 -  You can always find the working directory by looking at top of console: 
 
@@ -105,7 +105,7 @@ report-draft-notes.txt
 -   `getwd()` to identify the current working directory
 -   `setwd()` to change the working directory (an absolute path) : **not recommended**
 
-## RStudio Projects {-}
+## RStudio Projects
 
 - Self contained projects are the way to go! [Read more about project-oriented workflow by Jenny Brian here](https://www.tidyverse.org/blog/2017/12/workflow-vs-script/)
 - First create a new project
@@ -119,7 +119,7 @@ report-draft-notes.txt
 
 ![Figure 6.5: To create new project: (top) first click New Directory, then (middle) click New Project, then (bottom) fill in the directory (project) name, choose a good subdirectory for its home and click Create Project.](https://r4ds.hadley.nz/diagrams/new-project.png)
 
-## Relative and Absolute Paths {-}
+## Relative and Absolute Paths
 
 -   A relative path is relative to the working directory, i.e. the project's home.
 -   Absolute paths point to the same place regardless of your working directory.
@@ -130,7 +130,7 @@ report-draft-notes.txt
 - R can work with either type, but is recommended to always use Mac/Lynux style `/`.  
 -   You should **never use absolute paths in your scripts, because they hinder sharing.**
 
-## Package here {-}
+## Package here
 
 - [Package here website](https://here.r-lib.org/index.html)
 - The package here helps with easy file referencing and building file paths. 
@@ -148,13 +148,13 @@ readr::read_csv(
 ```
     
 
-## Exercises {-}
+## Exercises
 
 1.  Go to the RStudio Tips Twitter account, <https://twitter.com/rstudiotips> and find one tip that looks interesting. Practice using it!
 
 2.  What other common mistakes will RStudio diagnostics report? Read <https://support.posit.co/hc/en-us/articles/205753617-Code-Diagnostics> to find out.
 
-## Meeting Videos {-}
+## Meeting Videos
 
 ### Cohort 5
 

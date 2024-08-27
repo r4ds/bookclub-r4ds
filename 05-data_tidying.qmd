@@ -14,7 +14,7 @@ library(tidyverse)
 
 Apart from the book content, these slides also borrow from [`vignette("pivot", "tidyr")`](https://tidyr.tidyverse.org/articles/pivot.html) and contain some new diagrams.
 
-## Tidy data: what? {-}
+## Tidy data: what?
 
 ![](images/6-tidy-1.png)
 
@@ -24,13 +24,13 @@ Apart from the book content, these slides also borrow from [`vignette("pivot", "
 
 **`<meaningful things>`** are in **`<places>`**
 
-## Tidy data: why? {-}
+## Tidy data: why?
 
 - packages in the **tidyverse** are designed to work with **tidy data**
   - hence tidy data allow to focus on the data questions
 - placing variables in **columns** allows to take advantage of R’s **vectorized** nature
 
-## An example (1) {-}
+## An example (1)
 
 ```{r}
 #| include: false
@@ -46,34 +46,34 @@ table0 <- table1 |>
 table0
 ```
 
-## An example (2) {-}
+## An example (2)
 
 ```{r}
 table1
 ```
 
-## An example (3) {-}
+## An example (3)
 
 ```{r}
 table2
 ```
 
-## Which example dataframe was tidy? {-}
+## Which example dataframe was tidy?
 
-## Which example dataframe was tidy? {-}
+## Which example dataframe was tidy?
 
 ```{r}
 table1
 ```
 
-## The challenge (1) {-}
+## The challenge (1)
 
 - most real data is **untidy**: to facilitate some goal other than analysis
 - so you often need to **tidy** the original data. This takes two steps:
   1. determine the underlying variables and observations
   1. pivot your data into a tidy form
 
-## The challenge (2) {-}
+## The challenge (2)
 
 It may be difficult to define what a variable is, especially if you miss context.
 
@@ -82,18 +82,18 @@ It may be difficult to define what a variable is, especially if you miss context
 If you cannot figure out, then it’s fine to say a variable is whatever makes your **analysis** easiest.
 
 
-## Two different scenarios (1) {-}
+## Two different scenarios (1)
 
 1. 'too wide' is most common: _values_ (of a variable) have ended up _in **column names**_
     - tidy by making the data **longer**: pivot these values into their own column (variable)
     
-## Too wide {-}
+## Too wide
 
 ```{r}
 table4a # only has the 'cases', not the 'population'
 ```
 
-## Two different scenarios (2) {-}
+## Two different scenarios (2)
 
 1. 'too wide' is most common: _values_ (of a variable) have ended up _in **column names**_
     - tidy by making the data **longer**: pivot these values into their own column (variable)
@@ -101,20 +101,20 @@ table4a # only has the 'cases', not the 'population'
 1. 'too long' is less common: _names_ of several variables exist as _**cells in one column**_, their values in another
     - tidy by making the data **wider**: pivot the column with variable names into several columns (variables)
     
-## Too long {-}
+## Too long
 
 ```{r}
 table2
 ```
 
-## Tidy your data (1) {-}
+## Tidy your data (1)
 
 - Make too wide data **longer** with `tidyr::pivot_longer()`.
 - Make too long data **wider** with `tidyr::pivot_wider()`.
 
 We'll focus on the relationship between both functions in different situations.
 
-## Tidy your data (2) {-}
+## Tidy your data (2)
 
 Most function arguments contain the strings `names` or `values`:
 
@@ -123,11 +123,11 @@ Most function arguments contain the strings `names` or `values`:
 
 These arguments always get the **name** of the corresponding variable in the **long** table!
 
-## 1. One `names` variable and one `values` variable {-}
+## 1. One `names` variable and one `values` variable
 
 ![](images/5_diagram_1.png)
 
-## Example {-}
+## Example
 
 ```{r}
 table4a
@@ -149,11 +149,11 @@ table_tidy |>
   )
 ```
 
-## 2. Multiple `names` variables and one `values` variable {-}
+## 2. Multiple `names` variables and one `values` variable
 
 ![](images/5_diagram_2.png)
 
-## Example {-}
+## Example
 
 ```{r}
 #| include: false
@@ -186,7 +186,7 @@ perc_tidy |>
   )
 ```
 
-## Intermezzo: missing values (1) {-}
+## Intermezzo: missing values (1)
 
 ```{r}
 billboard
@@ -201,7 +201,7 @@ billboard %>%
   )
 ```
 
-## Intermezzo: missing values (2) {-}
+## Intermezzo: missing values (2)
 
 Notice the effect of `values_drop_na` in `pivot_longer()`!
 
@@ -216,7 +216,7 @@ billboard %>%
 ```
 
 
-## Intermezzo: missing values (3) {-}
+## Intermezzo: missing values (3)
 
 ```{r}
 #| include: false
@@ -250,7 +250,7 @@ daily |>
 Obviously not.
 
 
-## Intermezzo: missing values (4) {-}
+## Intermezzo: missing values (4)
 
 Notice the effect of `names_expand` in `pivot_wider()`!
 
@@ -264,7 +264,7 @@ daily |>
 ```
 
 
-## Intermezzo: missing values (5) {-}
+## Intermezzo: missing values (5)
 
 Remember this example:
 
@@ -276,7 +276,7 @@ perc_tidy
 perc_wide
 ```
 
-## Intermezzo: missing values (6) {-}
+## Intermezzo: missing values (6)
 
 Suppose we have this, and you want to make it **wide** and add **zeros**, not `NA`s:
 
@@ -301,7 +301,7 @@ percentages |>
 
 That's not it...
 
-## Intermezzo: missing values (7) {-}
+## Intermezzo: missing values (7)
 
 Notice the effect of `names_expand` and `values_fill` in `pivot_wider()`!
 
@@ -316,7 +316,7 @@ percentages |>
 ```
 
 
-## Recap {-}
+## Recap
 
 So far we had:
 
@@ -330,11 +330,11 @@ Let's consider two more situations:
 3. The `values` variable's name is included in the wide-table's column names
 4. Multiple `values` variables' names are included in the wide-table's column names
 
-## 3. The `values` variable's name is included in the wide-table's column names {-}
+## 3. The `values` variable's name is included in the wide-table's column names
 
 ![](images/5_diagram_3.png)
 
-## Example {-}
+## Example
 
 We take the example from the first situation, but with the name of the `values` variable included in the wide table:
 
@@ -379,11 +379,11 @@ cases_long |>
 
 
 
-## 4. Multiple `values` variables' names are included in the wide-table's column names {-}
+## 4. Multiple `values` variables' names are included in the wide-table's column names
 
 ![](images/5_diagram_4.png)
 
-## Example {-}
+## Example
 
 ```{r}
 household
@@ -404,7 +404,7 @@ household_tidy |>
 ```
 
 
-## There's more! {-}
+## There's more!
 
 See [book chapter](https://r4ds.hadley.nz/data-tidy) and especially the [vignette](https://tidyr.tidyverse.org/articles/pivot.html)!
 
@@ -417,9 +417,9 @@ See [book chapter](https://r4ds.hadley.nz/data-tidy) and especially the [vignett
 - and more
 
 
-## Meeting Videos {-}
+## Meeting Videos
 
-### Cohort 5 {-}
+### Cohort 5
 
 `r knitr::include_url("https://www.youtube.com/embed/5lsv2ftMouA")`
 
@@ -484,7 +484,7 @@ See [book chapter](https://r4ds.hadley.nz/data-tidy) and especially the [vignett
 ```
 </details>
 
-### Cohort 6 {-}
+### Cohort 6
 
 `r knitr::include_url("https://www.youtube.com/embed/e5rO37mHrKQ")`
 
@@ -510,7 +510,7 @@ See [book chapter](https://r4ds.hadley.nz/data-tidy) and especially the [vignett
 </details>
 
 
-### Cohort 7 {-}
+### Cohort 7
 
 `r knitr::include_url("https://www.youtube.com/embed/2zHJ9v8Or9Y")`
 
@@ -523,14 +523,14 @@ See [book chapter](https://r4ds.hadley.nz/data-tidy) and especially the [vignett
 </details>
 
 
-### Cohort 8 {-}
+### Cohort 8
 
 `r knitr::include_url("https://www.youtube.com/embed/xKthmzkTerU")`
 
-### Cohort 9 {-}
+### Cohort 9
 
 `r knitr::include_url("https://www.youtube.com/embed/tr7b8Fpiezk")`
 
-### Cohort 10 {-}
+### Cohort 10
 
 

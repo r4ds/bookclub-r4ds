@@ -15,7 +15,7 @@ library(dbplyr)
 library(tidyverse) 
 ```
 
-## Database basics {-}
+## Database basics
 
 ![](https://media.tenor.com/OUpv1OW0bJMAAAAM/database-db.gif)
 
@@ -27,7 +27,7 @@ library(tidyverse)
     -   db tables have indexes, dfs don't
     -   dbs row-oriented for fast data collection, dfs column-oriented for fast analysis
 
-##  Connecting to a database {-}
+##  Connecting to a database
 
 -   {DBI} = generic SQL interface
 -   Specific package for your DBMS ({RPostgres}, {RMariaDB}, {duckdb}, etc)
@@ -46,14 +46,14 @@ con <- DBI::dbConnect(duckdb::duckdb())
 con <- DBI::dbConnect(duckdb::duckdb(), dbdir = "duckdb")
 ```
 
-##  Load some data {-}
+##  Load some data
 
 ```{r}
 dbWriteTable(con, "mpg", ggplot2::mpg)
 dbWriteTable(con, "diamonds", ggplot2::diamonds)
 ```
 
-## DBI basics {-}
+## DBI basics
 ```{r}
 dbListTables(con)
 
@@ -77,7 +77,7 @@ sql <- "
 as_tibble(dbGetQuery(con, sql))
 ```
 
-## dbplyr basics {-}
+## dbplyr basics
 
 ```{r}
 diamonds_db <- tbl(con, "diamonds")
@@ -106,7 +106,7 @@ big_diamonds <- big_diamonds_db |>
 big_diamonds
 ```
 
-## SQL {-}
+## SQL
 
 ```{r}
 dbplyr::copy_nycflights13(con)
@@ -116,7 +116,7 @@ flights <- tbl(con, "flights")
 planes <- tbl(con, "planes")
 ```
 
-## SQL basics {-}
+## SQL basics
 
 -   *statements* = top level
     -   `CREATE` = new tables
@@ -141,7 +141,7 @@ flights |>
   show_query()
 ```
 
-## SELECT {-}
+## SELECT
 
 `SELECT` = tons of things!
 
@@ -166,7 +166,7 @@ planes |>
 
 Not shown: `mutate()`, `summarize()` are also `SELECT`
 
-## Subqueries {-}
+## Subqueries
 
 Sometimes {dbplyr} uses subqueries to translate {dplyr} code
 
@@ -181,7 +181,7 @@ flights |>
   show_query()
 ```
 
-## Joins {-}
+## Joins
 
 SQL joins similar to {dplyr} joins
 
@@ -191,7 +191,7 @@ flights |>
   show_query()
 ```
 
-## Other verbs {-}
+## Other verbs
 
 -   `distinct()`
 -   `slice_*()`
@@ -200,7 +200,7 @@ flights |>
 -   `tidyr::pivot_wider()`
 -   Full list on [dbplyr website](https://dbplyr.tidyverse.org/reference/)
 
-## Function translations {-}
+## Function translations
 
 How does {dbplyr} deal with `mean()` vs `median()`?
 
@@ -245,7 +245,7 @@ flights |>
 ```
 
 
-## Clean up {-}
+## Clean up
 
 ```{r}
 #| label: clean-up
@@ -253,9 +253,9 @@ flights |>
 dbDisconnect(con, shutdown = TRUE) 
 ```
 
-## Meeting Videos {-}
+## Meeting Videos
 
-### Cohort 7 {-}
+### Cohort 7
 
 `r knitr::include_url("https://www.youtube.com/embed/0AWywckm3W4")`
 
@@ -274,7 +274,7 @@ dbDisconnect(con, shutdown = TRUE)
 </details>
 
 
-### Cohort 8 {-}
+### Cohort 8
 
 `r knitr::include_url("https://www.youtube.com/embed/ylTfwbQq1v0")`
 

@@ -10,7 +10,7 @@
 -   Group Quarto documents together into websites and books.
 -   Find information about other Quarto formats.
 
-## Setting output type {-}
+## Setting output type
 
 2 ways to set qmd output format:
 
@@ -31,7 +31,7 @@ quarto::quarto_render("diamond-sizes.qmd", output_format = c("docx", "pdf"))
 
 Note: `output_format` can have multiple values
 
-## Output options {-}
+## Output options
 
 -   [Quarto output formats](https://quarto.org/docs/output-formats/all-formats.html)
 -   Some options shared (`toc: true`)
@@ -49,7 +49,7 @@ format:
 
 -   `output_format = "all"` for all specified formats
 
-## Documents {-}
+## Documents
 
 Document formats:
 
@@ -58,7 +58,7 @@ Document formats:
 -   `gfm` = GitHub Flavored Markdown
 -   `ipynb` = Jupyter Notebooks
 
-## Presentations {-}
+## Presentations
 
 -   `#` = new section, `##` = new slide
 
@@ -70,7 +70,7 @@ Presentation formats:
 
 More at [quarto.org/docs/presentations](https://quarto.org/docs/presentations)
 
-## Interactivity {-}
+## Interactivity
 
 `format: html` support interactivity
 
@@ -78,7 +78,7 @@ More at [quarto.org/docs/presentations](https://quarto.org/docs/presentations)
 -   {shiny} = complex interactivity with server-side processing
 -   {shinylive} (not in book) = complex interactivity without server
 
-## htmlwidgets {-}
+## htmlwidgets
 
 -   Handles HTML & JavaScript for you
 -   Many packages provide {htmlwidgets}:
@@ -89,7 +89,7 @@ More at [quarto.org/docs/presentations](https://quarto.org/docs/presentations)
     -   [{DiagrammeR}](https://rich-iannone.github.io/DiagrammeR) = flow charts, node-link diagrams, etc
     -   More at [htmlwidgets.org](https://www.htmlwidgets.org)
 
-## Shiny {-}
+## Shiny
 
 ```{yaml}
 title: "Shiny Web App"
@@ -108,7 +108,7 @@ numericInput("age", "How old are you?", NA, min = 0, max = 150)
 
 -   Code chunk with `#| context: server` for server-side code
 
-## ShinyLive {-}
+## ShinyLive
 
 -   Uses [WebR](https://docs.r-wasm.org/webr/latest/)
 -   No server side
@@ -117,7 +117,7 @@ numericInput("age", "How old are you?", NA, min = 0, max = 150)
 
 [quarto-ext.github.io/shinylive](https://quarto-ext.github.io/shinylive/)
 
-## Websites and books {-}
+## Websites and books
 
 Quarto projects can group `.qmd`s into websites or books
 
@@ -134,21 +134,21 @@ project:
     -   [/docs/websites](https://quarto.org/docs/websites)
     -   [/docs/books](https://quarto.org/docs/books)
 
-## Other formats {-}
+## Other formats
 
 -   [Quarto Journal Templates](https://quarto.org/docs/journals/templates.html)
 -   [More at quarto.org](https://quarto.org/docs/output-formats/all-formats.html)
 
-## Resources {-}
+## Resources
 
 -   [quarto.pub](https://quartopub.com/): Quarto publishing platform
 -   [github.com/mcanouil/awesome-quarto](https://github.com/mcanouil/awesome-quarto): Awesome Quarto (Quarto talks, tools, etc) 
 -   [quarto.org](https://quarto.org/): Quarto documentation
 -   [github.com/quarto-dev](https://github.com/quarto-dev)
 
-## Meeting Videos {-}
+## Meeting Videos
 
-### Cohort 5 {-}
+### Cohort 5
 
 `r knitr::include_url("https://www.youtube.com/embed/2MGp74nb2ig")`
 
@@ -180,7 +180,7 @@ project:
 ```
 </details>
 
-### Cohort 6 {-}
+### Cohort 6
 
 `r knitr::include_url("https://www.youtube.com/embed/qQrnNef9fkM")`
 
@@ -206,7 +206,7 @@ https://exts.ggplot2.tidyverse.org/gallery/
 </details>
 
 
-### Cohort 7 {-}
+### Cohort 7
 
 `r knitr::include_url("https://www.youtube.com/embed/vkjYlBK9-9c")`
 
@@ -223,7 +223,7 @@ https://exts.ggplot2.tidyverse.org/gallery/
 </details>
 
 
-### Cohort 8 {-}
+### Cohort 8
 
 `r knitr::include_url("https://www.youtube.com/embed/7kW7DEWPVZ8")`
 

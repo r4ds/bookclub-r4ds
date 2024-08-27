@@ -8,7 +8,7 @@
 - Use **other {stringr} matching rules** to find specific patterns.
 
 
-## Introduction {-}
+## Introduction
 
 > This chapter is going to be wicked fun!!!
 
@@ -19,7 +19,7 @@
 [stringr pkgdown site](https://stringr.tidyverse.org/)
 [stringr cheatsheet](https://github.com/rstudio/cheatsheets/blob/main/strings.pdf)
 
-### Pre-Requisites {-}
+### Pre-Requisites
 We will be utilizing the `{stringr}` package which is part of the core `{tidyverse}` and also the package `{babynames}`.
 
 ```{r}
@@ -31,11 +31,11 @@ library(tidyverse)
 library(babynames)
 ```
 
-## Why regexp? Google Sheets find and replace {-}
+## Why regexp? Google Sheets find and replace
 
 ![Google Sheets find and replace](images/15_search_google_sheets_regex.png)
 
-## Why regexp? IPv4 loop {-}
+## Why regexp? IPv4 loop
 
 ```{r}
 
@@ -67,7 +67,7 @@ is_valid_ipv4_loop(ip3)
 
 ```
 
-## Why regexp? IPv4 regexp {-}
+## Why regexp? IPv4 regexp
 ```{r}
 is_valid_ipv4_regex <- function(ip) {
   pattern <- "^(25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2})(\\.(25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2})){3}$"
@@ -79,7 +79,7 @@ is_valid_ipv4_regex(ip2)
 is_valid_ipv4_regex(ip3)
 ```
 
-## Why regexp? IPv4 regexplained {-}
+## Why regexp? IPv4 regexplained
 `pattern <- "^(25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2})(\\.(25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2})){3}$"`
 
 1. `^`: Anchors the regex at the beginning of the string.
@@ -108,7 +108,7 @@ If the string doesn't match this pattern, `grepl` returns `FALSE`, indicating th
 
 
 
-## Matching Patterns with Regular Expressions {-}
+## Matching Patterns with Regular Expressions
 
 - `str_view()`: show the elements of the string vector that match, surrounding each match with `<>`
 - [RegExplain](https://www.garrickadenbuie.com/project/regexplain/): RStudio addin/utility belt for regular expressions 
@@ -116,7 +116,7 @@ If the string doesn't match this pattern, `grepl` returns `FALSE`, indicating th
 
 
 
-## Exact match letters numbers {-}
+## Exact match letters numbers
 
 The simplest expressions are pattern matching:
 
@@ -127,7 +127,7 @@ The simplest expressions are pattern matching:
 str_view(fruit, "berry")
 ```
 
-## Metacharacters {-}
+## Metacharacters
 - `.`, `+`, `*`, `[`, `]`, and `?` are metacharacters and have special meanings.
 - `.` matches any character (except a newline):
 ```{r}
@@ -141,7 +141,7 @@ str_view(c("a", "ab", "ae", "bd", "ea", "eab"), "a.")
 str_view(fruit, "a...e")
 ```
 
-## Quantifiers {-}
+## Quantifiers
 Quantifiers control how many times a pattern can match:
 
 - `?` makes a pattern optional (i.e. it matches 0 or 1 times)
@@ -160,7 +160,7 @@ str_view(c("a", "ab", "abb"), "ab*")
 
 ```
 
-## Character classes {-}
+## Character classes
 - Defined by `[]`: match a set of characters
   - `[abcd]` matches “a”, “b”, “c”, or “d”. 
 - Invert the match: start with `^`:
@@ -174,7 +174,7 @@ str_view(words, "[aeiou]x[aeiou]")
 str_view(words, "[^aeiou]y[^aeiou]")
 ```
 
-## Alternation {-}
+## Alternation
 - Defined by `|`: to pick between one or more alternative patterns. 
 
 ```{r}
@@ -184,7 +184,7 @@ str_view(fruit, "apple|melon|nut")
 # look for a repeated vowel
 str_view(fruit, "aa|ee|ii|oo|uu")
 ```
-## Detect matches {-}
+## Detect matches
 
 - `str_detect()`: returns a logical vector that is TRUE if the pattern matches an element of the character vector and FALSE otherwise:
 - can be used with `filter()`
@@ -198,7 +198,7 @@ babynames |>
   count(name, wt = n, sort = TRUE)
 ```
 
-## Detect matches (2) {-}
+## Detect matches (2)
 - `str_detect()` with `summarize()`:
   - sum(str_detect(x, pattern)) returns the number of observations that match
   - mean(str_detect(x, pattern)) returns the proportion that match. 
@@ -213,12 +213,12 @@ babynames |>
   geom_line()
 ```
 
-## str_detect() related {-}
+## str_detect() related
 
 - `str_subset()`: returns a character vector containing only the strings that match.
 - `str_which()`: returns an integer vector giving the positions of the strings that match.
 
-## Count matches {-}
+## Count matches
 
 - `str_count()`: returns how many matches there are in each string.
 - each match starts at the end of the previous match, regex matches don't overlap. 
@@ -231,7 +231,7 @@ str_count("abababa", "aba")
 str_view("abababa", "aba")
 ```
 
-## Pitfall: case sensitive regex {-}
+## Pitfall: case sensitive regex
 Possible fixes:
 
 - Add the upper case vowels to the character class: `str_count(name, "[aeiouAEIOU]")`.
@@ -249,7 +249,7 @@ babynames |>
 
 ```
 
-## Extract variables {-}
+## Extract variables
 
 - `separate_wider_regex()`: extract data out of one column into one or more new columns.
   - construct a sequence of regular expressions that match each piece. 
@@ -283,7 +283,7 @@ df |>
 
 ```
 
-## Extract variables debug {-}
+## Extract variables debug
 
 If the match fails
 
@@ -318,7 +318,7 @@ df |>
 
 ```
 
-## Pattern details {-}
+## Pattern details
 
 - **escaping** to match metacharacters that would otherwise be treated specially.
 - **anchors** to match the start or end of the string.
@@ -327,7 +327,7 @@ df |>
 - **operator** precedence and parentheses.
 - **grouping** components of the pattern.
 
-## Escaping metacharacters {-}
+## Escaping metacharacters
 
 - all of the metacharacters: `.^$\|*+?{}[]()`
 - to match a metacharacter you need to escape with `\`
@@ -345,7 +345,7 @@ str_view(c("abc", "a.c", "bef"), "a\\.c")
 
 ```
 
-## Escape literal `\` {-}
+## Escape literal `\`
 
 - `\` is the escape character for strings and regexes
 - to escape a `\` you need to write `"\\\\"`
@@ -360,7 +360,7 @@ str_view(x, "\\\\")
 ```
 
 
-## Escaping metacharacters, alternatives {-}
+## Escaping metacharacters, alternatives
 
 - use raw strings (previous chapter) `r"{}"`, `r"[]"` or `r"{}"`
 - use character class: `.`, `$`, `|`, `*`, `+`, `?`, `{`, `}`, `(`, `)` can be matched with `[.]`, `[$]`, `[|]`, etc.
@@ -375,7 +375,7 @@ str_view(c("abc", "a.c", "a*c", "a c"), ".[*]c")
 ```
 
 
-## Character classes {-}
+## Character classes
 
 - character class or set `[]`: match any character in a set. 
 - construct your own sets with `[]`
@@ -399,7 +399,7 @@ str_view("a-b-c", "[a\\-c]")
 
 
 
-## Special character classes {-}
+## Special character classes
 
 Commonly used character classes with their own shortcut:
 
@@ -421,7 +421,7 @@ str_view(x, "\\w+")
 str_view(x, "\\W+")
 ```
 
-## Quantifiers {-}
+## Quantifiers
 
 Quantifiers control how many times a pattern matches. 
 
@@ -435,7 +435,7 @@ Quantifiers control how many times a pattern matches.
 - `{n,}` matches at least n times.
 - `{n,m}` matches between n and m times.
 
-## Operator precedence and parentheses {-}
+## Operator precedence and parentheses
 
 Quantifiers have high precedence and Alternation has low precedence
 
@@ -446,7 +446,7 @@ Quantifiers have high precedence and Alternation has low precedence
 
 Use parentheses to override the usual order and or improve legibility.
 
-## Grouping and capturing {-}
+## Grouping and capturing
 
 - Parentheses can be used to create capturing groups.
 - Refer back to a match
@@ -459,7 +459,7 @@ str_view(fruit, "(..)\\1")
 #this one finds all words that start and end with the same pair of letters:
 str_view(words, "^(..).*\\1$")
 ```
-## Back references in str_replace() {-}
+## Back references in str_replace()
 
 ```{r}
 #switch the order of the second and third words in sentences
@@ -468,7 +468,7 @@ sentences |>
   str_view()
 ```
 
-## Non-capturing group {-}
+## Non-capturing group
 To use parentheses without creating matching groups, you can create a non-capturing group with `(?:)`.
 
 ```{r}
@@ -478,7 +478,7 @@ str_match(x, "gr(e|a)y")
 str_match(x, "gr(?:e|a)y")
 ```
 
-## Regex flags, ignore_case {-}
+## Regex flags, ignore_case
 
 Settings in `{stringr}` to control the details of the regexp.
 
@@ -491,7 +491,7 @@ str_view(bananas, "banana")
 str_view(bananas, regex("banana", ignore_case = TRUE))
 ```
 
-## Regex flags, dotall and multiline {-}
+## Regex flags, dotall and multiline
 
 Useful for work with multiline strings (i.e. strings that contain `\n`)
 
@@ -511,7 +511,7 @@ str_view(x, "^Line")
 str_view(x, regex("^Line", multiline = TRUE))
 ```
 
-## Regex flags, comments {-}
+## Regex flags, comments
 
 - `comments = TRUE` tweaks the pattern language to ignore spaces and new lines, as well as everything after #. 
 - use comments and whitespace to make complex regular expressions more understandable
@@ -535,7 +535,7 @@ str_extract(c("514-791-8141", "(123) 456 7890", "123456"), phone)
 
 ```
 
-##  Fixed matches {-}
+##  Fixed matches
 
 `fixed()` allows to opt-out of the regular expression rules or to ignore case
 
@@ -545,7 +545,7 @@ str_view("x X", "X")
 str_view("x X", fixed("X", ignore_case = TRUE))
 ```
 
-## Fixed matches, coll() {-}
+## Fixed matches, coll()
 
 - `coll()` instead of `fixed()` for non-English text, as it implements the full rules for capitalization as used by the specified locale.
 
@@ -554,7 +554,7 @@ str_view("i İ ı I", fixed("İ", ignore_case = TRUE))
 str_view("i İ ı I", coll("İ", ignore_case = TRUE, locale = "tr"))
 ```
 
-## General techniques {-}
+## General techniques
 
 To solve real world problems:
 
@@ -564,9 +564,9 @@ To solve real world problems:
 
 
 
-## Meeting Videos {-}
+## Meeting Videos
 
-### Cohort 5 {-}
+### Cohort 5
 
 `r knitr::include_url("https://www.youtube.com/embed/RpZoQR2xwME")`
 
@@ -647,7 +647,7 @@ $ = end of text
 ```
 </details>
 
-### Cohort 6 {-}
+### Cohort 6
 
 `r knitr::include_url("https://www.youtube.com/embed/l07Vo1wMW5s")`
 
@@ -704,7 +704,7 @@ Thanks Shannon for the wonderful presentation!
 </details>
 
 
-### Cohort 7 {-}
+### Cohort 7
 
 `r knitr::include_url("https://www.youtube.com/embed/RFSURwQ0-eg")`
 
@@ -731,6 +731,6 @@ Thanks Shannon for the wonderful presentation!
 </details>
 
 
-### Cohort 8 {-}
+### Cohort 8
 
 `r knitr::include_url("https://www.youtube.com/embed/wDVJ1zWGTzA")`

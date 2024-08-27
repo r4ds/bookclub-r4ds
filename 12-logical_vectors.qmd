@@ -18,21 +18,21 @@ library(nycflights13)
 - Understanding the effect of missing values in these operations
 
 
-## What and why {-}
+## What and why
 
 - This is all about conditions on data values: they return `TRUE` or `FALSE`.
 This vector of `TRUE`/`FALSE` values is a logical vector.
 - These conditions -- hence the resulting logical vectors -- play an important role in filtering, mutating and summarizing dataframe columns.
 
-## Definition {-}
+## Definition
 
 Logical vector: vector of `TRUE`, `FALSE` and/or `NA` values.
 
-## Challenging: `NA` values {-}
+## Challenging: `NA` values
 
 The most tricky part of **operations** with logical vectors is the effect of missing values.
 
-## Operations overview {-}
+## Operations overview
 
 - Operations that don't change vector lengths
   - comparisons: **generate a logical vector** from a non-logical vector
@@ -41,7 +41,7 @@ The most tricky part of **operations** with logical vectors is the effect of mis
 - **Subsetting** vectors with a logical vector
 - **Summarizing** logical vectors
 
-## Generating a logical vector (1) {-}
+## Generating a logical vector (1)
 
 - either by doing (vectorized) **comparisons**
 
@@ -54,14 +54,14 @@ The most tricky part of **operations** with logical vectors is the effect of mis
   Comparisons are often the way that logical vectors arise, i.e. during exploration, cleaning and analysis
     - ... unless the logical vector is already provided, e.g. the observed variable is boolean.
 
-## Generating a logical vector (2) {-}
+## Generating a logical vector (2)
 
 ```{r}
 flights |> 
   mutate(daytime = dep_time > 600, .keep = "used")
 ```
 
-## Generating a logical vector (3) {-}
+## Generating a logical vector (3)
 
 ```{r}
 flights |> 
@@ -69,13 +69,13 @@ flights |>
   filter(daytime)
 ```
 
-## Generating a logical vector (4) {-}
+## Generating a logical vector (4)
 
 ```{r}
 1:12 %in% c(1, 5, 11)
 ```
 
-## Generating a logical vector (5) {-}
+## Generating a logical vector (5)
 
 A comparison _**is**_ a logical vector...
 
@@ -85,7 +85,7 @@ length(flights$dep_time > 600)
 head(flights$dep_time > 600)
 ```
 
-## Generating a logical vector (6) {-}
+## Generating a logical vector (6)
 
 ... so the logical vector does not have to be stored in order to filter data -- it is created on the fly:
 
@@ -95,7 +95,7 @@ flights |>
 ```
 
 
-## Generating a logical vector (7) {-}
+## Generating a logical vector (7)
 
 - either by doing (vectorized) comparisons (see before)
 - or by **combining** logical vectors or comparisons = **boolean algebra**
@@ -110,13 +110,13 @@ flights |>
   - `&` can be mimicked by `pmin()`
   - `|` can be mimicked by `pmax()`
 
-## Generating a logical vector (8) {-}
+## Generating a logical vector (8)
 
 Boolean operators:
 
 ![](images/14_venn_diagrams.png)
 
-## Generating a logical vector (9) {-}
+## Generating a logical vector (9)
 
 ```{r}
 flights |> 
@@ -126,7 +126,7 @@ flights |>
   )
 ```
   
-## Missing values (1) {-}
+## Missing values (1)
 
 In most cases an `NA` value (vector element) is regarded '_missing so we can't (always) know the outcome_':
 
@@ -134,7 +134,7 @@ In most cases an `NA` value (vector element) is regarded '_missing so we can't (
   - so `x == NA` will just return `NA` for _all_ elements.
   - check for missing values with **`is.na()`**: `TRUE` for missing values and `FALSE` for everything else
   
-## Missing values (2) {-}
+## Missing values (2)
 
 ```{r}
 c(TRUE, NA, FALSE) == NA # NOT useful!!
@@ -142,7 +142,7 @@ is.na(c(TRUE, NA, FALSE))
 is.na(c(1, NA, 3))
 ```
 
-## Missing values (3) {-}
+## Missing values (3)
 
 In most cases an `NA` value (vector element) is regarded '_missing so we can't (always) know the outcome_':
 
@@ -151,14 +151,14 @@ In most cases an `NA` value (vector element) is regarded '_missing so we can't (
   - `TRUE & NA` is `NA` but `FALSE & NA` is `FALSE`
   - `TRUE | NA` is `TRUE` but `FALSE | NA` is `NA`
 
-## Missing values (4) {-}
+## Missing values (4)
 
 ```{r}
 c(TRUE, FALSE) & NA
 c(TRUE, FALSE) | NA
 ```
 
-## Missing values (5) {-}
+## Missing values (5)
 
 But `%in%` works differently:
 
@@ -169,7 +169,7 @@ flights |>
   filter(dep_time %in% c(NA, 0800))
 ```
 
-## Conditional transformations (1) {-}
+## Conditional transformations (1)
 
 Aim: generate a vector where each element is determined by the value of one or multiple conditions (~ comparisons).
 
@@ -179,14 +179,14 @@ Aim: generate a vector where each element is determined by the value of one or m
 - multiple (hierarchical) conditions: use `case_when(..., .default = NULL)`.
   - the _first_ condition that is `TRUE` for an element determines the outcome for that element.
 
-## Conditional transformations (2) {-}
+## Conditional transformations (2)
 
 ```{r}
 x <- c(-3:3, NA)
 if_else(x > 0, "+ve", "-ve", "???")
 ```
 
-## Conditional transformations (3) {-}
+## Conditional transformations (3)
 
 ```{r}
 x <- c(-3:3, NA)
@@ -198,7 +198,7 @@ case_when(
 )
 ```
 
-## Conditional transformations (4) {-}
+## Conditional transformations (4)
 
 The different outcomes must be **compatible types**!
 
@@ -209,7 +209,7 @@ Some examples:
 - `NA` is compatible with everything.
 
 
-## Subsetting vectors {-}
+## Subsetting vectors
 
 I.e. keep only a subset of a vector, drop the rest, based on some condition.
 
@@ -227,7 +227,7 @@ flights$dep_time[flights$arr_delay > 0]
 ```
 
 
-## Summarizing logical vectors (1) {-}
+## Summarizing logical vectors (1)
 
 - Summarizing the whole vector:
   - `any()`, `all()`: return a logical
@@ -238,7 +238,7 @@ flights$dep_time[flights$arr_delay > 0]
 
 - If `NA` values are present, the summary result will be `NA`, BUT the `NA` values can also be ignored with: **`na.rm = TRUE`**.
 
-## Summarizing logical vectors (2) {-}
+## Summarizing logical vectors (2)
 
 ```{r}
 flights |> 
@@ -250,7 +250,7 @@ flights |>
 ```
 
 
-## Summarizing logical vectors (3) {-}
+## Summarizing logical vectors (3)
 
 ```{r}
 flights |> 
@@ -261,7 +261,7 @@ flights |>
   )
 ```
 
-## Summarizing logical vectors (4) {-}
+## Summarizing logical vectors (4)
 
 ```{r}
 flights |>

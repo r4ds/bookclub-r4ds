@@ -23,7 +23,7 @@
 ::::
 
 
-## Loading Packages in R {-}
+## Loading Packages in R
 
 -   `install.packages("Package_name")` to **install** a package.
     -   Before 1st use, but only once
@@ -50,7 +50,7 @@ library(palmerpenguins)
 library(ggthemes)
 ```
 
-## Peeking at the `palmerpenguins` {-}
+## Peeking at the `palmerpenguins`
 
 ```{r}
 #| label: 02-dataset
@@ -58,7 +58,7 @@ library(ggthemes)
 palmerpenguins::penguins
 ```
 
-## Creating a ggplot: ggplot() {-}
+## Creating a ggplot: ggplot()
 
 -   Call `ggplot()` function. 
 -   Arguments: 
@@ -76,7 +76,7 @@ ggplot(
 )
 ```
 
-## Creating a ggplot: geom_\*() {-}
+## Creating a ggplot: geom_\*()
 
 ```{r}
 #| label: 02-plot02
@@ -90,7 +90,7 @@ ggplot(
 
 (warning = 2 penguins in dataset w/ missing body mass / flipper length)
 
-## Adding Aesthetics and Layers {-}
+## Adding Aesthetics and Layers
 
 - **Aesthetics** = visual properties of the plot.
 - More aesthetics may tell the data's story better.
@@ -124,7 +124,7 @@ ggplot(
 ```
 
 
-## Adding Layers {-}
+## Adding Layers
 
 - Additional `geom_*()` layers may help as well
 
@@ -151,7 +151,7 @@ ggplot(
     -   text / label
     -   ...
 
-## Global vs. Local Aesthetics {-}
+## Global vs. Local Aesthetics
 
 :::: {style="display: flex;"}
 ::: {style="margin-right: 0.5em; width: 50%;"}
@@ -203,7 +203,7 @@ ggplot(
 :::
 ::::
 
-## Improving Accessibility {-}
+## Improving Accessibility
 
 - Mapping shape and color may help colorblind readers
 - Colorblind-friendly palette would help, too
@@ -223,7 +223,7 @@ ggplot(
 
 ```
 
-## Why Stop There? {-}
+## Why Stop There?
 
 Use `labs()` to add understandable titles and axes.
 
@@ -247,7 +247,7 @@ ggplot(
   scale_color_colorblind()
 ```
 
-## Exercises {-}
+## Exercises
 
 **1. How many rows are in `penguins`? How many columns?**
 
@@ -429,7 +429,7 @@ ggplot() +
   )
 ```
 
-## `ggplot2` calls {-}
+## `ggplot2` calls
 
 - For brevity, "data =" and "mapping =" often dropped 
 - But things still work...
@@ -443,7 +443,7 @@ ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
   geom_point()
 ```
 
-## Visualizing Distributions: Barplots {-}
+## Visualizing Distributions: Barplots
 
 Quickly check out variable distributions.
 
@@ -458,7 +458,7 @@ ggplot(penguins, aes(x = species)) +
   geom_bar()
 ```
 
-## Visualizing Distributions: Histograms {-}
+## Visualizing Distributions: Histograms
 
 Histograms aid with numerical variables
 
@@ -471,7 +471,7 @@ ggplot(penguins, aes(x = body_mass_g)) +
   geom_histogram(binwidth = 200)
 ```
 
-## Visualizing Distributions: Density plots {-}
+## Visualizing Distributions: Density plots
 
 Density plots also help
 
@@ -484,7 +484,7 @@ ggplot(penguins, aes(x = body_mass_g)) +
   geom_density()
 ```
 
-## (more) Exercises {-}
+## (more) Exercises
 
 **1. Make a bar plot of species of penguins, where you assign species to the y aesthetic. How is this plot different?**
 
@@ -552,11 +552,11 @@ ggplot(diamonds) +
 
 Here, a `binwidth` of 0.1 seems to be a good compromise between showing granularity in the data and not overwhelming ourselves with too many bars.
 
-## Visualizing relationships {-}
+## Visualizing relationships
 
 `ggplot2` is also incredible at displaying relationships between variables.
 
-## Numerical Variable and Categorical Variable {-}
+## Numerical Variable and Categorical Variable
 
 Boxplots help here (or color-coded density plots).
 
@@ -569,7 +569,7 @@ ggplot(penguins, aes(x = species, y = body_mass_g)) +
   geom_boxplot()
 ```
 
-## Two Categorical Variables {-}
+## Two Categorical Variables
 
 Try a bar plot.
 
@@ -593,7 +593,7 @@ ggplot(penguins, aes(x = island, fill = species)) +
   geom_bar(position = "fill")
 ```
 
-## Two Numerical Variables {-}
+## Two Numerical Variables
 
 Scatterplots shine here.
 
@@ -606,7 +606,7 @@ ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
   geom_point()
 ```
 
-## Three or More Variables {-}
+## Three or More Variables
 
 Map each to different variable
 
@@ -631,7 +631,7 @@ ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
   facet_wrap(~island)
 ```
 
-## (Even More) Exercises {-}
+## (Even More) Exercises
 
 **1. The `mpg` data frame that is bundled with the `ggplot2` package contains 234 observations collected by the US Environmental Protection Agency on 38 car models. Which variables in `mpg` are categorical? Which variables are numerical? (Hint: Type `?mpg` to read the documentation for the dataset.) How can you see this information when you run `mpg?`**
 
@@ -779,7 +779,7 @@ ggplot(penguins, aes(x = species, fill = island)) +
 
 The first tells us which species make up certain proportions of an island's overall population. The second tells us how a species' overall population is split among the islands.
 
-## Saving Your Plots {-}
+## Saving Your Plots
 
 `ggsave()` lets you get your plots out of R for sharing.
 
@@ -797,7 +797,7 @@ ggsave(filename = "penguin-plot.png", width = 800, units = "px")
 
 Setting `width` and/or `height` helps with reproducibility.
 
-## (Yet More) Exercises {-}
+## (Yet More) Exercises
 
 **1. Run the following lines of code. Which of the two plots is saved as `mpg-plot.png`? Why?**
 
@@ -820,7 +820,7 @@ It will run the second. In looking at `?ggplot2::ggsave`, we see that it default
 
 Changing filename in `ggsave()` to end in `.pdf` instead of `.png` will change the type. Looking at the function documentation, we see there are options for: "eps", "ps", "tex" (pictex), "pdf", "jpeg", "tiff", "png", "bmp", "svg" and "wmf" (windows only).
 
-## Common Problems {-}
+## Common Problems
 
 Mistakes happen. To everyone.
 
@@ -841,7 +841,7 @@ But more than likely, you misspelled something.
 -   Ask R friends
 -   **Don't give up ... setbacks are temporary**
 
-## Summary {-}
+## Summary
 
 <h3> TADA! </h3>
 
@@ -867,7 +867,7 @@ But more than likely, you misspelled something.
 
 ::::
 
-### Resources: {-}
+### Resources:
 
 -   [R4DS book (1e)](https://r4ds.had.co.nz/data-visualisation.html)
 -   [R for Data Science: Exercise Solutions (1e)](https://jrnold.github.io/r4ds-exercise-solutions/)
@@ -878,9 +878,9 @@ But more than likely, you misspelled something.
 -   [Gina Reynolds' ggplot flipbook](https://evamaerey.github.io/ggplot_flipbook/ggplot_flipbook_xaringan.html)
 
 
-## Meeting Videos {-}
+## Meeting Videos
 
-### Cohort 5 {-}
+### Cohort 5
 
 `r knitr::include_url("https://www.youtube.com/embed/0NdiQuuM0vw")`
 
@@ -938,7 +938,7 @@ But more than likely, you misspelled something.
 ```
 </details>
 
-### Cohort 6 {-}
+### Cohort 6
 
 `r knitr::include_url("https://www.youtube.com/embed/5IMg8AC-1IA")`
 
@@ -1035,7 +1035,7 @@ But more than likely, you misspelled something.
 </details>
 
 
-### Cohort 7 {-}
+### Cohort 7
 
 `r knitr::include_url("https://www.youtube.com/embed/eqQJ5tmEGco")`
 
@@ -1050,7 +1050,7 @@ But more than likely, you misspelled something.
 </details>
 
 
-### Cohort 8 {-}
+### Cohort 8
 
 `r knitr::include_url("https://www.youtube.com/embed/RRxtbv5QCA4")`
 

@@ -21,7 +21,7 @@ library(tidyverse)
 library(babynames)
 ```
 
-## Introduction {-}
+## Introduction
 
 -   Strings = text, eg the stuff you're reading here
 -   {[stringr](https://stringr.tidyverse.org/)} = {tidyverse} string package ([stringr cheatsheet](https://github.com/rstudio/cheatsheets/blob/main/strings.pdf))
@@ -29,7 +29,7 @@ library(babynames)
 
 ![Stringr Autocomplete](images/stringr-autocomplete.png)
 
-## Creating strings: " and ' {-}
+## Creating strings: " and '
 
 ```{r}
 #| label: strings-create
@@ -42,7 +42,7 @@ string2 <- 'Include "quote characters" inside a string'
 
 ![](images/string_stuck.png)
 
-## Escapes {-}
+## Escapes
 
 -   "Escape" = tell R not to process special character
 
@@ -56,7 +56,7 @@ backslash <- "\\"
 
 -   [`?Quotes`](https://rdrr.io/r/base/Quotes.html)
 
-## Printing strings {-}
+## Printing strings
 
 ```{r}
 #| label: strings-print-view
@@ -68,7 +68,7 @@ str_view(x)
 
 -   `print()` output = the format needed to define the string!
 
-## Multiple escapes = confusion {-}
+## Multiple escapes = confusion
 
 ```{r}
 #| label: strings-escapes-confusion
@@ -77,7 +77,7 @@ tricky <- "double_quote <- \"\\\"\" # or '\"' single_quote <- '\\'' # or \"'\""
 str_view(tricky)
 ```
 
-## Raw strings {-}
+## Raw strings
 
 -   Raw strings in R 4.0+ = `r"()"`
     -   Or `r"[]"`, `r"{}"`, `r"--()--"`, etc.
@@ -90,7 +90,7 @@ identical(tricky, tricky2)
 ```
 
 
-## Other special characters {-}
+## Other special characters
 
 -   `\n` = newline
 -   `\t` = tab
@@ -102,7 +102,7 @@ identical(tricky, tricky2)
 str_view(c("one\ntwo", "one\ttwo", "\u00b5", "\U0001f604"))
 ```
 
-## str_c() {-}
+## str_c()
 
 -   `str_c()` = combine multiple strings or multiple character vectors
 -   Vectorized just like `base::paste0()` but safer recycling rules
@@ -115,7 +115,7 @@ str_c("x", "y", "z")
 str_c("Hello ", c("John", "Susan"))
 ```
 
-## str_c() and missing values {-}
+## str_c() and missing values
 
 ```{r}
 #| label: strings-str_c-missing
@@ -129,7 +129,7 @@ df |>
   )
 ```
 
-## str_glue() {-}
+## str_glue()
 
 -   `str_glue()` = combine strings with `{glue}` syntax
 -   vectorized
@@ -140,7 +140,7 @@ df |>
 df |> mutate(greeting = str_glue("Hi {name}!"))
 ```
 
-## str_glue() escapes {-}
+## str_glue() escapes
 
 -   `{{` to escape `{`
 
@@ -148,7 +148,7 @@ df |> mutate(greeting = str_glue("Hi {name}!"))
 df |> mutate(greeting = str_glue("{{Hi {name}!}}"))
 ```
 
-## str_flatten() {-}
+## str_flatten()
 
 -   `str_flatten()` = collapse a single character vector into a single string
 -   Similar to `base::paste(collapse = X)`
@@ -170,7 +170,7 @@ tribble(
   summarize(fruits = str_flatten(fruit, ", ", last = ", and "))
 ```
 
-## Separating strings {-}
+## Separating strings
 
 {tidyr} has multiple `separate_*()` functions:
 
@@ -182,7 +182,7 @@ tribble(
   -   `separate_wider_position()`
   -   (`separate_wider_regex()` in next chapter)
 
-## separate_longer_delim() {-}
+## separate_longer_delim()
 
 ```{r}
 #| label: strings-separate_longer_delim
@@ -191,7 +191,7 @@ tibble(x = c("a,b,c", "d,e", "f")) |>
   separate_longer_delim(x, delim = ",")
 ```
 
-## separate_longer_position {-}
+## separate_longer_position
 
 Rarer, but sometimes data is weird
 
@@ -202,7 +202,7 @@ tibble(x = c("1211", "131", "21")) |>
   separate_longer_position(x, width = 1)
 ```
 
-## separate_wider_delim() {-}
+## separate_wider_delim()
 
 ```{r}
 #| label: strings-separate_wider_delim
@@ -216,7 +216,7 @@ df3 |>
   )
 ```
 
-## Delim: Omit columns {-}
+## Delim: Omit columns
 
 ```{r}
 #| label: strings-separate_wider_delim-omit
@@ -228,7 +228,7 @@ df3 |>
   )
 ```
 
-## separate_wider_position() {-}
+## separate_wider_position()
 
 ```{r}
 #| label: strings-separate_wider_position
@@ -241,7 +241,7 @@ df4 |>
   )
 ```
 
-## Position: omit columns {-}
+## Position: omit columns
 
 ```{r}
 #| label: strings-separate_wider_position-omit
@@ -253,7 +253,7 @@ df4 |>
   )
 ```
 
-## Diagnosing widening problems {-}
+## Diagnosing widening problems
 
 -   Default = error for too many/too few columns
 -   `"debug"` to diagnose
@@ -269,7 +269,7 @@ df |>
   )
 ```
 
-## too_few {-}
+## too_few
 
 ```{r}
 #| label: strings-too_few
@@ -281,7 +281,7 @@ df |>
   )
 ```
 
-## too_many {-}
+## too_many
 
 ```{r}
 #| label: strings-too_many
@@ -295,7 +295,7 @@ df |>
 ```
 
 
-## str_length() {-}
+## str_length()
 
 ```{r}
 #| label: strings-str_length
@@ -303,7 +303,7 @@ df |>
 str_length(c("a", "R for data science", NA))
 ```
 
-## str_length() and babynames {-}
+## str_length() and babynames
 
 ```{r}
 #| label: strings-babynames-length
@@ -312,7 +312,7 @@ babynames |>
   count(length = str_length(name), wt = n)
 ```
 
-## Substrings {-}
+## Substrings
 
 ```{r}
 #| label: strings-sub_str
@@ -323,7 +323,7 @@ str_sub(x, -3, -1)
 str_sub("a", 1, 5)
 ```
 
-##  Encoding {-}
+##  Encoding
 
 -   Encoding = how each character is represented by one or more bytes
     -   1 byte is 8 bits (base-2 octet) = 2 hex digits (base-16)
@@ -335,7 +335,7 @@ str_sub("a", 1, 5)
         -   From a single 15th-century manuscript
         -   As "o" in a word meaning "many-eyed"
 
-## Specifying encoding {-}
+## Specifying encoding
 
 -   {readr} uses UTF-8 unless you tell it otherwise
 
@@ -349,7 +349,7 @@ x <- "text\nEl Ni\xf1o was particularly bad this year"
 read_csv(charToRaw(x), locale = locale(encoding = "Latin1"))$text
 ```
 
-## Locales (1) {-}
+## Locales (1)
 
 -   `locale` = specifier of language and optionally the region
     -   e.g. `en`, `en_US`, `en_UK`, `nl_BE`, etc.
@@ -358,7 +358,7 @@ read_csv(charToRaw(x), locale = locale(encoding = "Latin1"))$text
 -   `{stringr}` defaults to `en`; can take explicit locale = consistent behaviour!
     -   many locales supported: [`stringi::stri_locale_list()`](https://stringi.gagolewski.com/rapi/stri_locale_list.html#examples)
 
-## Locales (2) {-}
+## Locales (2)
 
 ```{r}
 #| label: strings-locale-upper
@@ -374,9 +374,9 @@ str_sort(c("c", "ch", "h"))
 str_sort(c("c", "ch", "h"), locale = "cs")
 ```
 
-## Meeting Videos {-}
+## Meeting Videos
 
-### Cohort 5 {-}
+### Cohort 5
 
 `r knitr::include_url("https://www.youtube.com/embed/RpZoQR2xwME")`
 
@@ -457,7 +457,7 @@ $ = end of text
 ```
 </details>
 
-### Cohort 6 {-}
+### Cohort 6
 
 `r knitr::include_url("https://www.youtube.com/embed/l07Vo1wMW5s")`
 
@@ -514,7 +514,7 @@ Thanks Shannon for the wonderful presentation!
 </details>
 
 
-### Cohort 7 {-}
+### Cohort 7
 
 `r knitr::include_url("https://www.youtube.com/embed/NQq6EoCCsR0")`
 
@@ -537,7 +537,7 @@ Thanks Shannon for the wonderful presentation!
 </details>
 
 
-### Cohort 8 {-}
+### Cohort 8
 
 `r knitr::include_url("https://www.youtube.com/embed/AiIZ0U6zMvU")`
 

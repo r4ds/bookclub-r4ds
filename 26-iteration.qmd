@@ -15,7 +15,7 @@
 library(tidyverse)
 ```
 
-## Intro to iteration {-}
+## Intro to iteration
 
 **Iteration** = repeatedly performing the same action on different objects
 
@@ -27,7 +27,7 @@ R is full of *hidden* iteration!
 -   Anything with a vector! 
     -   `1:10 + 1` requires loops in other languages!
 
-## Summarize w/ `across()`: setup {-}
+## Summarize w/ `across()`: setup
 
 ```{r}
 #| label: iteration-summarize-setup
@@ -36,7 +36,7 @@ df <- tibble(a = rnorm(10), b = rnorm(10), c = rnorm(10))
 glimpse(df)
 ```
 
-## Summarize w/ `across()`: motivation {-}
+## Summarize w/ `across()`: motivation
 
 ```{r}
 #| label: iteration-summarize-motivation
@@ -49,7 +49,7 @@ messy <- df |> summarize(
 )
 ```
 
-## Summarize w/ `across()`: cleaner {-}
+## Summarize w/ `across()`: cleaner
 
 ```{r}
 #| label: iteration-summarize-across
@@ -61,7 +61,7 @@ clean <- df |> summarize(
 identical(clean, messy)
 ```
 
-## Selecting columns {-}
+## Selecting columns
 
 -   `everything()` for all non-grouping columns
 -   `where()` to select based on a condition
@@ -70,14 +70,14 @@ identical(clean, messy)
     -   `starts_with("a") & !where(is_numeric)` = all columns that start with "a" and are not numeric
     -   `where(\(x) any(stringr::str_detect("name")))` = all columns that contain the word "name" in at least one value
 
-## Passing functions {-}
+## Passing functions
 
 Pass actual function to `across()`, ***not*** a call to the function!
 
 -   ✅ `across(a:c, mean)`
 -   ❌ `across(a:c, mean())`
 
-## Multiple functions {-}
+## Multiple functions
 
 ```{r}
 #| label: iteration-multiple_functions
@@ -87,7 +87,7 @@ df |> summarize(
 )
 ```
 
-## Multiple functions with names {-}
+## Multiple functions with names
 
 ```{r}
 #| label: iteration-multiple_functions-names
@@ -97,7 +97,7 @@ df |> summarize(across(a:c,
 ))
 ```
 
-## Multiple functions with names & args {-}
+## Multiple functions with names & args
 
 ```{r}
 #| label: iteration-multiple_functions-args
@@ -110,7 +110,7 @@ df |> summarize(across(a:c,
 ))
 ```
 
-## Fancier naming {-}
+## Fancier naming
 
 ```{r}
 #| label: iteration-across-glue_names
@@ -124,7 +124,7 @@ df |> summarize(across(a:c,
 ))
 ```
 
-## Filtering with if_any() and if_all() {-}
+## Filtering with if_any() and if_all()
 
 ```{r}
 #| label: iteration-if_any
@@ -134,7 +134,7 @@ df2 |> filter(if_any(everything(), is.na))
 df2 |> filter(if_all(everything(), \(x) !is.na(x)))
 ```
 
-## across() in functions: setup {-}
+## across() in functions: setup
 
 ```{r}
 #| label: iteration-across-in-functions
@@ -154,7 +154,7 @@ summarize_datatypes <- function(df) {
 }
 ```
 
-## across() in functions: mpg {-}
+## across() in functions: mpg
 
 ```{r}
 #| label: iteration-across_in_functions-mpg
@@ -162,7 +162,7 @@ summarize_datatypes <- function(df) {
 mpg |> summarize_datatypes()
 ```
 
-## across() in functions: diamonds {-}
+## across() in functions: diamonds
 
 ```{r}
 #| label: iteration-across_in_functions-diamonds
@@ -170,7 +170,7 @@ mpg |> summarize_datatypes()
 diamonds |> summarize_datatypes()
 ```
 
-## Iterate over files {-}
+## Iterate over files
 
 ```{r}
 #| label: iteration-map_files
@@ -184,7 +184,7 @@ list.files("data/gapminder", pattern = "[.]xlsx$", full.names = TRUE) |>
   purrr::list_rbind(names_to = "filename")
 ```
 
-## One vs everything {-}
+## One vs everything
 
 > We recommend this approach [perform each step on each file instead of in a function] because it stops you getting fixated on getting the first file right before moving on to the rest. By considering all of the data when doing tidying and cleaning, you’re more likely to think holistically and end up with a higher quality result.
 
@@ -193,16 +193,16 @@ Discuss!
 -   Jon's preference: Do 1-2 files first, iterate on iteration
 -   Book: Do everything on everything
 
-## Walk vs map {-}
+## Walk vs map
 
 -   Use `purrr::walk()` to do things without keeping result
     -   Book example: Saving things
 -   `purrr::map2()` & `purrr::walk2()`: 2 inputs
 -   `purrr::pmap()` & `purrr::pwalk()`: list of inputs (largely replaced by `across()`)
 
-## Meeting Videos {-}
+## Meeting Videos
 
-### Cohort 5 {-}
+### Cohort 5
 
 `r knitr::include_url("https://www.youtube.com/embed/0rsV1jlxhws")`
 
@@ -256,7 +256,7 @@ mtcars %>%
 ```
 </details>
 
-### Cohort 6 {-}
+### Cohort 6
 
 `r knitr::include_url("https://www.youtube.com/embed/NVUHFpYUmA4")`
 
@@ -284,7 +284,7 @@ mtcars %>%
 </details>
 
 
-### Cohort 7 {-}
+### Cohort 7
 
 `r knitr::include_url("https://www.youtube.com/embed/vPEgWgs0q7s")`
 
@@ -302,6 +302,6 @@ mtcars %>%
 </details>
 
 
-### Cohort 8 {-}
+### Cohort 8
 
 `r knitr::include_url("https://www.youtube.com/embed/TQabUIBbJKs")`

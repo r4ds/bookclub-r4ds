@@ -18,7 +18,7 @@ library(tidyverse)
 - **Diagnose problems** that may arise when using the `read_*()` functions.
 - **Write data** to disk using the `readr::write_*()` family of functions.
 
-## Reading data from a file {-}
+## Reading data from a file
 
 - Use `{readr}` 📦 (part of the `{tidyverse}`) 
 - **CSV** (**c**omma-**s**eparated **v**alues) = most common rectangular data filetype
@@ -27,7 +27,7 @@ library(tidyverse)
 - Columns separated ("delimited") by commas
 
 
-## `readr::read_csv` {-}
+## `readr::read_csv`
 
 - 1st argument = file (path or URL)
   - `here::here()` = root of project
@@ -37,13 +37,13 @@ library(tidyverse)
 students <- readr::read_csv(here::here('data', 'students.csv'))
 ```
 
-## Reading from URL {-}
+## Reading from URL
 
 ```{r}
 students <- readr::read_csv("https://pos.it/r4ds-students-csv")
 ```
 
-## Transforming data during read {-}
+## Transforming data during read
 
 - Can transform data during read:
   - Replace mislabeled NA values
@@ -55,7 +55,7 @@ students
 ```
 
 
-## Mislabeled NA values {-}
+## Mislabeled NA values
 
 - `read_csv()` default: only empty strings (`""`) = `NA`
 - `favourite.food` has `"N/A"` (character), let's treat as `NA`
@@ -77,7 +77,7 @@ students <- read_csv("data/students.csv", na = c("N/A", ""))
 students
 ```
 
-## Non-syntactic column names {-}
+## Non-syntactic column names
 
 - \`Student ID\` and \`Full Name\` contain spaces (i.e. are **non-syntactic**)
 
@@ -90,7 +90,7 @@ students |>
 ```
 
 
-## `janitor` 📦 for non-syntactic column names {-}
+## `janitor` 📦 for non-syntactic column names
 
 [{janitor}](https://sfirke.github.io/janitor/) 📦
 
@@ -103,7 +103,7 @@ students |>
 students |> janitor::clean_names()
 ```
 
-## Mislabeled variable types {-}
+## Mislabeled variable types
 
 - The column `meal_plan` is a categorical variable but should be a factor.
 
@@ -115,7 +115,7 @@ students |>
   mutate(meal_plan = factor(meal_plan))
 ```
 
-## Mislabeled variable types cont. {-}
+## Mislabeled variable types cont.
 
 - `age` is a character variable because there's a `five` instead of `5`.
 
@@ -132,7 +132,7 @@ students <- students |>
 students
 ```
 
-## Other arguments {-}
+## Other arguments
 
 - Other arguments in `read_csv()`: 
   - `comment = "#"`
@@ -148,7 +148,7 @@ read_csv(
 ```
 
   
-## `skip = n` {-}
+## `skip = n`
 
 - Skip the first n lines of metadata to be included at the top of the file.
 
@@ -163,7 +163,7 @@ read_csv(
 ```
 
 
-## `comment = "#"` {-}
+## `comment = "#"`
 
 - Drop all lines that start with (e.g.) `#`:
 
@@ -177,7 +177,7 @@ read_csv(
 ```
 
 
-## `col_names = FALSE` {-}
+## `col_names = FALSE`
 
 - Use `col_names = FALSE` to not treat the first row as headings and instead label them sequentially from `X1` to `Xn`:
 
@@ -189,7 +189,7 @@ read_csv(
 )
 ```
 
-## `col_names` as a character vector {-}
+## `col_names` as a character vector
 
 - Pass `col_names` a character vector for column names.
 
@@ -202,7 +202,7 @@ read_csv(
 ```
 
 
-## Other types of files {-}
+## Other types of files
 
 The [`readr`](https://readr.tidyverse.org/) package has other functions beside [`read_csv()`](https://readr.tidyverse.org/reference/read_delim.html) to read files into R, such as:
 
@@ -220,7 +220,7 @@ The [`readr`](https://readr.tidyverse.org/) package has other functions beside [
 
 - [`read_log()`](https://readr.tidyverse.org/reference/read_log.html) for Apache-style log files.
 
-## Controlling column types {-}
+## Controlling column types
 
 - `readr` will try to guess the type of each column (i.e. whether it’s a logical, number, string, etc.) 
 
@@ -243,7 +243,7 @@ read_csv("
 
 ```
 
-## Unexpected values {-}
+## Unexpected values
 
 - Most common way column detection fails is a column contains unexpected values so you get a character column.
   - The most common cause is a missing value, recorded using something other than `NA`.
@@ -260,7 +260,7 @@ read_csv(simple_csv)
 ```
 
 
-## `col_types` {-}
+## `col_types`
 
 - One approach is to tell `readr` that `x` is a numeric column using `col_types` argument:
 
@@ -277,7 +277,7 @@ df <- read_csv(
 problems(df)
 ```
 
-## `problems()` {-}
+## `problems()`
 
 - `problems()`tells us that there was a problem in row 3, col 1 where readr expected a double but got a `.`. 
 - So set `na = "."`.
@@ -286,7 +286,7 @@ problems(df)
 read_csv(simple_csv, na = ".")
 ```
 
-## Column types {-}
+## Column types
 
 `readr` provides a total of nine column types for you to use:
 
@@ -302,7 +302,7 @@ read_csv(simple_csv, na = ".")
 
 - `col_skip()` skips a column so it’s not included in the result.
 
-##  Overriding the default column {-}
+##  Overriding the default column
 
 It’s also possible to override the default column by switching from `list()` to `cols()` and specifying `.default`, or to read in only the columns you specify using `cols_only()`.
 
@@ -324,7 +324,7 @@ read_csv(
 )
 ```
 
-## Reading data from multiple files {-}
+## Reading data from multiple files
 
 - `read_csv()`  can read data **stored in the same directory** split across multiple files instead of being contained in a single file -> stack them on top of each other in a single data frame.
 
@@ -338,7 +338,7 @@ class(stacked_csv)
 
 ```
 
-## Reading data from multiple files cont. {-}
+## Reading data from multiple files cont.
 
 - If you have many files you want to read in **stored in the same directory**, you can use the base R `list.files()` function to find the files for you by matching a pattern in the file names. 
 
@@ -347,7 +347,7 @@ sales_files <- list.files("data", pattern = "sales\\.csv$", full.names = TRUE)
 sales_files
 ```
 
-## Writing to a file {-}
+## Writing to a file
 
 - `readr` also has functions for writing data back to disk: `write_csv()` and `write_tsv()`. 
 
@@ -366,7 +366,7 @@ write_csv(students, "students-2.csv")
 read_csv("students-2.csv")
 ```
 
-## RDS {-}
+## RDS
 
 - `write_rds()` and `read_rds()` are uniform wrappers around the base functions `readRDS()` and `saveRDS()`. 
 
@@ -381,7 +381,7 @@ read_rds("students.rds")
 ```
 
 
-## Arrow {-}
+## Arrow
 
 - The [`arrow`](https://arrow.apache.org/docs/r/) package allows you to read and write parquet files, a fast binary file format that can be shared across programming languages.
 
@@ -402,7 +402,7 @@ read_parquet("students.parquet")
 ```
 
 
-## Data Entry {-}
+## Data Entry
 
 - There are two useful functions to help you assemble a tibble “by hand”:
   - [`tibble()`](https://tibble.tidyverse.org/reference/tibble.html), and
@@ -427,7 +427,7 @@ tribble(
 )
 ```
 
-## Summary {-}
+## Summary
 
 - In this chapter, we’ve learned how csv files work, some of the problems you might encounter, and how to overcome them. 
 
@@ -438,7 +438,7 @@ tribble(
   - [Chapter 24](https://r4ds.hadley.nz/rectangling) from JSON, and 
   - [Chapter 25](https://r4ds.hadley.nz/webscraping) from websites.
   
-## Exercises {-}
+## Exercises
 
 1. What function would you use to read a file where fields were separated with “|”?
 
@@ -499,9 +499,9 @@ ggplot(clean,
 ```
 
 
-## Meeting Videos {-}
+## Meeting Videos
 
-### Cohort 5 {-}
+### Cohort 5
 
 `r knitr::include_url("https://www.youtube.com/embed/s5b_QkLSYeE")`
 
@@ -592,7 +592,7 @@ is     fixed  width
 ```
 </details>
 
-### Cohort 6 {-}
+### Cohort 6
 
 `r knitr::include_url("https://www.youtube.com/embed/QKB9wy-2_Ps")`
 
@@ -624,7 +624,7 @@ is     fixed  width
 </details>
 
 
-### Cohort 7 {-}
+### Cohort 7
 
 `r knitr::include_url("https://www.youtube.com/embed/hb7eSpCMGDU")`
 
@@ -646,6 +646,6 @@ is     fixed  width
 </details>
 
 
-### Cohort 8 {-}
+### Cohort 8
 
 `r knitr::include_url("https://www.youtube.com/embed/b91ZvatZ1Ug")`

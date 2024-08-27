@@ -17,7 +17,7 @@ library(rvest)
 library(tidyverse)
 ```
 
-## Ethics & Legalities {-}
+## Ethics & Legalities
 
 > [If the data isn’t public, non-personal, or factual or you’re scraping the data specifically to make money with it, you’ll need to talk to a lawyer.](https://r4ds.hadley.nz/webscraping#scraping-ethics-and-legalities)
 
@@ -26,7 +26,7 @@ library(tidyverse)
 -   Beware PII
 -   Facts usually aren't copyrightable
 
-## Typical HTML structure {-}
+## Typical HTML structure
 
 HTML = **H**yper**T**ext **M**arkup **L**anguage
 
@@ -39,14 +39,14 @@ HTML = **H**yper**T**ext **M**arkup **L**anguage
 -   Elements nest inside elements (as content) 
     -   Nested elements = "children"
 
-## Use {rvest} to scrape web pages {-}
+## Use {rvest} to scrape web pages
 
 [{rvest}](https://rvest.tidyverse.org/) ("harvest") = tidyverse web-scraping package
 
 -   Load html to scrape: `read_html()`
 -   Shortcut for tables: `html_table()`
 
-## Example: Table {-}
+## Example: Table
 
 [IMDB data from the Internet Archive](https://web.archive.org/web/20220201012049/https://www.imdb.com/chart/top/)
 
@@ -62,7 +62,7 @@ html |>
   html_table()
 ```
 
-## Select a specific element {-}
+## Select a specific element
 
 `html_element()` returns same # outputs as inputs (1 thing in, 1 thing out)
 
@@ -70,7 +70,7 @@ html |>
 -   `".thing"` = something with attribute `class="thing"`
 -   `"#thing"` = something with attribute `id="thing"`
 
-## Example: Specific table {-}
+## Example: Specific table
 
 (See "Example: Table" slide above; fix that then this)
 
@@ -83,7 +83,7 @@ html |>
   html_table()
 ```
 
-## Select finer-grained elements {-}
+## Select finer-grained elements
 
 `html_elements()` finds *all* matches
 
@@ -92,13 +92,13 @@ html |>
 -   `html_elements()` to get observations (rows)
 -   `html_element()` to get variables for each observation (columns)
 
-## Extract data {-}
+## Extract data
 
 -   `html_text()` for raw text (you probably don't want this)
 -   `html_text2()` for clean text
 -   `html_attr()` for attribute value (eg url `href`)
 
-## Example: Star Wars Rows {-}
+## Example: Star Wars Rows
 
 [Star Wars films (1-7)](https://rvest.tidyverse.org/articles/starwars.html)
 
@@ -112,7 +112,7 @@ section <- html |> html_elements("section")
 section
 ```
 
-## Example: Star Wars Directors {-}
+## Example: Star Wars Directors
 
 ```{r}
 #| label: web_scraping-star_wars-directors
@@ -120,7 +120,7 @@ section
 section |> html_element(".director") |> html_text2()
 ```
 
-## Example: Star Wars Tibble {-}
+## Example: Star Wars Tibble
 
 ```{r}
 #| label: web_scraping-star_wars-tibble
@@ -143,16 +143,16 @@ tibble(
 )
 ```
 
-## Learn more {-}
+## Learn more
 
 -   [SelectorGadget](https://rvest.tidyverse.org/articles/selectorgadget.html)
 -   [CSS Diner](https://flukeout.github.io/)
 -   [MDN CSS selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors)
 -   [*Web APIs with R* book club](https://DSLC.io/wapir)
 
-## Meeting Videos {-}
+## Meeting Videos
 
-### Cohort 7 {-}
+### Cohort 7
 
 `r knitr::include_url("https://www.youtube.com/embed/G5_pr9HxbT4")`
 
@@ -170,10 +170,10 @@ tibble(
 
 `r knitr::include_url("https://www.youtube.com/embed/HnJ3ZY1seY4")`
 
-### Cohort 8 {-}
+### Cohort 8
 
 `r knitr::include_url("https://www.youtube.com/embed/dOVWSSqUvt0")`
 
-### Cohort 9 {-}
+### Cohort 9
 
 `r knitr::include_url("https://www.youtube.com/embed/Hs928CH-_E4")`

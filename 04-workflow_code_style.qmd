@@ -9,7 +9,7 @@
 -   Appropriately utilize spaces ` ` between mathematical operators.
 -   Apply the `|>` operator to make our code more readable.
 
-## Use styler {-}
+## Use styler
 
 {styler} 📦 by Lorenz Walthert helps quickly apply styles
 
@@ -18,7 +18,7 @@
     -   **Cmd/Ctrl + Shift + P** to open pallette
     -   Type **“styler”** to see all styler shortcuts
 
-## Names {-}
+## Names
 
 Names should use only:
 
@@ -26,7 +26,7 @@ Names should use only:
 2. numbers 
 3. underscore
 
-## Use snake_case for names {-}
+## Use snake_case for names
 
 `snake_case` = preferred style
 
@@ -40,7 +40,7 @@ short_flights <- flights |> filter(air_time < 60)
 SHORTFLIGHTS <- flights |> filter(air_time < 60)
 ```
 
-## Names should be descriptive {-}
+## Names should be descriptive
 
 -   Good: Long, descriptive names
     -   Easy to understand
@@ -50,7 +50,7 @@ SHORTFLIGHTS <- flights |> filter(air_time < 60)
 Be consistent with related names!
 
 
-## Spaces {-}
+## Spaces
 
 Spaces around:
 
@@ -67,7 +67,7 @@ z <- (a + b)^2 / d
 z<-( a + b ) ^ 2/d
 ```
 
-## Spaces in function calls {-}
+## Spaces in function calls
 
 -   No spaces inside/outside parentheses
 -   Spaces after commas (like regular English)
@@ -82,7 +82,7 @@ mean(x, na.rm = TRUE)
 mean (x ,na.rm=TRUE )
 ```
 
-## Use extra spaces for alignment {-}
+## Use extra spaces for alignment
 
 ```{r}
 #| eval: false
@@ -96,7 +96,7 @@ flights |>
 ```
 
 
-## Pipes: Spacing {-}
+## Pipes: Spacing
 
 ```{r}
 #| eval: false
@@ -117,7 +117,7 @@ Easier to:
 3. modify elements within a step
 4. to get a 50,000 ft view by skimming the verbs on the left-hand side
 
-## Pipes: Newlines {-}
+## Pipes: Newlines
 
 -   Put named arguments on newline
 -   Put unnamed arguments on one line if they fit
@@ -141,7 +141,7 @@ flights |>
   summarize(delay = mean(arr_delay, na.rm = TRUE), n = n())
 ```
 
-## Pipes: Indentation {-}
+## Pipes: Indentation
 
 ```{r}
 #| eval: false
@@ -170,7 +170,7 @@ flights|>
   )
 ```
 
-## Pipes: Breaking the rules {-}
+## Pipes: Breaking the rules
 
 OK to shirk some rules to fit on one line 
 
@@ -188,13 +188,13 @@ df |>
   )
 ```
 
-## Pipe length {-}
+## Pipe length
 
 -   Limit to 10-15 lines
 -   Break up into smaller sub-tasks
     -   Give each task an informative name
 
-## ggplot2 spacing {-}
+## ggplot2 spacing
 
 Same rules for `+` as for `|>`
 
@@ -211,7 +211,7 @@ flights |>
   geom_line()
 ```
 
-## ggplot2 spacing 2 {-}
+## ggplot2 spacing 2
 
 ```{r}
 #| eval: false
@@ -233,7 +233,7 @@ flights |>
   geom_point()
 ```
 
-## Sectioning comments {-}
+## Sectioning comments
 
 Use sectioning comments (**Cmd/Ctrl + Shift + R**) to break up long files
 
@@ -246,7 +246,7 @@ Use sectioning comments (**Cmd/Ctrl + Shift + R**) to break up long files
 ```
 
 
-## Exercises {-}
+## Exercises
 
 1. Restyle the following pipelines following the guidelines above.
 
@@ -295,9 +295,9 @@ flights |>
 ```
 
 
-## Meeting Videos {-}
+## Meeting Videos
 
-### Cohort 5 {-}
+### Cohort 5
 
 `r knitr::include_url("https://www.youtube.com/embed/JW1DilkJ3-0")`
 
@@ -336,7 +336,7 @@ a %<>%
 ```
 </details>
 
-### Cohort 6 {-}
+### Cohort 6
 
 `r knitr::include_url("https://www.youtube.com/embed/jwnQkHtUiOY")`
 
@@ -352,7 +352,7 @@ a %<>%
 ```
 </details>
 
-### Cohort 7 {-}
+### Cohort 7
 
 `r knitr::include_url("https://www.youtube.com/embed/wlYh2KewQcI")`
 
@@ -372,7 +372,7 @@ a %<>%
 `r knitr::include_url("https://www.youtube.com/embed/LHYUEAXaYoM")`
 
 
-### Cohort 8 {-}
+### Cohort 8
 
 `r knitr::include_url("https://www.youtube.com/embed/uEYKR3xs4Y0")`
 

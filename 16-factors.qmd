@@ -15,7 +15,7 @@
     -   `forcats::fct_collapse()`
     -   `forcats::fct_lump()`
 
-## Introduction {-}
+## Introduction
 
 - Factors -> categorical variables: variables that have a fixed and known set of possible values. 
 - Also useful when you want to display character vectors in a non-alphabetical order.
@@ -27,7 +27,7 @@
 library(tidyverse)
 ```
 
-## Factor basics {-}
+## Factor basics
 
 - A variable that records month:
 
@@ -49,7 +49,7 @@ x2 <- c("Dec", "Apr", "Jam", "Mar")
 sort(x1)
 ```
 
-## Fix issues with strings using factors {-}
+## Fix issues with strings using factors
 
 - Fix those problems with a factor. 
 - Start by creating a list of the valid levels:
@@ -77,7 +77,7 @@ sort(y1)
 factor(x1)
 ```
 
-## Values not included in levels {-}
+## Values not included in levels
 
 - <b style="color:red;">WARNING:</b> Any values not in the level will be silently converted to NA:
 
@@ -105,7 +105,7 @@ y2 <- fct(x2, levels = month_levels)
 levels(y2)
 ```
 
-## Other ways of dealing with factors {-}
+## Other ways of dealing with factors
 
 - If we want the order of the levels match the order of the first appearance in the data then use `unique()`, or after the fact, with [fct_inorder():]('https://forcats.tidyverse.org/reference/fct_inorder.html')
 
@@ -139,7 +139,7 @@ df <- read_csv(csv, col_types = cols(month = col_factor(month_levels)))
 df$month
 ```
 
-## General Social Survey {-}
+## General Social Survey
 
 It's a long-running US survey conducted by the independent research organization NORC at the University of Chicago. The survey has thousands of questions, so in `gss_cat` Hadley selected a handful that will illustrate some common challenges you’ll encounter when working with factors.
 
@@ -154,7 +154,7 @@ gss_cat |>
   count(race)
 ```
 
-## Modifying factor order {-}
+## Modifying factor order
 
 - Let's look at an example in a plot for which we will modify the order of factors on the y-axis: 
 
@@ -171,7 +171,7 @@ ggplot(relig_summary, aes(x = tvhours, y = relig)) +
   geom_point()
 ```
 
-## Let's re order the factos with `fct_reorder()` {-}
+## Let's re order the factos with `fct_reorder()`
 
 - It is hard to read this plot because there's no overall pattern. We can improve it by reordering the levels of relig using [fct_reorder()]('https://forcats.tidyverse.org/reference/fct_reorder.html'). [fct_reorder()]('https://forcats.tidyverse.org/reference/fct_reorder.html') takes three arguments:
 
@@ -191,7 +191,7 @@ relig_summary |>
   geom_point()
 ```
 
-## Change levels of a factor {-}
+## Change levels of a factor
 
 - Changing the levels of a factor
 
@@ -244,7 +244,7 @@ gss_cat |>
   geom_bar()
 ```
 
-## Modifying factor levels {-}
+## Modifying factor levels
 
 - We can change the values of the levels.
   - Now we can clarify levels for publication
@@ -266,7 +266,7 @@ gss_cat |>
   count(partyid)
 ```
 
-## Combine groups {-}
+## Combine groups
 
   - To combine groups, we can assign multiple old levels to the same new level ('Other'):
 
@@ -288,7 +288,7 @@ gss_cat |>
   count(partyid)
 ```
 
-## Collapse levels into one {-}
+## Collapse levels into one
 
   - If we want to collapse a lot of levels, [fct_collapse()]('https://forcats.tidyverse.org/reference/fct_collapse.html') is a useful variant of [fct_recode().]('https://forcats.tidyverse.org/reference/fct_recode.html'). 
     - For each new variable, you can provide a vector of old levels:
@@ -306,7 +306,7 @@ gss_cat |>
   count(partyid)
 ```
 
-## Lump together several small groups {-}
+## Lump together several small groups
 
   - If you want to lump together small groups to make a simpler table or plot then use `fct_lump*()`. For example: `fct_lump_lofreq()` lumps progressively smallest groups categories into 'Other':
 
@@ -318,7 +318,7 @@ gss_cat |>
 
 -   Read the documentation to learn about [fct_lump_min()]('https://forcats.tidyverse.org/reference/fct_lump.html') and [fct_lump_prop()]('https://forcats.tidyverse.org/reference/fct_lump.html') which are useful in other cases.
 
-## Ordered factors {-}
+## Ordered factors
 
 - Ordered factors, created with ordered(), imply a strict ordering and equal distance between levels:
 
@@ -329,7 +329,7 @@ ordered(c('a', 'b', 'c'))
 - If you use an ordered function in a linear model, it will use 'polygonal contrasts'. These are mildly useful and you can learn more here: `vignette("contrasts", package = "faux")` by [Lisa DeBruine](https://debruine.github.io/faux/articles/contrasts.html).
 
 
-## Meeting Videos {-}
+## Meeting Videos
 
 ### Cohort 5
 

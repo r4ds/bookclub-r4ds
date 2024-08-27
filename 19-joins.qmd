@@ -19,11 +19,11 @@ library(tidyverse)
 - Understand how joins work and understand the output
 - Understand how various key matching conditions work
 
-## What? {-}
+## What?
 
 - Joining two data frames `x` and `y`: combining the information from both data frames to create a new data frame, by **matching rows in `x` to rows in `y` based on one or more common variables** (keys)
 
-## What? {-}
+## What?
 
 - A join is the operation of joining.
 Joins can be classified by several criteria:
@@ -31,14 +31,14 @@ Joins can be classified by several criteria:
     - what happens with non-matching rows? (inner vs outer joins / semi-join vs anti-join)
     - how are key matching conditions defined? (equality vs inequality vs no restrictions)
 
-## Keys {-}
+## Keys
 
 Keys = the variables used to connect a pair of data frames in a join.
 
 - `x$key` must match `y$key` for a row in `x` to be matched to a row in `y`
 - **compound key**: key that consists of > 1 variable
 
-## Keys {-}
+## Keys
 
 Every join involves a **pair of keys**: one key in each data frame.
 
@@ -52,13 +52,13 @@ They typically play a different role depending on the data frame they belong to:
 ![](images/19_equality_match.png)
 
 
-## Keys {-}
+## Keys
 
 Primary & foreign key relationships in the nycflights13 package:
 
 ![](images/19_relational.png)
 
-## Keys {-}
+## Keys
 
 Tips:
 
@@ -67,7 +67,7 @@ Tips:
     - each value must occur only once
     - there must be no missing values
 
-## Keys {-}
+## Keys
 
 **Surrogate key**: a single variable added to reflect a compound primary key; makes life easier
 
@@ -81,30 +81,30 @@ flights2
 ```
 
 
-## Mutating joins {-}
+## Mutating joins
 
 **Mutating joins** add columns from data frame `y`.
 
 - Inner join: only keep matching rows.
 - Outer join: also keep non-matching rows from `x` (left join), `y` (right join) or both (full join).
 
-## Mutating joins {-}
+## Mutating joins
 
 ![](images/19_inner.png)
 
-## Mutating joins {-}
+## Mutating joins
 
 ![](images/19_left.png)
 
-## Mutating joins {-}
+## Mutating joins
 
 ![](images/19_right.png)
 
-## Mutating joins {-}
+## Mutating joins
 
 ![](images/19_full.png)
 
-## Mutating joins: examples {-}
+## Mutating joins: examples
 
 ```{r}
 flights2 <- flights |> 
@@ -112,28 +112,28 @@ flights2 <- flights |>
 flights2
 ```
 
-## Mutating joins: examples {-}
+## Mutating joins: examples
 
 ```{r}
 flights2 |>
   left_join(airlines)
 ```
 
-## Mutating joins: examples {-}
+## Mutating joins: examples
 
 ```{r}
 flights2 |>
   inner_join(airlines)
 ```
 
-## Mutating joins: extras {-}
+## Mutating joins: extras
 
 `left_join()`, `right_join()` and `inner_join()` have an argument `unmatched =`
 
 - defaults to `"drop"`: drop non-matching records from (respectively) `y`, `x` or both `x` and `y`
 - can be set to `"error"` to verify that all records from `y`, `x` or both `x` and `y` are kept, if that is what you expect
 
-## Mutating joins: extras {-}
+## Mutating joins: extras
 
 All mutating join functions have an argument `keep =`
 
@@ -145,7 +145,7 @@ flights2 |>
   inner_join(airlines, keep = TRUE)
 ```
 
-## Relationships in mutating joins {-}
+## Relationships in mutating joins
 
 The _relationship_ describes how many rows in `x` each value of `y$key` is _expected_ to match (**one** or **many**), _and vice-versa_, giving rise to 4 possible combinations:
 
@@ -156,7 +156,7 @@ The _relationship_ describes how many rows in `x` each value of `y$key` is _expe
 
 Which relationship applies, follows from the keys being primary or foreign in `x` and `y`.
 
-## Relationships in mutating joins {-}
+## Relationships in mutating joins
 
 **One-to-many**: primary key is in `x`.
 
@@ -164,7 +164,7 @@ Example with left join:
 
 ![](images/19_one-to-many.png)
 
-## Relationships in mutating joins {-}
+## Relationships in mutating joins
 
 **Many-to-one**: primary key is in `y`.
 
@@ -172,13 +172,13 @@ Example with left join or inner join:
 
 ![](images/19_many-to-one.png)
 
-## Relationships in mutating joins {-}
+## Relationships in mutating joins
 
 **One-to-one**: each row in `x` matches at most one row in `y`, and vice-versa.
 
 ![](images/19_right.png)
 
-## Relationships in mutating joins {-}
+## Relationships in mutating joins
 
 **Many-to-many**: no primary keys involved!
 
@@ -188,7 +188,7 @@ This gives a warning by default, since it can be unintended.
 
 To avoid the warning (an intentional many-to-many), explicitly set `relationship = "many-to-many"`.
 
-## Relationships in mutating joins {-}
+## Relationships in mutating joins
 
 The `relationship` argument in mutating joins allows you to take control over the expected relationship.
 
@@ -196,35 +196,35 @@ From `help("mutate-joins")`:
 
 > In production code, it is best to preemptively set `relationship` to whatever relationship you expect to exist between the keys of `x` and `y`, as this forces an error to occur immediately if the data doesn't align with your expectations.
 
-## Filtering joins {-}
+## Filtering joins
 
 **Filtering joins** filter `x` based on (non-)matching rows in `y`.
 
 They never duplicate rows!
 
-## Filtering joins {-}
+## Filtering joins
 
 ![](images/19_semi.png)
 
-## Filtering joins {-}
+## Filtering joins
 
 ![](images/19_anti.png)
 
-## Filtering joins: examples {-}
+## Filtering joins: examples
 
 ```{r}
 flights2 |>
   semi_join(weather)
 ```
 
-## Filtering joins: examples {-}
+## Filtering joins: examples
 
 ```{r}
 flights2 |>
   anti_join(weather)
 ```
 
-## Specifying join keys and their matching conditions {-}
+## Specifying join keys and their matching conditions
 
 Without specifying a join key: the 'natural join' is applied (messages in previous slides).
 
@@ -233,7 +233,7 @@ BUT:
 - this will miss key pairs with different names
 - this will assume any pair of identical variable names to be part of the key pair
 
-## Specifying join keys and their matching conditions {-}
+## Specifying join keys and their matching conditions
 
 E.g. this is NOT wat we intend (`year` has a different meaning in `flights` vs `planes`):
 
@@ -242,7 +242,7 @@ flights2 |>
   left_join(planes)
 ```
 
-## Specifying join keys and their matching conditions {-}
+## Specifying join keys and their matching conditions
 
 So it's much recommended to explicitly define the join key using `join_by()`:
 
@@ -253,7 +253,7 @@ So it's much recommended to explicitly define the join key using `join_by()`:
 - `semi_join(x, y, by = join_by(...))`
 - `anti_join(x, y, by = join_by(...))`
 
-## Specifying join keys and their matching conditions {-}
+## Specifying join keys and their matching conditions
 
 When both keys have the same name(s): just provide the key name(s).
 
@@ -262,7 +262,7 @@ flights2 |>
   left_join(planes, join_by(tailnum))
 ```
 
-## Specifying join keys and their matching conditions {-}
+## Specifying join keys and their matching conditions
 
 When both keys have the same name(s): just provide the key name(s).
 
@@ -271,7 +271,7 @@ flights2 |>
   semi_join(weather, join_by(origin, time_hour))
 ```
 
-## Specifying join keys and their matching conditions {-}
+## Specifying join keys and their matching conditions
 
 `join_by(var1)` is shorthand for `join_by(var1 == var1)`.
 
@@ -282,7 +282,7 @@ The expression form in `join_by()` defines:
 - _each_ key's name -- these can differ between the `x` and `y` data frame
 - the matching condition that defines the match between `x$key` and `y$key`: equality (`==`) or inequality (`<`, `<=` etc, and helpers)
 
-## Some `join_by()` examples {-}
+## Some `join_by()` examples
 
 Join airport attributes without losing flights:
 
@@ -291,7 +291,7 @@ flights2 |>
   left_join(airports, join_by(origin == faa))
 ```
 
-## Some `join_by()` examples {-}
+## Some `join_by()` examples
 
 Join airport attributes without losing flights:
 
@@ -300,7 +300,7 @@ flights2 |>
   left_join(airports, join_by(dest == faa))
 ```
 
-## Some `join_by()` examples {-}
+## Some `join_by()` examples
 
 ```{r}
 df <- tibble(id = 1:4, name = c("John", "Simon", "Tracy", "Max"))
@@ -314,7 +314,7 @@ df |> inner_join(df, join_by(id < id)) |> print(n = Inf)
 ```
 
 
-## Key matching conditions {-}
+## Key matching conditions
 
 - Equality condition: so called '**equi joins**'.
     - You will use this most of the time.
@@ -329,17 +329,17 @@ df |> inner_join(df, join_by(id < id)) |> print(n = Inf)
 - No conditions: **cross joins**.
 Use separate function `cross_join()`.
 
-## Key matching conditions {-}
+## Key matching conditions
 
 ![](images/19_lt.png)
 
-## Key matching conditions {-}
+## Key matching conditions
 
 **`cross_join(x, y)`**
 
 ![](images/19_cross.png)
 
-## Key matching conditions: examples {-}
+## Key matching conditions: examples
 
 ```{r}
 #| include: false
@@ -362,7 +362,7 @@ employees
 parties
 ```
 
-## Key matching conditions: examples {-}
+## Key matching conditions: examples
 
 When is the birthday party for each employee?
 
@@ -375,7 +375,7 @@ employees |>
   )
 ```
 
-## Key matching conditions: examples {-}
+## Key matching conditions: examples
 
 ```{r}
 df <- tibble(name = c("John", "Simon", "Tracy", "Max"))

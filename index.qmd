@@ -7,7 +7,7 @@ This website is being developed by the [Data Science Learning Community](https:/
 
 This companion follows the [Data Science Learning Community Code of Conduct](https://dslc.io/conduct).
 
-## Book club meetings {-}
+## Book club meetings
 
 -   Volunteer leads discussion of a chapter
     -   **This is the best way to learn the material.**
@@ -18,7 +18,7 @@ This companion follows the [Data Science Learning Community Code of Conduct](htt
 -   More info about editing: [this github repo](https://github.com/r4ds/bookclub-r4ds).
 -   Recorded, available on the [Data Science Learning Community YouTube Channel](https://dslc.io/youtube).
 
-## Pace {-}
+## Pace
 
 -   **Goal:** 1 chapter/week
 -   Ok to split overwhelming chapters
@@ -26,7 +26,7 @@ This companion follows the [Data Science Learning Community Code of Conduct](htt
 -   Meet ***every*** week except holidays, etc
     -   We'll discuss even if presenter unavailable
 
-## Learning objectives {-}
+## Learning objectives
 
 -   Students who study with LOs in mind ***retain more.***
 -   **Tips:**
@@ -34,7 +34,7 @@ This companion follows the [Data Science Learning Community Code of Conduct](htt
     -   *Very* roughly **1 per section.**
 -   Likely need to be refined
 
-## Today's learning objectives {-}
+## Today's learning objectives
 
 After today's session, you will be able to...
 
@@ -43,7 +43,7 @@ After today's session, you will be able to...
 -   Edit notes on GitHub.
 -   (More LOs coming in Chapter 1)
 
-## GitHub {-}
+## GitHub
 
 -   Even *tech bros* can figure it out, ***you'll be fine!***
 -   See README for setup instructions

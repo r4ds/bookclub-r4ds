@@ -8,7 +8,7 @@
 -   Recognize good practices when naming objects.
 -   Confidently call **functions** in R.
 
-## Basic math calculations {-}
+## Basic math calculations
 
 ```{r}
 #| label: 03-basic-math
@@ -18,7 +18,7 @@
 sin(pi / 2)
 ```
 
-## Create new objects {-}
+## Create new objects
 
 Use the 'assignment operator' `<-`
 
@@ -28,7 +28,7 @@ Use the 'assignment operator' `<-`
     -   "to ... assign" or "is assigned to": "To object x ***assign*** three by four" OR "three by four ***is assigned to*** object x" 
     -   "gets": "x ***gets*** 3 times 4".
 
-## Create new objects: Reverse assign {-}
+## Create new objects: Reverse assign
 
 Can go the other way `->`, eg graphs:
 
@@ -42,11 +42,11 @@ ggplot(mtcars, aes(wt, hp)) +
 plot01
 ```
 
-## Create new objects: Double assign {-}
+## Create new objects: Double assign
 
 -   *Double assign or scoping assign `<<-`?!*
 
-## Combining elements {-}
+## Combining elements
 
 -   Combine elements into a vector with `c()`
 -   Basic arithmetic operations applied to every element of a vector. 
@@ -59,7 +59,7 @@ primes * 2
 ```
 
 
-## Comments {-}
+## Comments
 
 Use `#` to insert comments in R. 
   
@@ -74,7 +74,7 @@ primes <- c(2, 3)
 primes * 2
 ```
 
-## Comments: Why? {-}
+## Comments: Why?
 
 -   Commenting your own code can save (future) you & and collaborators time.
 - *Why* of your code, not the *how* or *what.* 
@@ -82,7 +82,7 @@ primes * 2
     -   Good: `# Increased smoothing parameter to better capture the trend in the data.`
 
 
-## Assigning names {-}
+## Assigning names
 
 -   Names must start with a letter, contain letters, numbers, `_`, `.`. 
 -   Good style convention ➡️ more readable code.
@@ -91,11 +91,11 @@ primes * 2
 -   R is case-sensitive! And it can't read your mind.
 -   Typos matter! 
 
-## Assigning names: Cases {-}
+## Assigning names: Cases
 
 ![](images/cases.png)
 
-## Calling Functions {-}
+## Calling Functions
 
 Functions overall look like this: 
 
@@ -110,7 +110,7 @@ function_name(argument1 = value 1,
 
 -   Functions and objects are always displayed in the Environment tab in RStudio. 
 
-## Calling Functions: Arguments {-}
+## Calling Functions: Arguments
 
 -   TAB to show possible completions of function & arguments.
     -   Use ESC to abort the suggestions. 
@@ -129,7 +129,7 @@ seq(1, 10)
 #> [1]  1  2  3  4  5  6  7  8  9 10
 ```
   
-## Other RStudio Features {-}
+## Other RStudio Features
 
 Explore on your own:
 
@@ -198,7 +198,7 @@ ggsave(filename = "mpg-plot.png", plot = my_bar_plot)
 
 > The arguments for ggsave are (`?ggsave` in the console): filename, plot, device, path, ...). Plot refers to the plot to be saved, so in this case the first plot named `my_bar_plot` will be saved as mpg-plot.png. 
 
-## Meeting Videos {-}
+## Meeting Videos
 
 ### Cohort 5
 

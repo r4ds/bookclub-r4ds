@@ -6,13 +6,13 @@
 -   Partition large data files into parquet files for quicker access, less memory usage, and quicker wrangling 
 -   Wrangle {arrow} data using existing {dplyr} operations
 
-## Why learn {arrow}? {-}
+## Why learn {arrow}?
 
 -   CSV files = very common for ease of access and use
 -   Big/messy CSVs = slow
 -   {arrow} 📦 reads large datasets quickly & uses {dplyr} syntax
 
-## Packages used {-}
+## Packages used
 
 ```{r}
 #| label: arrow-library
@@ -25,7 +25,7 @@ library(duckdb)
 library(tidyverse)
 ```
 
-## Download data {-}
+## Download data
 
 -   Case study: [item checkouts dataset from Seattle libraries](https://data.seattle.gov/Community/Checkouts-by-Title/tmmm-ytt6)
 -   **DON'T `download.file()`!!!**  (41,389,465 rows of data)
@@ -41,7 +41,7 @@ curl::multi_download(
 )
 ```
 
-## Open the data {-}
+## Open the data
 
 -   Size in memory ≈ 2 × size on disk
 -   ~~`read_csv()`~~ ➡️ `arrow::open_dataset()`
@@ -59,7 +59,7 @@ seattle_csv <- open_dataset(
 )
 ```
 
-## Glimpse the data {-}
+## Glimpse the data
 
 ```{r}
 #| eval: false
@@ -81,7 +81,7 @@ seattle_csv |> glimpse()
 #> $ PublicationYear <string> "c2011.", "2010.", "2015", "2005.", "c2004.", "c20…
 ```
 
-## Manipulate the data {-}
+## Manipulate the data
 
 -   Can use {dplyr} functions on data
 
@@ -105,14 +105,14 @@ seattle_csv |>
 #> # ℹ 12 more rows
 ```
 
-## Parquet > CSV {-}
+## Parquet > CSV
 
 -   Slow: Manipulating large CSV datasets with {readr}
 -   Faster: Manipulating large CSV datasets with {arrow}
 -   Much faster: Manipulating large `parquet` datasets with {arrow}
     -   Data subdivided into multiple files 
 
-## Benefits of parquet {-}
+## Benefits of parquet
 
 -   Smaller files than CSV (efficient encodings + compression)
 -   Stores datatypes (vs CSV storing all as character & guessing)
@@ -123,7 +123,7 @@ seattle_csv |>
 
 -   Not human-readable
 
-## Partitioning {-}
+## Partitioning
 
 -   Split data across files so analyses can skip unused data
 -   Experiment to find best partition for your data
@@ -131,7 +131,7 @@ seattle_csv |>
     -   20 MB < Filesize < 2 GB
     -   <= 10,000 files
 
-## Seattle library CSV to parquet {-}
+## Seattle library CSV to parquet
 
 -   `dplyr::group_by()` to define partitions
 -   `arrow::write_dataset()` to save as parquet
@@ -145,7 +145,7 @@ seattle_csv |>
   write_dataset(path = pq_path, format = "parquet")
 ```
 
-## Seattle library parquet files {-}
+## Seattle library parquet files
 
 -   [Apache Hive](https://hive.apache.org/) "self-describing" directory/file names
 
@@ -168,7 +168,7 @@ tibble(
 #> # ℹ 12 more rows
 ```
 
-## parquet + {arrow} + {dplyr} {-}
+## parquet + {arrow} + {dplyr}
 
 ```{r}
 #| eval: false
@@ -181,7 +181,7 @@ query <- seattle_pq |>
   arrange(CheckoutYear, CheckoutMonth)
 ```
 
-## Results (uncollected) {-}
+## Results (uncollected)
 
 ```{r}
 #| eval: false
@@ -197,7 +197,7 @@ query
 #> See $.data for the source Arrow object
 ```
 
-## Results (collected) {-}
+## Results (collected)
 
 ```{r}
 #| eval: false
@@ -216,12 +216,12 @@ query |> collect()
 #> # ℹ 52 more rows
 ```
 
-## Available verbs {-}
+## Available verbs
 
 -   [`?arrow-dplyr`](https://arrow.apache.org/docs/r/reference/acero.html) for supported functions
     -   (book uses `?acero` but that's way harder to remember)
 
-## Performance {-}
+## Performance
 
 ```{r}
 #| eval: false
@@ -238,16 +238,16 @@ x |>
 -   CSV: 11.951s
 -   Parquet: **0.263s**
 
-## Using {duckdb} with {arrow} {-}
+## Using {duckdb} with {arrow}
 
 -   `arrow::to_duckdb()` translates {arrow} dataset to {duckdb}
     -   Outside R/memory
 -   Discussion: Why? 
     -   More tidyverse verbs?
 
-## Meeting Videos {-}
+## Meeting Videos
 
-### Cohort 7 {-}
+### Cohort 7
 
 `r knitr::include_url("https://www.youtube.com/embed/qsgZAgmmpt4")`
 
@@ -267,6 +267,6 @@ x |>
 ```
 </details>
 
-### Cohort 8 {-}
+### Cohort 8
 
 `r knitr::include_url("https://www.youtube.com/embed/dUQ3vCNejbI")`

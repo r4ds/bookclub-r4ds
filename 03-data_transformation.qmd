@@ -10,7 +10,7 @@
 - **Apply functions to columns** of a (grouped) data frame with **`dplyr::summarize()`**.
 - **Streamline data transformations** with the **pipe** operator (`|>`).
 
-## Prerequisites {-}
+## Prerequisites
 
 -   dplyr 📦 = functions to manipulate data frames.
 -   data frames consist of columns (variables) and rows (observations).
@@ -44,7 +44,7 @@ install.packages("dplyr")
 library(dplyr)
 ```
 
-## nycflights13 {-}
+## nycflights13
 
 `nycflights13` 📦 = New York City flight data from 2013.
 
@@ -119,7 +119,7 @@ colnames(flights)
 glimpse(flights)
 ```
 
-## dplyr basics: General structure {-}
+## dplyr basics: General structure
 
 When using `dplyr`:
 
@@ -127,7 +127,7 @@ When using `dplyr`:
 -   Subsequent args typically = columns to operate on, as variable names (without quotes).
 -   Output is always a new data frame.
 
-## dplyr basics: Pipe {-}
+## dplyr basics: Pipe
 
 -   `|>` = pipe symbol
 -   Pronounced "and then"
@@ -150,7 +150,7 @@ flights |>
 -   *and then* group these filtered results by year, month, and day, 
 -   *and then* for each group, calculate the average arrival delay (arr_delay), ignoring the missing values."
 
-## Filter rows with filter() {-}
+## Filter rows with filter()
 
 -   `filter()` = pick out certain rows (observations)
 -   `filter()` picks rows which evaluate to TRUE for all criteria.
@@ -183,7 +183,7 @@ jan1 <- flights |>
 # "jan1 gets flights and then filter where month is 1 and day is 1."
 ```
 
-### Comparisons {-}
+### Comparisons
 
 -   `>` greater than
 -   `>=` greater than or equal
@@ -192,13 +192,13 @@ jan1 <- flights |>
 -   `==` equal
 -   `!=` not equal
 
-### Logical operators {-}
+### Logical operators
 
 - `&` and; all expressions must be true in order to return true
 - `|` or; one or more expressions must be true in order to return true; `|` is the key above the return key, not lowercase letter l.
 - `!` not; negate the expression
 
-## Common mistakes {-}
+## Common mistakes
 
 -   Mistake: Using `=` instead of `==` 
     -   `filter()` tells you when this happens (read the errors!):
@@ -239,7 +239,7 @@ flights |>
 ```
 
 
-## Arrange rows with arrange() {-}
+## Arrange rows with arrange()
 
 -   `arrange()` changes order of rows
 -   1st arg = data frame
@@ -264,7 +264,7 @@ flights |>
 ```
 
 
-## Distinct {-}
+## Distinct
 
 -   `distinct()` = find unique rows in dataset
 -   Operates on rows
@@ -296,11 +296,11 @@ flights |>
   count(origin, dest, sort = TRUE)
 ```
 
-## Exercises (rows) {-}
+## Exercises (rows)
 
 (NOTE: using `relocate()` and `mutate()` from next section for better visualization)
 
-### Question 1 {-}
+### Question 1
 
 In a single pipeline for each condition, find all flights that meet the condition:
 
@@ -341,7 +341,7 @@ flights |>
 
 ```
 
-### Question 2 {-}
+### Question 2
 
 Sort flights to find the flights with longest departure delays. Find the flights that left earliest in the morning.
 
@@ -354,7 +354,7 @@ flights |>
   relocate(dep_delay, dep_time)
 ```
 
-### Question 3 {-}
+### Question 3
 
 Sort flights to find the fastest flights. (Hint: Try including a math calculation inside of your function.)
 ```{r}
@@ -367,7 +367,7 @@ flights |>
 ```
 
 
-### Question 4 {-}
+### Question 4
 
 Was there a flight on every day of 2013?
 ```{r}
@@ -385,7 +385,7 @@ flights |>
 # Yes, there was a flight every day as the resulting tibble has 365 rows
 ```
 
-### Question 5 {-}
+### Question 5
 
 Which flights traveled the farthest distance? Which traveled the least distance?
 ```{r}
@@ -403,13 +403,13 @@ flights |>
 
 ```
 
-### Question 6 {-}
+### Question 6
 
 Does it matter what order you used filter() and arrange() if you’re using both? Why/why not? Think about the results and how much work the functions would have to do.
 
 If `arrange()` is used before `filter()`, the sorting will be applied to all the rows in the dataset, including those that will be filtered out later. This can result in unnecessary work for the computer and slower performance. On the other hand, if `filter()` is used before `arrange()`, the sorting will only be applied to the remaining rows after filtering, which can be more efficient and faster.
 
-## Columns {-}
+## Columns
 
 There are four important verbs that affect the columns without changing the rows:
 
@@ -418,7 +418,7 @@ There are four important verbs that affect the columns without changing the rows
 -   `rename()` changes the names of the columns
 -   `relocate()` changes the positions of the columns.
 
-## Add new variables with mutate() {-}
+## Add new variables with mutate()
 
 `mutate()` adds new columns based on values from existing columns. Data frame includes existing and new columns.
 
@@ -474,7 +474,7 @@ flights |>
 If you don't assign the result of the computation back to `flights`, the new variables will only be displayed, not stored. Consider whether to overwrite `flights` with more variables or create a new object for future use.
 
 
-## Select columns with select() {-}
+## Select columns with select()
 
 `select()` lets you pick which columns (variables) to use. The first argument to `select()` is a data frame, the subsequent arguments are columns to use.
 
@@ -532,7 +532,7 @@ flights |>
   select(tail_num = tailnum)
 ```
 
-## Rename columns with rename() {-}
+## Rename columns with rename()
 
 If you want to keep all the existing variables and just want to rename a few, you can use `rename()` instead of `select()`:
 
@@ -546,7 +546,7 @@ flights |>
 **Tip**: If you have inconsistently named columns and it's difficult to fix them manually, use `janitor::clean_names()`. It automates the cleaning process.
 
 
-## Move variables around with relocate() {-}
+## Move variables around with relocate()
 
 Use `relocate()` to move variables around. You might want to collect related variables together or move important variables to the front. By default `relocate()` moves variables to the front:
 
@@ -569,9 +569,9 @@ flights |>
 ```
 
 
-##  Exercises (columns) {-}
+##  Exercises (columns)
 
-### Question 1 {-}
+### Question 1
 Compare `dep_time`, `sched_dep_time`, and `dep_delay`. How would you expect those three numbers to be related?
 
 The `dep_time` should be `sched_dep_time + dep_delay`.
@@ -583,7 +583,7 @@ flights |>
   relocate(dep_time, sched_dep_time, dep_delay)
 ```
 
-### Question 2 {-}
+### Question 2
 
 Brainstorm as many ways as possible to select `dep_time`, `dep_delay`, `arr_time`, and `arr_delay` from `flights`.
 
@@ -598,7 +598,7 @@ flights |>
   select(starts_with("dep"), starts_with("arr"))
 ```
 
-### Question 3 {-}
+### Question 3
 
 What happens if you specify the name of the same variable multiple times in a `select()` call?
 
@@ -611,7 +611,7 @@ flights |>
   select(dep_time, dep_delay, arr_time, arr_delay, dep_time)
 ```
 
-### Question 4 {-}
+### Question 4
 
 What does the `any_of()` function do? Why might it be helpful in conjunction with this vector?
 
@@ -630,7 +630,7 @@ flights |>
   select(any_of(variables))
 ```
 
-### Question 5 {-}
+### Question 5
 
 Does the result of running the following code surprise you? How do the select helpers deal with upper and lower case by default? How can you change that default?
 
@@ -650,7 +650,7 @@ flights |>
   select(contains("TIME", ignore.case = FALSE))
 ```
 
-### Question 6 {-}
+### Question 6
 
 Rename `air_time` to `air_time_min` to indicate units of measurement and move it to the beginning of the data frame.
 
@@ -662,7 +662,7 @@ flights |>
   relocate(air_time_min)
 ```
 
-### Question 7 {-}
+### Question 7
 
 Why doesn’t the following work, and what does the error mean?
 
@@ -681,7 +681,7 @@ flights |>
 
 The code doesn’t work because the `select()` will give a tibble with only the `tailnum` column, so  the arrange will not find the column `arr_delay`.
 
-## The pipe {-}
+## The pipe
 
 The real power of the pipe is to combine multiple verbs. 
 To find the fast flights to Houston’s IAH airport: you need to combine filter(), mutate(), select(), and arrange():
@@ -734,12 +734,12 @@ Both forms have their uses, but the pipe operator usually makes data analysis co
 
 **Tip**: To add the pipe to your code, use the built-in keyboard shortcut Ctrl/Cmd + Shift + M. 
 
-## Groups {-}
+## Groups
 
 The previous functions work with rows and columns. `dplyr` also allows to work with groups with functions like: `group_by()`, `summarize()`, and the slice family of functions.
 
 
-### group_by() {-}
+### group_by()
 
 Use `group_by()` to divide your dataset into groups meaningful for your analysis:
 
@@ -752,7 +752,7 @@ flights |>
 
 group_by() doesn’t change the data but looking at the output, it indicates that it is “grouped by” month `(Groups: month [12])`
 
-## summarize() {-}
+## summarize()
 
 Summarization is the most important grouped operation, because it reduces the data frame to a single row for each group, summarizing the data with a single statistic.
 The following example computes the average departure delay by month:
@@ -794,7 +794,7 @@ flights |>
   )
 ```
 
-## Slice functions {-}
+## Slice functions
 
 To extract specific rows within each group you can use the following functions:
 
@@ -818,7 +818,7 @@ flights |>
 In the above output we get 108 rows but there are only 105 destinations.
 `slice_min()` and `slice_max()` keep tied values so `n = 1` means give us all rows with the highest value, if you want only one row per group you can set `with_ties = FALSE`.
 
-## Grouping by multiple variables {-}
+## Grouping by multiple variables
 
 To make a group for each date you can create groups using more than one variable.
 
@@ -854,7 +854,7 @@ daily_flights <- daily |>
 
 You can change the default behavior by setting a different value, like `"drop"` to remove all grouping or `"keep"` to maintain the existing groups.
 
-## Ungrouping {-}
+## Ungrouping
 
 You might also want to remove grouping from a data frame without using `summarize()`.
 You can do this with `ungroup()`.
@@ -881,7 +881,7 @@ daily |>
 
 You get a single row back because dplyr treats all the rows in an ungrouped data frame as belonging to one group.
 
-## Group using .by {-}
+## Group using .by
 
 You can now also use the `.by` argument to group within a single operation,
 `.by` works with all verbs and has the advantage that you don't need to use the `.groups` argument to suppress the grouping message or `ungroup()` when you're done.
@@ -911,9 +911,9 @@ flights |>
   )
 ```
 
-## Exercises (groups) {-}
+## Exercises (groups)
 
-### Question 1 {-}
+### Question 1
 
 Which carrier has the worst average delays?
 Challenge: can you disentangle the effects of bad airports vs. bad carriers?
@@ -963,7 +963,7 @@ flights |>
 In the 1st calculation, UA to STL has a very high average delay, but it only happens twice. 
 In the 2nd calculation, DL to ATL has the higher total delay. 
 
-### Question 2 {-}
+### Question 2
 
 Find the flights that are most delayed upon departure from each destination.
 
@@ -989,7 +989,7 @@ flights |>
   arrange(desc(dep_delay))
 ```
 
-### Question 3 {-}
+### Question 3
 
 How do delays vary over the course of the day. Illustrate your answer with a plot.
 
@@ -1010,7 +1010,7 @@ ggplot(delays_by_hour, aes(x = hour, y = avg_dep_delay)) +
   ylab("Average Departure Delay (minutes)")
 ```
 
-### Question 4 {-}
+### Question 4
 
 What happens if you supply a negative `n` to `slice_min()` and friends?
 
@@ -1031,7 +1031,7 @@ flights |>
 
 ```
 
-### Question 5 {-}
+### Question 5
 
 Explain what `count()` does in terms of the dplyr verbs you just learned.
 What does the `sort` argument to `count()` do?
@@ -1041,7 +1041,7 @@ What does the `sort` argument to `count()` do?
 The `sort` argument specifies if how the results are sorted (`TRUE` ascending) is the default.
 
 
-## Case Study {-}
+## Case Study
 
 When you summarize data, it is always a good idea to include a count of the number of observations. This helps you to make sure that your conclusions are based on a large enough sample size.
 
@@ -1085,9 +1085,9 @@ batters |>
 ```
 
 
-## Meeting Videos {-}
+## Meeting Videos
 
-### Cohort 5 {-}
+### Cohort 5
 
 `r knitr::include_url("https://www.youtube.com/embed/J6mGn1F1kiA")`
 
@@ -1148,7 +1148,7 @@ batters |>
 </details>
 
 
-### Cohort 6 {-}
+### Cohort 6
 
 `r knitr::include_url("https://www.youtube.com/embed/DNwioC-SgKQ")`
 
@@ -1213,12 +1213,12 @@ batters |>
 </details>
 
 
-### Cohort 7 {-}
+### Cohort 7
 
 `r knitr::include_url("https://www.youtube.com/embed/LsU9XZ8iNws")`
 
 
-### Cohort 8 {-}
+### Cohort 8
 
 `r knitr::include_url("https://www.youtube.com/embed/aJFrAAmTCVE")`
 
