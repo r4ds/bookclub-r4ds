@@ -139,7 +139,9 @@ report-draft-notes.txt
   - Use `here::here('dir', 'file.txt')` to build a path relative to the top-level directory in order to build the full path to a file. 
     - For example, if you want to import a csv file you can use the function `here` to indicate the relative path of the file you want to read: 
     
-```{r, eval=FALSE}
+```{r}
+#| eval: false
+
 readr::read_csv(
   here("directory", "your_file.csv")
 )

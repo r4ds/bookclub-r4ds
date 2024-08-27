@@ -11,7 +11,12 @@ After this chapter, we'll be able to:
 -   Extract substrings from strings.
 -   Work with strings in different alphabets.
 
-```{r strings-pkgs, message=FALSE, warning=FALSE, include=FALSE}
+```{r}
+#| label: strings-pkgs
+#| message: false
+#| warning: false
+#| include: false
+
 library(tidyverse)
 library(babynames)
 ```
@@ -26,7 +31,9 @@ library(babynames)
 
 ## Creating strings: " and ' {-}
 
-```{r strings-create}
+```{r}
+#| label: strings-create
+
 string1 <- "This is a string"
 string2 <- 'Include "quote characters" inside a string'
 ```
@@ -39,7 +46,9 @@ string2 <- 'Include "quote characters" inside a string'
 
 -   "Escape" = tell R not to process special character
 
-```{r strings-escapes}
+```{r}
+#| label: strings-escapes
+
 double_quote <- "\"" # or '"'
 single_quote <- '\'' # or "'"
 backslash <- "\\"
@@ -49,7 +58,9 @@ backslash <- "\\"
 
 ## Printing strings {-}
 
-```{r strings-print-view}
+```{r}
+#| label: strings-print-view
+
 x <- c(single_quote, double_quote, backslash)
 x
 str_view(x)
@@ -59,7 +70,9 @@ str_view(x)
 
 ## Multiple escapes = confusion {-}
 
-```{r strings-escapes-confusion}
+```{r}
+#| label: strings-escapes-confusion
+
 tricky <- "double_quote <- \"\\\"\" # or '\"' single_quote <- '\\'' # or \"'\""
 str_view(tricky)
 ```
@@ -69,7 +82,9 @@ str_view(tricky)
 -   Raw strings in R 4.0+ = `r"()"`
     -   Or `r"[]"`, `r"{}"`, `r"--()--"`, etc.
 
-```{r strings-raw}
+```{r}
+#| label: strings-raw
+
 tricky2 <- r"(double_quote <- "\"" # or '"' single_quote <- '\'' # or "'")"
 identical(tricky, tricky2)
 ```
@@ -81,7 +96,9 @@ identical(tricky, tricky2)
 -   `\t` = tab
 -   `\u` or `\U` = unicode escapes (other special characters)
 
-```{r strings-special}
+```{r}
+#| label: strings-special
+
 str_view(c("one\ntwo", "one\ttwo", "\u00b5", "\U0001f604"))
 ```
 
@@ -90,7 +107,9 @@ str_view(c("one\ntwo", "one\ttwo", "\u00b5", "\U0001f604"))
 -   `str_c()` = combine multiple strings or multiple character vectors
 -   Vectorized just like `base::paste0()` but safer recycling rules
 
-```{r strings-str_c}
+```{r}
+#| label: strings-str_c
+
 str_c("x", "y")
 str_c("x", "y", "z")
 str_c("Hello ", c("John", "Susan"))
@@ -98,7 +117,9 @@ str_c("Hello ", c("John", "Susan"))
 
 ## str_c() and missing values {-}
 
-```{r strings-str_c-missing}
+```{r}
+#| label: strings-str_c-missing
+
 df <- tibble(name = c("Flora", "David", NA))
 df |> 
   mutate(
@@ -113,7 +134,9 @@ df |>
 -   `str_glue()` = combine strings with `{glue}` syntax
 -   vectorized
 
-```{r strings-str_glue}
+```{r}
+#| label: strings-str_glue
+
 df |> mutate(greeting = str_glue("Hi {name}!"))
 ```
 
@@ -131,7 +154,9 @@ df |> mutate(greeting = str_glue("{{Hi {name}!}}"))
 -   Similar to `base::paste(collapse = X)`
 -   Useful with `summarize()`
 
-```{r strings-str_flatten}
+```{r}
+#| label: strings-str_flatten
+
 tribble(
   ~ name, ~ fruit,
   "Carmen", "banana",
@@ -159,7 +184,9 @@ tribble(
 
 ## separate_longer_delim() {-}
 
-```{r strings-separate_longer_delim}
+```{r}
+#| label: strings-separate_longer_delim
+
 tibble(x = c("a,b,c", "d,e", "f")) |> 
   separate_longer_delim(x, delim = ",")
 ```
@@ -168,14 +195,18 @@ tibble(x = c("a,b,c", "d,e", "f")) |>
 
 Rarer, but sometimes data is weird
 
-```{r strings-separate_longer_position}
+```{r}
+#| label: strings-separate_longer_position
+
 tibble(x = c("1211", "131", "21")) |> 
   separate_longer_position(x, width = 1)
 ```
 
 ## separate_wider_delim() {-}
 
-```{r strings-separate_wider_delim}
+```{r}
+#| label: strings-separate_wider_delim
+
 df3 <- tibble(x = c("a10.1.2022", "b10.2.2011", "e15.1.2015")) 
 df3 |> 
   separate_wider_delim(
@@ -187,7 +218,9 @@ df3 |>
 
 ## Delim: Omit columns {-}
 
-```{r strings-separate_wider_delim-omit}
+```{r}
+#| label: strings-separate_wider_delim-omit
+
 df3 |> 
   separate_wider_delim(
     x, ".",
@@ -197,7 +230,9 @@ df3 |>
 
 ## separate_wider_position() {-}
 
-```{r strings-separate_wider_position}
+```{r}
+#| label: strings-separate_wider_position
+
 df4 <- tibble(x = c("202215TX", "202122LA", "202325CA")) 
 df4 |> 
   separate_wider_position(
@@ -208,7 +243,9 @@ df4 |>
 
 ## Position: omit columns {-}
 
-```{r strings-separate_wider_position-omit}
+```{r}
+#| label: strings-separate_wider_position-omit
+
 df4 |> 
   separate_wider_position(
     x, 
@@ -221,7 +258,9 @@ df4 |>
 -   Default = error for too many/too few columns
 -   `"debug"` to diagnose
 
-```{r strings-separate_wider_delim-debug}
+```{r}
+#| label: strings-separate_wider_delim-debug
+
 df <- tibble(x = c("1-1-1", "1-3", "1"))
 df |> 
   separate_wider_delim(
@@ -232,7 +271,9 @@ df |>
 
 ## too_few {-}
 
-```{r strings-too_few}
+```{r}
+#| label: strings-too_few
+
 df |> 
   separate_wider_delim(
     x, "-", names = c("x", "y", "z"),
@@ -242,7 +283,9 @@ df |>
 
 ## too_many {-}
 
-```{r strings-too_many}
+```{r}
+#| label: strings-too_many
+
 df |> 
   separate_wider_delim(
     x, "-", names = c("x", "y"),
@@ -254,20 +297,26 @@ df |>
 
 ## str_length() {-}
 
-```{r strings-str_length}
+```{r}
+#| label: strings-str_length
+
 str_length(c("a", "R for data science", NA))
 ```
 
 ## str_length() and babynames {-}
 
-```{r strings-babynames-length}
+```{r}
+#| label: strings-babynames-length
+
 babynames |>
   count(length = str_length(name), wt = n)
 ```
 
 ## Substrings {-}
 
-```{r strings-sub_str}
+```{r}
+#| label: strings-sub_str
+
 x <- c("Apple", "Banana", "Pear")
 str_sub(x, 1, 3)
 str_sub(x, -3, -1)
@@ -290,7 +339,11 @@ str_sub("a", 1, 5)
 
 -   {readr} uses UTF-8 unless you tell it otherwise
 
-```{r strings-encoding-specify, message=FALSE, warning=FALSE}
+```{r}
+#| label: strings-encoding-specify
+#| message: false
+#| warning: false
+
 # \xf1 is the Latin1 encoding of ñ
 x <- "text\nEl Ni\xf1o was particularly bad this year"
 read_csv(charToRaw(x), locale = locale(encoding = "Latin1"))$text
@@ -307,12 +360,16 @@ read_csv(charToRaw(x), locale = locale(encoding = "Latin1"))$text
 
 ## Locales (2) {-}
 
-```{r strings-locale-upper}
+```{r}
+#| label: strings-locale-upper
+
 str_to_upper(c("i", "ı"))
 str_to_upper(c("i", "ı"), locale = "tr")
 ```
 
-```{r strings-locale-sort}
+```{r}
+#| label: strings-locale-sort
+
 str_sort(c("c", "ch", "h"))
 str_sort(c("c", "ch", "h"), locale = "cs")
 ```

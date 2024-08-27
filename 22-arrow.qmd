@@ -14,7 +14,11 @@
 
 ## Packages used {-}
 
-```{r arrow-library, warning=F, message=F}
+```{r}
+#| label: arrow-library
+#| warning: false
+#| message: false
+
 library(arrow)
 library(curl)
 library(duckdb)
@@ -26,7 +30,9 @@ library(tidyverse)
 -   Case study: [item checkouts dataset from Seattle libraries](https://data.seattle.gov/Community/Checkouts-by-Title/tmmm-ytt6)
 -   **DON'T `download.file()`!!!**  (41,389,465 rows of data)
 
-```{r, eval=F}
+```{r}
+#| eval: false
+
 dir.create("data", showWarnings = FALSE)
 curl::multi_download(
   "https://r4ds.s3.us-west-2.amazonaws.com/seattle-library-checkouts.csv",
@@ -43,7 +49,9 @@ curl::multi_download(
     -   `ISBN` is empty for 80k rows, so we specify
 -   Does NOT load entire dataset into memory
 
-```{r, eval=F}
+```{r}
+#| eval: false
+
 seattle_csv <- open_dataset(
   sources = "data/seattle-library-checkouts.csv", 
   col_types = schema(ISBN = string()),
@@ -53,7 +61,9 @@ seattle_csv <- open_dataset(
 
 ## Glimpse the data {-}
 
-```{r, eval=F}
+```{r}
+#| eval: false
+
 seattle_csv |> glimpse()
 #> FileSystemDataset with 1 csv file
 #> 41,389,465 rows x 12 columns
@@ -75,7 +85,9 @@ seattle_csv |> glimpse()
 
 -   Can use {dplyr} functions on data
 
-```{r, eval=F}
+```{r}
+#| eval: false
+
 seattle_csv |> 
   group_by(CheckoutYear) |> 
   summarise(Checkouts = sum(Checkouts)) |> 
@@ -124,7 +136,9 @@ seattle_csv |>
 -   `dplyr::group_by()` to define partitions
 -   `arrow::write_dataset()` to save as parquet
 
-```{r, eval=F}
+```{r}
+#| eval: false
+
 pq_path <- "data/seattle-library-checkouts"
 seattle_csv |>
   group_by(CheckoutYear) |>
@@ -135,7 +149,9 @@ seattle_csv |>
 
 -   [Apache Hive](https://hive.apache.org/) "self-describing" directory/file names
 
-```{r, eval=F}
+```{r}
+#| eval: false
+
 tibble(
   files = list.files(pq_path, recursive = TRUE),
   size_MB = file.size(file.path(pq_path, files)) / 1024^2
@@ -154,7 +170,9 @@ tibble(
 
 ## parquet + {arrow} + {dplyr} {-}
 
-```{r, eval=F}
+```{r}
+#| eval: false
+
 seattle_pq <- open_dataset(pq_path)
 query <- seattle_pq |> 
   filter(CheckoutYear >= 2018, MaterialType == "BOOK") |>
@@ -165,7 +183,9 @@ query <- seattle_pq |>
 
 ## Results (uncollected) {-}
 
-```{r, eval=F}
+```{r}
+#| eval: false
+
 query
 #> FileSystemDataset (query)
 #> CheckoutYear: int32
@@ -179,7 +199,9 @@ query
 
 ## Results (collected) {-}
 
-```{r, eval=F}
+```{r}
+#| eval: false
+
 query |> collect()
 #> # A tibble: 58 × 3
 #> # Groups:   CheckoutYear [5]
@@ -201,7 +223,9 @@ query |> collect()
 
 ## Performance {-}
 
-```{r, eval=F}
+```{r}
+#| eval: false
+
 x |> 
   filter(CheckoutYear == 2021, MaterialType == "BOOK") |>
   group_by(CheckoutMonth) |>

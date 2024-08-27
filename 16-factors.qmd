@@ -20,7 +20,10 @@
 - Factors -> categorical variables: variables that have a fixed and known set of possible values. 
 - Also useful when you want to display character vectors in a non-alphabetical order.
 
-```{r, warning=FALSE, message=FALSE}
+```{r}
+#| warning: false
+#| message: false
+
 library(tidyverse)
 ```
 
@@ -86,7 +89,9 @@ y2
 
 - But if you use `forcats::fct()` insted: 
 
-```{r, eval=FALSE}
+```{r}
+#| eval: false
+
 y2 <- fct(x2, levels = month_levels)
 ```
 

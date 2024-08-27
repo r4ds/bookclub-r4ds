@@ -22,7 +22,11 @@
 ### Pre-Requisites {-}
 We will be utilizing the `{stringr}` package which is part of the core `{tidyverse}` and also the package `{babynames}`.
 
-```{r 17-Load Library, include = TRUE, message = FALSE}
+```{r}
+#| label: 17-Load Library
+#| include: true
+#| message: false
+
 library(tidyverse)
 library(babynames)
 ```
@@ -116,14 +120,20 @@ If the string doesn't match this pattern, `grepl` returns `FALSE`, indicating th
 
 The simplest expressions are pattern matching:
 
-```{r 17-Pattern Matching, include=TRUE}
+```{r}
+#| label: 17-Pattern Matching
+#| include: true
+
 str_view(fruit, "berry")
 ```
 
 ## Metacharacters {-}
 - `.`, `+`, `*`, `[`, `]`, and `?` are metacharacters and have special meanings.
 - `.` matches any character (except a newline):
-```{r 17-Match any Character, include = TRUE}
+```{r}
+#| label: 17-Match any Character
+#| include: true
+
 # any string that contains an “a” followed by another character
 str_view(c("a", "ab", "ae", "bd", "ea", "eab"), "a.")
 # all the fruits that contain an “a”, followed by three letters,

@@ -10,7 +10,9 @@
 
 ## Basic math calculations {-}
 
-```{r 03-basic-math}
+```{r}
+#| label: 03-basic-math
+
 1 / 200 * 30
 (59 + 73 + 2) / 3
 sin(pi / 2)
@@ -30,7 +32,9 @@ Use the 'assignment operator' `<-`
 
 Can go the other way `->`, eg graphs:
 
-```{r 03-reverse-assign}
+```{r}
+#| label: 03-reverse-assign
+
 library(ggplot2)
 ggplot(mtcars, aes(wt, hp)) +
   geom_point() -> plot01
@@ -47,7 +51,9 @@ plot01
 -   Combine elements into a vector with `c()`
 -   Basic arithmetic operations applied to every element of a vector. 
 
-```{r 03-vector-arithmetic}
+```{r}
+#| label: 03-vector-arithmetic
+
 primes <- c(2, 3, 5, 7, 11, 13)
 primes * 2
 ```
@@ -57,7 +63,10 @@ primes * 2
 
 Use `#` to insert comments in R. 
   
-```{r 03-comments, eval = FALSE}
+```{r}
+#| label: 03-comments
+#| eval: false
+
 # Create vector of primes 
 primes <- c(2, 3)
 
@@ -90,7 +99,10 @@ primes * 2
 
 Functions overall look like this: 
 
-```{r 03-function-signature, eval=FALSE}
+```{r}
+#| label: 03-function-signature
+#| eval: false
+
 function_name(argument1 = value 1, 
               argument2 = value 2, 
               ...)
@@ -106,7 +118,10 @@ function_name(argument1 = value 1,
 -   Order of named args isn't important
 -   If you skip names remember the order of the defined function. 
 
-```{r 03-arg-order, eval = FALSE}
+```{r}
+#| label: 03-arg-order
+#| eval: false
+
 # All of these are equivalent
 seq(from = 1,  to = 10)
 seq(to = 10,  from = 1)
@@ -127,7 +142,10 @@ Explore on your own:
 
 1. Why does this code not work? 
 
-```{r 03-ex-01, eval=FALSE}
+```{r}
+#| label: 03-ex-01
+#| eval: false
+
 my_variable <- 10
 my_varıable 
 #> Error in eval(expr, envir, enclos): object 'my_varıable' not found
@@ -137,7 +155,10 @@ my_varıable
 
 2. Tweak each of the following R commands so that they run correctly:
 
-```{r 03-ex-02, eval = FALSE}
+```{r}
+#| label: 03-ex-02
+#| eval: false
+
 libary(todyverse)
 
 ggplot(dTA = mpg) + 
@@ -147,7 +168,10 @@ ggplot(dTA = mpg) +
 
 > Here is the correct code with no typos: 
 
-```{r 03-ex-02b, eval=FALSE}
+```{r}
+#| label: 03-ex-02b
+#| eval: false
+
 library(tidyverse)
 
 ggplot(data = mpg)+
@@ -161,7 +185,10 @@ ggplot(data = mpg)+
 
 4. Let’s revisit an exercise from the Section 2.6. Run the following lines of code. Which of the two plots is saved as mpg-plot.png? Why?
 
-```{r 03-ex-04, eval=FALSE}
+```{r}
+#| label: 03-ex-04
+#| eval: false
+
 my_bar_plot <- ggplot(mpg, aes(x = class)) +
   geom_bar()
 my_scatter_plot <- ggplot(mpg, aes(x = cty, y = hwy)) +

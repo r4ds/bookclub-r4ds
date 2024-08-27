@@ -23,7 +23,9 @@ format: html
 
 2. `quarto::quarto_render()`:
 
-```{r eval=FALSE}
+```{r}
+#| eval: false
+
 quarto::quarto_render("diamond-sizes.qmd", output_format = c("docx", "pdf"))
 ```
 
@@ -95,7 +97,9 @@ format: html
 server: shiny
 ```
 
-```{r eval=FALSE}
+```{r}
+#| eval: false
+
 library(shiny)
 
 textInput("name", "What is your name?")

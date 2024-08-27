@@ -40,7 +40,9 @@ Selection can be done using:
 
 - using vector of (integer) indices
 
-```{r eval=FALSE}
+```{r}
+#| eval: false
+
 x[c(3, 2, 5)]
 x[c(-1, -2)]
 x[3:5]
@@ -50,7 +52,9 @@ x[3:5]
 
 - using logical vector having same length as `x` (often using comparisons)
 
-```{r eval=FALSE}
+```{r}
+#| eval: false
+
 x[!is.na(x)]
 x[y > 0]
 ```
@@ -289,7 +293,9 @@ You get a named vector!
 
 Similar to `purrr::walk()`.
 
-```{r eval=FALSE}
+```{r}
+#| eval: false
+
 for (element in vector) {
   # do something with element
 }
@@ -303,7 +309,9 @@ _Pre-allocate memory to your vector / data frame / list, then fill in the values
 
 Growing an object takes many times longer (e.g. doing `x <- c(x, new)` in the `for` loop).
 
-```{r eval=FALSE}
+```{r}
+#| eval: false
+
 paths <- dir("data/gapminder", pattern = "\\.xlsx$", full.names = TRUE)
 files <- vector("list", length(paths))
 seq_along(paths)
@@ -326,7 +334,9 @@ do.call(rbind, files)
 
 ## Base R plotting function {-}
 
-```{r out.width="100%"}
+```{r}
+#| out-width: 100%
+
 oldpar <- par(mfrow = c(1, 2))
 hist(diamonds$carat)
 plot(diamonds$carat, diamonds$price)

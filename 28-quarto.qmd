@@ -1,6 +1,11 @@
 # Quarto 
 
-```{r fig, echo=FALSE, out.width="40%", fig.align="center"}
+```{r}
+#| label: fig
+#| echo: false
+#| out-width: 40%
+#| fig-align: center
+
 knitr::include_graphics("./images/quarto-dark-bg.jpeg")
 ```
 
@@ -40,7 +45,12 @@ knitr::include_graphics("./images/quarto-dark-bg.jpeg")
 
 - To get started with your own .qmd file, select File > New File > Quarto Document… in the menu bar.
 
-```{r quarto, echo=FALSE, out.width="100%", fig.align="center"}
+```{r}
+#| label: quarto
+#| echo: false
+#| out-width: 100%
+#| fig-align: center
+
 knitr::include_graphics("./images/28-fig28.png")
 ```
 
@@ -57,7 +67,12 @@ knitr::include_graphics("./images/28-fig28.png")
 - Visual editor -> use the buttons on the menu bar to insert images, tables, cross-references, etc. or you can use the catch-all ⌘ + / or Ctrl + / shortcut to insert just about anything.
 - The visual editor displays your content with formatting, but under the hood, it saves your content in plain Markdown and you can switch back and forth between the visual and source editors.
 
-```{r vised, echo=FALSE, out.width="100%", fig.align="center"}
+```{r}
+#| label: vised
+#| echo: false
+#| out-width: 100%
+#| fig-align: center
+
 knitr::include_graphics("./images/28-quarto-visual-editor.png")
 ```
 

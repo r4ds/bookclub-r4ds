@@ -1,6 +1,8 @@
 # Logical Vectors
 
-```{r, include=F}
+```{r}
+#| include: false
+
 library(dplyr)
 library(nycflights13)
 ```

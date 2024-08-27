@@ -4,7 +4,10 @@ These chapters have been removed from the book since the time that older cohorts
 
 All code blocks for these chapters have been disabled to avoid mystery bugs.
 
-```{r 99-eval-off, include=FALSE}
+```{r}
+#| label: 99-eval-off
+#| include: false
+
 knitr::opts_chunk$set(eval = FALSE)
 ```
 
@@ -49,7 +52,12 @@ To make the formula in Rmarkdown have a look at this resource: [markdown-extensi
 ----------
 
 Here is the visualization of simulated data from {modelr} package, we have a look at different slope levels.
-```{r 99-23-plot1, message=FALSE, warning=FALSE, paged.print=FALSE}
+```{r}
+#| label: 99-23-plot1
+#| message: false
+#| warning: false
+#| paged-print: false
+
 library(tidyverse)
 library(manipulate)
 library(modelr)
@@ -109,7 +117,11 @@ while others require a traditional response surface design model expansion (quad
 
 We can switch between linear and non-linear models with some transformations:
 
-```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+```{r}
+#| message: false
+#| warning: false
+#| paged-print: false
+
 # weighted regression
 data(sim3)
 sim3_2<-sim3%>%mutate(x3=case_when(x2=="a"~1,
@@ -154,7 +166,10 @@ $$y = 7 + 3x$$
 So, the conversion of the linear model formula $y\sim{x}$ is $y = a_1 + a_2x$    
 
 Behind the scenes, what happens is:
-```{r eval=FALSE, include=T}
+```{r}
+#| eval: false
+#| include: true
+
 model1 <- function(a, data) {
   a[1] + data$x * a[2] + a[3]
 }

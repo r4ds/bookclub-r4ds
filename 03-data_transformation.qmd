@@ -16,21 +16,31 @@
 -   data frames consist of columns (variables) and rows (observations).
 -   dplyr is part of the tidyverse. 
 
-```{r 04-01, eval=FALSE}
+```{r}
+#| label: 04-01
+#| eval: false
+
 install.packages("tidyverse")
 ```
 
-```{r 04-02}
+```{r}
+#| label: 04-02
+
 library(tidyverse)
 ```
 
 Or just dplyr
 
-```{r 04-03, eval=FALSE}
+```{r}
+#| label: 04-03
+#| eval: false
+
 install.packages("dplyr")
 ```
 
-```{r 04-04}
+```{r}
+#| label: 04-04
+
 library(dplyr)
 ```
 
@@ -38,11 +48,16 @@ library(dplyr)
 
 `nycflights13` 📦 = New York City flight data from 2013.
 
-```{r 04-05, eval=FALSE}
+```{r}
+#| label: 04-05
+#| eval: false
+
 install.packages("nycflights13")
 ```
 
-```{r 04-06}
+```{r}
+#| label: 04-06
+
 library(nycflights13)
 ```
 
@@ -50,13 +65,18 @@ For new data: quickly browse to check if you want to use it.
 
 View in console:
 
-```{r 04-07}
+```{r}
+#| label: 04-07
+
 flights
 ```
 
 View in a spreadsheet-like viewer:
 
-```{r 04-08, eval=FALSE}
+```{r}
+#| label: 04-08
+#| eval: false
+
 View(flights)
 ```
 
@@ -64,7 +84,10 @@ View(flights)
 
 Check size of the flights data:
 
-```{r 04-10, eval=FALSE}
+```{r}
+#| label: 04-10
+#| eval: false
+
 # number of rows
 nrow(flights)
 #> [1] 336776
@@ -84,11 +107,15 @@ dim(flights)
 
 Column names:
 
-```{r 04-11}
+```{r}
+#| label: 04-11
+
 colnames(flights)
 ```
 
-```{r 04-glimpse-flights}
+```{r}
+#| label: 04-glimpse-flights
+
 glimpse(flights)
 ```
 
@@ -106,7 +133,10 @@ When using `dplyr`:
 -   Pronounced "and then"
 -   Pipes data from one function into 1st arg of next
 
-```{r 04-pipe-basics, eval=FALSE}
+```{r}
+#| label: 04-pipe-basics
+#| eval: false
+
 flights |>
   filter(dest == "IAH") |> 
   group_by(year, month, day) |> 
@@ -127,7 +157,9 @@ flights |>
 -   1st arg = data frame
 -   Subsequent args are logical expressions
 
-```{r 04-filter-flights}
+```{r}
+#| label: 04-filter-flights
+
 # all flights that departed more than 120 minutes (two hours) late
 flights |> 
   filter(dep_delay > 120)
@@ -171,7 +203,10 @@ jan1 <- flights |>
 -   Mistake: Using `=` instead of `==` 
     -   `filter()` tells you when this happens (read the errors!):
 
-```{r 04-mistake1, eval=FALSE}
+```{r}
+#| label: 04-mistake1
+#| eval: false
+
 flights |> 
   filter(month = 1)
 #> Error in `filter()`:
@@ -182,7 +217,10 @@ flights |>
 
 Mistake: Writing “or” statements like you would in English:
 
-```{r 04-mistake2, eval=FALSE}
+```{r}
+#| label: 04-mistake2
+#| eval: false
+
 flights |> 
   filter(month == 1 | 2)
 # "filter where (month is 1), or (2 (is a non-zero number))"
@@ -191,7 +229,10 @@ flights |>
 
 instead of:
 
-```{r 04-mistake2-fixed, eval=FALSE}
+```{r}
+#| label: 04-mistake2-fixed
+#| eval: false
+
 flights |> 
   filter(month == 1 | month == 2)
 # "filter where month is 1 or month is 2"
@@ -206,13 +247,17 @@ flights |>
 -   Default order = ascending (small to big)
 -   `desc()` for descending order (big to small).
 
-```{r 04-arrange1}
+```{r}
+#| label: 04-arrange1
+
 # Sort by year (early to late), then within year by month (early to late), then
 # within month by day (early to late), then by time
 flights |> 
   arrange(year, month, day, dep_time)
 ```
-```{r 04-arrange2}
+```{r}
+#| label: 04-arrange2
+
 # Sort flights from most to least delayed
 flights |> 
   arrange(desc(dep_delay))
@@ -225,7 +270,9 @@ flights |>
 -   Operates on rows
 -   Optional args: column names = find unique combos of values
 
-```{r 04-distinct1}
+```{r}
+#| label: 04-distinct1
+
 # Remove duplicate rows, if any
 flights |> 
   distinct()
@@ -242,7 +289,9 @@ flights |>
 -   `count()` = number of occurrences
 -   `sort = TRUE` to arrange in descending order of # occurrences
 
-```{r 04-count}
+```{r}
+#| label: 04-count
+
 flights |>
   count(origin, dest, sort = TRUE)
 ```
@@ -255,7 +304,9 @@ flights |>
 
 In a single pipeline for each condition, find all flights that meet the condition:
 
-```{r 04-exercise1}
+```{r}
+#| label: 04-exercise1
+
 # Had an arrival delay of two or more hours
 flights |>
   filter(arr_delay >= 120) |>
@@ -294,7 +345,9 @@ flights |>
 
 Sort flights to find the flights with longest departure delays. Find the flights that left earliest in the morning.
 
-```{r 04-exercise2}
+```{r}
+#| label: 04-exercise2
+
 flights |> 
   arrange(desc(dep_delay)) |> 
   arrange(dep_time) |>
@@ -304,7 +357,9 @@ flights |>
 ### Question 3 {-}
 
 Sort flights to find the fastest flights. (Hint: Try including a math calculation inside of your function.)
-```{r 04-exercise3}
+```{r}
+#| label: 04-exercise3
+
 flights |> 
   mutate(speed = distance / (air_time / 60)) |>
   arrange(desc(speed)) |>
@@ -315,7 +370,9 @@ flights |>
 ### Question 4 {-}
 
 Was there a flight on every day of 2013?
-```{r 04-exercise4}
+```{r}
+#| label: 04-exercise4
+
 # using count
 flights |>
   count(year, month, day, sort = TRUE) |>
@@ -331,7 +388,9 @@ flights |>
 ### Question 5 {-}
 
 Which flights traveled the farthest distance? Which traveled the least distance?
-```{r 04-exercise5}
+```{r}
+#| label: 04-exercise5
+
 # Flights that traveled the farthest distance:
 flights |> 
   arrange(desc(distance)) |>
@@ -365,7 +424,9 @@ There are four important verbs that affect the columns without changing the rows
 
 Compute the gain, how much time a delayed flight made up in the air, and the speed in miles per hour:
 
-```{r 04-mutate1}
+```{r}
+#| label: 04-mutate1
+
 flights |> 
   mutate(
     gain = dep_delay - arr_delay,
@@ -374,7 +435,9 @@ flights |>
 ```
 Use the `.before` argument to instead add the variables to the left hand side
 
-```{r 04-mutate2}
+```{r}
+#| label: 04-mutate2
+
 flights |> 
   mutate(
     gain = dep_delay - arr_delay,
@@ -385,7 +448,9 @@ flights |>
 Use `.after` to add after a variable, and in both `.before` and `.after` you can use the variable name instead of a position.
 Add the new variables after day:
 
-```{r 04-mutate3}
+```{r}
+#| label: 04-mutate3
+
 flights |> 
   mutate(
     gain = dep_delay - arr_delay,
@@ -395,7 +460,9 @@ flights |>
 ```
 You can use the `.keep` argument to control which variables are kept after a `mutate()` operation. Setting `.keep = "used"` ensures only columns involved or created in the `mutate()` step are retained, like `dep_delay`, `arr_delay`, `air_time`, `gain`, `hours`, and `gain_per_hour`.
 
-```{r 04-mutate4}
+```{r}
+#| label: 04-mutate4
+
 flights |> 
   mutate(
     gain = dep_delay - arr_delay,
@@ -413,25 +480,33 @@ If you don't assign the result of the computation back to `flights`, the new var
 
 The order you list the columns will determine the order of the columns returned by `select()`.
 
-```{r 04-44}
+```{r}
+#| label: 04-44
+
 # Select columns by name:
 flights |> 
   select(year, month, day)
 ```
 
-```{r 04-45}
+```{r}
+#| label: 04-45
+
 # Select all columns between year and day (inclusive):
 flights |> 
   select(year:day)
 ```
 
-```{r 04-46}
+```{r}
+#| label: 04-46
+
 # Select all columns except those from year to day (inclusive):
 flights |> 
   select(!year:day)
 ```
 
-```{r 04-select-characters}
+```{r}
+#| label: 04-select-characters
+
 # Select all columns that are characters:
 flights |> 
   select(where(is.character))
@@ -450,7 +525,9 @@ See `?select` for more details.
 
 You can rename variables as you `select()` them by using `=`. The new name appears on the left hand side of the `=`, and the old variable appears on the right hand side:
 
-```{r 04-select-rename}
+```{r}
+#| label: 04-select-rename
+
 flights |> 
   select(tail_num = tailnum)
 ```
@@ -459,7 +536,9 @@ flights |>
 
 If you want to keep all the existing variables and just want to rename a few, you can use `rename()` instead of `select()`:
 
-```{r 04-rename}
+```{r}
+#| label: 04-rename
+
 flights |> 
   rename(tail_num = tailnum)
 ```
@@ -471,14 +550,18 @@ flights |>
 
 Use `relocate()` to move variables around. You might want to collect related variables together or move important variables to the front. By default `relocate()` moves variables to the front:
 
-```{r 04-relocate}
+```{r}
+#| label: 04-relocate
+
 flights |> 
   relocate(time_hour, air_time)
 ```
 
 You can also specify where to put them using the `.before` and `.after` arguments, just like in `mutate()`:
 
-```{r 04-relocate-before-after}
+```{r}
+#| label: 04-relocate-before-after
+
 flights |> 
   relocate(year:dep_time, .after = time_hour)
 flights |> 
@@ -493,7 +576,9 @@ Compare `dep_time`, `sched_dep_time`, and `dep_delay`. How would you expect thos
 
 The `dep_time` should be `sched_dep_time + dep_delay`.
 
-```{r 04-exercises-columns-01}
+```{r}
+#| label: 04-exercises-columns-01
+
 flights |> 
   relocate(dep_time, sched_dep_time, dep_delay)
 ```
@@ -503,7 +588,9 @@ flights |>
 Brainstorm as many ways as possible to select `dep_time`, `dep_delay`, `arr_time`, and `arr_delay` from `flights`.
 
 You can select them by name, or the columns that starts with dep or with arr.
-```{r 04-exercises-columns-02}
+```{r}
+#| label: 04-exercises-columns-02
+
 flights |> 
   select(dep_time, dep_delay, arr_time, arr_delay)
 
@@ -517,7 +604,9 @@ What happens if you specify the name of the same variable multiple times in a `s
 
 It will only show the column at the first position it was specified.
 
-```{r 04-exercises-columns-03}
+```{r}
+#| label: 04-exercises-columns-03
+
 flights |> 
   select(dep_time, dep_delay, arr_time, arr_delay, dep_time)
 ```
@@ -532,7 +621,9 @@ What does the `any_of()` function do? Why might it be helpful in conjunction wit
 
 The order of selected columns is determined by the order in the vector.
 
-```{r 04-exercises-columns-04}
+```{r}
+#| label: 04-exercises-columns-04
+
 variables <- c("year", "month", "day", "dep_delay", "arr_delay")
 
 flights |> 
@@ -543,14 +634,18 @@ flights |>
 
 Does the result of running the following code surprise you? How do the select helpers deal with upper and lower case by default? How can you change that default?
 
-```{r 04-exercises-columns-05}
+```{r}
+#| label: 04-exercises-columns-05
+
 flights |> select(contains("TIME"))
 ```
 It is suprising because "TIME" is in uppercase, so it seems that `contains` ignores the case. 
 
 To change this default behavior, set ignore.case = FALSE.
 
-```{r 04-exercises-columns-05-1}
+```{r}
+#| label: 04-exercises-columns-05-1
+
 flights |> 
   select(contains("TIME", ignore.case = FALSE))
 ```
@@ -559,7 +654,9 @@ flights |>
 
 Rename `air_time` to `air_time_min` to indicate units of measurement and move it to the beginning of the data frame.
 
-```{r 04-exercises-columns-06}
+```{r}
+#| label: 04-exercises-columns-06
+
 flights |>
   rename(air_time_min = air_time) |>
   relocate(air_time_min)
@@ -569,7 +666,10 @@ flights |>
 
 Why doesn’t the following work, and what does the error mean?
 
-```{r 04-exercises-columns-07, eval=FALSE}
+```{r}
+#| label: 04-exercises-columns-07
+#| eval: false
+
 flights |> 
   select(tailnum) |> 
   arrange(arr_delay)
@@ -586,7 +686,9 @@ The code doesn’t work because the `select()` will give a tibble with only the 
 The real power of the pipe is to combine multiple verbs. 
 To find the fast flights to Houston’s IAH airport: you need to combine filter(), mutate(), select(), and arrange():
 
-```{r 04-pipe1,}
+```{r}
+#| label: 04-pipe1
+
 flights |> 
   filter(dest == "IAH") |> 
   mutate(speed = distance / air_time * 60) |> 
@@ -597,7 +699,10 @@ flights |>
 Using the pipe operator makes complex operations easier to read and follow. Each step is clear as the verbs start at the beginning of the line. Without the pipe, functions would be nested inside each other, making the code harder to understand.
 
 
-```{r 04-pipe2, eval=FALSE}
+```{r}
+#| label: 04-pipe2
+#| eval: false
+
 arrange(
   select(
     mutate(
@@ -615,7 +720,10 @@ arrange(
 
 Another way but using intermediate objects:
 
-```{r 04-pipe3, eval=FALSE}
+```{r}
+#| label: 04-pipe3
+#| eval: false
+
 flights1 <- filter(flights, dest == "IAH")
 flights2 <- mutate(flights1, speed = distance / air_time * 60)
 flights3 <- select(flights2, year:day, dep_time, carrier, flight, speed)
@@ -635,7 +743,9 @@ The previous functions work with rows and columns. `dplyr` also allows to work w
 
 Use `group_by()` to divide your dataset into groups meaningful for your analysis:
 
-```{r 04-group1}
+```{r}
+#| label: 04-group1
+
 flights |> 
   group_by(month)
 ```
@@ -648,7 +758,9 @@ Summarization is the most important grouped operation, because it reduces the da
 The following example computes the average departure delay by month:
 
 
-```{r 04-summarize1}
+```{r}
+#| label: 04-summarize1
+
 flights |> 
   group_by(month) |> 
   summarize(
@@ -659,7 +771,9 @@ flights |>
 
 The above example show NAs because some of the observed flights had missing data in the delay column. To ignore the missing data, use:
 
-```{r 04-summarize2}
+```{r}
+#| label: 04-summarize2
+
 flights |> 
   group_by(month) |> 
   summarize(
@@ -669,7 +783,9 @@ flights |>
 
 In a single call to summarize() you can create any number of summaries. There are different useful summaries available, one of which is n(), which returns the number of rows in each group:
 
-```{r 04-summarize3}
+```{r}
+#| label: 04-summarize3
+
 flights |> 
   group_by(month) |> 
   summarize(
@@ -690,7 +806,9 @@ To extract specific rows within each group you can use the following functions:
 
 You can use n to select multiple rows or use prop = 0.1 to select 10% of the rows in each group. For example, the code finds the most delayed flights upon arrival at each destination.
 
-```{r 04-slice1}
+```{r}
+#| label: 04-slice1
+
 flights |> 
   group_by(dest) |> 
   slice_max(arr_delay, n = 1) |>
@@ -704,7 +822,9 @@ In the above output we get 108 rows but there are only 105 destinations.
 
 To make a group for each date you can create groups using more than one variable.
 
-```{r 04-grouping-multiple-1}
+```{r}
+#| label: 04-grouping-multiple-1
+
 daily <- flights |>  
   group_by(year, month, day)
 daily
@@ -713,14 +833,18 @@ daily
 When you summarize a tibble grouped by more than one variable, each summary peels off the last group.
 
 
-```{r 04-grouping-multiple-2}
+```{r}
+#| label: 04-grouping-multiple-2
+
 daily_flights <- daily |> 
   summarize(n = n())
 ```
 
 If this behavior is OK, you can explicitly request it so that it doesn't give the warning message:
 
-```{r 04-grouping-multiple-3}
+```{r}
+#| label: 04-grouping-multiple-3
+
 daily_flights <- daily |> 
   summarize(
     n = n(), 
@@ -735,14 +859,18 @@ You can change the default behavior by setting a different value, like `"drop"` 
 You might also want to remove grouping from a data frame without using `summarize()`.
 You can do this with `ungroup()`.
 
-```{r 04-ungrouping-1}
+```{r}
+#| label: 04-ungrouping-1
+
 daily |> 
   ungroup()
 ```
 
 Now let's see what happens when you summarize an ungrouped data frame.
 
-```{r 04-ungrouping-}
+```{r}
+#| label: 04-ungrouping-
+
 daily |> 
   ungroup() |>
   summarize(
@@ -759,7 +887,9 @@ You can now also use the `.by` argument to group within a single operation,
 `.by` works with all verbs and has the advantage that you don't need to use the `.groups` argument to suppress the grouping message or `ungroup()` when you're done.
 
 
-```{r 04-groupby-01}
+```{r}
+#| label: 04-groupby-01
+
 flights |> 
   summarize(
     delay = mean(dep_delay, na.rm = TRUE), 
@@ -770,7 +900,9 @@ flights |>
 
 Or if you want to group by multiple variables:
 
-```{r 04-groupby-02}
+```{r}
+#| label: 04-groupby-02
+
 flights |> 
   summarize(
     delay = mean(dep_delay, na.rm = TRUE), 
@@ -790,7 +922,9 @@ Why/why not?
 
 The carrier with worst average delays is `F9`
 
-```{r 04-exercises-groups-01-1}
+```{r}
+#| label: 04-exercises-groups-01-1
+
 flights |>
   group_by(carrier) |>
   summarize(
@@ -802,7 +936,9 @@ flights |>
 
 To try to disentangle the effects of bad airports vs. bad carriers and using the hint to group and summarize:
 
-```{r 04-exercises-groups-01-2}
+```{r}
+#| label: 04-exercises-groups-01-2
+
 # calculate average delay and sort
 
 flights |>
@@ -833,7 +969,9 @@ Find the flights that are most delayed upon departure from each destination.
 
 The top 10 most departure delayed flights from each destination.
 
-```{r 04-exercises-groups-02}
+```{r}
+#| label: 04-exercises-groups-02
+
 flights |>
   group_by(dest) |>
   slice_max(dep_delay, n = 1) |>
@@ -855,7 +993,9 @@ flights |>
 
 How do delays vary over the course of the day. Illustrate your answer with a plot.
 
-```{r 04-exercises-groups-03}
+```{r}
+#| label: 04-exercises-groups-03
+
 # Calculate the average departure delay for each hour of the day
 delays_by_hour <- flights %>%
   group_by(hour) %>%
@@ -876,7 +1016,9 @@ What happens if you supply a negative `n` to `slice_min()` and friends?
 
 It doesn't slice the data but it does arrange the values. 
 
-```{r 04-exercises-groups-04}
+```{r}
+#| label: 04-exercises-groups-04
+
 # only shows the lowest 5 rows
 flights |> 
   slice_min(dep_delay, n = 5) |>
@@ -905,7 +1047,9 @@ When you summarize data, it is always a good idea to include a count of the numb
 
 In this example using baseball data, we're comparing how often a player successfully hits the ball (H) to the total number of attempts they made to hit the ball (AB). Including a count ensures our analysis is based on a reasonable amount of data and not just a few instances.
 
-```{r 04-case-study-01}
+```{r}
+#| label: 04-case-study-01
+
 batters <- Lahman::Batting |> 
   group_by(playerID) |> 
   summarize(
@@ -921,7 +1065,9 @@ When we compare how well baseball players hit the ball (measured by batting aver
 
 2. Skilled players tend to have more chances to hit. This is because teams prefer to let their best players have more opportunities to bat. So, better players get more chances to hit the ball.
 
-```{r 04-case-study-02}
+```{r}
+#| label: 04-case-study-02
+
 batters |> 
   filter(n > 100) |> 
   ggplot(aes(x = n, y = performance)) +
@@ -931,7 +1077,9 @@ batters |>
 
 If you simply rank players by batting average, the players at the top of the list will be those who had very few at-bats and happened to get a hit. These players may not actually be the most skilled players.
 
-```{r 04-case-study-03}
+```{r}
+#| label: 04-case-study-03
+
 batters |> 
   arrange(desc(performance))
 ```

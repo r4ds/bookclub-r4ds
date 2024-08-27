@@ -8,7 +8,9 @@
 
 ## Packages
 
-```{r message=FALSE}
+```{r}
+#| message: false
+
 library(dplyr)
 library(tidyr)
 library(purrr)
@@ -342,7 +344,9 @@ chars |>
 
 ## Rectangling data: applications {-}
 
-```{r echo=FALSE}
+```{r}
+#| echo: false
+
 locations <- gmaps_cities |> 
   unnest_wider(json) |> 
   select(-status) |> 

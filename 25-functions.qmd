@@ -10,7 +10,10 @@ We are going to learn about three useful type of function:
 
 - *Plot functions* that take a data frame as input and return a plot as output.
 
-```{r echo=FALSE, warning = FALSE}
+```{r}
+#| echo: false
+#| warning: false
+
 library(tidyverse) |> suppressPackageStartupMessages()
 library(nycflights13)
 ```
@@ -43,7 +46,9 @@ Key steps in creating a function:
 
 4.  Check your function with a few inputs to make sure it's working.
 
-```{r eval=FALSE}
+```{r}
+#| eval: false
+
 name <- function(arguments) {
   code
 }
@@ -75,7 +80,9 @@ df |> mutate(
 
 ## Writing a vector function
 
-```{r,eval=FALSE}
+```{r}
+#| eval: false
+
 (a - min(a, na.rm = TRUE)) / (max(a, na.rm = TRUE) - min(a, na.rm = TRUE))
 (b - min(b, na.rm = TRUE)) / (max(b, na.rm = TRUE) - min(b, na.rm = TRUE))
 (c - min(c, na.rm = TRUE)) / (max(c, na.rm = TRUE) - min(c, na.rm = TRUE))
@@ -84,7 +91,9 @@ df |> mutate(
 
 To make this a bit clearer we can replace the bit that varies with █:
 
-```{r,eval=FALSE}
+```{r}
+#| eval: false
+
 (█ - min(█, na.rm = TRUE)) / (max(█, na.rm = TRUE) - min(█, na.rm = TRUE))
 ```
 
@@ -168,7 +177,9 @@ grouped_mean <- function(df, group_var, mean_var) {
 }
 ```
 
-```{r,error=TRUE}
+```{r}
+#| error: true
+
 diamonds |> 
   grouped_mean(cut, carat)
 ```
@@ -248,7 +259,9 @@ diamonds |>
 
 ## Plot functions
 
-```{r eval=FALSE}
+```{r}
+#| eval: false
+
 diamonds |> 
   ggplot(aes(x = carat)) +
   geom_histogram(binwidth = 0.1)
@@ -272,7 +285,9 @@ diamonds |>
 
 Note that because `histogram()` returns a ggplot2 plot, meaning you can still add on additional components if you want. Just remember to switch from `|>` to `+`:
 
-```{r eval=FALSE}
+```{r}
+#| eval: false
+
 diamonds |> 
   histogram(carat, 0.1) +
   labs(x = "Size (in carats)", y = "Number of diamonds")

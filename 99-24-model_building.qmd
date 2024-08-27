@@ -15,7 +15,10 @@
 
 ## Build a Linear Model
 
-```{r 99-24-setup, include = FALSE}
+```{r}
+#| label: 99-24-setup
+#| include: false
+
 # By this point these are probably already libraried, but I want to be sure.
 library(tidyverse)
 library(modelr)
@@ -23,7 +26,9 @@ library(nycflights13)
 library(lubridate)
 ```
 
-```{r 99-24-lm}
+```{r}
+#| label: 99-24-lm
+
 diamonds2 <- diamonds %>% 
   filter(carat <= 2.5) %>% 
   mutate(log_price = log2(price), log_carat = log2(carat))
@@ -44,7 +49,9 @@ ggplot(diamonds2) +
 
 ## Examine Residuals
 
-```{r 99-24-residuals}
+```{r}
+#| label: 99-24-residuals
+
 diamonds2 <- diamonds2 %>% 
   add_residuals(mod_diamond, "log_resid")
 
@@ -53,7 +60,9 @@ ggplot(diamonds2) +
   geom_hex(bins = 50)
 ```
 
-```{r 99-24-residuals-plots}
+```{r}
+#| label: 99-24-residuals-plots
+
 base_plot <- ggplot(diamonds2) +
   aes(y = log_resid) + 
   geom_boxplot()
@@ -70,7 +79,9 @@ base_plot +
 
 ## Another Diamonds Model
 
-```{r 99-24-lm2}
+```{r}
+#| label: 99-24-lm2
+
 mod_diamond2 <- lm(
   log_price ~ log_carat + color + cut + clarity, 
   data = diamonds2
@@ -91,7 +102,9 @@ plot_mod2(color)
 plot_mod2(clarity)
 ```
 
-```{r 99-24-diamond-leftovers}
+```{r}
+#| label: 99-24-diamond-leftovers
+
 diamonds2 <- diamonds2 %>% 
   add_residuals(mod_diamond2, "log_resid2")
 
@@ -102,7 +115,9 @@ ggplot(diamonds2) +
 
 ## Feature Engineering
 
-```{r 99-24-flights}
+```{r}
+#| label: 99-24-flights
+
 daily <- flights %>% 
   mutate(date = make_date(year, month, day)) %>% 
   group_by(date) %>% 
@@ -115,7 +130,9 @@ ggplot(daily) +
 
 Feature engineering = using data to create new features to use in models
 
-```{r 99-24-wday}
+```{r}
+#| label: 99-24-wday
+
 daily <- daily %>% 
   mutate(wday = wday(date, label = TRUE, week_start = 1))
 ggplot(daily) +
@@ -123,7 +140,9 @@ ggplot(daily) +
   geom_boxplot()
 ```
 
-```{r 99-24-wday-mod}
+```{r}
+#| label: 99-24-wday-mod
+
 mod <- lm(n ~ wday, data = daily)
 
 grid <- daily %>% 
@@ -136,7 +155,9 @@ ggplot(daily) +
   geom_point(data = grid, colour = "red", size = 4)
 ```
 
-```{r 99-24-wday-residuals}
+```{r}
+#| label: 99-24-wday-residuals
+
 daily <- daily %>% 
   add_residuals(mod)
 
@@ -154,13 +175,17 @@ base_plot +
   geom_smooth(se = FALSE, span = 0.20)
 ```
 
-```{r 99-24-wday-low}
+```{r}
+#| label: 99-24-wday-low
+
 daily %>% 
   filter(resid < -100) %>% 
   pull(date, wday)
 ```
 
-```{r 99-24-seasonal}
+```{r}
+#| label: 99-24-seasonal
+
 term <- function(date) {
   cut(date, 
     breaks = ymd(20130101, 20130605, 20130825, 20140101),

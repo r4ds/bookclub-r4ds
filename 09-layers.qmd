@@ -14,7 +14,9 @@
 
   - how coordinate systems allow us to fundamentally change what x and y mean. 
 
-```{r include=FALSE}
+```{r}
+#| include: false
+
 library(tidyverse)
 ```
 
@@ -33,7 +35,9 @@ library(tidyverse)
 
   -`class`: Type of car. A categorical variable.
 
-```{r include=FALSE}
+```{r}
+#| include: false
+
 mpg
 ```
 
@@ -43,7 +47,11 @@ mpg
 
 - By default ggplot2 will only use six shapes at a time so additional groups will go unplotted when you use the shape aesthetic. There are 62 SUVs in the dataset and they’re not plotted.
 
-```{r, figures-side1, fig.show="hold", out.width="50%"}
+```{r}
+#| label: figures-side1
+#| fig-show: hold
+#| out-width: 50%
+
 
 par(mar = c(4, 4, .1, .1))
 
@@ -64,7 +72,11 @@ geom_point()
 
 - We get warnings because mapping a non-ordinal discrete variable (`class`) to an ordered aesthetic (`size` or `alpha`) is generally not a good idea because it implies a ranking that does not in fact exist.
 
-```{r, figures-side, fig.show="hold", out.width="50%"}
+```{r}
+#| label: figures-side
+#| fig-show: hold
+#| out-width: 50%
+
 par(mar = c(4, 4, .1, .1))
 
 # Left
@@ -133,7 +145,11 @@ geom_point()
 
 - The plots below contain the same x variable, the same y variable, and both describe the same data, but are not identical because each plot uses a different geometric object, geom, to represent the data. 
 
-```{r, figures-side3, fig.show="hold", out.width="50%"}
+```{r}
+#| label: figures-side3
+#| fig-show: hold
+#| out-width: 50%
+
 
 par(mar = c(4, 4, .1, .1))
 
@@ -154,7 +170,11 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
 
 - On the other hand, you could set the linetype of a line. Here we see, `geom_smooth()` will draw a different line, with a different linetype, for each unique value of the variable that you map to linetype.
 
-```{r, figures-side4, fig.show="hold", out.width="50%"}
+```{r}
+#| label: figures-side4
+#| fig-show: hold
+#| out-width: 50%
+
 
 par(mar = c(4, 4, .1, .1))
 
@@ -169,7 +189,11 @@ geom_smooth()
 
 ## 
 
-```{r, figures-side5, fig.show="hold", out.width="50%"}
+```{r}
+#| label: figures-side5
+#| fig-show: hold
+#| out-width: 50%
+
 
 #par(mar = c(4, 4, .1, .1))
 
@@ -204,7 +228,11 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
 - The histogram and density plot below reveal that the distribution of highway mileage is bimodal and right skewed while the boxplot reveals two potential outliers.
 
 
-```{r, figures-side8, fig.show="hold", out.width="50%"}
+```{r}
+#| label: figures-side8
+#| fig-show: hold
+#| out-width: 50%
+
 
 par(mar = c(4, 4, .1, .1))
 
@@ -234,7 +262,11 @@ The best place to get a comprehensive overview of all of the geoms ggplot2 offer
 
 - To facet your plot with the combination of two variables, switch from `facet_wrap()`, which we learned about in chapter 2,  to `facet_grid()`, which uses a double sided formula, `rows~cols`.
 
-```{r, figures-side7, fig.show="hold", out.width="50%"}
+```{r}
+#| label: figures-side7
+#| fig-show: hold
+#| out-width: 50%
+
 
 par(mar = c(4, 4, .1, .1))
 
@@ -288,7 +320,10 @@ ggplot(diamonds) +
 
 ## Position adjustments
 
-```{r, fig.show="hold", out.width="50%"}
+```{r}
+#| fig-show: hold
+#| out-width: 50%
+
 
 par(mar = c(4, 4, .1, .1))
 
@@ -308,7 +343,10 @@ ggplot(diamonds, aes(x = cut, fill = clarity)) +
 
 - N/B: position = "identity" will place each object exactly where it falls in the context of the graph. This is not very useful for bars, because it overlaps them. To see that overlapping we either need to make the bars slightly transparent by setting alpha to a small value, or completely transparent by setting fill = NA.
 
-```{r, fig.show="hold", out.width="50%"}
+```{r}
+#| fig-show: hold
+#| out-width: 50%
+
 
 par(mar = c(4, 4, .1, .1))
 
@@ -336,7 +374,10 @@ Coordinate systems are probably the most complicated part of ggplot2. The defaul
 
 - coord_quickmap() sets the aspect ratio correctly for maps. This is very important if you’re plotting spatial data with ggplot2. We don’t have the space to discuss maps in this book, but you can learn more in the [Maps chapter](https://ggplot2-book.org/maps.html) of ggplot2: Elegant graphics for data analysis.
 
-```{r, fig.show="hold", out.width="50%"}
+```{r}
+#| fig-show: hold
+#| out-width: 50%
+
 
 par(mar = c(4, 4, .1, .1))
 
@@ -350,7 +391,10 @@ ggplot(nz, aes(x = long, y = lat, group = group)) +
   coord_quickmap()
 ```
 
-```{r, fig.show="hold", out.width="50%"}
+```{r}
+#| fig-show: hold
+#| out-width: 50%
+
 
 par(mar = c(4, 4, .1, .1))
 

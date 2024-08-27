@@ -5,7 +5,11 @@
 -   Use {DBI} to connect to a database and retrieve data.
 -   Use {dbplyr} to translate dplyr code to SQL.
 
-```{r 21-packages-used, message=FALSE, warning=FALSE}
+```{r}
+#| label: 21-packages-used
+#| message: false
+#| warning: false
+
 library(DBI) 
 library(dbplyr) 
 library(tidyverse) 
@@ -34,7 +38,11 @@ con <- DBI::dbConnect(duckdb::duckdb())
 ```
  
 - When using duckdb in a project
-```{r,eval=FALSE,warning=FALSE,message=FALSE}
+```{r}
+#| eval: false
+#| warning: false
+#| message: false
+
 con <- DBI::dbConnect(duckdb::duckdb(), dbdir = "duckdb")
 ```
 
@@ -239,7 +247,9 @@ flights |>
 
 ## Clean up {-}
 
-```{r clean-up}
+```{r}
+#| label: clean-up
+
 dbDisconnect(con, shutdown = TRUE) 
 ```
 

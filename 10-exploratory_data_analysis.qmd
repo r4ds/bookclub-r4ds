@@ -2,7 +2,10 @@
 
 ## Learning objectives
 
-```{r 12-setup, include = FALSE}
+```{r}
+#| label: 12-setup
+#| include: false
+
 library(tidyverse)
 ```
 
@@ -25,7 +28,9 @@ library(tidyverse)
 - **variation:** the tendency of values of a variable to change between measurements.
 - **categorical variable:** can only take certain values. Visualize variation with bar chart.
 
-```{r 12-variation-categorical}
+```{r}
+#| label: 12-variation-categorical
+
 ggplot(data = diamonds) +
   aes(x = cut) +
   geom_bar()
@@ -33,7 +38,9 @@ ggplot(data = diamonds) +
 
 - **continuous variables:** can take on infinite set of ordered values. Visualize variation with histogram.
 
-```{r 12-variation-continuous}
+```{r}
+#| label: 12-variation-continuous
+
 ggplot(data = diamonds) +
   aes(x = carat) +
   geom_histogram(binwidth = 0.5)
@@ -43,7 +50,9 @@ ggplot(data = diamonds) +
 - Reminder: the `%>%` pipe = "and then".
 - `{ggplot2}` uses `+` to add layers, read it as "with" or "and".
 
-```{r 12-variation-freqpoly}
+```{r}
+#| label: 12-variation-freqpoly
+
 smaller <- diamonds %>% 
   filter(carat < 3) 
 ggplot(smaller) +
@@ -56,7 +65,9 @@ ggplot(smaller) +
   - Which values are rare? Why? Does that match your expectations?
   - Can you see any unusual patterns? What might explain them?
 
-```{r 12-var-questions1}
+```{r}
+#| label: 12-var-questions1
+
 ggplot(smaller, mapping = aes(x = carat)) +
   geom_histogram(binwidth = 0.01)
 ```
@@ -78,7 +89,9 @@ ggplot(smaller, mapping = aes(x = carat)) +
 - Drop the entire row. <-- probably don't do this
 - Replace bad data with NA.
 
-```{r 12-replace-weird}
+```{r}
+#| label: 12-replace-weird
+
 diamonds2 <- diamonds %>% 
   mutate(y = ifelse(y < 3 | y > 20, NA, y))
 ```
@@ -121,7 +134,9 @@ diamonds2 <- diamonds %>%
 
 ## Simplified ggplot2
 
-```{r 12-ggplot-simplified}
+```{r}
+#| label: 12-ggplot-simplified
+
 ggplot(data = faithful, mapping = aes(x = eruptions)) + 
   geom_freqpoly(binwidth = 0.25)
 

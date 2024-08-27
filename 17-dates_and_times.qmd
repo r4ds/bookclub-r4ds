@@ -7,7 +7,11 @@
 -   Perform **arithmetic** on **timespans.**
 -   Recognize ways to deal with **timezones** in R.
 
-```{r dates-and-times-libraries, warning=FALSE, message=FALSE}
+```{r}
+#| label: dates-and-times-libraries
+#| warning: false
+#| message: false
+
 library(tidyverse)
 library(nycflights13)
 ```
@@ -25,7 +29,9 @@ library(nycflights13)
 
 ## today() and now() {-}
 
-```{r dates-and-times-now-today}
+```{r}
+#| label: dates-and-times-now-today
+
 today() # just the date
 now() # date with timestamp
 ```
@@ -46,13 +52,17 @@ now() # date with timestamp
 -   Rearrange for other options
 -   Leave off `_hms` & `tz` for just date
 
-```{r dates-and-times-ymd}
+```{r}
+#| label: dates-and-times-ymd
+
 ymd_hms("2017-01-31 20:11:59")
 ```
 
 ## make_date() and make_datetime() {-}
 
-```{r dates-and-times-make-datetime}
+```{r}
+#| label: dates-and-times-make-datetime
+
 flights |> 
   select(year, month, day, hour, minute) |> 
   mutate(
@@ -67,7 +77,9 @@ flights |>
     -   `as_date(days)`
     -   `as_datetime(seconds)`
 
-```{r dates-and-times-as}
+```{r}
+#| label: dates-and-times-as
+
 as_date(365 * 10 + 2) # 2 leap years
 as_datetime(10 * 60 * 60)
 ```
@@ -77,7 +89,9 @@ as_datetime(10 * 60 * 60)
 -   `year()`, `month()`, `hour()`, `minute()`, `second()`
 -   `day()` == `mday()`, `yday()` (day of year), `wday()` (day of week)
 
-```{r dates-and-times-components}
+```{r}
+#| label: dates-and-times-components
+
 datetime <- ymd_hms("2024-03-08 19:32:28")
 year(datetime)
 mday(datetime)
@@ -87,7 +101,9 @@ wday(datetime, label = TRUE)
 
 ## Rounding datetimes {-}
 
-```{r dates-and-times-rounding}
+```{r}
+#| label: dates-and-times-rounding
+
 round_date(datetime, unit = "hour")
 floor_date(datetime, unit = "hour")
 ceiling_date(datetime, unit = "hour")
@@ -95,7 +111,9 @@ ceiling_date(datetime, unit = "hour")
 
 ## Updating components {-}
 
-```{r dates-and-times-updating}
+```{r}
+#| label: dates-and-times-updating
+
 year(datetime) <- 2030
 datetime
 hour(datetime) <- hour(datetime) + 1
@@ -112,7 +130,9 @@ update(datetime, years = 2024, months = 2, mdays = 30)
 
 ## Durations {-}
 
-```{r dates-and-times-durations}
+```{r}
+#| label: dates-and-times-durations
+
 jon_age <- today() - ymd("1975-01-24")
 jon_age
 as.duration(jon_age)
@@ -123,7 +143,9 @@ dyears(1) / ddays(1)
 
 ## Periods {-}
 
-```{r dates-and-times-periods}
+```{r}
+#| label: dates-and-times-periods
+
 class(days(1))
 ymd_hms("2024-03-10 01:00:00", tz = "America/Chicago") + ddays(1)
 ymd_hms("2024-03-10 01:00:00", tz = "America/Chicago") + days(1)
@@ -131,7 +153,9 @@ ymd_hms("2024-03-10 01:00:00", tz = "America/Chicago") + days(1)
 
 ## Intervals {-}
 
-```{r dates-and-times-intervals}
+```{r}
+#| label: dates-and-times-intervals
+
 y2023 <- ymd("2023-01-01") %--% ymd("2024-01-01")
 y2024 <- ymd("2024-01-01") %--% ymd("2025-01-01")
 y2023 / dyears(1)
@@ -142,7 +166,9 @@ y2024 / days(1)
 
 ## Time zones {-}
 
-```{r dates-and-times-timezones}
+```{r}
+#| label: dates-and-times-timezones
+
 club_start_chicago <- ymd_hms("2024-03-08 13:00:00", tz = "America/Chicago")
 force_tz(club_start_chicago, "Europe/Rome") # Only do this to fix mistakes
 with_tz(club_start_chicago, "UTC")
@@ -152,7 +178,9 @@ with_tz(club_start_chicago, "Australia/Sydney")
 
 ## Daylight saving time {-}
 
-```{r dates-and-times-timezones-dst}
+```{r}
+#| label: dates-and-times-timezones-dst
+
 club_starts <- club_start_chicago + weeks(0:5)
 club_starts |> hour()
 club_starts |> with_tz("Europe/Rome") |> hour()
@@ -168,7 +196,9 @@ club_starts |> with_tz("Australia/Sydney") |> hour() # 😢
 
 Lord Howe Island changes by 30 minutes for daylight saving time
 
-```{r dates-and-times-timezones-howe}
+```{r}
+#| label: dates-and-times-timezones-howe
+
 club_starts |> with_tz("Australia/Sydney") |> hour()
 club_starts |> with_tz("Australia/Lord_Howe") |> hour()
 club_starts |> with_tz("Australia/Sydney") |> minute()

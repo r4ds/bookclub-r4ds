@@ -1,6 +1,8 @@
 # Data import
 
-```{r include=FALSE}
+```{r}
+#| include: false
+
 library(tidyverse)
 ```
 
@@ -58,11 +60,16 @@ students
 - `read_csv()` default: only empty strings (`""`) = `NA`
 - `favourite.food` has `"N/A"` (character), let's treat as `NA`
 
-```{r, echo=TRUE, eval=FALSE}
+```{r}
+#| echo: true
+#| eval: false
+
 students <- read_csv("data/students.csv", na = c("N/A", ""))
 ```
 
-```{r, include=FALSE}
+```{r}
+#| include: false
+
 students <- read_csv("data/students.csv", na = c("N/A", ""))
 ```
 
@@ -351,7 +358,9 @@ sales_files
 
 <p style="color: #104E8B">**IMPORTANT** Note that the variable type information that you just set up is lost when you save to CSV because you’re starting over with reading from a plain text file again.</p>
 
-```{r eval=FALSE}
+```{r}
+#| eval: false
+
 students
 write_csv(students, "students-2.csv")
 read_csv("students-2.csv")
@@ -363,7 +372,9 @@ read_csv("students-2.csv")
 
 - These store data in R’s custom binary format called RDS, which means that when you reload the object, you are loading the exact same R object that you stored.
 
-```{r eval=FALSE}
+```{r}
+#| eval: false
+
 write_rds(students, "students.rds")
 read_rds("students.rds")
 
@@ -376,11 +387,16 @@ read_rds("students.rds")
 
 - Parquet tends to be much faster than RDS and is usable outside of R, but does require the `arrow` package.
 
-```{r message=FALSE, eval=FALSE}
+```{r}
+#| message: false
+#| eval: false
+
 library(arrow)
 ```
 
-``` {r eval=FALSE}
+``` {r}
+#| eval: false
+
 write_parquet(students, "students.parquet")
 read_parquet("students.parquet")
 ```

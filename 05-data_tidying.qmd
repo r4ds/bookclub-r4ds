@@ -1,6 +1,8 @@
 # Data tidying
 
-```{r, include=FALSE}
+```{r}
+#| include: false
+
 library(tidyverse)
 ```
 
@@ -30,7 +32,9 @@ Apart from the book content, these slides also borrow from [`vignette("pivot", "
 
 ## An example (1) {-}
 
-```{r include=FALSE}
+```{r}
+#| include: false
+
 table0 <- table1 |>
   pivot_wider(
     names_from = year,
@@ -151,7 +155,9 @@ table_tidy |>
 
 ## Example {-}
 
-```{r include=FALSE}
+```{r}
+#| include: false
+
 perc_wide <- tibble(
   "2018_A" = 100, 
   "2018_B" = 0, 
@@ -212,7 +218,9 @@ billboard %>%
 
 ## Intermezzo: missing values (3) {-}
 
-```{r include=FALSE}
+```{r}
+#| include: false
+
 weekdays <- c("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
 daily <- tibble(
   day = factor(c("Tue", "Thu", "Fri", "Mon"), levels = weekdays),
@@ -272,7 +280,9 @@ perc_wide
 
 Suppose we have this, and you want to make it **wide** and add **zeros**, not `NA`s:
 
-```{r include=FALSE}
+```{r}
+#| include: false
+
 percentages <- tibble(
   year = c(2018, 2019, 2020, 2020),
   type = factor(c("A", "B", "A", "B"), levels = c("A", "B")),
@@ -328,7 +338,9 @@ Let's consider two more situations:
 
 We take the example from the first situation, but with the name of the `values` variable included in the wide table:
 
-```{r include=FALSE}
+```{r}
+#| include: false
+
 cases <- table_tidy |> 
   pivot_wider(
     names_from = year,

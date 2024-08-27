@@ -33,20 +33,28 @@
 -   Alternatively: `ggplot2::ggplot()`. 
     -   "ggplot2" = package, "ggplot()" = function
 
-```{r 02-library}
+```{r}
+#| label: 02-library
+
 library(tidyverse)
 ```
 
 We'll also need...
 
-```{r 02-otherpkgs, message=FALSE, warning=FALSE}
+```{r}
+#| label: 02-otherpkgs
+#| message: false
+#| warning: false
+
 library(palmerpenguins)
 library(ggthemes)
 ```
 
 ## Peeking at the `palmerpenguins` {-}
 
-```{r 02-dataset}
+```{r}
+#| label: 02-dataset
+
 palmerpenguins::penguins
 ```
 
@@ -57,7 +65,11 @@ palmerpenguins::penguins
     -   **data** to use
     -   how to **map** them to **aesthetics**
 
-```{r 02-plot01, message=FALSE, warning=FALSE}
+```{r}
+#| label: 02-plot01
+#| message: false
+#| warning: false
+
 ggplot(
   data = penguins,
   mapping = aes(x = flipper_length_mm, y = body_mass_g)
@@ -66,7 +78,9 @@ ggplot(
 
 ## Creating a ggplot: geom_\*() {-}
 
-```{r 02-plot02}
+```{r}
+#| label: 02-plot02
+
 ggplot(
   data = penguins,
   mapping = aes(x = flipper_length_mm, y = body_mass_g)
@@ -93,7 +107,11 @@ ggplot(
     -   show.legend
     -   others, sometimes specific to geom
 
-```{r 02-plot03, message=FALSE, warning=FALSE}
+```{r}
+#| label: 02-plot03
+#| message: false
+#| warning: false
+
 ggplot(
   data = penguins,
   mapping = aes(
@@ -110,7 +128,11 @@ ggplot(
 
 - Additional `geom_*()` layers may help as well
 
-```{r 02-plot04, message=FALSE, warning=FALSE}
+```{r}
+#| label: 02-plot04
+#| message: false
+#| warning: false
+
 ggplot(
   data = penguins,
   mapping = aes(x = flipper_length_mm, y = body_mass_g, color = species)
@@ -138,7 +160,11 @@ ggplot(
 -   in `ggplot()` 
 -   apply to all layers
 
-```{r 02-plot05, message=FALSE, warning=FALSE}
+```{r}
+#| label: 02-plot05
+#| message: false
+#| warning: false
+
 ggplot(
   data = penguins,
   mapping = aes(
@@ -158,7 +184,11 @@ ggplot(
 -   in `geom_*()` 
 -   apply only to that layer.
 
-```{r 02-plot06, message=FALSE, warning=FALSE}
+```{r}
+#| label: 02-plot06
+#| message: false
+#| warning: false
+
 ggplot(
   data = penguins,
   mapping = aes(
@@ -178,7 +208,11 @@ ggplot(
 - Mapping shape and color may help colorblind readers
 - Colorblind-friendly palette would help, too
 
-```{r 02-plot07, message=FALSE, warning=FALSE}
+```{r}
+#| label: 02-plot07
+#| message: false
+#| warning: false
+
 ggplot(
   data = penguins,
   mapping = aes(x = flipper_length_mm, y = body_mass_g)
@@ -193,7 +227,11 @@ ggplot(
 
 Use `labs()` to add understandable titles and axes.
 
-```{r 02-plot08, message=FALSE, warning=FALSE}
+```{r}
+#| label: 02-plot08
+#| message: false
+#| warning: false
+
 ggplot(
   data = penguins,
   mapping = aes(x = flipper_length_mm, y = body_mass_g)
@@ -213,7 +251,9 @@ ggplot(
 
 **1. How many rows are in `penguins`? How many columns?**
 
-```{r 02-ex01-01}
+```{r}
+#| label: 02-ex01-01
+
 penguins
 ```
 
@@ -225,7 +265,11 @@ Call `?penguins` for definition from package documentation
 
 **3. Make a scatterplot of `bill_depth_mm` vs. `bill_length_mm`. That is, make a scatterplot with `bill_depth_mm` on the y-axis and `bill_length_mm` on the x-axis. Describe the relationship between these two variables.**
 
-```{r 02-ex03-01, message=FALSE, warning=FALSE}
+```{r}
+#| label: 02-ex03-01
+#| message: false
+#| warning: false
+
 ggplot(penguins) +
   geom_point(aes(x = bill_depth_mm, y = bill_length_mm))
 ```
@@ -234,14 +278,18 @@ Positive, linear relationship? We'll see more about this in later exercises.
 
 **4. What happens if you make a scatterplot of species vs. bill_depth_mm? What might be a better choice of geom?**
 
-```{r 02-ex04-01}
+```{r}
+#| label: 02-ex04-01
+
 ggplot(penguins) +
   geom_point(aes(x = species, y = bill_depth_mm))
 ```
 
 Dotplot for every species. Boxplot would tell us more.
 
-```{r 02-ex04-02}
+```{r}
+#| label: 02-ex04-02
+
 ggplot(penguins) +
   geom_boxplot(aes(x = species, y = bill_depth_mm))
 ```
@@ -250,7 +298,10 @@ This better compares bill depths across species.
 
 **5. Why does the following give an error and how would you fix it?**
 
-```{r 02-ex05-01, eval=FALSE}
+```{r}
+#| label: 02-ex05-01
+#| eval: false
+
 ggplot(data = penguins) + 
   geom_point()
 ```
@@ -261,7 +312,9 @@ The error reads `! geom_point() requires the following missing aesthetics: x and
 
 From function documentation, "If `FALSE`, the default, missing values are removed with a warning. If `TRUE`, missing values are silently removed."
 
-```{r 02-ex06-01}
+```{r}
+#| label: 02-ex06-01
+
 ggplot(penguins) +
   geom_point(aes(x = species, y = bill_depth_mm), na.rm = TRUE)
 ```
@@ -270,7 +323,11 @@ ggplot(penguins) +
 
 `caption` argument adds a caption.
 
-```{r 02-ex07-01, message=FALSE, warning=FALSE}
+```{r}
+#| label: 02-ex07-01
+#| message: false
+#| warning: false
+
 ggplot(penguins) +
   geom_boxplot(aes(x = species, y = bill_depth_mm)) +
   labs(
@@ -286,7 +343,11 @@ ggplot(penguins) +
 
 ![](https://r4ds.hadley.nz/data-visualize_files/figure-html/unnamed-chunk-17-1.png)
 
-```{r 02-ex08-01, message=FALSE, warning=FALSE}
+```{r}
+#| label: 02-ex08-01
+#| message: false
+#| warning: false
+
 ggplot(data = penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
   geom_point(aes(color = bill_depth_mm)) +
   geom_smooth(method = "loess")
@@ -294,7 +355,11 @@ ggplot(data = penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
 
 **9. Run this code in your head and predict what the output will look like. Then, run the code in R and check your predictions.**
 
-```{r 02-ex09-02, message=FALSE, warning=FALSE}
+```{r}
+#| label: 02-ex09-02
+#| message: false
+#| warning: false
+
 ggplot(
   data = penguins,
   mapping = aes(x = flipper_length_mm, y = body_mass_g, color = island)
@@ -314,7 +379,12 @@ ggplot(
 
 **10. Will these two graphs look different? Why/why not?**
 
-```{r 02-ex10-01, eval=FALSE, message=FALSE, warning=FALSE}
+```{r}
+#| label: 02-ex10-01
+#| eval: false
+#| message: false
+#| warning: false
+
 ggplot(
   data = penguins,
   mapping = aes(x = flipper_length_mm, y = body_mass_g)
@@ -335,7 +405,12 @@ ggplot() +
 
 Only difference is mapping globally vs. locally, and mapped same in both geoms, so they should look the same.
 
-```{r 02-ex10-02, echo=FALSE, message=FALSE, warning=FALSE}
+```{r}
+#| label: 02-ex10-02
+#| echo: false
+#| message: false
+#| warning: false
+
 ggplot(
   data = penguins,
   mapping = aes(x = flipper_length_mm, y = body_mass_g)
@@ -359,7 +434,11 @@ ggplot() +
 - For brevity, "data =" and "mapping =" often dropped 
 - But things still work...
 
-```{r 02-twin02, message=FALSE, warning=FALSE}
+```{r}
+#| label: 02-twin02
+#| message: false
+#| warning: false
+
 ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) + 
   geom_point()
 ```
@@ -370,7 +449,11 @@ Quickly check out variable distributions.
 
 Barplots help with categorical variables.
 
-```{r 02-categorical, message=FALSE, warning=FALSE}
+```{r}
+#| label: 02-categorical
+#| message: false
+#| warning: false
+
 ggplot(penguins, aes(x = species)) +
   geom_bar()
 ```
@@ -379,7 +462,11 @@ ggplot(penguins, aes(x = species)) +
 
 Histograms aid with numerical variables
 
-```{r 02-numerical, message=FALSE, warning=FALSE}
+```{r}
+#| label: 02-numerical
+#| message: false
+#| warning: false
+
 ggplot(penguins, aes(x = body_mass_g)) +
   geom_histogram(binwidth = 200)
 ```
@@ -388,7 +475,11 @@ ggplot(penguins, aes(x = body_mass_g)) +
 
 Density plots also help
 
-```{r 02-numerical2, message=FALSE, warning=FALSE}
+```{r}
+#| label: 02-numerical2
+#| message: false
+#| warning: false
+
 ggplot(penguins, aes(x = body_mass_g)) +
   geom_density()
 ```
@@ -397,7 +488,11 @@ ggplot(penguins, aes(x = body_mass_g)) +
 
 **1. Make a bar plot of species of penguins, where you assign species to the y aesthetic. How is this plot different?**
 
-```{r 02-ex11, message=FALSE, warning=FALSE}
+```{r}
+#| label: 02-ex11
+#| message: false
+#| warning: false
+
 ggplot(penguins, aes(y = species)) +
   geom_bar()
 ```
@@ -406,7 +501,11 @@ Bars horizontal instead of vertical.
 
 **2. How are the following two plots different? Which `aesthetic`, `color` or `fill`, is more useful for changing the color of bars?**
 
-```{r 02-ex12, message=FALSE, warning=FALSE}
+```{r}
+#| label: 02-ex12
+#| message: false
+#| warning: false
+
 ggplot(penguins, aes(x = species)) +
   geom_bar(color = "red")
 
@@ -424,17 +523,29 @@ The `bins` argument is helpful when you don't have a particular bin width in min
 
 Let's try 1, 0.1, and 0.01.
 
-```{r 02-ex14-01, message=FALSE, warning=FALSE}
+```{r}
+#| label: 02-ex14-01
+#| message: false
+#| warning: false
+
 ggplot(diamonds) +
   geom_histogram(aes(x = carat), binwidth = 1)
 ```
 
-```{r 02-ex14-02, message=FALSE, warning=FALSE}
+```{r}
+#| label: 02-ex14-02
+#| message: false
+#| warning: false
+
 ggplot(diamonds) +
   geom_histogram(aes(x = carat), binwidth = 0.1)
 ```
 
-```{r 02-ex14-03, message=FALSE, warning=FALSE}
+```{r}
+#| label: 02-ex14-03
+#| message: false
+#| warning: false
+
 ggplot(diamonds) +
   geom_histogram(aes(x = carat), binwidth = 0.01)
 ```
@@ -449,7 +560,11 @@ Here, a `binwidth` of 0.1 seems to be a good compromise between showing granular
 
 Boxplots help here (or color-coded density plots).
 
-```{r 02-relationship-boxplot, message=FALSE, warning=FALSE}
+```{r}
+#| label: 02-relationship-boxplot
+#| message: false
+#| warning: false
+
 ggplot(penguins, aes(x = species, y = body_mass_g)) +
   geom_boxplot()
 ```
@@ -458,14 +573,22 @@ ggplot(penguins, aes(x = species, y = body_mass_g)) +
 
 Try a bar plot.
 
-```{r 02-relationship-bar, message=FALSE, warning=FALSE}
+```{r}
+#| label: 02-relationship-bar
+#| message: false
+#| warning: false
+
 ggplot(penguins, aes(x = island, fill = species)) +
   geom_bar()
 ```
 
 To get proportions, set `position` argument to "fill"
 
-```{r 02-relationship-barprop, message=FALSE, warning=FALSE}
+```{r}
+#| label: 02-relationship-barprop
+#| message: false
+#| warning: false
+
 ggplot(penguins, aes(x = island, fill = species)) +
   geom_bar(position = "fill")
 ```
@@ -474,7 +597,11 @@ ggplot(penguins, aes(x = island, fill = species)) +
 
 Scatterplots shine here.
 
-```{r 02-relationship-scatter, message=FALSE, warning=FALSE}
+```{r}
+#| label: 02-relationship-scatter
+#| message: false
+#| warning: false
+
 ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
   geom_point()
 ```
@@ -483,14 +610,22 @@ ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
 
 Map each to different variable
 
-```{r 02-relationship-scatter-multi, message=FALSE, warning=FALSE}
+```{r}
+#| label: 02-relationship-scatter-multi
+#| message: false
+#| warning: false
+
 ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
   geom_point(aes(color = species, shape = island))
 ```
 
 Or use `facet_wrap()` to create "small multiples"
 
-```{r 02-relationship-facet, message=FALSE, warning=FALSE}
+```{r}
+#| label: 02-relationship-facet
+#| message: false
+#| warning: false
+
 ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
   geom_point(aes(color = species, shape = species)) +
   facet_wrap(~island)
@@ -504,27 +639,45 @@ Running `glimpse(mpg)` gets us most of the way there. We can assume all of the c
 
 **2. Make a scatterplot of `hwy` vs. `displ` using the `mpg` data frame. Next, map a third, numerical variable to color, then size, then both color and size, then shape. How do these aesthetics behave differently for categorical vs. numerical variables?**
 
-```{r 02-ex16-01, message=FALSE, warning=FALSE}
+```{r}
+#| label: 02-ex16-01
+#| message: false
+#| warning: false
+
 ggplot(mpg) +
   geom_point(aes(x = hwy, y = displ))
 ```
 
-```{r 02-ex16-02, message=FALSE, warning=FALSE}
+```{r}
+#| label: 02-ex16-02
+#| message: false
+#| warning: false
+
 ggplot(mpg) +
   geom_point(aes(x = hwy, y = displ, color = cty))
 ```
 
-```{r 02-ex16-03, message=FALSE, warning=FALSE}
+```{r}
+#| label: 02-ex16-03
+#| message: false
+#| warning: false
+
 ggplot(mpg) +
   geom_point(aes(x = hwy, y = displ, size = cty))
 ```
 
-```{r 02-ex16-04, message=FALSE, warning=FALSE}
+```{r}
+#| label: 02-ex16-04
+#| message: false
+#| warning: false
+
 ggplot(mpg) +
   geom_point(aes(x = hwy, y = displ, color = cty, size = year))
 ```
 
-```{r 02-ex16-05}
+```{r}
+#| label: 02-ex16-05
+
 ggplot(mpg) +
   geom_point(aes(x = hwy, y = displ, color = cty, size = year, shape = manufacturer))
 ```
@@ -533,7 +686,9 @@ First off, shape doesn't accept numerical variables. When a categorical variable
 
 **3. In the scatterplot of `hwy` vs. `displ`, what happens if you map a third variable to `linewidth`?**
 
-```{r 02-ex17-01}
+```{r}
+#| label: 02-ex17-01
+
 ggplot(mpg) +
   geom_point(aes(x = hwy, y = displ, color = cty, size = year, linewidth = manufacturer))
 ```
@@ -542,7 +697,11 @@ It's ignored because there are no lines in a scatterplot. (Also, if you use a ca
 
 **4. What happens if you map the same variable to multiple aesthetics?**
 
-```{r 02-ex18-01, message=FALSE, warning=FALSE}
+```{r}
+#| label: 02-ex18-01
+#| message: false
+#| warning: false
+
 ggplot(mpg) +
   geom_point(aes(x = hwy, y = displ, color = cty, size = cty))
 ```
@@ -551,12 +710,20 @@ Both work, but it can be kind of redundant. It can be useful for colorblind user
 
 **5. Make a scatterplot of `bill_depth_mm` vs. `bill_length_mm` and color the points by `species`. What does adding coloring by species reveal about the relationship between these two variables? What about faceting by species?**
 
-```{r 02-ex19-01, message=FALSE, warning=FALSE}
+```{r}
+#| label: 02-ex19-01
+#| message: false
+#| warning: false
+
 ggplot(penguins) +
   geom_point(aes(x = bill_depth_mm, y = bill_length_mm, color = species))
 ```
 
-```{r 02-ex19-02, message=FALSE, warning=FALSE}
+```{r}
+#| label: 02-ex19-02
+#| message: false
+#| warning: false
+
 ggplot(penguins) +
   geom_point(aes(x = bill_depth_mm, y = bill_length_mm, color = species))+
   facet_wrap(~species)
@@ -566,7 +733,9 @@ Color-coding helps spot the relationship of bill sizes by species (compare to Ex
 
 **6. Why does the following yield two separate legends? How would you fix it to combine the two legends?**
 
-```{r 02-ex20-01}
+```{r}
+#| label: 02-ex20-01
+
 ggplot(
   data = penguins,
   mapping = aes(
@@ -580,7 +749,11 @@ ggplot(
 
 Adding an argument to `labs` about our shape as well as our color should solve that.
 
-```{r 02-ex20-02, message=FALSE, warning=FALSE}
+```{r}
+#| label: 02-ex20-02
+#| message: false
+#| warning: false
+
 ggplot(
   data = penguins,
   mapping = aes(
@@ -593,7 +766,11 @@ ggplot(
 
 **7. Create the two following stacked bar plots. Which question can you answer with the first one? Which question can you answer with the second one?**
 
-```{r 02-ex21-01, message=FALSE, warning=FALSE}
+```{r}
+#| label: 02-ex21-01
+#| message: false
+#| warning: false
+
 ggplot(penguins, aes(x = island, fill = species)) +
   geom_bar(position = "fill")
 ggplot(penguins, aes(x = species, fill = island)) +
@@ -606,7 +783,10 @@ The first tells us which species make up certain proportions of an island's over
 
 `ggsave()` lets you get your plots out of R for sharing.
 
-```{r 02-ggsave, eval=FALSE}
+```{r}
+#| label: 02-ggsave
+#| eval: false
+
 ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
   geom_point()
 ggsave(filename = "penguin-plot.png", width = 800, units = "px")
@@ -621,7 +801,12 @@ Setting `width` and/or `height` helps with reproducibility.
 
 **1. Run the following lines of code. Which of the two plots is saved as `mpg-plot.png`? Why?**
 
-```{r 02-ex22-01, warning=FALSE, message=FALSE, eval=FALSE}
+```{r}
+#| label: 02-ex22-01
+#| warning: false
+#| message: false
+#| eval: false
+
 ggplot(mpg, aes(x = class)) +
   geom_bar()
 ggplot(mpg, aes(x = cty, y = hwy)) +

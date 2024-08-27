@@ -103,7 +103,9 @@ Code in book slightly different from output you'll see
     -   `#` = comment
     -   Can copy/paste code from book to console
 
-```{r eval=FALSE}
+```{r}
+#| eval: false
+
 1 + 2
 #> [1] 3
 ```

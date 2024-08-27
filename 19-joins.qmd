@@ -1,6 +1,12 @@
 # Joins
 
-```{r 19-01, message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
+```{r}
+#| label: 19-01
+#| message: false
+#| warning: false
+#| include: false
+#| paged-print: false
+
 oldopt <- options(pillar.print_max = 4, pillar.print_min = 4)
 library(nycflights13)
 library(tidyverse)
@@ -335,7 +341,9 @@ Use separate function `cross_join()`.
 
 ## Key matching conditions: examples {-}
 
-```{r include=FALSE}
+```{r}
+#| include: false
+
 set.seed(123)
 employees <- tibble(
   name = sample(babynames::babynames$name, 100),
@@ -382,7 +390,9 @@ df |> cross_join(df)
 
 
 
-```{r include=FALSE}
+```{r}
+#| include: false
+
 options(oldopt)
 ```
 

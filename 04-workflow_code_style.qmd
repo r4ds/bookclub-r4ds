@@ -30,7 +30,9 @@ Names should use only:
 
 `snake_case` = preferred style
 
-```{r eval=FALSE}
+```{r}
+#| eval: false
+
 # Strive for:
 short_flights <- flights |> filter(air_time < 60)
 
@@ -55,7 +57,9 @@ Spaces around:
 -   Math operators (except `^`)
 -   Assignment operator (`<-`)
 
-```{r eval=FALSE}
+```{r}
+#| eval: false
+
 # Strive for
 z <- (a + b)^2 / d
 
@@ -68,7 +72,9 @@ z<-( a + b ) ^ 2/d
 -   No spaces inside/outside parentheses
 -   Spaces after commas (like regular English)
 
-```{r eval=FALSE}
+```{r}
+#| eval: false
+
 # Strive for
 mean(x, na.rm = TRUE)
 
@@ -78,7 +84,9 @@ mean (x ,na.rm=TRUE )
 
 ## Use extra spaces for alignment {-}
 
-```{r eval=FALSE}
+```{r}
+#| eval: false
+
 flights |> 
   mutate(
     speed      = air_time / distance,
@@ -90,7 +98,9 @@ flights |>
 
 ## Pipes: Spacing {-}
 
-```{r eval=FALSE}
+```{r}
+#| eval: false
+
 # Strive for space before |>, end line with |>
 flights |> 
   filter(!is.na(arr_delay), !is.na(tailnum)) |> 
@@ -112,7 +122,9 @@ Easier to:
 -   Put named arguments on newline
 -   Put unnamed arguments on one line if they fit
 
-```{r eval=FALSE}
+```{r}
+#| eval: false
+
 # Strive for
 flights |>  
   group_by(tailnum) |> 
@@ -131,7 +143,9 @@ flights |>
 
 ## Pipes: Indentation {-}
 
-```{r eval=FALSE}
+```{r}
+#| eval: false
+
 # Strive for 
 flights |>  
   group_by(tailnum) |> 
@@ -160,7 +174,9 @@ flights|>
 
 OK to shirk some rules to fit on one line 
 
-```{r eval = FALSE}
+```{r}
+#| eval: false
+
 # This fits compactly on one line
 df |> mutate(y = x + 1)
 
@@ -182,7 +198,9 @@ df |>
 
 Same rules for `+` as for `|>`
 
-```{r eval=FALSE}
+```{r}
+#| eval: false
+
 flights |> 
   group_by(month) |> 
   summarize(
@@ -195,7 +213,9 @@ flights |>
 
 ## ggplot2 spacing 2 {-}
 
-```{r eval=FALSE}
+```{r}
+#| eval: false
+
 flights |> 
   group_by(dest) |> 
   summarize(
@@ -217,7 +237,9 @@ flights |>
 
 Use sectioning comments (**Cmd/Ctrl + Shift + R**) to break up long files
 
-```{r load-data-comment}
+```{r}
+#| label: load-data-comment
+
  # Load data --------------------------------------
 
  # Plot data --------------------------------------
@@ -228,7 +250,10 @@ Use sectioning comments (**Cmd/Ctrl + Shift + R**) to break up long files
 
 1. Restyle the following pipelines following the guidelines above.
 
-```{r exercises, eval=FALSE}
+```{r}
+#| label: exercises
+#| eval: false
+
 flights|>filter(dest=="IAH")|>group_by(year,month,day)|>summarize(n=n(),
 delay=mean(arr_delay,na.rm=TRUE))|>filter(n>10)
 
@@ -239,7 +264,10 @@ arr_delay,na.rm=TRUE),cancelled=sum(is.na(arr_delay)),n=n())|>filter(n>10)
 
 Solution
 
-```{r exercises solution, eval=FALSE}
+```{r}
+#| label: exercises solution
+#| eval: false
+
 flights |> # space before/ after pipe and the last thing on a line
   filter(dest == "IAH") |> # indent twice, space between operators
   group_by(year, month, day) |> # space after comma
