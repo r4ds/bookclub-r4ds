@@ -16,7 +16,7 @@
 
 1. YAML header:
 
-```{yaml}
+``` yaml
 title: "Diamond sizes"
 format: html
 ```
@@ -38,7 +38,7 @@ Note: `output_format` can have multiple values
 -   Some format-specific (`code-fold: true` for `format: html`)
 -   `default` to use defaults for format
 
-```{yaml}
+``` yaml
 format:
   html:
     toc: true
@@ -91,7 +91,7 @@ More at [quarto.org/docs/presentations](https://quarto.org/docs/presentations)
 
 ## Shiny
 
-```{yaml}
+``` yaml
 title: "Shiny Web App"
 format: html
 server: shiny
@@ -125,7 +125,7 @@ Quarto projects can group `.qmd`s into websites or books
 -   `index.qmd` = home page
 -   `_quarto.yml` specifies structure
 
-```{yaml}
+``` yaml
 project:
   type: book
 ```
