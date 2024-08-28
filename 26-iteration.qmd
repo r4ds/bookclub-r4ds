@@ -8,7 +8,7 @@
 -   Write multiple files.
 
 ```{r}
-#| label: iteration-packages_used
+#| label: iteration-packages-used
 #| message: false
 #| warning: false
 
@@ -80,7 +80,7 @@ Pass actual function to `across()`, ***not*** a call to the function!
 ## Multiple functions
 
 ```{r}
-#| label: iteration-multiple_functions
+#| label: iteration-multiple-functions
 
 df |> summarize(
   across(a:c, list(mean, median))
@@ -90,7 +90,7 @@ df |> summarize(
 ## Multiple functions with names
 
 ```{r}
-#| label: iteration-multiple_functions-names
+#| label: iteration-multiple-functions-names
 
 df |> summarize(across(a:c, 
     list(mean = mean, median = median)
@@ -100,7 +100,7 @@ df |> summarize(across(a:c,
 ## Multiple functions with names & args
 
 ```{r}
-#| label: iteration-multiple_functions-args
+#| label: iteration-multiple-functions-args
 
 df |> summarize(across(a:c, 
     list(
@@ -113,7 +113,7 @@ df |> summarize(across(a:c,
 ## Fancier naming
 
 ```{r}
-#| label: iteration-across-glue_names
+#| label: iteration-across-glue-names
 
 df |> summarize(across(a:c,
     list(
@@ -127,7 +127,7 @@ df |> summarize(across(a:c,
 ## Filtering with if_any() and if_all()
 
 ```{r}
-#| label: iteration-if_any
+#| label: iteration-if-any
 
 df2 <- tibble(x = 1:3, y = c(1, 2, NA), z = c(NA, 2, 3))
 df2 |> filter(if_any(everything(), is.na))
@@ -157,7 +157,7 @@ summarize_datatypes <- function(df) {
 ## across() in functions: mpg
 
 ```{r}
-#| label: iteration-across_in_functions-mpg
+#| label: iteration-across-in-functions-mpg
 
 mpg |> summarize_datatypes()
 ```
@@ -165,7 +165,7 @@ mpg |> summarize_datatypes()
 ## across() in functions: diamonds
 
 ```{r}
-#| label: iteration-across_in_functions-diamonds
+#| label: iteration-across-in-functions-diamonds
 
 diamonds |> summarize_datatypes()
 ```
@@ -173,7 +173,7 @@ diamonds |> summarize_datatypes()
 ## Iterate over files
 
 ```{r}
-#| label: iteration-map_files
+#| label: iteration-map-files
 #| eval: false
 
 list.files("data/gapminder", pattern = "[.]xlsx$", full.names = TRUE) |>

@@ -23,7 +23,7 @@
 We will be utilizing the `{stringr}` package which is part of the core `{tidyverse}` and also the package `{babynames}`.
 
 ```{r}
-#| label: 17-Load Library
+#| label: 17-load-library
 #| include: true
 #| message: false
 
@@ -121,7 +121,7 @@ If the string doesn't match this pattern, `grepl` returns `FALSE`, indicating th
 The simplest expressions are pattern matching:
 
 ```{r}
-#| label: 17-Pattern Matching
+#| label: 17-pattern-matching
 #| include: true
 
 str_view(fruit, "berry")
@@ -131,7 +131,7 @@ str_view(fruit, "berry")
 - `.`, `+`, `*`, `[`, `]`, and `?` are metacharacters and have special meanings.
 - `.` matches any character (except a newline):
 ```{r}
-#| label: 17-Match any Character
+#| label: 17-match-any-character
 #| include: true
 
 # any string that contains an “a” followed by another character

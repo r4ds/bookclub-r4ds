@@ -8,7 +8,7 @@
 -   Extract other data from web pages.
 
 ```{r}
-#| label: web_scraping-packages
+#| label: web-scraping-packages
 #| eval: true
 #| message: false
 #| warning: false
@@ -53,7 +53,7 @@ HTML = **H**yper**T**ext **M**arkup **L**anguage
 (currently times out, disabled for now; next cohort should revise!)
 
 ```{r}
-#| label: web_scraping-tables
+#| label: web-scraping-tables
 #| eval: false
 
 url <- "https://web.archive.org/web/20220201012049/https://www.imdb.com/chart/top/"
@@ -75,7 +75,7 @@ html |>
 (See "Example: Table" slide above; fix that then this)
 
 ```{r}
-#| label: web_scraping-html_element
+#| label: web-scraping-html-element
 #| eval: false
 
 html |> 
@@ -103,7 +103,7 @@ html |>
 [Star Wars films (1-7)](https://rvest.tidyverse.org/articles/starwars.html)
 
 ```{r}
-#| label: web_scraping-star_wars-section
+#| label: web-scraping-star-wars-section
 
 url <- "https://rvest.tidyverse.org/articles/starwars.html"
 html <- read_html(url)
@@ -115,7 +115,7 @@ section
 ## Example: Star Wars Directors
 
 ```{r}
-#| label: web_scraping-star_wars-directors
+#| label: web-scraping-star-wars-directors
 
 section |> html_element(".director") |> html_text2()
 ```
@@ -123,7 +123,7 @@ section |> html_element(".director") |> html_text2()
 ## Example: Star Wars Tibble
 
 ```{r}
-#| label: web_scraping-star_wars-tibble
+#| label: web-scraping-star-wars-tibble
 
 tibble(
   title = section |> 

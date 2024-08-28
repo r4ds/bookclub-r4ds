@@ -265,7 +265,7 @@ arr_delay,na.rm=TRUE),cancelled=sum(is.na(arr_delay)),n=n())|>filter(n>10)
 Solution
 
 ```{r}
-#| label: exercises solution
+#| label: exercises-solution
 #| eval: false
 
 flights |> # space before/ after pipe and the last thing on a line
