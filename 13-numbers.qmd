@@ -1167,7 +1167,7 @@ Tibbles can have atomic vectors (with additional attributes)of different types: 
 
 ### Cohort 5
 
-`r knitr::include_url("https://www.youtube.com/embed/rsRImj294pM")`
+{{< video https://www.youtube.com/embed/rsRImj294pM >}}
 
 <details>
   <summary> Meeting chat log </summary>
@@ -1206,7 +1206,7 @@ In .Machine$integer.max + 1L : NAs produced by integer overflow
 ```
 </details>
 
-`r knitr::include_url("https://www.youtube.com/embed/EfOPxmQ9R-c")`
+{{< video https://www.youtube.com/embed/EfOPxmQ9R-c >}}
 
 <details>
   <summary> Meeting chat log </summary>
@@ -1265,7 +1265,7 @@ function (x, width = NULL, max.level = 3, ...)
 
 ### Cohort 6
 
-`r knitr::include_url("https://www.youtube.com/embed/bRwmyUbario")`
+{{< video https://www.youtube.com/embed/bRwmyUbario >}}
 
 <details>
   <summary> Meeting chat log </summary>
@@ -1282,12 +1282,12 @@ function (x, width = NULL, max.level = 3, ...)
 
 ### Cohort 7
 
-`r knitr::include_url("https://www.youtube.com/embed/JABxQRPg2TQ")`
+{{< video https://www.youtube.com/embed/JABxQRPg2TQ >}}
 
 
 ### Cohort 8
 
-`r knitr::include_url("https://www.youtube.com/embed/KXTa8_58ITQ")`
+{{< video https://www.youtube.com/embed/KXTa8_58ITQ >}}
 
 <details>
 <summary> Meeting chat log </summary>

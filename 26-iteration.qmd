@@ -204,7 +204,7 @@ Discuss!
 
 ### Cohort 5
 
-`r knitr::include_url("https://www.youtube.com/embed/0rsV1jlxhws")`
+{{< video https://www.youtube.com/embed/0rsV1jlxhws >}}
 
 <details>
   <summary> Meeting chat log </summary>  
@@ -227,7 +227,7 @@ Discuss!
 ```
 </details>
 
-`r knitr::include_url("https://www.youtube.com/embed/CEKPAUWTA3c")`
+{{< video https://www.youtube.com/embed/CEKPAUWTA3c >}}
 
 <details>
   <summary> Meeting chat log </summary>  
@@ -258,7 +258,7 @@ mtcars %>%
 
 ### Cohort 6
 
-`r knitr::include_url("https://www.youtube.com/embed/NVUHFpYUmA4")`
+{{< video https://www.youtube.com/embed/NVUHFpYUmA4 >}}
 
 <details>
   <summary> Meeting chat log </summary>  
@@ -269,7 +269,7 @@ mtcars %>%
 ```
 </details>
 
-`r knitr::include_url("https://www.youtube.com/embed/YnZSfzMGhTE")`
+{{< video https://www.youtube.com/embed/YnZSfzMGhTE >}}
 
 <details>
   <summary> Meeting chat log </summary>  
@@ -286,7 +286,7 @@ mtcars %>%
 
 ### Cohort 7
 
-`r knitr::include_url("https://www.youtube.com/embed/vPEgWgs0q7s")`
+{{< video https://www.youtube.com/embed/vPEgWgs0q7s >}}
 
 <details>
 <summary> Meeting chat log </summary>
@@ -304,4 +304,4 @@ mtcars %>%
 
 ### Cohort 8
 
-`r knitr::include_url("https://www.youtube.com/embed/TQabUIBbJKs")`
+{{< video https://www.youtube.com/embed/TQabUIBbJKs >}}

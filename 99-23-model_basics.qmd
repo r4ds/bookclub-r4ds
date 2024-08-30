@@ -306,7 +306,7 @@ ggplot(sim5, aes(x, y)) +
 
 ### Cohort 5
 
-`r knitr::include_url("https://www.youtube.com/embed/hEjE7PYLCL8")`
+{{< video https://www.youtube.com/embed/hEjE7PYLCL8 >}}
 
 <details>
   <summary> Meeting chat log </summary>
@@ -334,7 +334,7 @@ y ~ x1*x2 = y ~ x1 + x2 + x1:x2
 ```
 </details>
 
-`r knitr::include_url("https://www.youtube.com/embed/9DZV6bvifHA")`
+{{< video https://www.youtube.com/embed/9DZV6bvifHA >}}
 
 <details>
   <summary> Meeting chat log </summary>
@@ -352,7 +352,7 @@ y ~ x1*x2 = y ~ x1 + x2 + x1:x2
 
 ### Cohort 6
 
-`r knitr::include_url("https://www.youtube.com/embed/GDIOmvhOgNk")`
+{{< video https://www.youtube.com/embed/GDIOmvhOgNk >}}
 
 <details>
   <summary> Meeting chat log </summary>
@@ -366,7 +366,7 @@ y ~ x1*x2 = y ~ x1 + x2 + x1:x2
 ```
 </details>
 
-`r knitr::include_url("https://www.youtube.com/embed/LD2xOX_svU0")`
+{{< video https://www.youtube.com/embed/LD2xOX_svU0 >}}
 
 <details>
   <summary> Meeting chat log </summary>
@@ -377,7 +377,7 @@ y ~ x1*x2 = y ~ x1 + x2 + x1:x2
 ```
 </details>
 
-`r knitr::include_url("https://www.youtube.com/embed/VrFzuaGDiJo")`
+{{< video https://www.youtube.com/embed/VrFzuaGDiJo >}}
 
 <details>
   <summary> Meeting chat log </summary>

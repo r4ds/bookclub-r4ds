@@ -882,7 +882,7 @@ But more than likely, you misspelled something.
 
 ### Cohort 5
 
-`r knitr::include_url("https://www.youtube.com/embed/0NdiQuuM0vw")`
+{{< video https://www.youtube.com/embed/0NdiQuuM0vw >}}
 
 <details>
   <summary> Meeting chat log </summary>
@@ -940,7 +940,7 @@ But more than likely, you misspelled something.
 
 ### Cohort 6
 
-`r knitr::include_url("https://www.youtube.com/embed/5IMg8AC-1IA")`
+{{< video https://www.youtube.com/embed/5IMg8AC-1IA >}}
 
 <details>
   <summary> Meeting chat log </summary>
@@ -996,7 +996,7 @@ But more than likely, you misspelled something.
 ```
 </details>
 
-`r knitr::include_url("https://www.youtube.com/embed/sEYMNIEvG5Q")`
+{{< video https://www.youtube.com/embed/sEYMNIEvG5Q >}}
 
 <details>
   <summary> Meeting chat log </summary>
@@ -1037,7 +1037,7 @@ But more than likely, you misspelled something.
 
 ### Cohort 7
 
-`r knitr::include_url("https://www.youtube.com/embed/eqQJ5tmEGco")`
+{{< video https://www.youtube.com/embed/eqQJ5tmEGco >}}
 
 <details>
 <summary> Meeting chat log </summary>
@@ -1052,7 +1052,7 @@ But more than likely, you misspelled something.
 
 ### Cohort 8
 
-`r knitr::include_url("https://www.youtube.com/embed/RRxtbv5QCA4")`
+{{< video https://www.youtube.com/embed/RRxtbv5QCA4 >}}
 
 <details>
 <summary> Meeting chat log </summary>

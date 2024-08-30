@@ -209,7 +209,7 @@ club_starts |> with_tz("Australia/Lord_Howe") |> minute()
 
 ### Cohort 5
 
-`r knitr::include_url("https://www.youtube.com/embed/J8QU4RBdi5c")`
+{{< video https://www.youtube.com/embed/J8QU4RBdi5c >}}
 
 <details>
   <summary> Meeting chat log </summary>
@@ -236,14 +236,14 @@ club_starts |> with_tz("Australia/Lord_Howe") |> minute()
 
 ### Cohort 6
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+{{< video https://www.youtube.com/embed/URL >}}
 
 
 ### Cohort 7
 
-`r knitr::include_url("https://www.youtube.com/embed/pGbCWFB4Rz4")`
+{{< video https://www.youtube.com/embed/pGbCWFB4Rz4 >}}
 
 
 ### Cohort 8
 
-`r knitr::include_url("https://www.youtube.com/embed/QXFhZjc9S0o")`
+{{< video https://www.youtube.com/embed/QXFhZjc9S0o >}}

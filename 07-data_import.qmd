@@ -503,7 +503,7 @@ ggplot(clean,
 
 ### Cohort 5
 
-`r knitr::include_url("https://www.youtube.com/embed/s5b_QkLSYeE")`
+{{< video https://www.youtube.com/embed/s5b_QkLSYeE >}}
 
 <details>
   <summary> Meeting chat log </summary>
@@ -553,7 +553,7 @@ is     fixed  width
 ```
 </details>
 
-`r knitr::include_url("https://www.youtube.com/embed/ctRKvm8Z-_8")`
+{{< video https://www.youtube.com/embed/ctRKvm8Z-_8 >}}
 
 <details>
   <summary> Meeting chat log </summary>
@@ -594,7 +594,7 @@ is     fixed  width
 
 ### Cohort 6
 
-`r knitr::include_url("https://www.youtube.com/embed/QKB9wy-2_Ps")`
+{{< video https://www.youtube.com/embed/QKB9wy-2_Ps >}}
 
 <details>
   <summary> Meeting chat log </summary>
@@ -626,7 +626,7 @@ is     fixed  width
 
 ### Cohort 7
 
-`r knitr::include_url("https://www.youtube.com/embed/hb7eSpCMGDU")`
+{{< video https://www.youtube.com/embed/hb7eSpCMGDU >}}
 
 <details>
 <summary> Meeting chat log </summary>
@@ -648,4 +648,4 @@ is     fixed  width
 
 ### Cohort 8
 
-`r knitr::include_url("https://www.youtube.com/embed/b91ZvatZ1Ug")`
+{{< video https://www.youtube.com/embed/b91ZvatZ1Ug >}}

@@ -158,7 +158,7 @@ readr::read_csv(
 
 ### Cohort 5
 
-`r knitr::include_url("https://www.youtube.com/embed/2LFWCGNiuoE")`
+{{< video https://www.youtube.com/embed/2LFWCGNiuoE >}}
 
 <details>
 
@@ -178,7 +178,7 @@ readr::read_csv(
 
 </details>
 
-`r knitr::include_url("https://www.youtube.com/embed/VYYxhIBuDys")`
+{{< video https://www.youtube.com/embed/VYYxhIBuDys >}}
 
 <details>
 
@@ -235,7 +235,7 @@ readr::read_csv(
 
 ### Cohort 6
 
-`r knitr::include_url("https://www.youtube.com/embed/3SLN7bQQkDY")`
+{{< video https://www.youtube.com/embed/3SLN7bQQkDY >}}
 
 <details>
 
@@ -285,7 +285,7 @@ readr::read_csv(
 
 </details>
 
-`r knitr::include_url("https://www.youtube.com/embed/dNtF8-lZ_pA")`
+{{< video https://www.youtube.com/embed/dNtF8-lZ_pA >}}
 
 <details>
 
@@ -305,7 +305,7 @@ readr::read_csv(
 
 ### Cohort 7
 
-`r knitr::include_url("https://www.youtube.com/embed/xrZdzkOC_Ts")`
+{{< video https://www.youtube.com/embed/xrZdzkOC_Ts >}}
 
 <details>
 
@@ -323,4 +323,4 @@ readr::read_csv(
 
 ### Cohort 8
 
-`r knitr::include_url("https://www.youtube.com/embed/Tf1wyQojaQk")`
+{{< video https://www.youtube.com/embed/Tf1wyQojaQk >}}

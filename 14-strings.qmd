@@ -378,7 +378,7 @@ str_sort(c("c", "ch", "h"), locale = "cs")
 
 ### Cohort 5
 
-`r knitr::include_url("https://www.youtube.com/embed/RpZoQR2xwME")`
+{{< video https://www.youtube.com/embed/RpZoQR2xwME >}}
 
 <details>
   <summary> Meeting chat log </summary>
@@ -435,7 +435,7 @@ In stri_c(..., sep = sep, collapse = collapse, ignore_null = TRUE) :
 ```
 </details>
 
-`r knitr::include_url("https://www.youtube.com/embed/A-_URHkvxNA")`
+{{< video https://www.youtube.com/embed/A-_URHkvxNA >}}
 
 <details>
   <summary> Meeting chat log </summary>
@@ -459,7 +459,7 @@ $ = end of text
 
 ### Cohort 6
 
-`r knitr::include_url("https://www.youtube.com/embed/l07Vo1wMW5s")`
+{{< video https://www.youtube.com/embed/l07Vo1wMW5s >}}
 
 <details>
   <summary> Meeting chat log </summary>
@@ -478,7 +478,7 @@ $ = end of text
 ```
 </details>
 
-`r knitr::include_url("https://www.youtube.com/embed/k7poFr556To")`
+{{< video https://www.youtube.com/embed/k7poFr556To >}}
 
 <details>
   <summary> Meeting chat log </summary>
@@ -497,7 +497,7 @@ $ = end of text
 ```
 </details>
 
-`r knitr::include_url("https://www.youtube.com/embed/9UuMNJB3KFA")`
+{{< video https://www.youtube.com/embed/9UuMNJB3KFA >}}
 
 <details>
   <summary> Meeting chat log </summary>
@@ -516,7 +516,7 @@ Thanks Shannon for the wonderful presentation!
 
 ### Cohort 7
 
-`r knitr::include_url("https://www.youtube.com/embed/NQq6EoCCsR0")`
+{{< video https://www.youtube.com/embed/NQq6EoCCsR0 >}}
 
 <details>
 <summary> Meeting chat log </summary>
@@ -539,7 +539,7 @@ Thanks Shannon for the wonderful presentation!
 
 ### Cohort 8
 
-`r knitr::include_url("https://www.youtube.com/embed/AiIZ0U6zMvU")`
+{{< video https://www.youtube.com/embed/AiIZ0U6zMvU >}}
 
 <details>
 <summary> Meeting chat log </summary>

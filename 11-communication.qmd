@@ -231,7 +231,7 @@ source: [https://exts.ggplot2.tidyverse.org/gallery/](https://exts.ggplot2.tidyv
 
 ### Cohort 5
 
-`r knitr::include_url("https://www.youtube.com/embed/42cqVanImm0")`
+{{< video https://www.youtube.com/embed/42cqVanImm0 >}}
 
 <details>
   <summary> Meeting chat log </summary>
@@ -247,7 +247,7 @@ https://exts.ggplot2.tidyverse.org/gallery/
 ```
 </details>
 
-`r knitr::include_url("https://www.youtube.com/embed/mPCSgJAYLac")`
+{{< video https://www.youtube.com/embed/mPCSgJAYLac >}}
 
 <details>
   <summary> Meeting chat log </summary>
@@ -270,7 +270,7 @@ https://exts.ggplot2.tidyverse.org/gallery/
 
 ### Cohort 6
 
-`r knitr::include_url("https://www.youtube.com/embed/qQrnNef9fkM")`
+{{< video https://www.youtube.com/embed/qQrnNef9fkM >}}
 
 <details>
   <summary> Meeting chat log </summary>
@@ -296,9 +296,9 @@ https://exts.ggplot2.tidyverse.org/gallery/
 
 ### Cohort 7
 
-`r knitr::include_url("https://www.youtube.com/embed/fOA271r3MGo")`
+{{< video https://www.youtube.com/embed/fOA271r3MGo >}}
 
 
 ### Cohort 8
 
-`r knitr::include_url("https://www.youtube.com/embed/etTi7a_HJTc")`
+{{< video https://www.youtube.com/embed/etTi7a_HJTc >}}

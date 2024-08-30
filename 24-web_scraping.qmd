@@ -154,7 +154,7 @@ tibble(
 
 ### Cohort 7
 
-`r knitr::include_url("https://www.youtube.com/embed/G5_pr9HxbT4")`
+{{< video https://www.youtube.com/embed/G5_pr9HxbT4 >}}
 
 <details>
   <summary> Meeting chat log </summary>
@@ -168,12 +168,12 @@ tibble(
 ```
 </details>
 
-`r knitr::include_url("https://www.youtube.com/embed/HnJ3ZY1seY4")`
+{{< video https://www.youtube.com/embed/HnJ3ZY1seY4 >}}
 
 ### Cohort 8
 
-`r knitr::include_url("https://www.youtube.com/embed/dOVWSSqUvt0")`
+{{< video https://www.youtube.com/embed/dOVWSSqUvt0 >}}
 
 ### Cohort 9
 
-`r knitr::include_url("https://www.youtube.com/embed/Hs928CH-_E4")`
+{{< video https://www.youtube.com/embed/Hs928CH-_E4 >}}

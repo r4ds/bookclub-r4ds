@@ -385,7 +385,7 @@ Be consistent in your naming and coding of functions
 
 ### Cohort 5
 
-`r knitr::include_url("https://www.youtube.com/embed/B5097Rbsafc")`
+{{< video https://www.youtube.com/embed/B5097Rbsafc >}}
 
 <details>
   <summary> Meeting chat log </summary>
@@ -456,7 +456,7 @@ myfun(1:10, Sys.sleep(60))
 ```
 </details>
 
-`r knitr::include_url("https://www.youtube.com/embed/rsRImj294pM")`
+{{< video https://www.youtube.com/embed/rsRImj294pM >}}
 
 <details>
   <summary> Meeting chat log </summary>
@@ -470,7 +470,7 @@ See Chapter 20 for the part of the log that's relevant to that chapter.
 
 ### Cohort 6
 
-`r knitr::include_url("https://www.youtube.com/embed/jDsmsNUHfPE")`
+{{< video https://www.youtube.com/embed/jDsmsNUHfPE >}}
 
 <details>
   <summary> Meeting chat log </summary>
@@ -484,7 +484,7 @@ See Chapter 20 for the part of the log that's relevant to that chapter.
 ```
 </details>
 
-`r knitr::include_url("https://www.youtube.com/embed/whu8LeXt0VE")`
+{{< video https://www.youtube.com/embed/whu8LeXt0VE >}}
 
 <details>
   <summary> Meeting chat log </summary>  
@@ -499,7 +499,7 @@ See Chapter 20 for the part of the log that's relevant to that chapter.
 
 ### Cohort 7
 
-`r knitr::include_url("https://www.youtube.com/embed/c5FtLt0bGRs")`
+{{< video https://www.youtube.com/embed/c5FtLt0bGRs >}}
 
 <details>
 <summary> Meeting chat log </summary>
@@ -518,7 +518,7 @@ See Chapter 20 for the part of the log that's relevant to that chapter.
 
 ### Cohort 8
 
-`r knitr::include_url("https://www.youtube.com/embed/10mBNkkLdo0")`
+{{< video https://www.youtube.com/embed/10mBNkkLdo0 >}}
 
 <details>
 <summary> Meeting chat log </summary>

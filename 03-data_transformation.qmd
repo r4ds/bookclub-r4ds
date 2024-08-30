@@ -1089,7 +1089,7 @@ batters |>
 
 ### Cohort 5
 
-`r knitr::include_url("https://www.youtube.com/embed/J6mGn1F1kiA")`
+{{< video https://www.youtube.com/embed/J6mGn1F1kiA >}}
 
 <details>
   <summary> Meeting chat log </summary>
@@ -1122,7 +1122,7 @@ batters |>
 ```
 </details>
 
-`r knitr::include_url("https://www.youtube.com/embed/KtDeYCfurz4")`
+{{< video https://www.youtube.com/embed/KtDeYCfurz4 >}}
 
 <details>
   <summary> Meeting chat log </summary>
@@ -1150,7 +1150,7 @@ batters |>
 
 ### Cohort 6
 
-`r knitr::include_url("https://www.youtube.com/embed/DNwioC-SgKQ")`
+{{< video https://www.youtube.com/embed/DNwioC-SgKQ >}}
 
 <details>
   <summary> Meeting chat log </summary>
@@ -1215,12 +1215,12 @@ batters |>
 
 ### Cohort 7
 
-`r knitr::include_url("https://www.youtube.com/embed/LsU9XZ8iNws")`
+{{< video https://www.youtube.com/embed/LsU9XZ8iNws >}}
 
 
 ### Cohort 8
 
-`r knitr::include_url("https://www.youtube.com/embed/aJFrAAmTCVE")`
+{{< video https://www.youtube.com/embed/aJFrAAmTCVE >}}
 
 <details>
 <summary> Meeting chat log </summary>
@@ -1231,7 +1231,7 @@ batters |>
 ```
 </details>
 
-`r knitr::include_url("https://www.youtube.com/embed/_NbdlBznxIE")`
+{{< video https://www.youtube.com/embed/_NbdlBznxIE >}}
 
 <details>
 <summary> Meeting chat log </summary>

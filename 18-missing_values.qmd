@@ -880,8 +880,8 @@ example |>
 
 ### Cohort 7
 
-`r knitr::include_url("https://www.youtube.com/embed/H9vdMIyEtfA")`
+{{< video https://www.youtube.com/embed/H9vdMIyEtfA >}}
 
 ### Cohort 8
 
-`r knitr::include_url("https://www.youtube.com/embed/oL8fMJqBWVs")`
+{{< video https://www.youtube.com/embed/oL8fMJqBWVs >}}

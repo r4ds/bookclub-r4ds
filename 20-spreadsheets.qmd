@@ -385,12 +385,12 @@ Microsoft Excel and Google Sheets are two of the most popular spreadsheet system
 
 ### Cohort 7
 
-`r knitr::include_url("https://www.youtube.com/embed/1OeA2Ogi5is")`
+{{< video https://www.youtube.com/embed/1OeA2Ogi5is >}}
 
 
 ### Cohort 8
 
-`r knitr::include_url("https://www.youtube.com/embed/UPwib5lZ78o")`
+{{< video https://www.youtube.com/embed/UPwib5lZ78o >}}
 
 <details>
   <summary> Meeting chat log </summary>

@@ -299,7 +299,7 @@ flights |>
 
 ### Cohort 5
 
-`r knitr::include_url("https://www.youtube.com/embed/JW1DilkJ3-0")`
+{{< video https://www.youtube.com/embed/JW1DilkJ3-0 >}}
 
 <details>
   <summary> Meeting chat log </summary>
@@ -338,7 +338,7 @@ a %<>%
 
 ### Cohort 6
 
-`r knitr::include_url("https://www.youtube.com/embed/jwnQkHtUiOY")`
+{{< video https://www.youtube.com/embed/jwnQkHtUiOY >}}
 
 <details>
   <summary> Meeting chat log </summary>
@@ -354,7 +354,7 @@ a %<>%
 
 ### Cohort 7
 
-`r knitr::include_url("https://www.youtube.com/embed/wlYh2KewQcI")`
+{{< video https://www.youtube.com/embed/wlYh2KewQcI >}}
 
 <details>
   <summary> Meeting chat log </summary>
@@ -369,11 +369,11 @@ a %<>%
 ```
 </details>
 
-`r knitr::include_url("https://www.youtube.com/embed/LHYUEAXaYoM")`
+{{< video https://www.youtube.com/embed/LHYUEAXaYoM >}}
 
 
 ### Cohort 8
 
-`r knitr::include_url("https://www.youtube.com/embed/uEYKR3xs4Y0")`
+{{< video https://www.youtube.com/embed/uEYKR3xs4Y0 >}}
 
-`r knitr::include_url("https://www.youtube.com/embed/MvzrbyCuFLw")`
+{{< video https://www.youtube.com/embed/MvzrbyCuFLw >}}

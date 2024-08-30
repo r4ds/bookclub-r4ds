@@ -140,7 +140,7 @@ Code in book slightly different from output you'll see
 
 ### Cohort 5
 
-`r knitr::include_url("https://www.youtube.com/embed/BtRTkChZo8c")`
+{{< video https://www.youtube.com/embed/BtRTkChZo8c >}}
 
 <details>
   <summary> Meeting chat log </summary>
@@ -158,7 +158,7 @@ Code in book slightly different from output you'll see
 
 ### Cohort 6
 
-`r knitr::include_url("https://www.youtube.com/embed/R1OUW3Ldu4Q")`
+{{< video https://www.youtube.com/embed/R1OUW3Ldu4Q >}}
 
 <details>
   <summary> Meeting chat log </summary>
@@ -201,7 +201,7 @@ Code in book slightly different from output you'll see
 
 ### Cohort 7
 
-`r knitr::include_url("https://www.youtube.com/embed/wBH7pqql_uU")`
+{{< video https://www.youtube.com/embed/wBH7pqql_uU >}}
 
 <details>
 <summary> Meeting chat log </summary>
@@ -221,4 +221,4 @@ Code in book slightly different from output you'll see
 
 ### Cohort 8
 
-`r knitr::include_url("https://www.youtube.com/embed/KK7dJe9AoXs")`
+{{< video https://www.youtube.com/embed/KK7dJe9AoXs >}}

@@ -73,7 +73,7 @@
 
 ### Cohort 7
 
-`r knitr::include_url("https://www.youtube.com/embed/kmc54BI9GTg")`
+{{< video https://www.youtube.com/embed/kmc54BI9GTg >}}
 
 <details>
 
@@ -88,4 +88,4 @@
 
 ### Cohort 8
 
-`r knitr::include_url("https://www.youtube.com/embed/rbYO0oVkJC4")`
+{{< video https://www.youtube.com/embed/rbYO0oVkJC4 >}}

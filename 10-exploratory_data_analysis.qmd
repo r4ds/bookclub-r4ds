@@ -159,7 +159,7 @@ ggplot(faithful) +
 
 ### Cohort 5
 
-`r knitr::include_url("https://www.youtube.com/embed/ujOn-4esnDo")`
+{{< video https://www.youtube.com/embed/ujOn-4esnDo >}}
 
 <details>
   <summary> Meeting chat log </summary>
@@ -191,7 +191,7 @@ ggplot(faithful) +
 
 ### Cohort 6
 
-`r knitr::include_url("https://www.youtube.com/embed/mYTD9DbM174")`
+{{< video https://www.youtube.com/embed/mYTD9DbM174 >}}
 
 <details>
   <summary> Meeting chat log </summary>
@@ -239,12 +239,12 @@ ggplot(faithful) +
 
 ### Cohort 7
 
-`r knitr::include_url("https://www.youtube.com/embed/F-vr9yl_hmQ")`
+{{< video https://www.youtube.com/embed/F-vr9yl_hmQ >}}
 
 
 ### Cohort 8
 
-`r knitr::include_url("https://www.youtube.com/embed/kWcA_ES2VtI")`
+{{< video https://www.youtube.com/embed/kWcA_ES2VtI >}}
 
 <details>
 <summary> Meeting chat log </summary>

@@ -425,7 +425,7 @@ bar + coord_polar()
 
 ### Cohort 5
 
-`r knitr::include_url("https://www.youtube.com/embed/ujOn-4esnDo")`
+{{< video https://www.youtube.com/embed/ujOn-4esnDo >}}
 
 <details>
   <summary> Meeting chat log </summary>
@@ -457,7 +457,7 @@ bar + coord_polar()
 
 ### Cohort 6
 
-`r knitr::include_url("https://www.youtube.com/embed/mYTD9DbM174")`
+{{< video https://www.youtube.com/embed/mYTD9DbM174 >}}
 
 <details>
   <summary> Meeting chat log </summary>
@@ -505,7 +505,7 @@ bar + coord_polar()
 
 ### Cohort 7
 
-`r knitr::include_url("https://www.youtube.com/embed/UW8cfioTAVc")`
+{{< video https://www.youtube.com/embed/UW8cfioTAVc >}}
 
 <details>
 <summary> Meeting chat log </summary>
@@ -527,4 +527,4 @@ ggplot() +
 
 ### Cohort 8
 
-`r knitr::include_url("https://www.youtube.com/embed/cDO1JD_Qlkw")`
+{{< video https://www.youtube.com/embed/cDO1JD_Qlkw >}}

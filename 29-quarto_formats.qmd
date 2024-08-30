@@ -150,7 +150,7 @@ project:
 
 ### Cohort 5
 
-`r knitr::include_url("https://www.youtube.com/embed/2MGp74nb2ig")`
+{{< video https://www.youtube.com/embed/2MGp74nb2ig >}}
 
 <details>
   <summary> Meeting chat log </summary>
@@ -182,7 +182,7 @@ project:
 
 ### Cohort 6
 
-`r knitr::include_url("https://www.youtube.com/embed/qQrnNef9fkM")`
+{{< video https://www.youtube.com/embed/qQrnNef9fkM >}}
 
 <details>
   <summary> Meeting chat log </summary>
@@ -208,7 +208,7 @@ https://exts.ggplot2.tidyverse.org/gallery/
 
 ### Cohort 7
 
-`r knitr::include_url("https://www.youtube.com/embed/vkjYlBK9-9c")`
+{{< video https://www.youtube.com/embed/vkjYlBK9-9c >}}
 
 <details>
 <summary> Meeting chat log </summary>
@@ -225,7 +225,7 @@ https://exts.ggplot2.tidyverse.org/gallery/
 
 ### Cohort 8
 
-`r knitr::include_url("https://www.youtube.com/embed/7kW7DEWPVZ8")`
+{{< video https://www.youtube.com/embed/7kW7DEWPVZ8 >}}
 
 <details>
 <summary> Meeting chat log </summary>

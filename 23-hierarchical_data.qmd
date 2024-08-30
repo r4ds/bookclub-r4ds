@@ -557,7 +557,7 @@ df_row |>
 
 ### Cohort 7
 
-`r knitr::include_url("https://www.youtube.com/embed/5t0xD2XsKYM")`
+{{< video https://www.youtube.com/embed/5t0xD2XsKYM >}}
 
 <details>
   <summary> Meeting chat log </summary>
@@ -576,9 +576,9 @@ df_row |>
 
 ### Cohort 8
 
-`r knitr::include_url("https://www.youtube.com/embed/jY5Mb82v77c")`
+{{< video https://www.youtube.com/embed/jY5Mb82v77c >}}
 
 ### Cohort 9
 
-`r knitr::include_url("https://www.youtube.com/embed/F53PlR1rEqs")`
+{{< video https://www.youtube.com/embed/F53PlR1rEqs >}}
 

@@ -333,7 +333,7 @@ ordered(c('a', 'b', 'c'))
 
 ### Cohort 5
 
-`r knitr::include_url("https://www.youtube.com/embed/2ySAk-lgT88")`
+{{< video https://www.youtube.com/embed/2ySAk-lgT88 >}}
 
 <details>
 
@@ -349,7 +349,7 @@ ordered(c('a', 'b', 'c'))
 
 ### Cohort 6
 
-`r knitr::include_url("https://www.youtube.com/embed/Xaax7EX-WIQ")`
+{{< video https://www.youtube.com/embed/Xaax7EX-WIQ >}}
 
 <details>
 
@@ -369,12 +369,12 @@ ordered(c('a', 'b', 'c'))
 
 ### Cohort 7
 
-`r knitr::include_url("https://www.youtube.com/embed/KUTSJFGy3kY")`
+{{< video https://www.youtube.com/embed/KUTSJFGy3kY >}}
 
 
 ### Cohort 8
 
-`r knitr::include_url("https://www.youtube.com/embed/PeJICZRmwvI")`
+{{< video https://www.youtube.com/embed/PeJICZRmwvI >}}
 
 <details>
 <summary> Meeting chat log </summary>

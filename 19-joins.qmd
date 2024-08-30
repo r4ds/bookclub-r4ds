@@ -401,7 +401,7 @@ options(oldopt)
 
 ### Cohort 5
 
-`r knitr::include_url("https://www.youtube.com/embed/4Ju9nj82Ksk")`
+{{< video https://www.youtube.com/embed/4Ju9nj82Ksk >}}
 
 <details>
   <summary> Meeting chat log </summary>
@@ -420,7 +420,7 @@ options(oldopt)
 ```
 </details>
 
-`r knitr::include_url("https://www.youtube.com/embed/BDckA3OdsiU")`
+{{< video https://www.youtube.com/embed/BDckA3OdsiU >}}
 
 <details>
   <summary> Meeting chat log </summary>
@@ -444,7 +444,7 @@ band_members %>% right_join(band_instruments)
 
 ### Cohort 6
 
-`r knitr::include_url("https://www.youtube.com/embed/P5FlxEhWE74")`
+{{< video https://www.youtube.com/embed/P5FlxEhWE74 >}}
 
 <details>
   <summary> Meeting chat log </summary>
@@ -457,12 +457,12 @@ LOG
 
 ### Cohort 7
 
-`r knitr::include_url("https://www.youtube.com/embed/BWk9H1yrB7o")`
+{{< video https://www.youtube.com/embed/BWk9H1yrB7o >}}
 
 
 ### Cohort 8
 
-`r knitr::include_url("https://www.youtube.com/embed/O57XwU3Erus")`
+{{< video https://www.youtube.com/embed/O57XwU3Erus >}}
 
 <details>
 <summary> Meeting chat log </summary>

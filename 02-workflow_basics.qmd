@@ -202,7 +202,7 @@ ggsave(filename = "mpg-plot.png", plot = my_bar_plot)
 
 ### Cohort 5
 
-`r knitr::include_url("https://www.youtube.com/embed/nQnMm6kyJbE")`
+{{< video https://www.youtube.com/embed/nQnMm6kyJbE >}}
 
 <details>
 
@@ -224,7 +224,7 @@ ggsave(filename = "mpg-plot.png", plot = my_bar_plot)
 
 ### Cohort 7
 
-`r knitr::include_url("https://www.youtube.com/embed/JDOQDfpYBmY")`
+{{< video https://www.youtube.com/embed/JDOQDfpYBmY >}}
 
 <details>
 
@@ -238,7 +238,7 @@ ggsave(filename = "mpg-plot.png", plot = my_bar_plot)
 
 ### Cohort 8
 
-`r knitr::include_url("https://www.youtube.com/embed/FeSYfRx2esU")`
+{{< video https://www.youtube.com/embed/FeSYfRx2esU >}}
 
 <details>
 

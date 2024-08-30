@@ -563,7 +563,7 @@ The broom package provides three general tools for turning models into tidy data
 
 ### Cohort 5
 
-`r knitr::include_url("https://www.youtube.com/embed/lO_qtXM8OH8")`
+{{< video https://www.youtube.com/embed/lO_qtXM8OH8 >}}
 
 <details>
   <summary> Meeting chat log </summary>
@@ -574,7 +574,7 @@ The broom package provides three general tools for turning models into tidy data
 ```
 </details>
 
-`r knitr::include_url("https://www.youtube.com/embed/d5FPrn4vTzc")`
+{{< video https://www.youtube.com/embed/d5FPrn4vTzc >}}
 
 <details>
   <summary> Meeting chat log </summary>
@@ -639,9 +639,9 @@ identical(use_purrr, use_rowwise)
 
 ### Cohort 6
 
-`r knitr::include_url("https://www.youtube.com/embed/v1OawROf1ZQ")`
+{{< video https://www.youtube.com/embed/v1OawROf1ZQ >}}
 
-`r knitr::include_url("https://www.youtube.com/embed/PX7y2jlRYuU")`
+{{< video https://www.youtube.com/embed/PX7y2jlRYuU >}}
 
 <details>
   <summary> Meeting chat log </summary>

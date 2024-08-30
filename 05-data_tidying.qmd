@@ -421,7 +421,7 @@ See [book chapter](https://r4ds.hadley.nz/data-tidy) and especially the [vignett
 
 ### Cohort 5
 
-`r knitr::include_url("https://www.youtube.com/embed/5lsv2ftMouA")`
+{{< video https://www.youtube.com/embed/5lsv2ftMouA >}}
 
 <details>
   <summary> Meeting chat log </summary>
@@ -456,7 +456,7 @@ See [book chapter](https://r4ds.hadley.nz/data-tidy) and especially the [vignett
 ```
 </details>
 
-`r knitr::include_url("https://www.youtube.com/embed/PB3dBof2q6I")`
+{{< video https://www.youtube.com/embed/PB3dBof2q6I >}}
 
 <details>
   <summary> Meeting chat log </summary>
@@ -486,7 +486,7 @@ See [book chapter](https://r4ds.hadley.nz/data-tidy) and especially the [vignett
 
 ### Cohort 6
 
-`r knitr::include_url("https://www.youtube.com/embed/e5rO37mHrKQ")`
+{{< video https://www.youtube.com/embed/e5rO37mHrKQ >}}
 
 <details>
   <summary> Meeting chat log </summary>
@@ -512,7 +512,7 @@ See [book chapter](https://r4ds.hadley.nz/data-tidy) and especially the [vignett
 
 ### Cohort 7
 
-`r knitr::include_url("https://www.youtube.com/embed/2zHJ9v8Or9Y")`
+{{< video https://www.youtube.com/embed/2zHJ9v8Or9Y >}}
 
 <details>
 <summary> Meeting chat log </summary>
@@ -525,11 +525,11 @@ See [book chapter](https://r4ds.hadley.nz/data-tidy) and especially the [vignett
 
 ### Cohort 8
 
-`r knitr::include_url("https://www.youtube.com/embed/xKthmzkTerU")`
+{{< video https://www.youtube.com/embed/xKthmzkTerU >}}
 
 ### Cohort 9
 
-`r knitr::include_url("https://www.youtube.com/embed/tr7b8Fpiezk")`
+{{< video https://www.youtube.com/embed/tr7b8Fpiezk >}}
 
 ### Cohort 10
 

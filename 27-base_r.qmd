@@ -350,7 +350,7 @@ par(oldpar)
 
 ### Cohort 7
 
-`r knitr::include_url("https://www.youtube.com/embed/0v3qdKUc7n8")`
+{{< video https://www.youtube.com/embed/0v3qdKUc7n8 >}}
 
 <details>
 <summary> Meeting chat log </summary>
@@ -368,4 +368,4 @@ par(oldpar)
 
 ### Cohort 8
 
-`r knitr::include_url("https://www.youtube.com/embed/NXnyXy8H_Ew")`
+{{< video https://www.youtube.com/embed/NXnyXy8H_Ew >}}

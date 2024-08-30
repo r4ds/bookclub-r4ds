@@ -249,7 +249,7 @@ x |>
 
 ### Cohort 7
 
-`r knitr::include_url("https://www.youtube.com/embed/qsgZAgmmpt4")`
+{{< video https://www.youtube.com/embed/qsgZAgmmpt4 >}}
 
 <details>
   <summary> Meeting chat log </summary>
@@ -269,4 +269,4 @@ x |>
 
 ### Cohort 8
 
-`r knitr::include_url("https://www.youtube.com/embed/dUQ3vCNejbI")`
+{{< video https://www.youtube.com/embed/dUQ3vCNejbI >}}
