@@ -1,0 +1,9 @@
+project:
+  output-dir: _book/slides
+  render:
+    - "*.qmd"
+    - "!references.qmd"
+
+format:
+  revealjs:
+    scrollable: true
