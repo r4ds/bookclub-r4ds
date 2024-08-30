@@ -1,5 +1,9 @@
 # Iteration
 
+::: {.content-visible when-profile="book"}
+{{< revealjs "slides/26-iteration.html" >}}
+:::
+
 ## Learning objectives
 
 -   Modify multiple columns using the same patterns.

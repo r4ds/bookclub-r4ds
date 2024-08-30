@@ -1,5 +1,9 @@
 # Layers
 
+::: {.content-visible when-profile="book"}
+{{< revealjs "slides/09-layers.html" >}}
+:::
+
 ## Learning objectives
 
 - We are going to learn about the layered grammar of graphics, including:

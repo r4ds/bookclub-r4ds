@@ -1,5 +1,9 @@
 # Data tidying
 
+::: {.content-visible when-profile="book"}
+{{< revealjs "slides/05-data_tidying.html" >}}
+:::
+
 ```{r}
 #| include: false
 

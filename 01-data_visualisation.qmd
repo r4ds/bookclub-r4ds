@@ -1,5 +1,9 @@
 # Data visualisation
 
+::: {.content-visible when-profile="book"}
+{{< revealjs "slides/01-data_visualisation.html" >}}
+:::
+
 ## Learning objectives
 
 :::: {style="display: flex;"}

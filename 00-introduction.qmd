@@ -1,5 +1,9 @@
 # Introduction {.unnumbered}
 
+::: {.content-visible when-profile="book"}
+{{< revealjs "slides/00-introduction.html" >}}
+:::
+
 ## Learning objectives
 
 After today's session, you will be able to...

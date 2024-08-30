@@ -1,5 +1,9 @@
 # Communication
 
+::: {.content-visible when-profile="book"}
+{{< revealjs "slides/11-communication.html" >}}
+:::
+
 ***Note: This was chapter 28 when these slides were last edited. They likely need to be updated to match the current chapter order.***
 
 ## Learning objectives

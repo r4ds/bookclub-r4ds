@@ -1,5 +1,9 @@
 # Workflow: basics
 
+::: {.content-visible when-profile="book"}
+{{< revealjs "slides/02-workflow_basics.html" >}}
+:::
+
 ## Learning objectives
 
 -   Review some basic R coding.

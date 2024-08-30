@@ -1,5 +1,9 @@
 # Strings
 
+::: {.content-visible when-profile="book"}
+{{< revealjs "slides/14-strings.html" >}}
+:::
+
 ## Learning objectives
 
 After this chapter, we'll be able to:

@@ -1,5 +1,9 @@
 # Logical Vectors
 
+::: {.content-visible when-profile="book"}
+{{< revealjs "slides/12-logical_vectors.html" >}}
+:::
+
 ```{r}
 #| include: false
 

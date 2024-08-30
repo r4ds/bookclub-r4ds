@@ -1,5 +1,9 @@
 # Data transformation
 
+::: {.content-visible when-profile="book"}
+{{< revealjs "slides/03-data_transformation.html" >}}
+:::
+
 ## Learning objectives
 
 - **Pick out rows** of a data frame with the **`dplyr::filter()`** function.

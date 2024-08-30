@@ -1,5 +1,9 @@
 # Welcome {.unnumbered}
 
+::: {.content-visible when-profile="book"}
+{{< revealjs "slides/index.html" >}}
+:::
+
 This is a companion for the book [R for Data Science](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund.
 This companion is available at [dslc.io/r4ds](https://dslc.io/r4ds).
 

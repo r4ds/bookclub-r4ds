@@ -1,5 +1,9 @@
 # Quarto 
 
+::: {.content-visible when-profile="book"}
+{{< revealjs "slides/28-quarto.html" >}}
+:::
+
 ```{r}
 #| label: fig
 #| echo: false

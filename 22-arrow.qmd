@@ -1,5 +1,9 @@
 # Arrow
 
+::: {.content-visible when-profile="book"}
+{{< revealjs "slides/22-arrow.html" >}}
+:::
+
 ## Learning objectives
 
 -   Use {arrow} to load large data files into R efficiently

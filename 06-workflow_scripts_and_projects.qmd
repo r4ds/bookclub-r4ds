@@ -1,5 +1,9 @@
 # Workflow: scripts and projects
 
+::: {.content-visible when-profile="book"}
+{{< revealjs "slides/06-workflow_scripts_and_projects.html" >}}
+:::
+
 ## Learning objectives
 
 -   Create scripts and Understand **script diagnostics** in RStudio.

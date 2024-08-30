@@ -1,5 +1,9 @@
 # Databases
 
+::: {.content-visible when-profile="book"}
+{{< revealjs "slides/21-databases.html" >}}
+:::
+
 ## Learning objectives
 
 -   Use {DBI} to connect to a database and retrieve data.

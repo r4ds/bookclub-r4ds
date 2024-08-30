@@ -1,5 +1,9 @@
 # A field guide to base R
 
+::: {.content-visible when-profile="book"}
+{{< revealjs "slides/27-base_r.html" >}}
+:::
+
 ## Learning objectives
 
 - Get acquainted with some powerful basic tools in R

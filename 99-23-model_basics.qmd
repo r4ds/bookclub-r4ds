@@ -1,5 +1,9 @@
 # Model basics
 
+::: {.content-visible when-profile="book"}
+{{< revealjs "slides/99-23-model_basics.html" >}}
+:::
+
 These chapters have been removed from the book since the time that older cohorts covered them. We're keeping the old notes in case anybody finds them useful.
 
 All code blocks for these chapters have been disabled to avoid mystery bugs.

@@ -1,5 +1,9 @@
 # Quarto formats
 
+::: {.content-visible when-profile="book"}
+{{< revealjs "slides/29-quarto_formats.html" >}}
+:::
+
 ## Learning objectives
 
 -   Render Quarto documents to different formats.

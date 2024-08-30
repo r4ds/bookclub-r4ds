@@ -1,5 +1,9 @@
 # Web scraping
 
+::: {.content-visible when-profile="book"}
+{{< revealjs "slides/24-web_scraping.html" >}}
+:::
+
 ## Learning objectives
 
 -   Decide whether to scrape data from a web page.

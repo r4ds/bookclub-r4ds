@@ -1,5 +1,9 @@
 # Dates and times
 
+::: {.content-visible when-profile="book"}
+{{< revealjs "slides/17-dates_and_times.html" >}}
+:::
+
 ## Learning objectives
 
 -   **Create date** and **datetime** objects.

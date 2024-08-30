@@ -7,3 +7,4 @@ project:
 format:
   revealjs:
     scrollable: true
+    controls: true

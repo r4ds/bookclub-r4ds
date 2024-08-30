@@ -1,5 +1,9 @@
 # Joins
 
+::: {.content-visible when-profile="book"}
+{{< revealjs "slides/19-joins.html" >}}
+:::
+
 ```{r}
 #| label: 19-01
 #| message: false

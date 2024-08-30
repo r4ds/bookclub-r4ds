@@ -1,5 +1,9 @@
 # Spreadsheets
 
+::: {.content-visible when-profile="book"}
+{{< revealjs "slides/20-spreadsheets.html" >}}
+:::
+
 ## Learning objectives
 
 - We are going to learn about the various ways in which we can get data out of a spread sheet or google sheet.

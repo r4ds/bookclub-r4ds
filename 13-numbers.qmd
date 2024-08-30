@@ -1,5 +1,9 @@
 # Numbers
 
+::: {.content-visible when-profile="book"}
+{{< revealjs "slides/13-numbers.html" >}}
+:::
+
 Note: Since these slides were made, this chapter has been split into multiple chapters. After you edit these slides, remove this note.
 
 ## Learning objectives

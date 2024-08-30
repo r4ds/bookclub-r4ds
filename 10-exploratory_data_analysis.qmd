@@ -1,5 +1,9 @@
 # Exploratory Data Analysis
 
+::: {.content-visible when-profile="book"}
+{{< revealjs "slides/10-exploratory_data_analysis.html" >}}
+:::
+
 ## Learning objectives
 
 ```{r}

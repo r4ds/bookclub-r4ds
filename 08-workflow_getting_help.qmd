@@ -1,5 +1,9 @@
 # Workflow: getting help
 
+::: {.content-visible when-profile="book"}
+{{< revealjs "slides/08-workflow_getting_help.html" >}}
+:::
+
 ## Learning objectives
 
 -   Describe a few tips beyond the book on how to get help and to help you keep learning.

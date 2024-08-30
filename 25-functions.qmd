@@ -1,5 +1,9 @@
 # Functions
 
+::: {.content-visible when-profile="book"}
+{{< revealjs "slides/25-functions.html" >}}
+:::
+
 ## Learning objectives
 
 We are going to learn about three useful type of function:

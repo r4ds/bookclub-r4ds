@@ -1,5 +1,9 @@
 # Model building
 
+::: {.content-visible when-profile="book"}
+{{< revealjs "slides/99-24-model_building.html" >}}
+:::
+
 ## Learning objectives
 
 -   Build a **linear model** to explain trends in data.

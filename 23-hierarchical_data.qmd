@@ -1,5 +1,9 @@
 # Hierarchical data
 
+::: {.content-visible when-profile="book"}
+{{< revealjs "slides/23-hierarchical_data.html" >}}
+:::
+
 ## Learning objectives
 
 1. Introduce a new data structure called lists

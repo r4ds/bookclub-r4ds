@@ -1,5 +1,9 @@
 # Missing values
 
+::: {.content-visible when-profile="book"}
+{{< revealjs "slides/18-missing_values.html" >}}
+:::
+
 ## Learning objectives
 
 *  Filling and indicating explicit missing values

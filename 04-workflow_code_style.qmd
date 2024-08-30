@@ -1,5 +1,9 @@
 # Workflow: code style
 
+::: {.content-visible when-profile="book"}
+{{< revealjs "slides/04-workflow_code_style.html" >}}
+:::
+
 > "Good coding style is like correct punctuation: you can \ \  manage without it, butitsuremakesthingseasiertoread." — Tidyverse Style Guide
 
 ## Learning objectives

@@ -1,5 +1,9 @@
 # Regular expressions
 
+::: {.content-visible when-profile="book"}
+{{< revealjs "slides/15-regular-expressions.html" >}}
+:::
+
 ## Learning objectives
 
 - Manipulate **character vectors** using simple `{stringr}` functions.
