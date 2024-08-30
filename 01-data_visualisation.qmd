@@ -884,8 +884,8 @@ But more than likely, you misspelled something.
 
 {{< video https://www.youtube.com/embed/0NdiQuuM0vw >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
   
 ```
 00:11:14	Jon Harmon (jonthegeek):	dslc.io/r4ds
@@ -936,14 +936,14 @@ But more than likely, you misspelled something.
 01:13:56	Saeed Shafiei Sabet:	Thank you
 01:13:58	Saeed Shafiei Sabet:	bye
 ```
-</details>
+:::
 
 ### Cohort 6
 
 {{< video https://www.youtube.com/embed/5IMg8AC-1IA >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
   
 ```
 00:16:33	Daniel Adereti:	do I have to run library(tidyverse) everytime I start my R?
@@ -994,12 +994,12 @@ But more than likely, you misspelled something.
 01:12:02	Marielena Soilemezidi:	See you next week!
 01:12:16	Matthew Efoli:	see you next week!
 ```
-</details>
+:::
 
 {{< video https://www.youtube.com/embed/sEYMNIEvG5Q >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
   
 ```
 00:06:29	Adeyemi Olusola:	Good day Daniel
@@ -1032,30 +1032,30 @@ But more than likely, you misspelled something.
 01:12:47	Freya Watkins (she/her):	Bye! Thanks Daniel
 01:12:52	Matthew Efoli:	bye
 ```
-</details>
+:::
 
 
 ### Cohort 7
 
 {{< video https://www.youtube.com/embed/eqQJ5tmEGco >}}
 
-<details>
-<summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
 
 ```
 00:08:24	Oluwafemi Oyedele:	Let wait for about 5 minute for others to join
 01:02:00	Aditi S:	Thank you! I have to leave now but hope to join again next week.
 01:05:04	Oluwafemi Oyedele:	geom_jitter is very useful if you want to avoid over-plotting
 ```
-</details>
+:::
 
 
 ### Cohort 8
 
 {{< video https://www.youtube.com/embed/RRxtbv5QCA4 >}}
 
-<details>
-<summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
 
 ```
 00:11:18	shamsuddeen:	https://www.youtube.com/playlist?list=PL3x6DOfs2NGhS_PhklqT6PwK1Fh7blgP2
@@ -1067,4 +1067,4 @@ But more than likely, you misspelled something.
 01:24:50	Bidemi Agbozuadu:	Thank you very much! Nice presentation
 01:25:32	shamsuddeen:	https://docs.google.com/spreadsheets/d/1reByMPb5Og3OHbRgplzV5Jkz_o6CkEYz_adBGfHTFwg/edit#gid=0
 ```
-</details>
+:::

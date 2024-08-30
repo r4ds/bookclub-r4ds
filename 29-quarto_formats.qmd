@@ -152,8 +152,8 @@ project:
 
 {{< video https://www.youtube.com/embed/2MGp74nb2ig >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
   
 ```
 00:10:00	Jon Harmon (jonthegeek):	bestbook.cool
@@ -178,14 +178,14 @@ project:
 01:13:21	Jon Harmon (jonthegeek):	https://pkgdown.r-lib.org/
 01:13:32	Sandra Muroy:	https://github.com/dlab-berkeley/Bash-Git
 ```
-</details>
+:::
 
 ### Cohort 6
 
 {{< video https://www.youtube.com/embed/qQrnNef9fkM >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
   
 ```
 00:09:51	Marielena Soilemezidi:	http://www.thefunctionalart.com/p/instructors-guide.html
@@ -203,15 +203,15 @@ https://exts.ggplot2.tidyverse.org/gallery/
 01:07:21	Marielena Soilemezidi:	http://colinpurrington.com/tips/lab-notebooks
 01:10:02	Marielena Soilemezidi:	https://quarto.org/
 ```
-</details>
+:::
 
 
 ### Cohort 7
 
 {{< video https://www.youtube.com/embed/vkjYlBK9-9c >}}
 
-<details>
-<summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
 
 ```
 00:08:34	Oluwafemi Oyedele:	We will start in 5 minute time!!!
@@ -220,15 +220,15 @@ https://exts.ggplot2.tidyverse.org/gallery/
 01:09:33	Oluwafemi Oyedele:	https://quarto.org/docs/journals/templates.html
 01:10:52	Oluwafemi Oyedele:	stop
 ```
-</details>
+:::
 
 
 ### Cohort 8
 
 {{< video https://www.youtube.com/embed/7kW7DEWPVZ8 >}}
 
-<details>
-<summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
 
 ```
 00:01:59	Shamsuddeen Muhammad:	start
@@ -243,4 +243,4 @@ https://exts.ggplot2.tidyverse.org/gallery/
 00:32:27	Ahmed Mamdouh:	Thanks alot man
 00:32:50	Ahmed Mamdouh:	Bye
 ```
-</details>
+:::

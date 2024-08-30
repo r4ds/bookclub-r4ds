@@ -335,9 +335,9 @@ ordered(c('a', 'b', 'c'))
 
 {{< video https://www.youtube.com/embed/2ySAk-lgT88 >}}
 
-<details>
+::: {.callout-tip collapse="true"}
 
-<summary>Meeting chat log</summary>
+## Meeting chat log
 
     00:05:04    Federica Gazzelloni:    Hello
     00:23:34    Jon Harmon (jonthegeek):    Useful: R has month.name and month.abb character vectors built in. So you can do things like y3 <- factor(month.abb, levels = month.abb)
@@ -345,15 +345,15 @@ ordered(c('a', 'b', 'c'))
     01:00:25    Ryan Metcalf:   I’m not finding a direct definition of “level” in the Forecats text. Would it be appropriate to state a “level” in this Factor chapter is the “quantity of a given category?”
     01:05:05    Jon Harmon (jonthegeek):    state.abb
 
-</details>
+:::
 
 ### Cohort 6
 
 {{< video https://www.youtube.com/embed/Xaax7EX-WIQ >}}
 
-<details>
+::: {.callout-tip collapse="true"}
 
-<summary>Meeting chat log</summary>
+## Meeting chat log
 
     00:12:43    Daniel Adereti: https://simplystatistics.org/posts/2015-07-24-stringsasfactors-an-unauthorized-biography/
     00:13:46    Adeyemi Olusola:    Its freezing but I don’t know if it’s from my end
@@ -364,7 +364,7 @@ ordered(c('a', 'b', 'c'))
     01:02:34    Marielena Soilemezidi:  bye all!
     01:02:40    Daniel Adereti: Bye!
 
-</details>
+:::
 
 
 ### Cohort 7
@@ -376,8 +376,8 @@ ordered(c('a', 'b', 'c'))
 
 {{< video https://www.youtube.com/embed/PeJICZRmwvI >}}
 
-<details>
-<summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
 
 ```
 00:39:21	shamsuddeen:	https://forcats.tidyverse.org/reference/fct_lump.html
@@ -386,4 +386,4 @@ ordered(c('a', 'b', 'c'))
 00:39:55	shamsuddeen:	exactly
 00:40:50	Abdou:	Reacted to "https://forcats.tidy..." with 👍
 ```
-</details>
+:::

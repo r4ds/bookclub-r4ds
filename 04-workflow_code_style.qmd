@@ -301,8 +301,8 @@ flights |>
 
 {{< video https://www.youtube.com/embed/JW1DilkJ3-0 >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
   
 ```
 00:12:57	Jon Harmon (jonthegeek):	https://en.wikipedia.org/wiki/The_Treachery_of_Images
@@ -334,14 +334,14 @@ a %<>%
 01:10:57	Jon Harmon (jonthegeek):	mtcars %<>% head()
 01:13:56	Becki R. (she/her):	Where is the signup list for presenting chapters?
 ```
-</details>
+:::
 
 ### Cohort 6
 
 {{< video https://www.youtube.com/embed/jwnQkHtUiOY >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
   
 ```
 00:09:32	Marielena Soilemezidi:	=
@@ -350,14 +350,14 @@ a %<>%
 00:55:20	Daniel Adereti:	works for me too, it is quite a large chapter
 00:55:39	Daniel Adereti:	Sorry, my mic seems problematic, hence my typing
 ```
-</details>
+:::
 
 ### Cohort 7
 
 {{< video https://www.youtube.com/embed/wlYh2KewQcI >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
 ```
 00:21:34	Oluwafemi Oyedele:	https://towardsdatascience.com/understanding-the-native-r-pipe-98dea6d8b61b
 00:22:15	Christine (she/her):	Thanks, Oluwafemi!
@@ -367,7 +367,7 @@ a %<>%
 00:50:13	Oluwafemi Oyedele:	http://127.0.0.1:22120/session/Rvig.11e05a207606.html
 01:03:47	Dolleen Osundwa:	thank you Kumar
 ```
-</details>
+:::
 
 {{< video https://www.youtube.com/embed/LHYUEAXaYoM >}}
 

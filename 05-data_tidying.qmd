@@ -423,8 +423,8 @@ See [book chapter](https://r4ds.hadley.nz/data-tidy) and especially the [vignett
 
 {{< video https://www.youtube.com/embed/5lsv2ftMouA >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
   
 ```
 00:07:37	Federica Gazzelloni:	Hello everyone!
@@ -454,12 +454,12 @@ See [book chapter](https://r4ds.hadley.nz/data-tidy) and especially the [vignett
 01:20:11	Keuntae Kim:	Excellent job Sandra! You really dive in the contents very deeply!
 01:20:27	Ryan Metcalf:	Great Job Sandra!
 ```
-</details>
+:::
 
 {{< video https://www.youtube.com/embed/PB3dBof2q6I >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
   
 ```
 00:11:11	Njoki Njuki Lucy:	Hi everyone!
@@ -482,14 +482,14 @@ See [book chapter](https://r4ds.hadley.nz/data-tidy) and especially the [vignett
 00:57:26	Jon Harmon (jonthegeek):	Read vignettes here for cases where it makes sense to be wide: https://cran.r-project.org/web/packages/widyr/index.html
 00:58:17	Federica Gazzelloni:	thanks Sandra
 ```
-</details>
+:::
 
 ### Cohort 6
 
 {{< video https://www.youtube.com/embed/e5rO37mHrKQ >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
   
 ```
 00:11:55	Marielena Soilemezidi:	hi guys! :)
@@ -507,20 +507,20 @@ See [book chapter](https://r4ds.hadley.nz/data-tidy) and especially the [vignett
 01:13:14	Marielena Soilemezidi:	great presentation :)
 01:13:16	Folashade Bayode:	Thank you
 ```
-</details>
+:::
 
 
 ### Cohort 7
 
 {{< video https://www.youtube.com/embed/2zHJ9v8Or9Y >}}
 
-<details>
-<summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
 
 ```
 00:54:04	Betsy Muriithi:	Sorry for joining so late; I got the dates mixed up.. I though I was doing my presentation next Monday 😔
 ```
-</details>
+:::
 
 
 ### Cohort 8

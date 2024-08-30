@@ -259,8 +259,8 @@ dbDisconnect(con, shutdown = TRUE)
 
 {{< video https://www.youtube.com/embed/0AWywckm3W4 >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
 ```
 00:09:36	Oluwafemi Oyedele:	Hi Tim, Good Evening!!!
 00:10:59	Tim Newby:	Hi Oluwafemi :-)
@@ -271,7 +271,7 @@ dbDisconnect(con, shutdown = TRUE)
 00:56:09	Oluwafemi Oyedele:	https://www.practicalsql.com/
 00:57:28	Oluwafemi Oyedele:	stop
 ```
-</details>
+:::
 
 
 ### Cohort 8

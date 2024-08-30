@@ -565,19 +565,19 @@ The broom package provides three general tools for turning models into tidy data
 
 {{< video https://www.youtube.com/embed/lO_qtXM8OH8 >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
   
 ```
 00:09:25	Jon Harmon (jonthegeek):	dslc.io/bookclubber
 01:07:14	Jon Harmon (jonthegeek):	ggrepel
 ```
-</details>
+:::
 
 {{< video https://www.youtube.com/embed/d5FPrn4vTzc >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
   
 ```
 00:10:13	Njoki Njuki Lucy:	It will be nice to see familiar faces :)
@@ -634,7 +634,7 @@ identical(use_purrr, use_rowwise)
 01:11:05	Njoki Njuki Lucy:	that's what I have been doing - doing the surgery😄
 01:11:33	Njoki Njuki Lucy:	:)
 ```
-</details>
+:::
 
 
 ### Cohort 6
@@ -643,12 +643,12 @@ identical(use_purrr, use_rowwise)
 
 {{< video https://www.youtube.com/embed/PX7y2jlRYuU >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
   
 ```
 00:14:37	Marielena Soilemezidi:	they're called quotes/quote marks!
 00:14:43	Marielena Soilemezidi:	I also got a brain freeze xD
 00:42:28	Daniel:	https://github.com/tidyverse/broom
 ```
-</details>
+:::

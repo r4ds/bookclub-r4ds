@@ -280,8 +280,8 @@ flights |>
 
 {{< video https://www.youtube.com/embed/rsRImj294pM >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
   
 ```
 00:39:35	Jon Harmon (jonthegeek):	.Machine$double.eps
@@ -314,12 +314,12 @@ In .Machine$integer.max + 1L : NAs produced by integer overflow
 01:16:19	Jon Harmon (jonthegeek):	> 1:10 + 2:11
  [1]  3  5  7  9 11 13 15 17 19 21
 ```
-</details>
+:::
 
 {{< video https://www.youtube.com/embed/EfOPxmQ9R-c >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
   
 ```
 00:03:09	Becki R. (she/her):	I have a buzz in my audio so I'm staying muted.
@@ -371,14 +371,14 @@ function (x, width = NULL, max.level = 3, ...)
 [1] 2 2 4 4
 01:14:08	Jon Harmon (jonthegeek):	Note that for rounding off a 5, the IEC 60559 standard (see also ‘IEEE 754’) is expected to be used, ‘go to the even digit’. Therefore round(0.5) is 0 and round(-1.5) is -2. However, this is dependent on OS services and on representation error (since e.g. 0.15 is not represented exactly, the rounding rule applies to the represented number and not to the printed number, and so round(0.15, 1) could be either 0.1 or 0.2).
 ```
-</details>
+:::
 
 ### Cohort 6
 
 {{< video https://www.youtube.com/embed/bRwmyUbario >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
   
 ```
 00:36:56	Daniel Adereti:	Lucky I am not a python user. lol
@@ -387,7 +387,7 @@ function (x, width = NULL, max.level = 3, ...)
 00:38:18	Daniel Adereti:	lol! can't avoid it!
 00:42:11	Daniel Adereti:	Unfortunately, we have a strict 18 mins to end the lessons, let's see where we end up. Thanks
 ```
-</details>
+:::
 
 
 ### Cohort 7

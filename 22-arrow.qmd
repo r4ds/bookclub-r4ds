@@ -251,8 +251,8 @@ x |>
 
 {{< video https://www.youtube.com/embed/qsgZAgmmpt4 >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
 ```
 00:06:25	Oluwafemi Oyedele:	Hi Tim, Good Evening!!!
 00:06:41	Tim Newby:	Hi Oluwafemi
@@ -265,7 +265,7 @@ x |>
 00:28:35	Oluwafemi Oyedele:	https://data.seattle.gov/Community/Checkouts-by-Title/tmmm-ytt6
 00:40:49	Oluwafemi Oyedele:	stop
 ```
-</details>
+:::
 
 ### Cohort 8
 

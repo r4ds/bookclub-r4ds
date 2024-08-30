@@ -268,8 +268,8 @@ knitr::include_graphics("images/28-bib.png")
 
 {{< video https://www.youtube.com/embed/wAzYA01hojo >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
   
 ```
 00:03:37	Njoki Njuki Lucy:	I agree with Ryan.
@@ -290,12 +290,12 @@ knitr::include_graphics("images/28-bib.png")
 01:12:53	Federica Gazzelloni:	there is some more about the changing r session and the cache: https://www.r-bloggers.com/2021/07/caching-the-results-of-functions-of-your-r-package/
 01:13:02	Becki R. (she/her):	Bye Lucy!
 ```
-</details>
+:::
 
 {{< video https://www.youtube.com/embed/2MGp74nb2ig >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
   
 ```
 00:10:00	Jon Harmon (jonthegeek):	bestbook.cool
@@ -320,30 +320,30 @@ knitr::include_graphics("images/28-bib.png")
 01:13:21	Jon Harmon (jonthegeek):	https://pkgdown.r-lib.org/
 01:13:32	Sandra Muroy:	https://github.com/dlab-berkeley/Bash-Git
 ```
-</details>
+:::
 
 
 ### Cohort 6
 
 {{< video https://www.youtube.com/embed/dG5PcCDMDdI >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
   
 ```
 00:18:56	Marielena Soilemezidi:	https://rstudio.com/resources/cheatsheets/
 00:19:07	Daniel:	Thanks
 00:59:42	Marielena Soilemezidi:	http://rmarkdown.rstudio.com/developer_parameterized_reports.html#parameter_user_interfaces
 ```
-</details>
+:::
 
 
 ### Cohort 7
 
 {{< video https://www.youtube.com/embed/J9UTG7zxelw >}}
 
-<details>
-<summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
 
 ```
 00:08:43	Tim Newby:	Hello Oluwafemi!
@@ -353,15 +353,15 @@ knitr::include_graphics("images/28-bib.png")
 01:01:50	Oluwafemi Oyedele:	https://github.com/citation-style-language/styles
 01:01:57	Oluwafemi Oyedele:	stop
 ```
-</details>
+:::
 
 
 ### Cohort 8
 
 {{< video https://www.youtube.com/embed/7kW7DEWPVZ8 >}}
 
-<details>
-<summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
 
 ```
 00:01:59	Shamsuddeen Muhammad:	start
@@ -376,4 +376,4 @@ knitr::include_graphics("images/28-bib.png")
 00:32:27	Ahmed Mamdouh:	Thanks alot man
 00:32:50	Ahmed Mamdouh:	Bye
 ```
-</details>
+:::

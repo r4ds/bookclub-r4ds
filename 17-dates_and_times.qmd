@@ -211,8 +211,8 @@ club_starts |> with_tz("Australia/Lord_Howe") |> minute()
 
 {{< video https://www.youtube.com/embed/J8QU4RBdi5c >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
   
 ```
 00:17:21	Sandra Muroy:	Hi Lucus!
@@ -232,7 +232,7 @@ club_starts |> with_tz("Australia/Lord_Howe") |> minute()
 01:11:19	Sandra Muroy:	interesting
 01:13:57	Sandra Muroy:	happy holidays everyone!
 ```
-</details>
+:::
 
 ### Cohort 6
 

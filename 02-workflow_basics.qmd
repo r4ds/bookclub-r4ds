@@ -204,9 +204,9 @@ ggsave(filename = "mpg-plot.png", plot = my_bar_plot)
 
 {{< video https://www.youtube.com/embed/nQnMm6kyJbE >}}
 
-<details>
+::: {.callout-tip collapse="true"}
 
-<summary>Meeting chat log</summary>
+## Meeting chat log
 
 ```         
 00:14:44    Jon Harmon (jonthegeek):    Ignore the URL on these, I should have made my coworker crop those out since it isn't relevant outside of our work environment 🙃
@@ -220,29 +220,29 @@ ggsave(filename = "mpg-plot.png", plot = my_bar_plot)
 01:22:41    Becki R. (she/her): Thanks everyone! I will not be here next week.
 ```
 
-</details>
+:::
 
 ### Cohort 7
 
 {{< video https://www.youtube.com/embed/JDOQDfpYBmY >}}
 
-<details>
+::: {.callout-tip collapse="true"}
 
-<summary>Meeting chat log</summary>
+## Meeting chat log
 
 ```         
 00:29:38    Dolleen Osundwa:    is a tibble similar to the table () function?
 ```
 
-</details>
+:::
 
 ### Cohort 8
 
 {{< video https://www.youtube.com/embed/FeSYfRx2esU >}}
 
-<details>
+::: {.callout-tip collapse="true"}
 
-<summary>Meeting chat log</summary>
+## Meeting chat log
 
 ```         
 00:06:13    Shamsuddeen Muhammad:   book_club-py4da
@@ -255,4 +255,4 @@ ggsave(filename = "mpg-plot.png", plot = my_bar_plot)
 00:41:22    Shamsuddeen Muhammad:   https://www.rscreencasts.com/content_pages/hbcu-enrollment.html
 ```
 
-</details>
+:::

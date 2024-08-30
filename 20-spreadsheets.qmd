@@ -392,8 +392,8 @@ Microsoft Excel and Google Sheets are two of the most popular spreadsheet system
 
 {{< video https://www.youtube.com/embed/UPwib5lZ78o >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
 ```
 00:08:22	Abdou:	Hello
 00:12:42	Abdou:	Start
@@ -404,4 +404,4 @@ Microsoft Excel and Google Sheets are two of the most popular spreadsheet system
 00:58:38	Abdou:	end
 00:58:45	shamsuddeen:	See you next week
 ```
-</details>
+:::

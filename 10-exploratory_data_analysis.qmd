@@ -161,8 +161,8 @@ ggplot(faithful) +
 
 {{< video https://www.youtube.com/embed/ujOn-4esnDo >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
   
 ```
 00:13:43	Njoki Njuki Lucy:	Is it best to visualize the variation in a categorical variable with only two levels using a bar chart? If not, what's the chart to use if I may ask?
@@ -187,14 +187,14 @@ ggplot(faithful) +
 00:49:35	Njoki Njuki Lucy:	thank you, bye
 00:49:45	Eileen:	Thank you!
 ```
-</details>
+:::
 
 ### Cohort 6
 
 {{< video https://www.youtube.com/embed/mYTD9DbM174 >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
   
 ```
 00:06:21	Matthew Efoli:	good evening Daniel and Esmeralda
@@ -234,7 +234,7 @@ ggplot(faithful) +
 01:05:39	Freya Watkins:	Thanks Matthew!
 01:06:44	Maria Eleni Soilemezidi:	bye everyone, see you next week!
 ```
-</details>
+:::
 
 
 ### Cohort 7
@@ -246,11 +246,11 @@ ggplot(faithful) +
 
 {{< video https://www.youtube.com/embed/kWcA_ES2VtI >}}
 
-<details>
-<summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
 
 ```
 00:42:29	Ahmed:	https://www.causact.com/index.html#welcome
 00:42:54	Abdou:	Thanks!
 ```
-</details>
+:::

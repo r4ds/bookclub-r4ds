@@ -403,8 +403,8 @@ options(oldopt)
 
 {{< video https://www.youtube.com/embed/4Ju9nj82Ksk >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
   
 ```
 00:08:43	Ryan Metcalf:	So sorry for my delay. Aerating the lawn! Fun!
@@ -418,12 +418,12 @@ options(oldopt)
 01:04:20	Jon Harmon (jonthegeek):	ggplot2::diamonds %>% dplyr::count(carat, cut, color, clarity, depth, table, price, x, y, z, sort = TRUE)
 01:08:49	Ryan Metcalf:	Great Job Federica! Looking forward to next week!
 ```
-</details>
+:::
 
 {{< video https://www.youtube.com/embed/BDckA3OdsiU >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
   
 ```
 00:22:57	Jon Harmon (jonthegeek):	Try this to see a quick example. You're right that the order of the columns is left then right either way, but the rows to keep changes.
@@ -440,19 +440,19 @@ band_members %>% right_join(band_instruments)
 01:05:28	Njoki Njuki Lucy:	thank you :)
 01:05:33	lucus w:	Thanks y'all
 ```
-</details>
+:::
 
 ### Cohort 6
 
 {{< video https://www.youtube.com/embed/P5FlxEhWE74 >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
   
 ```
 LOG
 ```
-</details>
+:::
 
 
 ### Cohort 7
@@ -464,8 +464,8 @@ LOG
 
 {{< video https://www.youtube.com/embed/O57XwU3Erus >}}
 
-<details>
-<summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
 
 ```
 00:09:40	shamsuddeen:	start
@@ -473,4 +473,4 @@ LOG
 01:05:16	Abdou:	Reacted to "https://dplyr.tidyve..." with 👍
 01:06:07	shamsuddeen:	end
 ```
-</details>
+:::

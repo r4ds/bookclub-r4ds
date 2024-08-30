@@ -380,8 +380,8 @@ str_sort(c("c", "ch", "h"), locale = "cs")
 
 {{< video https://www.youtube.com/embed/RpZoQR2xwME >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
   
 ```
 00:10:10	Njoki Njuki Lucy:	Hi everyone!
@@ -433,12 +433,12 @@ In stri_c(..., sep = sep, collapse = collapse, ignore_null = TRUE) :
 01:09:53	Sandra Muroy:	thanks so much Ryna!
 01:09:56	Sandra Muroy:	Ryan!
 ```
-</details>
+:::
 
 {{< video https://www.youtube.com/embed/A-_URHkvxNA >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
   
 ```
 00:07:40	Jon Harmon (jonthegeek):	statlearning.com
@@ -455,14 +455,14 @@ $ = end of text
 00:46:18	Jon Harmon (jonthegeek):	"a" %in% c("a", "b")
 01:02:39	Jon Harmon (jonthegeek):	regexr.com
 ```
-</details>
+:::
 
 ### Cohort 6
 
 {{< video https://www.youtube.com/embed/l07Vo1wMW5s >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
   
 ```
 00:09:53	Daniel Adereti:	We will kick off in 1 min
@@ -476,12 +476,12 @@ $ = end of text
 01:05:37	Adeyemi Olusola:	Thank you!
 01:05:45	Folashade Bayode:	Thank you 😊
 ```
-</details>
+:::
 
 {{< video https://www.youtube.com/embed/k7poFr556To >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
   
 ```
 00:15:15	Daniel Adereti:	We have this nice book that solves the exercises, if you are interested: https://jrnold.github.io/r4ds-exercise-solutions/strings.html
@@ -495,12 +495,12 @@ $ = end of text
 00:52:47	Daniel Adereti:	Hey Marielena, if you want to volunteer for a class, you can fill in your name here: https://docs.google.com/spreadsheets/d/1zy2nXNkvcdqWuF8rQ5ApWRkVQG_UJt0azu3h_mEnY2E/edit#gid=0
 00:55:10	Marielena Soilemezidi:	Thanks, Daniel! I'll check the next available chapters :)
 ```
-</details>
+:::
 
 {{< video https://www.youtube.com/embed/9UuMNJB3KFA >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
   
 ```
 00:03:15	Adeyemi Olusola:	Good day!
@@ -511,15 +511,15 @@ Thanks Shannon for the wonderful presentation!
 00:50:24	Marielena Soilemezidi:	haha yaay!
 00:51:47	Marielena Soilemezidi:	weird!
 ```
-</details>
+:::
 
 
 ### Cohort 7
 
 {{< video https://www.youtube.com/embed/NQq6EoCCsR0 >}}
 
-<details>
-<summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
 
 ```
 00:16:35	Oluwafemi Oyedele:	https://github.com/rstudio/cheatsheets/blob/main/strings.pdf
@@ -534,18 +534,18 @@ Thanks Shannon for the wonderful presentation!
 01:02:17	Oluwafemi Oyedele:	http://kunststube.net/encoding/
 01:06:49	Olukunle Bashir:	thank you very much oluwafemi. it's well understood
 ```
-</details>
+:::
 
 
 ### Cohort 8
 
 {{< video https://www.youtube.com/embed/AiIZ0U6zMvU >}}
 
-<details>
-<summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
 
 ```
 00:27:26	shamsuddeen: https://github.com/rstudio/cheatsheets/blob/main/strings.pdf
 00:27:37	Abdou: Thanks!
 ```
-</details>
+:::

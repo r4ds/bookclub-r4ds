@@ -427,8 +427,8 @@ bar + coord_polar()
 
 {{< video https://www.youtube.com/embed/ujOn-4esnDo >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
   
 ```
 00:13:43	Njoki Njuki Lucy:	Is it best to visualize the variation in a categorical variable with only two levels using a bar chart? If not, what's the chart to use if I may ask?
@@ -453,14 +453,14 @@ bar + coord_polar()
 00:49:35	Njoki Njuki Lucy:	thank you, bye
 00:49:45	Eileen:	Thank you!
 ```
-</details>
+:::
 
 ### Cohort 6
 
 {{< video https://www.youtube.com/embed/mYTD9DbM174 >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
   
 ```
 00:06:21	Matthew Efoli:	good evening Daniel and Esmeralda
@@ -500,15 +500,15 @@ bar + coord_polar()
 01:05:39	Freya Watkins:	Thanks Matthew!
 01:06:44	Maria Eleni Soilemezidi:	bye everyone, see you next week!
 ```
-</details>
+:::
 
 
 ### Cohort 7
 
 {{< video https://www.youtube.com/embed/UW8cfioTAVc >}}
 
-<details>
-<summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
 
 ```
 00:10:31	Oluwafemi Oyedele:	We will start the discussion in the next 5 minutes!!!
@@ -522,7 +522,7 @@ bar + coord_polar()
 ggplot() +
   geom_pointrange(aes(x = cut, y = y, ymin = ymin, ymax = ymax))
 ```
-</details>
+:::
 
 
 ### Cohort 8

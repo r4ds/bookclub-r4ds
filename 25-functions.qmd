@@ -387,8 +387,8 @@ Be consistent in your naming and coding of functions
 
 {{< video https://www.youtube.com/embed/B5097Rbsafc >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
   
 ```
 00:24:22	Jon Harmon (jonthegeek):	Famous computer science quote: There are only two hard things in Computer Science: cache invalidation and naming things.
@@ -454,17 +454,17 @@ myfun(a = 1)
 }
 myfun(1:10, Sys.sleep(60))
 ```
-</details>
+:::
 
 {{< video https://www.youtube.com/embed/rsRImj294pM >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
   
 ```
 See Chapter 20 for the part of the log that's relevant to that chapter.
 ```
-</details>
+:::
 
 
 
@@ -472,8 +472,8 @@ See Chapter 20 for the part of the log that's relevant to that chapter.
 
 {{< video https://www.youtube.com/embed/jDsmsNUHfPE >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
   
 ```
 00:23:48	Daniel Adereti:	Range() function in R returns the maximum and minimum value of the vector and column of the dataframe in R. range() function of the column of dataframe
@@ -482,27 +482,27 @@ See Chapter 20 for the part of the log that's relevant to that chapter.
 00:58:38	Adeyemi Olusola:	Thanks for the wonderful talk. Sorry, I have to drop off now. Thanks
 00:58:41	Daniel Adereti:	it might make sense to stop at 19.2
 ```
-</details>
+:::
 
 {{< video https://www.youtube.com/embed/whu8LeXt0VE >}}
 
-<details>
-  <summary> Meeting chat log </summary>  
+::: {.callout-tip collapse="true"}
+## Meeting chat log  
 ```
 00:03:15	Marielena Soilemezidi:	Hello there! :)
 00:03:51	Daniel:	Hello!
 00:32:16	Daniel:	I think it aim to check if any of the vector characters == 8, if yes, it returns 8, if no, it returns "Not available"
 00:44:24	Daniel:	Hello all, please remember we need volunteers for next week's class: Vectors
 ```
-</details>
+:::
 
 
 ### Cohort 7
 
 {{< video https://www.youtube.com/embed/c5FtLt0bGRs >}}
 
-<details>
-<summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
 
 ```
 00:15:05	Oluwafemi Oyedele:	start
@@ -513,15 +513,15 @@ See Chapter 20 for the part of the log that's relevant to that chapter.
 00:59:01	Oluwafemi Oyedele:	https://style.tidyverse.org/functions.html
 00:59:43	Oluwafemi Oyedele:	stop
 ```
-</details>
+:::
 
 
 ### Cohort 8
 
 {{< video https://www.youtube.com/embed/10mBNkkLdo0 >}}
 
-<details>
-<summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
 
 ```
 00:10:01	Abdou:	Hi everyone
@@ -535,4 +535,4 @@ See Chapter 20 for the part of the log that's relevant to that chapter.
 00:14:21	Ahmed Mamdouh:	Start
 00:47:09	Abdou:	Stop
 ```
-</details>
+:::

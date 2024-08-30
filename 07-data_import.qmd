@@ -505,8 +505,8 @@ ggplot(clean,
 
 {{< video https://www.youtube.com/embed/s5b_QkLSYeE >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
   
 ```
 00:07:14	Njoki Njuki Lucy:	Hi Becki!
@@ -551,12 +551,12 @@ is     fixed  width
 01:14:12	lucus w:	So for Swahili it will be locale(“sw”)
 01:15:08	Ryan Metcalf:	Outstanding job Lucy! Thank you everyone!
 ```
-</details>
+:::
 
 {{< video https://www.youtube.com/embed/ctRKvm8Z-_8 >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
   
 ```
 00:04:46	Federica G. (she/her):	Hello!
@@ -590,14 +590,14 @@ is     fixed  width
 01:27:36	Federica G. (she/her):	thanks
 01:27:39	Becki R. (she/her):	thank you!
 ```
-</details>
+:::
 
 ### Cohort 6
 
 {{< video https://www.youtube.com/embed/QKB9wy-2_Ps >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
   
 ```
 00:04:29	Adeyemi Olusola:	Hello Daniel. Happy New Year
@@ -621,15 +621,15 @@ is     fixed  width
 01:07:58	Daniel Adereti:	Thank you Adeyemi!
 01:07:59	Adeyemi Olusola:	Thank you
 ```
-</details>
+:::
 
 
 ### Cohort 7
 
 {{< video https://www.youtube.com/embed/hb7eSpCMGDU >}}
 
-<details>
-<summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
 
 ```
 00:06:17	Oluwafemi Oyedele:	Let us give others some time to join !!!
@@ -643,7 +643,7 @@ is     fixed  width
 00:34:57	Dolleen Osundwa:	Thanks for this.
 00:47:39	Olukunle Bashir:	thank you for the presentation
 ```
-</details>
+:::
 
 
 ### Cohort 8

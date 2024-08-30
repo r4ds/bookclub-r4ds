@@ -233,8 +233,8 @@ source: [https://exts.ggplot2.tidyverse.org/gallery/](https://exts.ggplot2.tidyv
 
 {{< video https://www.youtube.com/embed/42cqVanImm0 >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
   
 ```
 00:08:21	Jon Harmon (jonthegeek):	https://twitter.com/skyetetra/status/1501268379386081285
@@ -245,12 +245,12 @@ https://exts.ggplot2.tidyverse.org/gallery/
 01:09:05	Njoki Njuki Lucy:	I am so interested
 01:11:48	Becki R. (she/her):	See you all next week!
 ```
-</details>
+:::
 
 {{< video https://www.youtube.com/embed/mPCSgJAYLac >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
   
 ```
 00:10:30	Ryan Metcalf:	https://www.rstudio.com/conference/
@@ -266,14 +266,14 @@ https://exts.ggplot2.tidyverse.org/gallery/
 01:01:01	Federica Gazzelloni:	https://dslc.io/clubdeck
 01:12:22	shamsuddeen:	Applied Predictive Modelling?
 ```
-</details>
+:::
 
 ### Cohort 6
 
 {{< video https://www.youtube.com/embed/qQrnNef9fkM >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
   
 ```
 00:09:51	Marielena Soilemezidi:	http://www.thefunctionalart.com/p/instructors-guide.html
@@ -291,7 +291,7 @@ https://exts.ggplot2.tidyverse.org/gallery/
 01:07:21	Marielena Soilemezidi:	http://colinpurrington.com/tips/lab-notebooks
 01:10:02	Marielena Soilemezidi:	https://quarto.org/
 ```
-</details>
+:::
 
 
 ### Cohort 7

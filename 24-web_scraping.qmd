@@ -156,8 +156,8 @@ tibble(
 
 {{< video https://www.youtube.com/embed/G5_pr9HxbT4 >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
 ```
 00:04:47	Oluwafemi Oyedele:	Hi Tim!!!
 00:05:27	Tim Newby:	Hi Oluwafemi - can you hear me?
@@ -166,7 +166,7 @@ tibble(
 00:33:49	Oluwafemi Oyedele:	https://rvest.tidyverse.org/articles/selectorgadget.html
 00:40:24	Oluwafemi Oyedele:	stop
 ```
-</details>
+:::
 
 {{< video https://www.youtube.com/embed/HnJ3ZY1seY4 >}}
 

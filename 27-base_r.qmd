@@ -352,8 +352,8 @@ par(oldpar)
 
 {{< video https://www.youtube.com/embed/0v3qdKUc7n8 >}}
 
-<details>
-<summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
 
 ```
 00:01:16	Oluwafemi Oyedele:	Sorry for joining late
@@ -363,7 +363,7 @@ par(oldpar)
 00:12:54	Oluwafemi Oyedele:	this is nice!!!
 00:55:22	Oluwafemi Oyedele:	stop
 ```
-</details>
+:::
 
 
 ### Cohort 8

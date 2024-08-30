@@ -219,8 +219,8 @@ daily %>%
 
 {{< video https://www.youtube.com/embed/jZmSbkkJIzQ >}}
 
-<details>
-<summary>Meeting chat log</summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
 ```
 00:18:47	Njoki Njuki Lucy:	yes
 00:56:00	Ryan Metcalf:	@Sandra, here is a LARGE section to answer your question. I’m banking that Federica will provide a more specific code snippet….https://ggplot2-book.org/scales-guides.html#scales-guides
@@ -228,7 +228,7 @@ daily %>%
 00:57:03	Federica Gazzelloni:	ggplot()+geom_…()+guides()
 00:58:35	Federica Gazzelloni:	guides(color=guide_colourbar())
 ```
-</details>
+:::
 
 ### Cohort 6
 

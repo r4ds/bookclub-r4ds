@@ -160,9 +160,9 @@ readr::read_csv(
 
 {{< video https://www.youtube.com/embed/2LFWCGNiuoE >}}
 
-<details>
+::: {.callout-tip collapse="true"}
 
-<summary>Meeting chat log</summary>
+## Meeting chat log
 
 ```         
 00:40:51    Becki R. (she/her): It works both ways, I think. It's just convention to use <-.
@@ -176,13 +176,13 @@ readr::read_csv(
 01:17:21    Eileen Murphy:  Thank you Ryan
 ```
 
-</details>
+:::
 
 {{< video https://www.youtube.com/embed/VYYxhIBuDys >}}
 
-<details>
+::: {.callout-tip collapse="true"}
 
-<summary>Meeting chat log</summary>
+## Meeting chat log
 
 ```         
 00:05:55    docksbox@pm.me: Hello!
@@ -231,15 +231,15 @@ readr::read_csv(
 01:11:22    Susan Neilson:  https://bookdown.org/ndphillips/YaRrr/rdata-files.html
 ```
 
-</details>
+:::
 
 ### Cohort 6
 
 {{< video https://www.youtube.com/embed/3SLN7bQQkDY >}}
 
-<details>
+::: {.callout-tip collapse="true"}
 
-<summary>Meeting chat log</summary>
+## Meeting chat log
 
 ```         
 00:09:22    Matthew Efoli:  good evening
@@ -283,13 +283,13 @@ readr::read_csv(
 01:12:05    Esmeralda Cruz: yes, both are correct
 ```
 
-</details>
+:::
 
 {{< video https://www.youtube.com/embed/dNtF8-lZ_pA >}}
 
-<details>
+::: {.callout-tip collapse="true"}
 
-<summary>Meeting chat log</summary>
+## Meeting chat log
 
 ```         
 00:01:19    Adeyemi Olusola:    Good day everyone
@@ -301,15 +301,15 @@ readr::read_csv(
 00:49:45    Esmeralda Cruz: ok
 ```
 
-</details>
+:::
 
 ### Cohort 7
 
 {{< video https://www.youtube.com/embed/xrZdzkOC_Ts >}}
 
-<details>
+::: {.callout-tip collapse="true"}
 
-<summary>Meeting chat log</summary>
+## Meeting chat log
 
 ```         
 00:36:35    Oluwafemi Oyedele:  It is CMD + Enter on Mac
@@ -319,7 +319,7 @@ readr::read_csv(
 00:53:58    Oluwafemi Oyedele:  https://www.tidyverse.org/blog/2017/12/workflow-vs-script/
 ```
 
-</details>
+:::
 
 ### Cohort 8
 

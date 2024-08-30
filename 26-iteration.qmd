@@ -206,8 +206,8 @@ Discuss!
 
 {{< video https://www.youtube.com/embed/0rsV1jlxhws >}}
 
-<details>
-  <summary> Meeting chat log </summary>  
+::: {.callout-tip collapse="true"}
+## Meeting chat log  
 ```
 00:03:23	Becki R. (she/her):	I'm having trouble with a buzz again
 00:03:37	Njoki Njuki Lucy:	I so look forward to the discussion. I have been struggling with understanding this particular chapter! :)
@@ -225,12 +225,12 @@ Discuss!
 01:09:10	Njoki Njuki Lucy:	that's so cool! I wondered! Ha!!
 01:10:30	Federica Gazzelloni:	thanks Jon!!
 ```
-</details>
+:::
 
 {{< video https://www.youtube.com/embed/CEKPAUWTA3c >}}
 
-<details>
-  <summary> Meeting chat log </summary>  
+::: {.callout-tip collapse="true"}
+## Meeting chat log  
 ```
 00:10:17	Becki R. (she/her):	brb!
 00:26:00	Njoki Njuki Lucy:	does this mean, in this case, we will have 3 regression models?
@@ -254,25 +254,25 @@ mtcars %>%
 01:17:01	Ryan Metcalf:	Great Job Becki!!!
 01:17:25	Becki R. (she/her):	Thanks :)
 ```
-</details>
+:::
 
 ### Cohort 6
 
 {{< video https://www.youtube.com/embed/NVUHFpYUmA4 >}}
 
-<details>
-  <summary> Meeting chat log </summary>  
+::: {.callout-tip collapse="true"}
+## Meeting chat log  
 ```
 00:04:39	Marielena Soilemezidi:	I'll be back in 3'! No haste with the setup:)
 00:04:52	Adeyemi Olusola:	Ok
 00:07:22	Adeyemi Olusola:	Let me know when you return
 ```
-</details>
+:::
 
 {{< video https://www.youtube.com/embed/YnZSfzMGhTE >}}
 
-<details>
-  <summary> Meeting chat log </summary>  
+::: {.callout-tip collapse="true"}
+## Meeting chat log  
 ```
 00:11:10	Marielena Soilemezidi:	hello! :)
 00:20:31	Marielena Soilemezidi:	yep, it looks good!
@@ -281,15 +281,15 @@ mtcars %>%
 00:48:05	Daniel Adereti:	No worries!
 00:58:28	Adeyemi Olusola:	olusolaadeyemi.ao@gmail.com
 ```
-</details>
+:::
 
 
 ### Cohort 7
 
 {{< video https://www.youtube.com/embed/vPEgWgs0q7s >}}
 
-<details>
-<summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
 
 ```
 00:06:31	Oluwafemi Oyedele:	Hi Tim!!!
@@ -299,7 +299,7 @@ mtcars %>%
 00:56:02	Oluwafemi Oyedele:	https://adv-r.hadley.nz/functionals.html
 00:56:25	Oluwafemi Oyedele:	stop
 ```
-</details>
+:::
 
 
 ### Cohort 8

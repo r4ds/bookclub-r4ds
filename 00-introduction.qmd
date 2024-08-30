@@ -142,8 +142,8 @@ Code in book slightly different from output you'll see
 
 {{< video https://www.youtube.com/embed/BtRTkChZo8c >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
   
 ```
 00:18:00	Morgan Grovenburg:	I have to leave early today. Also, I'd normally have my video on, but my kid is currently using me as a jungle gym
@@ -154,14 +154,14 @@ Code in book slightly different from output you'll see
 01:00:14	Njoki Njuki Lucy:	data.table has the similar syntax as the base R package.
 01:17:46	Jon Harmon (jonthegeek):	dslc.io/r4ds
 ```
-</details>
+:::
 
 ### Cohort 6
 
 {{< video https://www.youtube.com/embed/R1OUW3Ldu4Q >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
   
 ```
 00:09:03	Matthew Efoli:	Good day everyone
@@ -196,15 +196,15 @@ Code in book slightly different from output you'll see
 00:40:14	Matthew Efoli:	Thank you
 00:40:28	Marielena Soilemezidi:	have a great day you all! :)
 ```
-</details>
+:::
 
 
 ### Cohort 7
 
 {{< video https://www.youtube.com/embed/wBH7pqql_uU >}}
 
-<details>
-<summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
 
 ```
 00:09:07	Oluwafemi Oyedele:	We will start in 2 minute time
@@ -216,7 +216,7 @@ Code in book slightly different from output you'll see
 00:43:54	Lucio:	please proceed
 01:02:15	Lucio:	thank you!!
 ```
-</details>
+:::
 
 
 ### Cohort 8

@@ -1091,8 +1091,8 @@ batters |>
 
 {{< video https://www.youtube.com/embed/J6mGn1F1kiA >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
   
 ```
 00:13:48	Jon Harmon (jonthegeek):	"dplyr" as in "data plyer" (tools for working with data)
@@ -1120,12 +1120,12 @@ batters |>
 01:16:46	Njoki Njuki Lucy:	Thank you!
 01:17:40	Eileen:	Thank you!
 ```
-</details>
+:::
 
 {{< video https://www.youtube.com/embed/KtDeYCfurz4 >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
 ```
 00:04:33	Susan Neilson:	Yes!
 00:27:11	shamsuddeen:	https://stackoverflow.com/questions/51901398/what-does-a-tilde-in-front-of-a-single-variable-mean-facet-wrap/53835451#53835451
@@ -1145,15 +1145,15 @@ batters |>
 01:12:38	Federica Gazzelloni:	thanks
 01:12:40	shamsuddeen:	I can do
 ```
-</details>
+:::
 
 
 ### Cohort 6
 
 {{< video https://www.youtube.com/embed/DNwioC-SgKQ >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
   
 ```
 00:01:33	Adeyemi Olusola:	good day Daniel
@@ -1210,7 +1210,7 @@ batters |>
 00:59:42	Freya Watkins (she/her):	Thanks Matthew!
 00:59:45	Daniel Adereti:	Thank you!
 ```
-</details>
+:::
 
 
 ### Cohort 7
@@ -1222,22 +1222,22 @@ batters |>
 
 {{< video https://www.youtube.com/embed/aJFrAAmTCVE >}}
 
-<details>
-<summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
 
 ```
 00:55:33	shamsuddeen:	https://r4ds.github.io/bookclub-r4ds/data-transformation.html
 01:09:35	shamsuddeen:	https://juliasilge.com
 ```
-</details>
+:::
 
 {{< video https://www.youtube.com/embed/_NbdlBznxIE >}}
 
-<details>
-<summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
 
 ```
 00:50:43	shamsuddeen:	https://docs.google.com/spreadsheets/d/1reByMPb5Og3OHbRgplzV5Jkz_o6CkEYz_adBGfHTFwg/edit#gid=0
 00:51:50	shamsuddeen:	Ctrl + Shift + M
 ```
-</details>
+:::

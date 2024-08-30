@@ -308,8 +308,8 @@ ggplot(sim5, aes(x, y)) +
 
 {{< video https://www.youtube.com/embed/hEjE7PYLCL8 >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
   
 ```
 00:10:00	Jon Harmon (jonthegeek):	https://www.youtube.com/c/TidyX_screencast/playlists?app=desktop
@@ -332,12 +332,12 @@ y ~ x1*x2 = y ~ x1 + x2 + x1:x2
 01:06:59	Becki R. (she/her):	That's a helpful description, Ryan, thanks!
 01:07:33	Ryan Metcalf:	Both kids live on their own. I hate showing up to hang a picture and realize the tool kits we gave for Xmas doesn’t have a tool to make the job easier.
 ```
-</details>
+:::
 
 {{< video https://www.youtube.com/embed/9DZV6bvifHA >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
   
 ```
 00:51:07	Becki R. (she/her):	i'm fading fast - catch up with you all next week.
@@ -348,14 +348,14 @@ y ~ x1*x2 = y ~ x1 + x2 + x1:x2
 00:56:49	Ryan Metcalf:	Another LaTeX code editor: https://latex.codecogs.com/eqneditor/editor.php
 00:57:14	Federica Gazzelloni:	thanks ryan
 ```
-</details>
+:::
 
 ### Cohort 6
 
 {{< video https://www.youtube.com/embed/GDIOmvhOgNk >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
   
 ```
 00:44:13	Adeyemi Olusola:	Yeah
@@ -364,27 +364,27 @@ y ~ x1*x2 = y ~ x1 + x2 + x1:x2
 00:44:55	Marielena Soilemezidi:	thanks for the presentation Daniel!
 00:45:14	Daniel Adereti:	https://personal.math.ubc.ca/~anstee/math104/newtonmethod.pdf
 ```
-</details>
+:::
 
 {{< video https://www.youtube.com/embed/LD2xOX_svU0 >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
   
 ```
 00:17:56	Daniel Adereti:	http://vita.had.co.nz/papers/model-vis.html
 00:28:26	Daniel Adereti:	https://www.jstor.org/stable/2346786
 ```
-</details>
+:::
 
 {{< video https://www.youtube.com/embed/VrFzuaGDiJo >}}
 
-<details>
-  <summary> Meeting chat log </summary>
+::: {.callout-tip collapse="true"}
+## Meeting chat log
   
 ```
 00:16:05	Daniel:	http://bit.ly/wilkrog
 00:40:08	Adeyemi Olusola:	Apologies for coming late.
 00:40:30	Marielena Soilemezidi:	no worries! :)
 ```
-</details>
+:::
