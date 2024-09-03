@@ -1,7 +1,11 @@
+::: {.content-visible when-profile="book"}
 # Introduction {.unnumbered}
 
-::: {.content-visible when-profile="book"}
 {{< revealjs "slides/00-introduction.html" >}}
+:::
+
+::: {.content-visible when-profile="slides"}
+## Introduction
 :::
 
 ## Learning objectives
