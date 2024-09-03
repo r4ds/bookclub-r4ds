@@ -1,4 +1,6 @@
-# Regular expressions
+---
+title: "Regular expressions"
+---
 
 ::: {.content-visible when-profile="book"}
 {{< revealjs "slides/15-regular-expressions.html" >}}

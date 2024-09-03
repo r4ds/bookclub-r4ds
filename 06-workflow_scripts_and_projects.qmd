@@ -1,4 +1,6 @@
-# Workflow: scripts and projects
+---
+title: "Workflow: scripts and projects"
+---
 
 ::: {.content-visible when-profile="book"}
 {{< revealjs "slides/06-workflow_scripts_and_projects.html" >}}

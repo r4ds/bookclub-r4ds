@@ -1,4 +1,6 @@
-# Workflow: getting help
+---
+title: "Workflow: getting help"
+---
 
 ::: {.content-visible when-profile="book"}
 {{< revealjs "slides/08-workflow_getting_help.html" >}}

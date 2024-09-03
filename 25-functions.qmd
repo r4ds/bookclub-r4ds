@@ -1,4 +1,6 @@
-# Functions
+---
+title: "Functions"
+---
 
 ::: {.content-visible when-profile="book"}
 {{< revealjs "slides/25-functions.html" >}}

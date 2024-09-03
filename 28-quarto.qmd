@@ -1,4 +1,6 @@
-# Quarto 
+---
+title: "Quarto "
+---
 
 ::: {.content-visible when-profile="book"}
 {{< revealjs "slides/28-quarto.html" >}}

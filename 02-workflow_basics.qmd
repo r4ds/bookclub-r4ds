@@ -1,4 +1,6 @@
-# Workflow: basics
+---
+title: "Workflow: basics"
+---
 
 ::: {.content-visible when-profile="book"}
 {{< revealjs "slides/02-workflow_basics.html" >}}

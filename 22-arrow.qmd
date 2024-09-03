@@ -1,4 +1,6 @@
-# Arrow
+---
+title: "Arrow"
+---
 
 ::: {.content-visible when-profile="book"}
 {{< revealjs "slides/22-arrow.html" >}}

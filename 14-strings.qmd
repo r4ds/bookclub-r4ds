@@ -1,4 +1,6 @@
-# Strings
+---
+title: "Strings"
+---
 
 ::: {.content-visible when-profile="book"}
 {{< revealjs "slides/14-strings.html" >}}

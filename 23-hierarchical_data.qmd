@@ -1,4 +1,6 @@
-# Hierarchical data
+---
+title: "Hierarchical data"
+---
 
 ::: {.content-visible when-profile="book"}
 {{< revealjs "slides/23-hierarchical_data.html" >}}

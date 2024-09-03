@@ -1,4 +1,6 @@
-# Spreadsheets
+---
+title: "Spreadsheets"
+---
 
 ::: {.content-visible when-profile="book"}
 {{< revealjs "slides/20-spreadsheets.html" >}}

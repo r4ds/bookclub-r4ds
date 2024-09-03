@@ -1,4 +1,6 @@
-# Workflow: code style
+---
+title: "Workflow: code style"
+---
 
 ::: {.content-visible when-profile="book"}
 {{< revealjs "slides/04-workflow_code_style.html" >}}

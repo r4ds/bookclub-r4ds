@@ -1,4 +1,6 @@
-# Many models
+---
+title: "Many models"
+---
 
 ::: {.content-visible when-profile="book"}
 {{< revealjs "slides/99-25-many_models.html" >}}

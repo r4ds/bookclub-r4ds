@@ -1,4 +1,6 @@
-# A field guide to base R
+---
+title: "A field guide to base R"
+---
 
 ::: {.content-visible when-profile="book"}
 {{< revealjs "slides/27-base_r.html" >}}

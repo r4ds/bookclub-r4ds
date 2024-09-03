@@ -1,4 +1,6 @@
-# Data import
+---
+title: "Data import"
+---
 
 ::: {.content-visible when-profile="book"}
 {{< revealjs "slides/07-data_import.html" >}}

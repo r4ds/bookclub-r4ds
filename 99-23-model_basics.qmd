@@ -1,4 +1,6 @@
-# Model basics
+---
+title: "Model basics"
+---
 
 ::: {.content-visible when-profile="book"}
 {{< revealjs "slides/99-23-model_basics.html" >}}

@@ -1,4 +1,6 @@
-# Layers
+---
+title: "Layers"
+---
 
 ::: {.content-visible when-profile="book"}
 {{< revealjs "slides/09-layers.html" >}}

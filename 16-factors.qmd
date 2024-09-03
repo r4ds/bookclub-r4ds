@@ -1,4 +1,6 @@
-# Factors
+---
+title: "Factors"
+---
 
 ::: {.content-visible when-profile="book"}
 {{< revealjs "slides/16-factors.html" >}}

@@ -1,4 +1,6 @@
-# Databases
+---
+title: "Databases"
+---
 
 ::: {.content-visible when-profile="book"}
 {{< revealjs "slides/21-databases.html" >}}

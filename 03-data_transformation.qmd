@@ -1,4 +1,6 @@
-# Data transformation
+---
+title: "Data transformation"
+---
 
 ::: {.content-visible when-profile="book"}
 {{< revealjs "slides/03-data_transformation.html" >}}

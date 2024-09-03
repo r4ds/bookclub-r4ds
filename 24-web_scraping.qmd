@@ -1,4 +1,6 @@
-# Web scraping
+---
+title: "Web scraping"
+---
 
 ::: {.content-visible when-profile="book"}
 {{< revealjs "slides/24-web_scraping.html" >}}

@@ -1,4 +1,6 @@
-# Joins
+---
+title: "Joins"
+---
 
 ::: {.content-visible when-profile="book"}
 {{< revealjs "slides/19-joins.html" >}}

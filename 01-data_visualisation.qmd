@@ -1,4 +1,6 @@
-# Data visualisation
+---
+title: "Data visualisation"
+---
 
 ::: {.content-visible when-profile="book"}
 {{< revealjs "slides/01-data_visualisation.html" >}}

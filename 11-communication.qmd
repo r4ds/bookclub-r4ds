@@ -1,4 +1,6 @@
-# Communication
+---
+title: "Communication"
+---
 
 ::: {.content-visible when-profile="book"}
 {{< revealjs "slides/11-communication.html" >}}

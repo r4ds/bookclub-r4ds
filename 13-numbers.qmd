@@ -1,4 +1,6 @@
-# Numbers
+---
+title: "Numbers"
+---
 
 ::: {.content-visible when-profile="book"}
 {{< revealjs "slides/13-numbers.html" >}}

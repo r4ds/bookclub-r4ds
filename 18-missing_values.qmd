@@ -1,4 +1,6 @@
-# Missing values
+---
+title: "Missing values"
+---
 
 ::: {.content-visible when-profile="book"}
 {{< revealjs "slides/18-missing_values.html" >}}
