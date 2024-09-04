@@ -7,4 +7,4 @@ on:
 
 jobs:
   pr_check:
-    uses: r4ds/r4dsactions/.github/workflows/render_check.yml@main
+    uses: r4ds/r4dsactions/.github/workflows/render_quarto.yml@main

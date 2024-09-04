@@ -6,5 +6,5 @@ on:
   workflow_dispatch:
 
 jobs:
-  bookdown:
-    uses: r4ds/r4dsactions/.github/workflows/render_pages.yml@main
+  publish-quarto:
+    uses: r4ds/r4dsactions/.github/workflows/deploy_quarto.yml@main
