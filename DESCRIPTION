@@ -10,7 +10,6 @@ Depends:
 Imports: 
     arrow,
     babynames,
-    bookdown,
     curl,
     DBI,
     dbplyr,
