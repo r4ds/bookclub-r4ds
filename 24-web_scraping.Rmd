@@ -62,7 +62,7 @@ html |>
 
 ## Example: One specific table {-}
 
-```{r web_scraping-html_element, eval=FALSE}
+```{r web_scraping-html_element}
 html |> 
   html_element("table.wikitable") |> 
   html_table()
