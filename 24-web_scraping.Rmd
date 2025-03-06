@@ -43,12 +43,10 @@ HTML = **H**yper**T**ext **M**arkup **L**anguage
 
 ## Example: Table {-}
 
-[IMDB data from the Internet Archive](https://web.archive.org/web/20220201012049/https://www.imdb.com/chart/top/)
+[Wikipedia List of world expositions](https://en.wikipedia.org/wiki/List_of_world_expositions)
 
-(currently times out, disabled for now; next cohort should revise!)
-
-```{r web_scraping-tables, eval=FALSE}
-url <- "https://web.archive.org/web/20220201012049/https://www.imdb.com/chart/top/"
+```{r web_scraping-tables, eval=TRUE}
+url <- "https://en.wikipedia.org/wiki/List_of_world_expositions"
 html <- read_html(url)
 html |> 
   html_table()
@@ -62,13 +60,11 @@ html |>
 -   `".thing"` = something with attribute `class="thing"`
 -   `"#thing"` = something with attribute `id="thing"`
 
-## Example: Specific table {-}
-
-(See "Example: Table" slide above; fix that then this)
+## Example: One specific table {-}
 
 ```{r web_scraping-html_element, eval=FALSE}
 html |> 
-  html_element("table") |> 
+  html_element("table.wikitable") |> 
   html_table()
 ```
 
