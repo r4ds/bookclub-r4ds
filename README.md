@@ -4,7 +4,7 @@ Welcome to the DSLC R for Data Science Book Club!
 
 We are working together to read [R for Data Science](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund.
 Join the #book_club-r_for_data_science channel on the [DSLC Slack](https://dslc.io/join) to participate.
-As we read, we are producing [notes about the book](https://r4ds.github.io/bookclub-r4ds/).
+As we read, we are producing [slides for the book](https://r4ds.github.io/bookclub-r4ds/).
 
 ## Meeting Schedule
 
@@ -21,7 +21,7 @@ If you would like to present, please see the sign-up sheet for your cohort (link
 - Cohort 9 (started 2023-07-30, ended 2024-04-28): [meeting videos](https://www.youtube.com/playlist?list=PL3x6DOfs2NGjVMs1NtbWu4s_ZgGhGKnrN)
 - Cohort 10 (started 2023-10-06, ended 2024-07-19): [meeting videos](https://www.youtube.com/playlist?list=PL3x6DOfs2NGj_fqbuP0xWjm5pD9hz6G5Z)
 - Cohort 11 (started 2024-08-22, ended 2025-05-01): [meeting videos](https://www.youtube.com/playlist?list=PL3x6DOfs2NGhcXLwZHIEnDLv2HhmhD4ma)
-
+- Cohort 12 (started 2026-05-19): [schedule](https://docs.google.com/spreadsheets/d/10cnh0j05dkOuKebFHb5-_-3wDSV8VEE9QLoohuC_k30/edit?usp=sharing) | [meeting videos](https://www.youtube.com/playlist?list=PL3x6DOfs2NGhcXLwZHIEnDLv2HhmhD4ma)
 
 ## How to Present
 
